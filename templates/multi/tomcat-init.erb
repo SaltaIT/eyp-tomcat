@@ -1,0 +1,127 @@
+#!/bin/bash
+#
+# apache-tomcat		Start up the Apache Tomcat Server
+#
+# chkconfig: - 80 20
+#
+### BEGIN INIT INFO
+# Provides: apache-tomcat
+# Required-Start: $network $syslog
+# Required-Stop: $network $syslog
+# Default-Start:
+# Default-Stop:
+# Description: Release implementation for Servlet 3.0 and JSP 2.2
+# Short-Description: start and stop tomcat
+### END INIT INFO
+#
+# There are lots of similar scripts roaming teh interwebs.
+# This one shamelessly culled from a couple of feral examples.
+# This one has been further tweaked to handle multiple Catalina bases
+#
+# Environment
+export CATALINA_PID=/var/run/<%= @instancename %>.pid
+export CATALINA_HOME=<%= scope.lookupvar('tomcat::catalina_home') %>
+export CATALINA_BASE=<%= @catalina_base %>
+export PATH=$JAVA_HOME/bin:$PATH
+TOMCAT_USER=<%= @tomcat_user %>
+KILL_WAIT=10
+
+start(){
+  pid=$( cat $CATALINA_PID 2>/dev/null )
+  if [ -n "$pid" ]; then
+    ps -p $pid | tail -n1 | grep java >/dev/null 2>&1
+    if [ $? -eq 0 ];
+    then
+      echo "<%= @instancename %> is already running (pid: $pid)"
+      exit 0
+    fi
+  fi
+  
+  echo "Starting <%= @instancename %>"
+  touch $CATALINA_PID
+  chown $TOMCAT_USER $CATALINA_PID
+  /bin/su -p -s /bin/sh $TOMCAT_USER $CATALINA_BASE/bin/startup.sh
+  exit 0
+}
+
+stop() {
+  pid=$( cat $CATALINA_PID 2>/dev/null )
+  if [ -n "$pid" ]; then
+    /bin/su -p -s /bin/sh $TOMCAT_USER $CATALINA_BASE/bin/shutdown.sh
+    echo -n "Stopping <%= @instancename %>"
+
+    let kwait=$KILL_WAIT
+    count=0;
+    until [ $( ps -p $pid | grep -c $pid ) = '0' ] || [ $count -gt $kwait ]
+    do
+      echo -n ".";
+      sleep 1
+      let count=$count+1;
+    done
+
+    echo ""
+
+    if [ $count -gt $kwait ]; then
+      echo "process is still running after $KILL_WAIT seconds, killing process"
+      kill -TERM $pid
+      sleep 3
+      if [ `ps -p $pid | grep -c $pid` -gt '0' ]; then
+        echo "process is still running, using kill -9"
+        kill -KILL $pid
+        sleep 3
+      fi
+    fi
+
+    if [ `ps -p $pid | grep -c $pid` -gt '0' ]; then
+      echo "Process is still running despite KILL"
+    else
+      # success, delete PID file
+      rm $CATALINA_PID
+    fi
+  else
+    echo "<%= @instancename %> is not running"
+    exit 1
+  fi
+  exit 0
+}
+
+status() {
+  pid=$( cat $CATALINA_PID 2>/dev/null )
+  if [ -n "$pid" ]; then
+    ps -p $pid | tail -n1 | grep java >/dev/null 2>&1
+    if [ $? -eq 0 ];
+    then
+      echo "<%= @instancename %> is already running (pid: $pid)"
+      exit 0
+    else
+      echo "<%= @instancename %> is not running."
+      rm -f $CATALINA_PID
+      exit 1
+    fi
+
+  else
+    echo "<%= @instancename %> is not running."
+    exit 1
+  fi
+}
+
+case $1 in
+  start)
+    start
+  ;;
+  stop)
+    stop
+  ;;
+  status)
+    status
+  ;;
+  restart)
+    $0 stop
+    sleep 1
+    $0 start
+  ;;
+  *)
+    echo 'Usage: /etc/init.d/<%= @instancename %> start|stop|status'
+  ;;
+esac
+exit 0

@@ -1,0 +1,14 @@
+export CATALINA_HOME=<%= scope.lookupvar('tomcat::catalina_home') %>
+export CATALINA_BASE=<%= @catalina_base %>
+<% if defined?(@xmx) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Xmx<%= @xmx %>"
+<% end -%>
+<% if defined?(@xms) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Xms<%= @xms %>"
+<% end -%>
+<% if defined?(@permsize) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:PermSize=<%= @permsize %>"
+<% end -%>
+<% if defined?(@maxpermsize) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxPermSize=<%= @maxpermsize %>"
+<% end -%>

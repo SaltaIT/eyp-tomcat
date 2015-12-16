@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  puppet managed file
+-->
+
+<Server port="<%= @shutdown_port %>" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+
+  <Listener className="org.apache.catalina.core.JasperListener" />
+
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+
+<% if @UserDatabase -%>
+
+  <!-- Global JNDI resources
+       Documentation at /docs/jndi-resources-howto.html
+  -->
+  <GlobalNamingResources>
+
+    <!-- Editable user database that can also be used by
+         UserDatabaseRealm to authenticate users
+    -->
+    <Resource name="UserDatabase" auth="Container"
+            type="org.apache.catalina.UserDatabase"
+            description="User database that can be updated and saved"
+            factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+            pathname="conf/tomcat-users.xml" />
+
+  </GlobalNamingResources>
+<% end -%>
+
+
+
+  <Service name="Catalina">
+
+    <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
+            maxThreads="<%= @maxThreads %>" minSpareThreads="<%= @minSpareThreads %>"/>
+
+<% if defined?(@connector_port) %>
+    <Connector port="<%= @connector_port %>" protocol="HTTP/1.1"
+               connectionTimeout="<%= @connectionTimeout %>"
+               executor="tomcatThreadPool"
+               redirectPort="<%= @redirectPort %>" />
+<% end %>
+
+<% if defined?(@ajp_port) -%>
+    <!-- Define an AJP 1.3 Connector on port 8009 -->
+    <Connector port="<%= @ajp_port %>" protocol="AJP/1.3" redirectPort="<%= @redirectPort %>" />
+<% end -%>
+
+
+
+    <Engine name="Catalina" defaultHost="localhost">
+
+<% if @LockOutRealm -%>
+      <!-- Use the LockOutRealm to prevent attempts to guess user passwords
+           via a brute-force attack -->
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+
+<% if @pwdigest == 'plaintext' -%>
+      <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+             resourceName="UserDatabase"/>
+<% else -%>
+      <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+              resourceName="UserDatabase"
+              digest="sha"/>
+<% end -%>
+      </Realm>
+<% end -%>
+
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true" <% if defined?(@errorReportValveClass) %>errorReportValveClass="<%= @errorReportValveClass %>" <% end %>>
+
+        <!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html -->
+        <!--
+        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
+        -->
+<% if(@realms) -%>
+<% @realms.each do | realm | -%>
+        <Realm className="<%= realm %>" />
+<% end -%>
+<% end -%>
+
+<% if(@values) -%>
+<% @values.each do | valve | -%>
+        <Value className="<%= valve %>" />
+<% end -%>
+<% end -%>
+
+
+        <!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" -->
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+      </Host>
+    </Engine>
+  </Service>
+</Server>

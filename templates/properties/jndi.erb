@@ -1,0 +1,6 @@
+java.naming.factory.initial=com.sun.jndi.ldap.LdapCtxFactory
+java.naming.provider.url=<% @ldapservers.each do |val| %>ldap://<%= val %>/<%= @ldapbase %> <% end %>
+java.naming.security.authentication=simple
+java.naming.security.principal=cn=<%= @ldapadmin %>,<%= @ldapbase %>
+java.naming.security.credentials=<%= @ldapadminpassword %>
+com.sun.jndi.ldap.connect.pool=true

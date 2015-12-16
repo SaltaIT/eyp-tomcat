@@ -1,0 +1,14 @@
+<%= @app %> {
+    com.sun.security.auth.module.LdapLoginModule SUFFICIENT
+        userProvider="<%= @provider %>"
+        userFilter="<%= @filter %>"
+        authzIdentity=controlRole
+        useSSL=false
+        debug=true;
+};
+
+Client {
+    org.apache.zookeeper.server.auth.DigestLoginModule SUFFICIENT
+        username="<%= @username %>"
+        password="<%= @password %>";
+};
