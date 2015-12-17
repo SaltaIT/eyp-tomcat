@@ -1,1 +1,12 @@
-# file $(dirname $(dirname $(dirname $(find / -xdev -iname jni_md.h | head -n1))))/bin/java >/dev/null 2>&1; echo $?
+
+java=Facter::Util::Resolution.exec('bash -c \'which java 2>/dev/null \'')
+
+Facter.add('ntteam_default_shell') do
+    setcode do
+      if (env.nil? or env.empty?)
+        false
+      else
+        true
+      end
+    end
+end
