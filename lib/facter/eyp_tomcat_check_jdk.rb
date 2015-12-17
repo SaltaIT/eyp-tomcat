@@ -4,7 +4,7 @@ jdk=Facter::Util::Resolution.exec('bash -c \'file $(dirname $(dirname $(dirname 
 
 Facter.add('ntteam_default_shell') do
     setcode do
-        if (jdk = 0)
+        if (jdk == 0)
           true
         else
           false
