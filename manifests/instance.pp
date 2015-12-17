@@ -36,6 +36,11 @@ define tomcat::instance (
 		fail('You must include the tomcat base class before using any tomcat defined resources')
 	}
 
+  if ($::eyp_tomcat_check_java=='false')
+  {
+    fail('No java found')
+  }
+
   if($realms)
   {
     validate_array($realms)
@@ -62,15 +67,10 @@ define tomcat::instance (
     $dependency_check_java=Class['java']
   }
 
-  #canviar per un fact per evitar el exec
-  exec { "check java tomcat ${instancename}":
-    command => "update-alternatives --display java",
-    require => $dependency_check_java,
-  }
-
   exec { "mkdir base tomcat instance ${instancename} ${catalina_base}":
     command => "mkdir -p ${catalina_base}",
     creates => $catalina_base,
+    require => $dependency_check_java,
   }
 
   #mkdir -p $CATALINA_HOME/lib/org/apache/catalina/util
