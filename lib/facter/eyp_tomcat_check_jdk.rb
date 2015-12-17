@@ -4,7 +4,7 @@ jdk=Facter::Util::Resolution.exec('bash -c \'file $(dirname $(dirname $(dirname 
 
 Facter.add('eyp_tomcat_check_jdk') do
     setcode do
-        if (jdk == 0)
+        if (jdk == '0')
           true
         else
           false
