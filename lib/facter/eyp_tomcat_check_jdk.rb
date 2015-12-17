@@ -8,5 +8,6 @@ Facter.add('ntteam_default_shell') do
           true
         else
           false
+        end
     end
 end
