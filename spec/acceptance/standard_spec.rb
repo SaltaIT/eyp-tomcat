@@ -15,6 +15,14 @@ describe 'tomcat class' do
     		tomcatpw => 'lol',
     	}
 
+      tomcat::instance { 'tomcat-8888':
+        tomcatpw => 'lol',
+        shutdown_port=>'9000',
+        ajp_port=>'8010',
+        connector_port=>'8888',
+        jmx_port => '9999',
+      }
+
       EOF
 
       # Run it twice and test for idempotency
