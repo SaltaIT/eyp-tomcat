@@ -66,6 +66,10 @@ define tomcat::instance (
   {
     $dependency_check_java=Class['java']
   }
+  else
+  {
+    $dependency_check_java=undef
+  }
 
   exec { "mkdir base tomcat instance ${instancename} ${catalina_base}":
     command => "mkdir -p ${catalina_base}",
@@ -130,8 +134,8 @@ define tomcat::instance (
 
   file { "${catalina_base}/conf/server.xml":
     ensure  => 'present',
-    owner   => $user,
-    group   => $user,
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
     mode    => '0644',
     require => File["${catalina_base}/conf"],
     notify  => Service[$instancename],
@@ -142,8 +146,8 @@ define tomcat::instance (
   {
     file { "${catalina_base}/conf/tomcat-users.xml":
       ensure  => 'present',
-      owner   => $user,
-      group   => $user,
+      owner   => $tomcat_user,
+      group   => $tomcat_user,
       mode    => '0644',
       require => File["${catalina_base}/conf"],
       notify  => Service[$instancename],
@@ -161,8 +165,8 @@ define tomcat::instance (
 
   file { "${catalina_base}/bin/startup.sh":
     ensure  => 'present',
-    owner   => $user,
-    group   => $user,
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
     mode    => '0755',
     require => File["${catalina_base}/bin"],
     content => template("${module_name}/multi/startup.erb"),
@@ -170,8 +174,8 @@ define tomcat::instance (
 
   file { "${catalina_base}/bin/shutdown.sh":
     ensure  => 'present',
-    owner   => $user,
-    group   => $user,
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
     mode    => '0755',
     require => File["${catalina_base}/bin"],
     content => template("${module_name}/multi/shutdown.erb"),
@@ -179,8 +183,8 @@ define tomcat::instance (
 
   concat { "${catalina_base}/bin/setenv.sh":
     ensure  => 'present',
-    owner   => $user,
-    group   => $user,
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
     mode    => '0644',
     require => File["${catalina_base}/bin"],
     notify  => Service[$instancename],
@@ -212,8 +216,8 @@ define tomcat::instance (
   {
     file { "${catalina_base}/lib/org/apache/catalina/util/ServerInfo.properties":
       ensure  => 'present',
-      owner   => $user,
-      group   => $user,
+      owner   => $tomcat_user,
+      group   => $tomcat_user,
       mode    => '0644',
       require => File[$catalina_base],
       notify  => Service[$instancename],

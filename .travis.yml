@@ -12,4 +12,4 @@ matrix:
     env: BEAKER_set="centos6-docker"
     dist: trusty
     bundler_args:
-    script: sudo yum install java-1.7.0-openjdk-devel -y; sudo service docker restart ; sleep 10 && bundle exec rspec spec/acceptance/*_spec.rb
+    script: sudo service docker restart ; sleep 10 && bundle exec rspec spec/acceptance/*_spec.rb
