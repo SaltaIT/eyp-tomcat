@@ -3,7 +3,8 @@
 # Copyright 2015 Your name here, unless otherwise noted.
 #
 class tomcat(
-              $tomcat_src,
+              $tomcat_src=undef,
+              $tomcat_url=undef,
               $manage_tomcat_user=true,
               $tomcat_user='tomcat',
               $tomcat_user_home='/home/tomcat',
@@ -41,15 +42,44 @@ class tomcat(
     creates => $srcdir,
   }
 
-  file { "${srcdir}/tomcat.tgz":
-    ensure  => 'present',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => $tomcat_src,
-    notify  => Exec["untar tomcat ${name} ${catalina_home}"],
-    require => Exec["mkdir p tomcat multi ${srcdir}"],
+  if($tomcat_src!=undef)
+  {
+    file { "${srcdir}/tomcat.tgz":
+      ensure  => 'present',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => $tomcat_src,
+      notify  => Exec["untar tomcat ${name} ${catalina_home}"],
+      require => Exec["mkdir p tomcat multi ${srcdir}"],
+    }
   }
+  else
+  {
+    if($tomcat_url!=undef)
+    {
+      exec { "wget tomcat ${srcdir}":
+        command => "wget ${tomcat_url} -O ${srcdir}/tomcat.tgz",
+        creates => "${srcdir}/tomcat.tgz",
+        notify  => Exec["untar tomcat ${name} ${catalina_home}"],
+        require => Exec["mkdir p tomcat multi ${srcdir}"],
+      }
+
+      file { "${srcdir}/tomcat.tgz":
+        ensure  => 'present',
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0444',
+        require => Exec["mkdir p tomcat multi ${srcdir}", "wget tomcat ${srcdir}"],
+      }
+
+    }
+    else
+    {
+      fail('tomcat tarball undefined: please, define either tomcat_src or tomcat_url')
+    }
+  }
+
 
   file { $catalina_home:
     ensure  => 'directory',

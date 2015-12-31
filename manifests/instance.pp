@@ -12,7 +12,7 @@ define tomcat::instance (
                           $maxpermsize='512m',
                           $permsize=undef,
                           $shutdown_port='8005',
-                          $ajp_port='8009',
+                          $ajp_port=undef,
                           $connector_port='8080',
                           $jmx_port='8999',
                           $redirectPort='8443',
@@ -35,6 +35,11 @@ define tomcat::instance (
 	{
 		fail('You must include the tomcat base class before using any tomcat defined resources')
 	}
+
+  if ($::eyp_tomcat_check_java=='false')
+  {
+    fail('No java found')
+  }
 
   if($realms)
   {
@@ -61,16 +66,15 @@ define tomcat::instance (
   {
     $dependency_check_java=Class['java']
   }
-
-  #canviar per un fact per evitar el exec
-  exec { "check java tomcat ${instancename}":
-    command => "update-alternatives --display java",
-    require => $dependency_check_java,
+  else
+  {
+    $dependency_check_java=undef
   }
 
   exec { "mkdir base tomcat instance ${instancename} ${catalina_base}":
     command => "mkdir -p ${catalina_base}",
     creates => $catalina_base,
+    require => $dependency_check_java,
   }
 
   #mkdir -p $CATALINA_HOME/lib/org/apache/catalina/util
@@ -130,8 +134,8 @@ define tomcat::instance (
 
   file { "${catalina_base}/conf/server.xml":
     ensure  => 'present',
-    owner   => $user,
-    group   => $user,
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
     mode    => '0644',
     require => File["${catalina_base}/conf"],
     notify  => Service[$instancename],
@@ -142,8 +146,8 @@ define tomcat::instance (
   {
     file { "${catalina_base}/conf/tomcat-users.xml":
       ensure  => 'present',
-      owner   => $user,
-      group   => $user,
+      owner   => $tomcat_user,
+      group   => $tomcat_user,
       mode    => '0644',
       require => File["${catalina_base}/conf"],
       notify  => Service[$instancename],
@@ -161,8 +165,8 @@ define tomcat::instance (
 
   file { "${catalina_base}/bin/startup.sh":
     ensure  => 'present',
-    owner   => $user,
-    group   => $user,
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
     mode    => '0755',
     require => File["${catalina_base}/bin"],
     content => template("${module_name}/multi/startup.erb"),
@@ -170,8 +174,8 @@ define tomcat::instance (
 
   file { "${catalina_base}/bin/shutdown.sh":
     ensure  => 'present',
-    owner   => $user,
-    group   => $user,
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
     mode    => '0755',
     require => File["${catalina_base}/bin"],
     content => template("${module_name}/multi/shutdown.erb"),
@@ -179,8 +183,8 @@ define tomcat::instance (
 
   concat { "${catalina_base}/bin/setenv.sh":
     ensure  => 'present',
-    owner   => $user,
-    group   => $user,
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
     mode    => '0644',
     require => File["${catalina_base}/bin"],
     notify  => Service[$instancename],
@@ -212,8 +216,8 @@ define tomcat::instance (
   {
     file { "${catalina_base}/lib/org/apache/catalina/util/ServerInfo.properties":
       ensure  => 'present',
-      owner   => $user,
-      group   => $user,
+      owner   => $tomcat_user,
+      group   => $tomcat_user,
       mode    => '0644',
       require => File[$catalina_base],
       notify  => Service[$instancename],
