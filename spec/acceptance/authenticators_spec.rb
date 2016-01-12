@@ -2,7 +2,7 @@ require 'spec_helper_acceptance'
 
 describe 'tomcat context' do
 
-  context 'tomcat context (+ basic setup, ie no native library)' do
+  context 'tomcat authenticators (+ basic setup, ie no native library)' do
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOF
