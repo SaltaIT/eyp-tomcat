@@ -29,8 +29,8 @@ describe 'tomcat context' do
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
 
-    it { should contain_file('/opt/tomcat-8080/conf/context.xml')
-    }
+    # it { should contain_file('/opt/tomcat-8080/conf/context.xml')
+    # }
 
     # File.read("/opt/tomcat-8080/conf/context.xml").expect include "sessionCookiePath=\"/\""
     #expect(File.read("/opt/tomcat-8080/conf/context.xml")).to match("sessionCookiePath=\"/\"")
