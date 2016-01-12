@@ -23,7 +23,7 @@ Multi instance tomcat installation
 
 Multi instance tomcat installation and configuration of:
  * server.xml
-   * context, connectors...
+   * context, connectors, reals, values...
  * JVM memory settings
  * context.xml
  * authenticators
@@ -31,21 +31,19 @@ Multi instance tomcat installation and configuration of:
  * jndi
  * custom library deployment (tar.gz)
  * web.xml
- * properties
+ * custom properties files
 
 ## Setup
 
 ### What tomcat affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+By default,
+ * **CATALINA_HOME**: /opt/tomcat-home (configured on class **tomcat**)
+ * **CATALINA_BASE**: "/opt/${name}" (configured on define **instance**)
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+This module requires pluginsync enabled and eyp/nsswitch module installed
 
 ### Beginning with tomcat
 
@@ -310,19 +308,15 @@ tomcatcontext:
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+TODO
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+TODO
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+Tested on CentOS 6, should work anywhere
 
 ## Development
 
