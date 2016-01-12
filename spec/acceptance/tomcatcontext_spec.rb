@@ -31,9 +31,6 @@ describe 'tomcat context' do
 
     describe file("/opt/tomcat-8080/conf/context.xml") do
       it { should be_file }
-      #xml encoding
-      its(:content) { should match '<?xml version="1.0" encoding="utf-8"?>' }
-
       its(:content) { should match 'sessionCookiePath="/"' }
       its(:content) { should match 'antiJARLocking="true"' }
       its(:content) { should match 'antiResourceLocking="true"' }
