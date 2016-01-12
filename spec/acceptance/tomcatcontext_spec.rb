@@ -31,9 +31,15 @@ describe 'tomcat context' do
 
     # File.read("/opt/tomcat-8080/conf/context.xml").expect include "sessionCookiePath=\"/\""
     #expect(File.read("/opt/tomcat-8080/conf/context.xml")).to match("sessionCookiePath=\"/\"")
-    it { should contain_file('/opt/tomcat-8080/conf/context.xml').with({
-      'content' => /sessionCookiePath="\/"/})
-    }
+    # it { should contain_file('/opt/tomcat-8080/conf/context.xml').with({
+    #   'content' => /sessionCookiePath="\/"/})
+    # }
+
+    it do
+      should contain_file('/opt/tomcat-8080/conf/context.xml').with({
+        'content' => /sessionCookiePath="\/"/})
+      })
+    end
 
     # File.read("/opt/tomcat-8080/conf/context.xml").should include "antiJARLocking=\"true\""
     # File.read("/opt/tomcat-8080/conf/context.xml").should include "antiResourceLocking=\"true\""
