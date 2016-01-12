@@ -29,35 +29,14 @@ describe 'tomcat context' do
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
 
-    # it { should contain_file('/opt/tomcat-8080/conf/context.xml')
-    # }
-
-    # File.read("/opt/tomcat-8080/conf/context.xml").expect include "sessionCookiePath=\"/\""
-    #expect(File.read("/opt/tomcat-8080/conf/context.xml")).to match("sessionCookiePath=\"/\"")
-    # it { should contain_file('/opt/tomcat-8080/conf/context.xml').with({
-    #   'content' => /sessionCookiePath="\/"/})
-    # }
-
-    # it do
-    #   should contain_file('/opt/tomcat-8080/conf/context.xml').with({
-    #     'content' => /sessionCookiePath="\/"/})
-    #   })
-    # end
-
-    # it do
-    #   should contain_file('/opt/tomcat-8080/conf/context.xml') \
-    #     .with_content(/sessionCookiePath="\/"/)
-    # end
-
     describe file("/opt/tomcat-8080/conf/context.xml") do
       it { should be_file }
       its(:content) { should match 'sessionCookiePath="/"' }
+      its(:content) { should match 'antiJARLocking="true"' }
+      its(:content) { should match 'antiResourceLocking="true"' }
+      its(:content) { should match '<WatchedResource>WEB-INF/web.xml</WatchedResource>' }
+      its(:content) { should match '<Manager pathname="" />' }
     end
-
-    # File.read("/opt/tomcat-8080/conf/context.xml").should include "antiJARLocking=\"true\""
-    # File.read("/opt/tomcat-8080/conf/context.xml").should include "antiResourceLocking=\"true\""
-    # File.read("/opt/tomcat-8080/conf/context.xml").should include "<WatchedResource>WEB-INF/web.xml</WatchedResource>"
-    # File.read("/opt/tomcat-8080/conf/context.xml").should include "<Manager pathname=\"\" />"
 
   end
 end
