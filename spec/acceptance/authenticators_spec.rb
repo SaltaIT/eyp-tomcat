@@ -16,12 +16,6 @@ describe 'tomcat context' do
         tomcatpw => 'lol',
       }
 
-      tomcat::context { 'tomcat-8080':
-        sessionCookiePath => '/',
-        antiJARLocking => true,
-        antiResourceLocking => true,
-      }
-
       tomcat::authenticators { 'tomcat-8080':
         basic => 'es.systemadmin.basic.sso.tomcat.BasicAuthenticator',
         form => 'es.systemadmin.form.sso.tomcat.BasicAuthenticator',
