@@ -35,10 +35,15 @@ describe 'tomcat context' do
     #   'content' => /sessionCookiePath="\/"/})
     # }
 
+    # it do
+    #   should contain_file('/opt/tomcat-8080/conf/context.xml').with({
+    #     'content' => /sessionCookiePath="\/"/})
+    #   })
+    # end
+
     it do
-      should contain_file('/opt/tomcat-8080/conf/context.xml').with({
-        'content' => /sessionCookiePath="\/"/})
-      })
+      should contain_file('/opt/tomcat-8080/conf/context.xml') \
+        .with_content(/sessionCookiePath="\/"/)
     end
 
     # File.read("/opt/tomcat-8080/conf/context.xml").should include "antiJARLocking=\"true\""
