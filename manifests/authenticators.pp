@@ -17,8 +17,11 @@ define tomcat::authenticators (
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
   }
 
-  #validate_array($ldapservers)
-  validate_string($ldapbase)
+  validate_string($basic)
+  validate_string($form)
+  validate_string($basic)
+  validate_string($clientcert)
+  validate_string($none)
 
   if($servicename!=undef)
   {

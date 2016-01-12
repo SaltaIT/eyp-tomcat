@@ -61,6 +61,40 @@ describe 'tomcat class' do
       it { should be_listening }
     end
 
+    ### tomcat-users.xml
+    # tomcat admin password
+    # <user username="tomcat" password="403926033d001b5279df37cbbe5287b7c7c267fa"
+    describe file("/opt/tomcat-8080/conf/tomcat-users.xml") do
+      it { should be_file }
+      its(:content) { should match '<user username="tomcat" password="403926033d001b5279df37cbbe5287b7c7c267fa"' }
+    end
+
+    describe file("/opt/tomcat-8888/conf/tomcat-users.xml") do
+      it { should be_file }
+      its(:content) { should match '<user username="tomcat" password="403926033d001b5279df37cbbe5287b7c7c267fa"' }
+    end
+
+    ### server.xml
+    #org.apache.catalina.realm.UserDatabaseRealm
+
+    describe file("/opt/tomcat-8888/conf/server.xml") do
+      it { should be_file }
+      its(:content) { should match 'org.apache.catalina.realm.UserDatabaseRealm' }
+      #defaul sha
+      its(:content) { should match 'digest="sha"' }
+    end
+
+    #configtest server.xml
+    #CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest
+    it 'configtest server.xml tomcat-8080' do
+      expect(shell("CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest").exit_code).to be_zero
+    end
+
+    it 'configtest server.xml tomcat-8888' do
+      expect(shell("CATALINA_BASE=/opt/tomcat-8888 /opt/tomcat-home/bin/catalina.sh configtest").exit_code).to be_zero
+    end
+
+
   end
 
 end
