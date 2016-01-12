@@ -40,6 +40,10 @@ describe 'tomcat context' do
     describe file("/opt/tomcat-8080/lib/org/apache/catalina/startup/Authenticators.properties") do
       it { should be_file }
       its(:content) { should match 'BASIC=es.systemadmin.basic.sso.tomcat.BasicAuthenticator' }
+      its(:content) { should match 'CLIENT-CERT=es.systemadmin.clientcert.sso.tomcat.BasicAuthenticator' }
+      its(:content) { should match 'DIGEST=es.systemadmin.digest.sso.tomcat.BasicAuthenticator' }
+      its(:content) { should match 'FORM=es.systemadmin.form.sso.tomcat.BasicAuthenticator' }
+      its(:content) { should match 'NONE=es.systemadmin.none.sso.tomcat.BasicAuthenticator' }
     end
 
   end
