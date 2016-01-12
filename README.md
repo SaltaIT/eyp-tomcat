@@ -49,6 +49,8 @@ etc.), mention it here.
 
 ### Beginning with tomcat
 
+Multi instance installation example:
+
 ```yaml
 ---
 paquets_general:
@@ -134,6 +136,11 @@ tomcatinstances:
     LockOutRealm: false
     UserDatabase: false
     rmi_server_hostname: "%{::ipaddress_eth0}"
+```
+
+jaas properties example:
+
+```yaml
 jaasproperties:
   tomcat8080:
     app: SystemAdminInternalConfig
@@ -151,6 +158,11 @@ jaasproperties:
     app: SystemAdminInternalConfig
     provider: ldap://1.2.3.4:389/ou=People,dc=systemadmin,dc=es
     filter: (&(uid={USERNAME})(objectClass=inetOrgPerson))
+```
+
+jndi properties example:
+
+```yaml
 jndiproperties:
   tomcat8080:
     ldapservers:
@@ -180,6 +192,11 @@ jndiproperties:
     ldapbase: "%{hiera('systemadmin::ldapbase')}"
     ldapadmin: "%{hiera('systemadmin::ldapadmin')}"
     ldapadminpassword: "%{hiera('openldap::server::adminpassword')}"
+```
+
+authenticators example:
+
+```yaml
 tomcatauthenticators:
   tomcat8080:
     basic: es.systemadmin.sso.tomcat.BasicAuthenticator
@@ -193,6 +210,11 @@ tomcatauthenticators:
   tomcat8083:
     basic: es.systemadmin.sso.tomcat.BasicAuthenticator
     form: es.systemadmin.sso.tomcat.FormAuthenticator
+```
+
+library tarball installation example:
+
+```yaml
 tomcatlibstarballs:
   tomcat8080:
     source: puppet:///customers/example/tomcatlibs.tgz
@@ -202,6 +224,11 @@ tomcatlibstarballs:
     source: puppet:///customers/example/tomcatlibs.tgz
   tomcat8083:
     source: puppet:///customers/example/tomcatlibs.tgz
+```
+
+custom tomcat properties file deployment example:
+
+```yaml
 tomcatproperties:
   catalina8080:
     properties_file: catalina
@@ -243,6 +270,11 @@ tomcatproperties:
     source: puppet:///customers/example/logging.properties
     catalina_base: /opt/tomcat8083
     servicename: tomcat8083
+```
+
+web.xml example:
+
+```yaml
 tomcatwebxml:
   tomcat8080:
     source: puppet:///customers/example/web.xml
@@ -252,6 +284,11 @@ tomcatwebxml:
     source: puppet:///customers/example/web.xml
   tomcat8083:
     source: puppet:///customers/example/web.xml
+```
+
+context.xml example:
+
+```yaml
 tomcatcontext:
   tomcat8080:
     sessionCookiePath: /
