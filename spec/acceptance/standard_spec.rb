@@ -94,7 +94,6 @@ describe 'tomcat class' do
       expect(shell("CATALINA_BASE=/opt/tomcat-8888 /opt/tomcat-home/bin/catalina.sh configtest").exit_code).to be_zero
     end
 
-
   end
 
 end
