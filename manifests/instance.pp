@@ -250,6 +250,15 @@ define tomcat::instance (
     notify  => Service[$instancename],
   }
 
+  if($systemd)
+  {
+    systemd::service { $instancename:
+      execstart => "/etc/init.d/${instancename}",
+      require   => [ Class['systemd'], File["/etc/init.d/${instancename}"] ],
+      before => Service[$instancename],
+    }
+  }
+
   service { $instancename:
     ensure  => 'running',
     enable  => true,
