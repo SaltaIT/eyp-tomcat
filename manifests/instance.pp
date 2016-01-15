@@ -250,7 +250,7 @@ define tomcat::instance (
     notify  => Service[$instancename],
   }
 
-  if($systemd)
+  if($tomcat::params::systemd)
   {
     systemd::service { $instancename:
       execstart => "/etc/init.d/${instancename}",
