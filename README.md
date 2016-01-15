@@ -316,7 +316,13 @@ TODO
 
 ## Limitations
 
-Tested on CentOS 6, should work anywhere
+Tested on:
+* CentOS 5
+* CentOS 6
+* CentOS 6
+* Ubuntu 14.04
+
+But should work anywhere
 
 ## Development
 
