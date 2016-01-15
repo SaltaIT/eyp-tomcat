@@ -8,7 +8,7 @@ class tomcat::params() {
     {
       case $::operatingsystemrelease
       {
-        /^[5-6].*$/:
+        /^[5-7].*$/:
         {
         }
         default: { fail("Unsupported RHEL/CentOS version! - $::operatingsystemrelease")  }
