@@ -252,6 +252,8 @@ define tomcat::instance (
 
   if($tomcat::params::systemd)
   {
+    include systemd
+
     systemd::service { $instancename:
       execstart => "/etc/init.d/${instancename}",
       require   => [ Class['systemd'], File["/etc/init.d/${instancename}"] ],
