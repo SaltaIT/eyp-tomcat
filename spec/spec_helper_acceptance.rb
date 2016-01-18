@@ -18,6 +18,7 @@ RSpec.configure do |c|
       # dependencies
       on host, puppet('module', 'install', 'puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module', 'install', 'puppetlabs-concat'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('module', 'install', 'eyp-systemd'), { :acceptable_exit_codes => [0,1] }
     end
   end
 end

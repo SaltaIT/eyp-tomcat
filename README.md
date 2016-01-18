@@ -310,13 +310,47 @@ tomcatcontext:
 
 TODO
 
+### known errors
+
+#### error installing tomcat native library
+
+The following error means that you need to install the devel package for java, for example **java-1.7.0-openjdk-devel**:
+
+```
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: dirname: missing operand
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: Try 'dirname --help' for more information.
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: dirname: missing operand
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: Try 'dirname --help' for more information.
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: dirname: missing operand
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: Try 'dirname --help' for more information.
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: checking build system type... x86_64-unknown-linux-gnu
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: checking host system type... x86_64-unknown-linux-gnu
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: checking target system type... x86_64-unknown-linux-gnu
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: checking for a BSD-compatible install... /usr/bin/install -c
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: checking for working mkdir -p... yes
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: Tomcat Native Version: 1.1.33
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: checking for chosen layout... tcnative
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: checking for APR... yes
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns:   setting CC to "gcc"
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns:   setting CPP to "gcc -E"
+Notice: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: checking for JDK location (please wait)... configure: error: Not a directory:
+Error: bash -c "./configure --with-apr=/usr/bin/apr-1-config --with-java-home=$(dirname $(dirname $(dirname $(find / -xdev -iname jni_md.h | head -n1))))" returned 1 instead of one of [0]
+Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: change from notrun to 0 failed: bash -c "./configure --with-apr=/usr/bin/apr-1-config --with-java-home=$(dirname $(dirname $(dirname $(find / -xdev -iname jni_md.h | head -n1))))" returned 1 instead of one of [0]
+```
+
 ## Reference
 
 TODO
 
 ## Limitations
 
-Tested on CentOS 6, should work anywhere
+Tested on:
+* CentOS 5
+* CentOS 6
+* CentOS 6
+* Ubuntu 14.04
+
+But should work anywhere
 
 ## Development
 

@@ -26,6 +26,13 @@ export PATH=$JAVA_HOME/bin:$PATH
 TOMCAT_USER=<%= @tomcat_user %>
 KILL_WAIT=10
 
+if [ "$(id -u)" -eq "$(id -u <%= @tomcat_user %>)" ];
+then
+  EXECSTART="/bin/bash"
+else
+  EXECSTART="/bin/su -p -s /bin/sh $TOMCAT_USER"
+fi
+
 start(){
   pid=$( cat $CATALINA_PID 2>/dev/null )
   if [ -n "$pid" ]; then
@@ -36,18 +43,18 @@ start(){
       exit 0
     fi
   fi
-  
+
   echo "Starting <%= @instancename %>"
   touch $CATALINA_PID
   chown $TOMCAT_USER $CATALINA_PID
-  /bin/su -p -s /bin/sh $TOMCAT_USER $CATALINA_BASE/bin/startup.sh
+  $EXECSTART $CATALINA_BASE/bin/startup.sh
   exit 0
 }
 
 stop() {
   pid=$( cat $CATALINA_PID 2>/dev/null )
   if [ -n "$pid" ]; then
-    /bin/su -p -s /bin/sh $TOMCAT_USER $CATALINA_BASE/bin/shutdown.sh
+    $EXECSTART $CATALINA_BASE/bin/shutdown.sh
     echo -n "Stopping <%= @instancename %>"
 
     let kwait=$KILL_WAIT

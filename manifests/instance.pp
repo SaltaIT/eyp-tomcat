@@ -250,6 +250,23 @@ define tomcat::instance (
     notify  => Service[$instancename],
   }
 
+  if($tomcat::params::systemd)
+  {
+    include systemd
+
+    #TODO: canviar sistema d'arranc en CentOS7
+    systemd::service { $instancename:
+      execstart => "/etc/init.d/${instancename} start",
+      execstop  => "/etc/init.d/${instancename} stop",
+      require   => File["/etc/init.d/${instancename}"],
+      before    => Service[$instancename],
+      forking   => true,
+      restart   => 'no',
+      user      => 'tomcat',
+      group     => 'tomcat',
+    }
+  }
+
   service { $instancename:
     ensure  => 'running',
     enable  => true,

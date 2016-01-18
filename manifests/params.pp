@@ -8,8 +8,13 @@ class tomcat::params() {
     {
       case $::operatingsystemrelease
       {
-        /^[5-7].*$/:
+        /^[5-6].*$/:
         {
+					$systemd=false
+        }
+				/^7.*$/:
+        {
+					$systemd=true
         }
         default: { fail("Unsupported RHEL/CentOS version! - $::operatingsystemrelease")  }
       }
@@ -24,6 +29,7 @@ class tomcat::params() {
 					{
 						/^14.*$/:
 						{
+							$systemd=false
 						}
 						default: { fail("Unsupported Ubuntu version! - $::operatingsystemrelease")  }
 					}
