@@ -254,7 +254,6 @@ define tomcat::instance (
   {
     include systemd
 
-
     #TODO: canviar sistema d'arranc en CentOS7
     systemd::service { $instancename:
       execstart => "/etc/init.d/${instancename}",
