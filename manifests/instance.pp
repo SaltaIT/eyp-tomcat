@@ -258,7 +258,8 @@ define tomcat::instance (
     systemd::service { $instancename:
       execstart => "/etc/init.d/${instancename} start",
       require   => File["/etc/init.d/${instancename}"],
-      before => Service[$instancename],
+      before    => Service[$instancename],
+      forking   => true,
     }
   }
 
