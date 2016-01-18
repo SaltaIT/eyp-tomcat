@@ -262,6 +262,8 @@ define tomcat::instance (
       before    => Service[$instancename],
       forking   => true,
       restart   => 'no',
+      user      => 'tomcat',
+      group     => 'tomcat',
     }
   }
 
