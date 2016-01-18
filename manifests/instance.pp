@@ -257,6 +257,7 @@ define tomcat::instance (
     #TODO: canviar sistema d'arranc en CentOS7
     systemd::service { $instancename:
       execstart => "/etc/init.d/${instancename} start",
+      execstop  => "/etc/init.d/${instancename} stop",
       require   => File["/etc/init.d/${instancename}"],
       before    => Service[$instancename],
       forking   => true,
