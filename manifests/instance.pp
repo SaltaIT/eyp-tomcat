@@ -261,6 +261,7 @@ define tomcat::instance (
       require   => File["/etc/init.d/${instancename}"],
       before    => Service[$instancename],
       forking   => true,
+      restart   => 'no',
     }
   }
 
