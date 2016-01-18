@@ -33,12 +33,20 @@ if [ ! -d "$CATALINA_TMPDIR" ]
         chown $USER:$USER $CATALINA_TMPDIR
 fi
 
+if [ "$(id -n)" -eq "$(id -n <%= @user %>)" ];
+then
+  EXECSTART="/bin/bash"
+else
+  EXECSTART="su - ${USER}"
+fi
+
+
 case $1 in
 'start')
         if [ -d ${CATALINA_BASE} ]
         then
                 echo "Tomcat $USER starting"
-                su - ${USER} -c "export CATALINA_HOME=$CATALINA_HOME; export CATALINA_BASE=$CATALINA_BASE; export CATALINA_OPTS=\"$CATALINA_OPTS\"; export CATALINA_PID=$CATALINA_PID; export JAVA_HOME=$JAVA_HOME; export JRE_HOME=$JRE_HOME; export LC_ALL=$LC_ALL; ${CATALINA_HOME}/bin/catalina.sh start"
+                ${EXECSTART} -c "export CATALINA_HOME=$CATALINA_HOME; export CATALINA_BASE=$CATALINA_BASE; export CATALINA_OPTS=\"$CATALINA_OPTS\"; export CATALINA_PID=$CATALINA_PID; export JAVA_HOME=$JAVA_HOME; export JRE_HOME=$JRE_HOME; export LC_ALL=$LC_ALL; ${CATALINA_HOME}/bin/catalina.sh start"
                 echo "Tomcat $USER started"
                 exit 0
         else
@@ -49,7 +57,7 @@ case $1 in
 
 'stop')
         echo "Tomcat $USER stopping"
-        su - ${USER} -c "export CATALINA_HOME=$CATALINA_HOME; export CATALINA_BASE=$CATALINA_BASE; export CATALINA_OPTS=\"$CATALINA_OPTS\"; export CATALINA_PID=$CATALINA_PID; export JAVA_HOME=$JAVA_HOME; export JRE_HOME=$JRE_HOME; export LC_ALL=$LC_ALL; ${CATALINA_HOME}/bin/catalina.sh stop -force"
+        ${EXECSTART} -c "export CATALINA_HOME=$CATALINA_HOME; export CATALINA_BASE=$CATALINA_BASE; export CATALINA_OPTS=\"$CATALINA_OPTS\"; export CATALINA_PID=$CATALINA_PID; export JAVA_HOME=$JAVA_HOME; export JRE_HOME=$JRE_HOME; export LC_ALL=$LC_ALL; ${CATALINA_HOME}/bin/catalina.sh stop -force"
         echo "Tomcat $USER stopped"
 
         exit 0
@@ -87,6 +95,6 @@ case $1 in
         ;;
 *)
         echo "Tomcat $1 "
-        su - ${USER} -c "export CATALINA_HOME=$CATALINA_HOME; export CATALINA_BASE=$CATALINA_BASE; export CATALINA_OPTS=\"$CATALINA_OPTS\"; export CATALINA_PID=$CATALINA_PID; export JAVA_HOME=$JAVA_HOME; export JRE_HOME=$JRE_HOME; export LC_ALL=$LC_ALL; ${CATALINA_HOME}/bin/catalina.sh $1"
+        $EXECSTART -c "export CATALINA_HOME=$CATALINA_HOME; export CATALINA_BASE=$CATALINA_BASE; export CATALINA_OPTS=\"$CATALINA_OPTS\"; export CATALINA_PID=$CATALINA_PID; export JAVA_HOME=$JAVA_HOME; export JRE_HOME=$JRE_HOME; export LC_ALL=$LC_ALL; ${CATALINA_HOME}/bin/catalina.sh $1"
         ;;
 esac
