@@ -354,5 +354,5 @@ But should work anywhere
 
 ## Development
 
-We are pushing to have acceptance testing in place, so any new feature should
-have some test to check both presence and absence of any feature
+We are pushing to have acceptance testing in place, so any new feature must
+have tests to check both presence and absence of any feature
