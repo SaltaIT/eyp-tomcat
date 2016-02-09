@@ -3,7 +3,7 @@ define tomcat::libstarball (
                             $source,
                             $servicename=$name,
                             $libstarballname=$name,
-                            $purge_old=true,
+                            $purge_old=false,
                           ) {
 
   if ! defined(Class['tomcat'])
