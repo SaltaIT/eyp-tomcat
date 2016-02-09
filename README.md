@@ -306,6 +306,14 @@ tomcatcontext:
     antiResourceLocking: true
 ```
 
+update library:
+```puppet
+tomcat::lib { 'tomcat-8080':
+  jar_name => 'ecj-4.4.3',
+  source => 'puppet:///solr/ecj-4.4.3.jar',
+}
+```
+
 ## Usage
 
 TODO
@@ -347,12 +355,12 @@ TODO
 Tested on:
 * CentOS 5
 * CentOS 6
-* CentOS 6
+* CentOS 7
 * Ubuntu 14.04
 
 But should work anywhere
 
 ## Development
 
-We are pushing to have acceptance testing in place, so any new feature should
-have some test to check both presence and absence of any feature
+We are pushing to have acceptance testing in place, so any new feature must
+have tests to check both presence and absence of any feature
