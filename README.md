@@ -306,6 +306,14 @@ tomcatcontext:
     antiResourceLocking: true
 ```
 
+update library:
+```puppet
+tomcat::lib { 'tomcat-8080':
+  jar_name => 'ecj-4.4.3',
+  source => 'puppet:///solr/ecj-4.4.3.jar',
+}
+```
+
 ## Usage
 
 TODO
