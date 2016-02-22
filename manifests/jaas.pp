@@ -13,9 +13,6 @@ define tomcat::jaas (
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-  #validate_array($ldapservers)
-  validate_string($ldapbase)
-
   if($servicename!=undef)
   {
     $serviceinstance=Service[$servicename]
