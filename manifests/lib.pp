@@ -29,7 +29,7 @@ define tomcat::lib (
     $notify_jar=Exec["purge old ${catalina_base} ${jar_name}"]
 
     exec{ "purge old ${catalina_base} ${jar_name}":
-      command     => "ls ${catalina_base}/lib/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\(.*\)-[0-9.]*\.jar$/\1/')'-[0-9.]+.jar' | xargs rm",
+      command     => "ls ${catalina_base}/lib/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar' | xargs rm",
       refreshonly => true,
       notify      => $serviceinstance,
     }
