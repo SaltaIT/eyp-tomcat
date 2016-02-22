@@ -9,12 +9,9 @@ define tomcat::jaas (
                           ) {
 
   if ! defined(Class['tomcat'])
-	{
-		fail('You must include the tomcat base class before using any tomcat defined resources')
-	}
-
-  #validate_array($ldapservers)
-  validate_string($ldapbase)
+  {
+    fail('You must include the tomcat base class before using any tomcat defined resources')
+  }
 
   if($servicename!=undef)
   {

@@ -8,7 +8,7 @@ describe 'tomcat context' do
       pp = <<-EOF
 
       class { 'tomcat':
-        tomcat_url => 'http://ftp.cixug.es/apache/tomcat/tomcat-7/v7.0.67/bin/apache-tomcat-7.0.67.tar.gz',
+        tomcat_url => 'http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.tar.gz',
         nativelibrary => false,
       }
 

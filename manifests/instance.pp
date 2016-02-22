@@ -2,11 +2,11 @@ define tomcat::instance (
                           $tomcatpw,
                           $catalina_base="/opt/${name}",
                           $instancename=$name,
-                          $pwdigest="sha",
+                          $pwdigest='sha',
                           $tomcat_user='tomcat',
-                          $server_info=".",
-                          $server_number=".",
-                          $server_built="Long long ago",
+                          $server_info='.',
+                          $server_number='.',
+                          $server_built='Long long ago',
                           $xmx='512m',
                           $xms='512m',
                           $maxpermsize='512m',
@@ -28,13 +28,13 @@ define tomcat::instance (
                           $rmi_server_hostname=undef,
                         ) {
   Exec {
-  	path => '/usr/sbin:/usr/bin:/sbin:/bin',
+    path => '/usr/sbin:/usr/bin:/sbin:/bin',
   }
 
   if ! defined(Class['tomcat'])
-	{
-		fail('You must include the tomcat base class before using any tomcat defined resources')
-	}
+  {
+    fail('You must include the tomcat base class before using any tomcat defined resources')
+  }
 
   if ($::eyp_tomcat_check_java=='false')
   {
@@ -51,9 +51,9 @@ define tomcat::instance (
     validate_array($values)
   }
 
-  validate_re($pwdigest, [ '^sha$', '^plaintext$'], "Not a supported digest: sha/plaintext")
+  validate_re($pwdigest, [ '^sha$', '^plaintext$'], 'Not a supported digest: sha/plaintext')
 
-  if ($pwdigest=="sha")
+  if ($pwdigest=='sha')
   {
     $digestedtomcatpw=sha1($tomcatpw)
   }
@@ -88,8 +88,12 @@ define tomcat::instance (
     owner   => $tomcat_user,
     group   => $tomcat_user,
     mode    => '0755',
-    require => Exec[["mkdir base tomcat instance ${instancename} ${catalina_base}",
-                     "mkdir ver tomcat instance ${instancename} ${catalina_base}" ]],
+    require => Exec[
+                    [
+                      "mkdir base tomcat instance ${instancename} ${catalina_base}",
+                      "mkdir ver tomcat instance ${instancename} ${catalina_base}"
+                    ]
+                  ],
   }
 
   file { "${catalina_base}/conf":
@@ -270,7 +274,7 @@ define tomcat::instance (
   service { $instancename:
     ensure  => 'running',
     enable  => true,
-    require => File["/etc/init.d/$instancename"],
+    require => File["/etc/init.d/${instancename}"],
   }
 
 }

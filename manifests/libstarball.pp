@@ -1,15 +1,15 @@
-define tomcat::libstarball (
-                            $catalina_base="/opt/${name}",
+define tomcat::libstarball(
                             $source,
+                            $catalina_base="/opt/${name}",
                             $servicename=$name,
                             $libstarballname=$name,
                             $purge_old=false,
                           ) {
 
   if ! defined(Class['tomcat'])
-	{
-		fail('You must include the tomcat base class before using any tomcat defined resources')
-	}
+  {
+    fail('You must include the tomcat base class before using any tomcat defined resources')
+  }
 
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',

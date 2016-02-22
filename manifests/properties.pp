@@ -6,9 +6,9 @@ define tomcat::properties (
                           ) {
 
   if ! defined(Class['tomcat'])
-	{
-		fail('You must include the tomcat base class before using any tomcat defined resources')
-	}
+  {
+    fail('You must include the tomcat base class before using any tomcat defined resources')
+  }
 
   if($servicename!=undef)
   {

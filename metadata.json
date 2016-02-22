@@ -4,13 +4,13 @@
   "author": "eyp",
   "summary": "multi instance tomcat",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/AtlasIT-AM/eyp-tomcat",
   "project_page": null,
-  "issues_url": null,
+  "issues_url": "https://github.com/AtlasIT-AM/eyp-tomcat/issues",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0"},
-    {"version_requirement":">= 0.1.2","name":"eyp/java"},
-    {"version_requirement":">= 0.1.7","name":"eyp/systemd"}
+    {"version_requirement":">= 0.1.2 < 0.2.0","name":"eyp/java"},
+    {"version_requirement":">= 0.1.7 < 0.2.0","name":"eyp/systemd"}
   ],
   "operatingsystem_support": [
   {
