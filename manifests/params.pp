@@ -16,7 +16,7 @@ class tomcat::params() {
         {
           $systemd=true
         }
-        default: { fail("Unsupported RHEL/CentOS version! - $::operatingsystemrelease")  }
+        default: { fail("Unsupported RHEL/CentOS version! - ${::operatingsystemrelease}")  }
       }
     }
     'Debian':
@@ -31,7 +31,7 @@ class tomcat::params() {
             {
               $systemd=false
             }
-            default: { fail("Unsupported Ubuntu version! - $::operatingsystemrelease")  }
+            default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
         'Debian': { fail('Unsupported')  }

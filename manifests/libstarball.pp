@@ -1,6 +1,6 @@
-define tomcat::libstarball (
-                            $catalina_base="/opt/${name}",
+define tomcat::libstarball(
                             $source,
+                            $catalina_base="/opt/${name}",
                             $servicename=$name,
                             $libstarballname=$name,
                             $purge_old=false,
