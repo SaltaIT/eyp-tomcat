@@ -7,9 +7,9 @@ define tomcat::libstarball (
                           ) {
 
   if ! defined(Class['tomcat'])
-	{
-		fail('You must include the tomcat base class before using any tomcat defined resources')
-	}
+  {
+    fail('You must include the tomcat base class before using any tomcat defined resources')
+  }
 
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',

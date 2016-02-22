@@ -9,9 +9,9 @@ define tomcat::context (
                           ) {
 
   if ! defined(Class['tomcat'])
-	{
-		fail('You must include the tomcat base class before using any tomcat defined resources')
-	}
+  {
+    fail('You must include the tomcat base class before using any tomcat defined resources')
+  }
 
   #validate_array($ldapservers)
   #validate_string($ldapbase)

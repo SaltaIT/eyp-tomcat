@@ -15,7 +15,7 @@ class tomcat(
             ) inherits tomcat::params {
 
   Exec {
-  	path => '/usr/sbin:/usr/bin:/sbin:/bin',
+    path => '/usr/sbin:/usr/bin:/sbin:/bin',
   }
 
   validate_absolute_path($srcdir)
@@ -103,7 +103,7 @@ class tomcat(
 
   if($nativelibrary)
   {
-    package { $develpkg:
+    package { $tomcat::params::develpkg:
       ensure => 'installed',
     }
 
@@ -123,7 +123,7 @@ class tomcat(
 
     exec { "configure native library ${srcdir}":
       command => 'bash -c "./configure --with-apr=/usr/bin/apr-1-config --with-java-home=$(dirname $(dirname $(dirname $(find / -xdev -iname jni_md.h | head -n1))))"',
-      require => [ Package[$develpkg], Exec["tar xzf native library ${srcdir}"] ],
+      require => [ Package[$tomcat::params::develpkg], Exec["tar xzf native library ${srcdir}"] ],
       cwd     => "${srcdir}/tomcat-native-library/jni/native",
       creates => "${srcdir}/tomcat-native-library/jni/native/Makefile",
     }
@@ -136,17 +136,17 @@ class tomcat(
     }
 
     file { '/etc/ld.so.conf.d/tomcat-native-library.conf':
-      ensure => 'present',
-      owner => 'root',
-      group => 'root',
-      mode => '0644',
+      ensure  => 'present',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
       content => "/usr/local/apr/lib/\n",
-      notify => Exec['tomcat library ldconfig'],
+      notify  => Exec['tomcat library ldconfig'],
       require => Exec["make install native library ${srcdir}"],
     }
 
     exec { 'tomcat library ldconfig':
-      command => 'ldconfig',
+      command     => 'ldconfig',
       refreshonly => true,
     }
   }

@@ -1,43 +1,43 @@
 class tomcat::params() {
 
-	$develpkg=[ 'apr-devel' ]
+  $develpkg=[ 'apr-devel' ]
 
-	case $::osfamily
-	{
+  case $::osfamily
+  {
     'redhat':
     {
       case $::operatingsystemrelease
       {
         /^[5-6].*$/:
         {
-					$systemd=false
+          $systemd=false
         }
-				/^7.*$/:
+        /^7.*$/:
         {
-					$systemd=true
+          $systemd=true
         }
         default: { fail("Unsupported RHEL/CentOS version! - $::operatingsystemrelease")  }
       }
     }
-		'Debian':
-		{
-			case $::operatingsystem
-			{
-				'Ubuntu':
-				{
-					case $::operatingsystemrelease
-					{
-						/^14.*$/:
-						{
-							$systemd=false
-						}
-						default: { fail("Unsupported Ubuntu version! - $::operatingsystemrelease")  }
-					}
-				}
-				'Debian': { fail('Unsupported')  }
-				default: { fail('Unsupported Debian flavour!')  }
-			}
-		}
-		default: { fail('Unsupported OS!')  }
-	}
+    'Debian':
+    {
+      case $::operatingsystem
+      {
+        'Ubuntu':
+        {
+          case $::operatingsystemrelease
+          {
+            /^14.*$/:
+            {
+              $systemd=false
+            }
+            default: { fail("Unsupported Ubuntu version! - $::operatingsystemrelease")  }
+          }
+        }
+        'Debian': { fail('Unsupported')  }
+        default: { fail('Unsupported Debian flavour!')  }
+      }
+    }
+    default: { fail('Unsupported OS!')  }
+  }
 }
