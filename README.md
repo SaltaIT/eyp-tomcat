@@ -1,5 +1,7 @@
 # tomcat
 
+[![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+
 **AtlasIT-AM/eyp-tomcat**: [![Build Status](https://travis-ci.org/AtlasIT-AM/eyp-tomcat.png?branch=master)](https://travis-ci.org/AtlasIT-AM/eyp-tomcat)
 
 #### Table of Contents
