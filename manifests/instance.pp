@@ -36,11 +36,6 @@ define tomcat::instance (
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-  if ($::eyp_tomcat_check_java=='false')
-  {
-    fail('No java found')
-  }
-
   if($realms)
   {
     validate_array($realms)
