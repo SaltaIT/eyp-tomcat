@@ -1,31 +1,33 @@
 define tomcat::instance (
                           $tomcatpw,
-                          $catalina_base="/opt/${name}",
-                          $instancename=$name,
-                          $pwdigest='sha',
-                          $tomcat_user='tomcat',
-                          $server_info='.',
-                          $server_number='.',
-                          $server_built='Long long ago',
-                          $xmx='512m',
-                          $xms='512m',
-                          $maxpermsize='512m',
-                          $permsize=undef,
-                          $shutdown_port='8005',
-                          $ajp_port=undef,
-                          $connector_port='8080',
-                          $jmx_port='8999',
-                          $redirectPort='8443',
-                          $realms=undef,
-                          $values=undef,
-                          $errorReportValveClass=undef,
-                          $maxThreads='150',
-                          $minSpareThreads='4',
-                          $connectionTimeout='20000',
-                          $LockOutRealm=true,
-                          $UserDatabase=true,
-                          $extra_vars=undef,
-                          $rmi_server_hostname=undef,
+                          $catalina_base         = "/opt/${name}",
+                          $instancename          = $name,
+                          $pwdigest              = 'sha',
+                          $tomcat_user           = 'tomcat',
+                          $server_info           = '.',
+                          $server_number         = '.',
+                          $server_built          = 'Long long ago',
+                          $xmx                   = '512m',
+                          $xms                   = '512m',
+                          $maxpermsize           = '512m',
+                          $permsize              = undef,
+                          $shutdown_port         = '8005',
+                          $ajp_port              = undef,
+                          $connector_port        = '8080',
+                          $jmx_port              = '8999',
+                          $redirectPort          = '8443',
+                          $realms                = undef,
+                          $values                = undef,
+                          $errorReportValveClass = undef,
+                          $maxThreads            = '150',
+                          $minSpareThreads       = '4',
+                          $connectionTimeout     = '20000',
+                          $LockOutRealm          = true,
+                          $UserDatabase          = true,
+                          $extra_vars            = undef,
+                          $rmi_server_hostname   = undef,
+                          $catalina_rotate       = '15',
+                          $catalina_size         = '100M',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -270,6 +272,22 @@ define tomcat::instance (
     ensure  => 'running',
     enable  => true,
     require => File["/etc/init.d/${instancename}"],
+  }
+
+  if($catalina_rotate!=undef)
+  {
+    if(defined(Class['::logrotate']))
+    {
+      logrotate::logs { "${instancename}.catalina.out":
+        log          => "${catalina_base}/logs/catalina.out",
+        compress     => true,
+        copytruncate => true,
+        frequency    => 'daily',
+        rotate       => $catalina_rotate,
+        missingok    => true,
+        size         => $catalina_size,
+      }
+    }
   }
 
 }
