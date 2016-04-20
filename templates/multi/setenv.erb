@@ -12,3 +12,7 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:PermSize=<%= @permsize %>"
 <% if defined?(@maxpermsize) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxPermSize=<%= @maxpermsize %>"
 <% end -%>
+<% if defined?(@heapdump_oom_dir) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+HeapDumpOnOutOfMemoryError"
+export CATALINA_OPTS="$CATALINA_OPTS -XX:HeapDumpPath=<%= @heapdump_oom_dir %>"
+<% end -%>

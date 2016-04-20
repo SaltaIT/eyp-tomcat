@@ -25,9 +25,11 @@ define tomcat::instance (
                           $LockOutRealm          = true,
                           $UserDatabase          = true,
                           $extra_vars            = undef,
+                          $system_properties     = undef,
                           $rmi_server_hostname   = undef,
                           $catalina_rotate       = '15',
                           $catalina_size         = '100M',
+                          $heapdump_oom_dir      = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -191,7 +193,7 @@ define tomcat::instance (
     notify  => Service[$instancename],
   }
 
-  concat::fragment{ "${catalina_base}/bin/setenv.sh extravars":
+  concat::fragment{ "${catalina_base}/bin/setenv.sh base":
     target  => "${catalina_base}/bin/setenv.sh",
     order   => '00',
     content => template("${module_name}/multi/setenv.erb"),
@@ -199,10 +201,23 @@ define tomcat::instance (
 
   if($extra_vars!=undef)
   {
-    concat::fragment{ "${catalina_base}/bin/setenv.sh base":
+    validate_hash($extra_vars)
+
+    concat::fragment{ "${catalina_base}/bin/setenv.sh extravars":
       target  => "${catalina_base}/bin/setenv.sh",
       order   => '01',
       content => template("${module_name}/multi/setenv_extra_vars.erb"),
+    }
+  }
+
+  if($system_properties!=undef)
+  {
+    validate_hash($system_properties)
+
+    concat::fragment{ "${catalina_base}/bin/setenv.sh systemproperties":
+      target  => "${catalina_base}/bin/setenv.sh",
+      order   => '02',
+      content => template("${module_name}/multi/setenv_systemproperties.erb"),
     }
   }
 
