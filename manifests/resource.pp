@@ -17,6 +17,8 @@ define tomcat::resource (
                           $time_between_evictionrunsmillis = undef,
                           $numtests_per_evictionrun        = undef,
                           $init_sql                        = undef,
+                          $auth                            = undef,
+                          $location                        = undef,
                         ) {
   #
   if ! defined(Class['tomcat'])

@@ -43,4 +43,10 @@
                  <%- if defined?(@init_sql) -%>
                  initSQL="<%= @init_sql %>"
                  <%- end -%>
+                 <%- if defined?(@auth) -%>
+                 auth="<%= @auth %>"
+                 <%- end -%>
+                 <%- if defined?(@location) -%>
+                 location="<%= @location %>"
+                 <%- end -%>
            />
