@@ -40,7 +40,7 @@ describe 'tomcat class' do
         min_evictable_idletimemillis => '3600000',
         time_between_evictionrunsmillis => '1800000',
         numtests_per_evictionrun => '10',
-        init_sql => 'SET application_name TO \'TC_extension01\'',
+        init_sql => 'SET application_name TO TC_extension01',
       }
 
       EOF
@@ -120,7 +120,7 @@ describe 'tomcat class' do
       its(:content) { should match 'minEvictableIdleTimeMillis="3600000"' }
       its(:content) { should match 'timeBetweenEvictionRunsMillis="1800000"' }
       its(:content) { should match 'numTestsPerEvictionRun="10"' }
-      its(:content) { should match 'initSQL="SET application_name TO \'TC_extension01\'"' }
+      its(:content) { should match 'initSQL="SET application_name TO TC_extension01"' }
 
 
     end
