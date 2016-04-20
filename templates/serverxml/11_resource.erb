@@ -1,0 +1,46 @@
+
+    <Resource    type="<%= @resource_type %>"
+                 name="<%= @resource_name %>"
+                 <%- if defined?(@factory) -%>
+                 factory="<%= @factory %>"
+                 <%- end -%>
+                 <%- if defined?(@driver_class_name) -%>
+                 driverClassName="<%= @driver_class_name %>"
+                 <%- end -%>
+                 <%- if defined?(@resource_url) -%>
+                 url="<%= @resource_url %>"
+                 <%- end -%>
+                 <%- if defined?(@username) -%>
+                 username="<%= @username %>"
+                 <%- end -%>
+                 <%- if defined?(@password) -%>
+                 password="<%= @password %>"
+                 <%- end -%>
+                 <%- if defined?(@initial_size) -%>
+                 initialSize="<%= @initial_size %>"
+                 <%- end -%>
+                 <%- if defined?(@max_active) -%>
+                 maxActive="<%= @max_active %>"
+                 <%- end -%>
+                 <%- if defined?(@max_idle) -%>
+                 maxIdle="<%= @max_idle %>"
+                 <%- end -%>
+                 <%- if defined?(@min_idle) -%>
+                 minIdle="<%= @min_idle %>"
+                 <%- end -%>
+                 <%- if defined?(@validation_query) -%>
+                 validationQuery="<%= @validation_query %>"
+                 <%- end -%>
+                 <%- if defined?(@min_evictable_idletimemillis) -%>
+                 minEvictableIdleTimeMillis="<%= @min_evictable_idletimemillis %>"
+                 <%- end -%>
+                 <%- if defined?(@time_between_evictionrunsmillis) -%>
+                 timeBetweenEvictionRunsMillis="<%= @time_between_evictionrunsmillis %>"
+                 <%- end -%>
+                 <%- if defined?(@numtests_per_evictionrun) -%>
+                 numTestsPerEvictionRun="<%= @numtests_per_evictionrun %>"
+                 <%- end -%>
+                 <%- if defined?(@init_sql) -%>
+                 initSQL="<%= @init_sql %>"
+                 <%- end -%>
+           />

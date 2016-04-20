@@ -135,18 +135,73 @@ define tomcat::instance (
     require => File[$catalina_base],
   }
 
-  file { "${catalina_base}/conf/server.xml":
+  concat { "${catalina_base}/conf/server.xml":
     ensure  => 'present',
     owner   => $tomcat_user,
     group   => $tomcat_user,
     mode    => '0644',
     require => File["${catalina_base}/conf"],
     notify  => Service[$instancename],
-    content => template("${module_name}/serverxml.erb"),
+  }
+
+  #content => template("${module_name}/serverxml.erb"),
+
+  concat::fragment{ "${catalina_base}/conf/server.xml initxml":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '00',
+    content => template("${module_name}/serverxml/00_initxml.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml server":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '01',
+    content => template("${module_name}/serverxml/01_server.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml listeners":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '02',
+    content => template("${module_name}/serverxml/02_listeners.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml service":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '20',
+    content => template("${module_name}/serverxml/20_service.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml server end":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '99',
+    content => template("${module_name}/serverxml/99_server_end.erb"),
   }
 
   if($UserDatabase)
   {
+    if(!defined(Concat::Fragment["${catalina_base}/conf/server.xml globalnamingresources ini"]))
+    {
+      concat::fragment{ "${catalina_base}/conf/server.xml globalnamingresources ini":
+        target  => "${catalina_base}/conf/server.xml",
+        order   => '10',
+        content => template("${module_name}/serverxml/10_global_naming_resources_init.erb"),
+      }
+    }
+
+    concat::fragment{ "${catalina_base}/conf/server.xml userdb resource":
+      target  => "${catalina_base}/conf/server.xml",
+      order   => '11',
+      content => template("${module_name}/serverxml/11_user_db.erb"),
+    }
+
+    if(!defined(Concat::Fragment["${catalina_base}/conf/server.xml globalnamingresources end"]))
+    {
+      concat::fragment{ "${catalina_base}/conf/server.xml globalnamingresources end":
+        target  => "${catalina_base}/conf/server.xml",
+        order   => '12',
+        content => template("${module_name}/serverxml/12_global_naming_resources_fi.erb"),
+      }
+    }
+
     file { "${catalina_base}/conf/tomcat-users.xml":
       ensure  => 'present',
       owner   => $tomcat_user,
