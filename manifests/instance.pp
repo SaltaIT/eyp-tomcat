@@ -1,31 +1,35 @@
 define tomcat::instance (
                           $tomcatpw,
-                          $catalina_base="/opt/${name}",
-                          $instancename=$name,
-                          $pwdigest='sha',
-                          $tomcat_user='tomcat',
-                          $server_info='.',
-                          $server_number='.',
-                          $server_built='Long long ago',
-                          $xmx='512m',
-                          $xms='512m',
-                          $maxpermsize='512m',
-                          $permsize=undef,
-                          $shutdown_port='8005',
-                          $ajp_port=undef,
-                          $connector_port='8080',
-                          $jmx_port='8999',
-                          $redirectPort='8443',
-                          $realms=undef,
-                          $values=undef,
-                          $errorReportValveClass=undef,
-                          $maxThreads='150',
-                          $minSpareThreads='4',
-                          $connectionTimeout='20000',
-                          $LockOutRealm=true,
-                          $UserDatabase=true,
-                          $extra_vars=undef,
-                          $rmi_server_hostname=undef,
+                          $catalina_base         = "/opt/${name}",
+                          $instancename          = $name,
+                          $pwdigest              = 'sha',
+                          $tomcat_user           = 'tomcat',
+                          $server_info           = '.',
+                          $server_number         = '.',
+                          $server_built          = 'Long long ago',
+                          $xmx                   = '512m',
+                          $xms                   = '512m',
+                          $maxpermsize           = '512m',
+                          $permsize              = undef,
+                          $shutdown_port         = '8005',
+                          $ajp_port              = undef,
+                          $connector_port        = '8080',
+                          $jmx_port              = '8999',
+                          $redirectPort          = '8443',
+                          $realms                = undef,
+                          $values                = undef,
+                          $errorReportValveClass = undef,
+                          $maxThreads            = '150',
+                          $minSpareThreads       = '4',
+                          $connectionTimeout     = '20000',
+                          $LockOutRealm          = true,
+                          $UserDatabase          = true,
+                          $extra_vars            = undef,
+                          $system_properties     = undef,
+                          $rmi_server_hostname   = undef,
+                          $catalina_rotate       = '15',
+                          $catalina_size         = '100M',
+                          $heapdump_oom_dir      = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -34,11 +38,6 @@ define tomcat::instance (
   if ! defined(Class['tomcat'])
   {
     fail('You must include the tomcat base class before using any tomcat defined resources')
-  }
-
-  if ($::eyp_tomcat_check_java=='false')
-  {
-    fail('No java found')
   }
 
   if($realms)
@@ -136,18 +135,73 @@ define tomcat::instance (
     require => File[$catalina_base],
   }
 
-  file { "${catalina_base}/conf/server.xml":
+  concat { "${catalina_base}/conf/server.xml":
     ensure  => 'present',
     owner   => $tomcat_user,
     group   => $tomcat_user,
     mode    => '0644',
     require => File["${catalina_base}/conf"],
     notify  => Service[$instancename],
-    content => template("${module_name}/serverxml.erb"),
+  }
+
+  #content => template("${module_name}/serverxml.erb"),
+
+  concat::fragment{ "${catalina_base}/conf/server.xml initxml":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '00',
+    content => template("${module_name}/serverxml/00_initxml.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml server":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '01',
+    content => template("${module_name}/serverxml/01_server.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml listeners":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '02',
+    content => template("${module_name}/serverxml/02_listeners.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml service":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '20',
+    content => template("${module_name}/serverxml/20_service.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml server end":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '99',
+    content => template("${module_name}/serverxml/99_server_end.erb"),
   }
 
   if($UserDatabase)
   {
+    if(!defined(Concat::Fragment["${catalina_base}/conf/server.xml globalnamingresources ini"]))
+    {
+      concat::fragment{ "${catalina_base}/conf/server.xml globalnamingresources ini":
+        target  => "${catalina_base}/conf/server.xml",
+        order   => '10',
+        content => template("${module_name}/serverxml/10_global_naming_resources_init.erb"),
+      }
+    }
+
+    concat::fragment{ "${catalina_base}/conf/server.xml userdb resource":
+      target  => "${catalina_base}/conf/server.xml",
+      order   => '11',
+      content => template("${module_name}/serverxml/11_user_db.erb"),
+    }
+
+    if(!defined(Concat::Fragment["${catalina_base}/conf/server.xml globalnamingresources end"]))
+    {
+      concat::fragment{ "${catalina_base}/conf/server.xml globalnamingresources end":
+        target  => "${catalina_base}/conf/server.xml",
+        order   => '12',
+        content => template("${module_name}/serverxml/12_global_naming_resources_fi.erb"),
+      }
+    }
+
     file { "${catalina_base}/conf/tomcat-users.xml":
       ensure  => 'present',
       owner   => $tomcat_user,
@@ -194,7 +248,7 @@ define tomcat::instance (
     notify  => Service[$instancename],
   }
 
-  concat::fragment{ "${catalina_base}/bin/setenv.sh extravars":
+  concat::fragment{ "${catalina_base}/bin/setenv.sh base":
     target  => "${catalina_base}/bin/setenv.sh",
     order   => '00',
     content => template("${module_name}/multi/setenv.erb"),
@@ -202,10 +256,23 @@ define tomcat::instance (
 
   if($extra_vars!=undef)
   {
-    concat::fragment{ "${catalina_base}/bin/setenv.sh base":
+    validate_hash($extra_vars)
+
+    concat::fragment{ "${catalina_base}/bin/setenv.sh extravars":
       target  => "${catalina_base}/bin/setenv.sh",
       order   => '01',
       content => template("${module_name}/multi/setenv_extra_vars.erb"),
+    }
+  }
+
+  if($system_properties!=undef)
+  {
+    validate_hash($system_properties)
+
+    concat::fragment{ "${catalina_base}/bin/setenv.sh systemproperties":
+      target  => "${catalina_base}/bin/setenv.sh",
+      order   => '02',
+      content => template("${module_name}/multi/setenv_systemproperties.erb"),
     }
   }
 
@@ -238,7 +305,6 @@ define tomcat::instance (
     require => [ File [
                       [
                         "${catalina_base}/conf/tomcat-users.xml",
-                        "${catalina_base}/conf/server.xml",
                         "${catalina_base}/lib",
                         "${catalina_base}/logs",
                         "${catalina_base}/temp",
@@ -248,7 +314,8 @@ define tomcat::instance (
                         "${catalina_base}/bin/shutdown.sh",
                       ]
                     ],
-                  Concat["${catalina_base}/bin/setenv.sh"],
+                  Concat[["${catalina_base}/bin/setenv.sh",
+                          "${catalina_base}/conf/server.xml"]],
                     ],
     content => template("${module_name}/multi/tomcat-init.erb"),
     notify  => Service[$instancename],
@@ -275,6 +342,22 @@ define tomcat::instance (
     ensure  => 'running',
     enable  => true,
     require => File["/etc/init.d/${instancename}"],
+  }
+
+  if($catalina_rotate!=undef)
+  {
+    if(defined(Class['::logrotate']))
+    {
+      logrotate::logs { "${instancename}.catalina.out":
+        log          => "${catalina_base}/logs/catalina.out",
+        compress     => true,
+        copytruncate => true,
+        frequency    => 'daily',
+        rotate       => $catalina_rotate,
+        missingok    => true,
+        size         => $catalina_size,
+      }
+    }
   }
 
 }

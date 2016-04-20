@@ -24,6 +24,25 @@ describe 'tomcat class' do
         jmx_port => '9999',
       }
 
+      tomcat::resource { 'tomcat-8888':
+        resource_name => 'jdbc/psp',
+        resource_type => 'javax.sql.DataSource',
+        factory => 'org.apache.tomcat.jdbc.pool.DataSourceFactory',
+        driver_class_name => 'org.postgresql.Driver',
+        resource_url => 'jdbc:postgresql://RTDKA1PQL02.dktetrix.net:60901/extension',
+        username => 'extension',
+        password => 'XXXXX',
+        initial_size => '2',
+        max_active => '20',
+        max_idle => '10',
+        min_idle => '2',
+        validation_query => 'select 1',
+        min_evictable_idletimemillis => '3600000',
+        time_between_evictionrunsmillis => '1800000',
+        numtests_per_evictionrun => '10',
+        init_sql => 'SET application_name TO TC_extension01',
+      }
+
       EOF
 
       # Run it twice and test for idempotency
@@ -82,6 +101,28 @@ describe 'tomcat class' do
       its(:content) { should match 'org.apache.catalina.realm.UserDatabaseRealm' }
       #defaul sha
       its(:content) { should match 'digest="sha"' }
+      #resources
+      its(:content) { should match '<GlobalNamingResources>' }
+      its(:content) { should match '</GlobalNamingResources>' }
+      its(:content) { should match '<Resource' }
+      its(:content) { should match 'type="javax.sql.DataSource"' }
+      its(:content) { should match 'name="jdbc/psp"' }
+      its(:content) { should match 'factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"' }
+      its(:content) { should match 'driverClassName="org.postgresql.Driver"' }
+      its(:content) { should match 'url="jdbc:postgresql://RTDKA1PQL02.dktetrix.net:60901/extension"' }
+      its(:content) { should match 'username="extension"' }
+      its(:content) { should match 'password="XXXXX"' }
+      its(:content) { should match 'initialSize="2"' }
+      its(:content) { should match 'maxActive="20"' }
+      its(:content) { should match 'maxIdle="10"' }
+      its(:content) { should match 'minIdle="2"' }
+      its(:content) { should match 'validationQuery="select 1"' }
+      its(:content) { should match 'minEvictableIdleTimeMillis="3600000"' }
+      its(:content) { should match 'timeBetweenEvictionRunsMillis="1800000"' }
+      its(:content) { should match 'numTestsPerEvictionRun="10"' }
+      its(:content) { should match 'initSQL="SET application_name TO TC_extension01"' }
+
+
     end
 
     #configtest server.xml
