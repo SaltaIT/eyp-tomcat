@@ -1,9 +1,10 @@
 define tomcat::lib (
                             $jar_name,
                             $source,
-                            $catalina_base="/opt/${name}",
-                            $servicename=$name,
-                            $purge_old=true,
+                            $catalina_base = "/opt/${name}",
+                            $servicename   = $name,
+                            $purge_old     = true,
+                            $ensure        = 'present',
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -40,7 +41,7 @@ define tomcat::lib (
   }
 
   file { "${catalina_base}/lib/${jar_name}.jar":
-    ensure  => 'present',
+    ensure  => $ensure,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
