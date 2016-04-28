@@ -135,6 +135,14 @@ define tomcat::instance (
     require => File[$catalina_base],
   }
 
+  file { "${catalina_base}/webapps":
+    ensure  => 'directory',
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
+    mode    => '0755',
+    require => File[$catalina_base],
+  }
+
   concat { "${catalina_base}/conf/server.xml":
     ensure  => 'present',
     owner   => $tomcat_user,
@@ -310,6 +318,7 @@ define tomcat::instance (
                         "${catalina_base}/temp",
                         "${catalina_base}/bin",
                         "${catalina_base}/conf",
+                        "${catalina_base}/webapps",
                         "${catalina_base}/bin/startup.sh",
                         "${catalina_base}/bin/shutdown.sh",
                       ]
