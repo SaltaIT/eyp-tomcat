@@ -140,7 +140,7 @@ define tomcat::instance (
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0755',
+    mode    => '0775',
     require => File[$catalina_base],
   }
 
