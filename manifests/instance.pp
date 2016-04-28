@@ -1,35 +1,36 @@
 define tomcat::instance (
                           $tomcatpw,
-                          $catalina_base         = "/opt/${name}",
-                          $instancename          = $name,
-                          $pwdigest              = 'sha',
-                          $tomcat_user           = 'tomcat',
-                          $server_info           = '.',
-                          $server_number         = '.',
-                          $server_built          = 'Long long ago',
-                          $xmx                   = '512m',
-                          $xms                   = '512m',
-                          $maxpermsize           = '512m',
-                          $permsize              = undef,
-                          $shutdown_port         = '8005',
-                          $ajp_port              = undef,
-                          $connector_port        = '8080',
-                          $jmx_port              = '8999',
-                          $redirectPort          = '8443',
-                          $realms                = undef,
-                          $values                = undef,
-                          $errorReportValveClass = undef,
-                          $maxThreads            = '150',
-                          $minSpareThreads       = '4',
-                          $connectionTimeout     = '20000',
-                          $LockOutRealm          = true,
-                          $UserDatabase          = true,
-                          $extra_vars            = undef,
-                          $system_properties     = undef,
-                          $rmi_server_hostname   = undef,
-                          $catalina_rotate       = '15',
-                          $catalina_size         = '100M',
-                          $heapdump_oom_dir      = undef,
+                          $catalina_base          = "/opt/${name}",
+                          $instancename           = $name,
+                          $pwdigest               = 'sha',
+                          $tomcat_user            = 'tomcat',
+                          $server_info            = '.',
+                          $server_number          = '.',
+                          $server_built           = 'Long long ago',
+                          $xmx                    = '512m',
+                          $xms                    = '512m',
+                          $maxpermsize            = '512m',
+                          $permsize               = undef,
+                          $shutdown_port          = '8005',
+                          $ajp_port               = undef,
+                          $connector_port         = '8080',
+                          $jmx_port               = '8999',
+                          $redirectPort           = '8443',
+                          $realms                 = undef,
+                          $values                 = undef,
+                          $errorReportValveClass  = undef,
+                          $maxThreads             = '150',
+                          $minSpareThreads        = '4',
+                          $connectionTimeout      = '20000',
+                          $LockOutRealm           = true,
+                          $UserDatabase           = true,
+                          $extra_vars             = undef,
+                          $system_properties      = undef,
+                          $rmi_server_hostname    = undef,
+                          $catalina_rotate        = '15',
+                          $catalina_size          = '100M',
+                          $heapdump_oom_dir       = undef,
+                          $install_tomcat_manager = true,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -128,6 +129,14 @@ define tomcat::instance (
   }
 
   file { "${catalina_base}/logs":
+    ensure  => 'directory',
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
+    mode    => '0755',
+    require => File[$catalina_base],
+  }
+
+  file { "${catalina_base}/webapps":
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
@@ -310,6 +319,7 @@ define tomcat::instance (
                         "${catalina_base}/temp",
                         "${catalina_base}/bin",
                         "${catalina_base}/conf",
+                        "${catalina_base}/webapps",
                         "${catalina_base}/bin/startup.sh",
                         "${catalina_base}/bin/shutdown.sh",
                       ]
@@ -357,6 +367,23 @@ define tomcat::instance (
         missingok    => true,
         size         => $catalina_size,
       }
+    }
+  }
+
+  if($install_tomcat_manager)
+  {
+    exec { 'cp tomcat manager from tomcat-home':
+      command => "cp -pr ${tomcat::catalina_home}/webapps/manager ${catalina_base}/webapps",
+      creates => "${catalina_base}/webapps/manager",
+      require => File["${catalina_base}/webapps"],
+      before => Service[$instancename],
+    }
+
+    exec { 'cp tomcat host-manager from tomcat-home':
+      command => "cp -pr ${tomcat::catalina_home}/webapps/host-manager ${catalina_base}/webapps",
+      creates => "${catalina_base}/webapps/host-manager",
+      require => File["${catalina_base}/webapps"],
+      before => Service[$instancename],
     }
   }
 
