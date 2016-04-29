@@ -376,14 +376,14 @@ define tomcat::instance (
       command => "cp -pr ${tomcat::catalina_home}/webapps/manager ${catalina_base}/webapps",
       creates => "${catalina_base}/webapps/manager",
       require => File["${catalina_base}/webapps"],
-      before => Service[$instancename],
+      before  => Service[$instancename],
     }
 
     exec { "cp tomcat host-manager from tomcat-home ${instancename}":
       command => "cp -pr ${tomcat::catalina_home}/webapps/host-manager ${catalina_base}/webapps",
       creates => "${catalina_base}/webapps/host-manager",
       require => File["${catalina_base}/webapps"],
-      before => Service[$instancename],
+      before  => Service[$instancename],
     }
   }
 

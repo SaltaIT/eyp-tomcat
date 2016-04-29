@@ -1,6 +1,7 @@
 define tomcat::lib (
                             $jar_name,
-                            $source,
+                            $source        = undef,
+                            $file_ln       = undef,
                             $catalina_base = "/opt/${name}",
                             $servicename   = $name,
                             $purge_old     = true,
@@ -10,6 +11,21 @@ define tomcat::lib (
   if ! defined(Class['tomcat'])
   {
     fail('You must include the tomcat base class before using any tomcat defined resources')
+  }
+
+  if($source==undef and $file_ln==undef)
+  {
+    fail('You have to specify source or file_ln')
+  }
+
+  if($source!=undef and $file_ln!=undef)
+  {
+    fail('You cannotspecify both source and file_ln')
+  }
+
+  if($file_ln!=undef)
+  {
+    validate_absolute_path($file_ln)
   }
 
   Exec {
@@ -34,13 +50,26 @@ define tomcat::lib (
     }
   }
 
-  file { "${catalina_base}/lib/${jar_name}.jar":
-    ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => File["${catalina_base}/lib"],
-    source  => $source,
+  if($source!=undef)
+  {
+    file { "${catalina_base}/lib/${jar_name}.jar":
+      ensure  => $ensure,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      require => File["${catalina_base}/lib"],
+      source  => $source,
+    }
   }
+
+  if($file_ln!=undef)
+  {
+    file { "${catalina_base}/lib/${jar_name}.jar":
+      ensure  => 'link',
+      target  => $file_ln,
+      require => File["${catalina_base}/lib"],
+    }
+  }
+
 
 }
