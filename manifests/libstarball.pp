@@ -1,9 +1,9 @@
 define tomcat::libstarball(
                             $source,
-                            $catalina_base="/opt/${name}",
-                            $servicename=$name,
-                            $libstarballname=$name,
-                            $purge_old=false,
+                            $catalina_base   = "/opt/${name}",
+                            $servicename     = $name,
+                            $libstarballname = $name,
+                            $purge_old       = false,
                           ) {
 
   if ! defined(Class['tomcat'])

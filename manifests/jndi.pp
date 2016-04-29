@@ -3,8 +3,8 @@ define tomcat::jndi (
                             $ldapbase,
                             $ldapadmin,
                             $ldapadminpassword,
-                            $servicename=$name,
-                            $catalina_base="/opt/${name}",
+                            $servicename   = $name,
+                            $catalina_base = "/opt/${name}",
                           ) {
 
   if ! defined(Class['tomcat'])

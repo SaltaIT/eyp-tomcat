@@ -1,11 +1,11 @@
 define tomcat::authenticators (
-                                $basic='org.apache.catalina.authenticator.BasicAuthenticator',
-                                $form='org.apache.catalina.authenticator.FormAuthenticator',
-                                $clientcert='org.apache.catalina.authenticator.SSLAuthenticator',
-                                $digest='org.apache.catalina.authenticator.DigestAuthenticator',
-                                $none='org.apache.catalina.authenticator.NonLoginAuthenticator',
-                                $servicename=$name,
-                                $catalina_base="/opt/${name}",
+                                $basic         = 'org.apache.catalina.authenticator.BasicAuthenticator',
+                                $form          = 'org.apache.catalina.authenticator.FormAuthenticator',
+                                $clientcert    = 'org.apache.catalina.authenticator.SSLAuthenticator',
+                                $digest        = 'org.apache.catalina.authenticator.DigestAuthenticator',
+                                $none          = 'org.apache.catalina.authenticator.NonLoginAuthenticator',
+                                $servicename   = $name,
+                                $catalina_base = "/opt/${name}",
                               ) {
 
   if ! defined(Class['tomcat'])

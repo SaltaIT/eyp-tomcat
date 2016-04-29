@@ -1,8 +1,8 @@
 define tomcat::properties (
                             $source,
                             $properties_file,
-                            $catalina_base="/opt/${name}",
-                            $servicename=$name,
+                            $catalina_base = "/opt/${name}",
+                            $servicename   = $name,
                           ) {
 
   if ! defined(Class['tomcat'])

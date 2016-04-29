@@ -3,15 +3,15 @@
 # Copyright 2015 Your name here, unless otherwise noted.
 #
 class tomcat(
-              $tomcat_src=undef,
-              $tomcat_url=undef,
-              $manage_tomcat_user=true,
-              $tomcat_user='tomcat',
-              $tomcat_user_home='/home/tomcat',
-              $tomcat_user_shell='/bin/bash',
-              $catalina_home='/opt/tomcat-home',
-              $srcdir='/usr/local/src',
-              $nativelibrary=true,
+              $tomcat_src         = undef,
+              $tomcat_url         = undef,
+              $manage_tomcat_user = true,
+              $tomcat_user        = 'tomcat',
+              $tomcat_user_home   = '/home/tomcat',
+              $tomcat_user_shell  = '/bin/bash',
+              $catalina_home      = '/opt/tomcat-home',
+              $srcdir             = '/usr/local/src',
+              $nativelibrary      = true,
             ) inherits tomcat::params {
 
   Exec {

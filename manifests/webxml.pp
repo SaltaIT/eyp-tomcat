@@ -1,7 +1,7 @@
 define tomcat::webxml (
                             $source,
-                            $catalina_base="/opt/${name}",
-                            $servicename=$name,
+                            $catalina_base = "/opt/${name}",
+                            $servicename   = $name,
                           ) {
 
   if ! defined(Class['tomcat'])
