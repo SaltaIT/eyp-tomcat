@@ -140,7 +140,7 @@ define tomcat::instance (
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0755',
+    mode    => '0775',
     require => File[$catalina_base],
   }
 
@@ -372,14 +372,14 @@ define tomcat::instance (
 
   if($install_tomcat_manager)
   {
-    exec { 'cp tomcat manager from tomcat-home':
+    exec { "cp tomcat manager from tomcat-home ${instancename}":
       command => "cp -pr ${tomcat::catalina_home}/webapps/manager ${catalina_base}/webapps",
       creates => "${catalina_base}/webapps/manager",
       require => File["${catalina_base}/webapps"],
       before => Service[$instancename],
     }
 
-    exec { 'cp tomcat host-manager from tomcat-home':
+    exec { "cp tomcat host-manager from tomcat-home ${instancename}":
       command => "cp -pr ${tomcat::catalina_home}/webapps/host-manager ${catalina_base}/webapps",
       creates => "${catalina_base}/webapps/host-manager",
       require => File["${catalina_base}/webapps"],
