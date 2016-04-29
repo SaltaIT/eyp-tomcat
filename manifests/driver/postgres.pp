@@ -18,12 +18,15 @@ define tomcat::driver::postgres (
     creates => "${srcdir}/postgresql-${postgres_version}.jdbc${jdbc_version}.jar",
   }
 
-  file { "${srcdir}/postgresql-${postgres_version}.jdbc${jdbc_version}.jar":
-    ensure  => 'present',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0664',
-    require => Exec["wget jdbc ${jdbc_version} postgres ${postgres_version} datasource ${srcdir} ${catalina_base}"],
+  if(!defined(File["${srcdir}/postgresql-${postgres_version}.jdbc${jdbc_version}.jar"]))
+  {
+    file { "${srcdir}/postgresql-${postgres_version}.jdbc${jdbc_version}.jar":
+      ensure  => 'present',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0664',
+      require => Exec["wget jdbc ${jdbc_version} postgres ${postgres_version} datasource ${srcdir} ${catalina_base}"],
+    }
   }
 
   tomcat::lib { "jdbc ${jdbc_version} postgres ${postgres_version} datasource ${srcdir} ${catalina_base}":
