@@ -1,3 +1,4 @@
+export CATALINA_PID=/var/run/<%= @instancename %>.pid
 export CATALINA_HOME=<%= scope.lookupvar('tomcat::catalina_home') %>
 export CATALINA_BASE=<%= @catalina_base %>
 <% if defined?(@xmx) -%>
