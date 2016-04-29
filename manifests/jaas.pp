@@ -2,10 +2,10 @@ define tomcat::jaas (
                             $app,
                             $provider,
                             $filter,
-                            $username='tomcat',
-                            $password='tomcat',
-                            $servicename=$name,
-                            $catalina_base="/opt/${name}",
+                            $username      = 'tomcat',
+                            $password      = 'tomcat',
+                            $servicename   = $name,
+                            $catalina_base = "/opt/${name}",
                           ) {
 
   if ! defined(Class['tomcat'])
