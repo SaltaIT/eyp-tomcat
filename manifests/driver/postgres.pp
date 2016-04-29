@@ -1,4 +1,4 @@
-define tomcat::datasource::postgres (
+define tomcat::driver::postgres (
                                       $catalina_base    = "/opt/${name}",
                                       $servicename      = $name,
                                       $jdbc_version     = '4',
