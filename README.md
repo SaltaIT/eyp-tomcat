@@ -35,6 +35,7 @@ Multi instance tomcat installation and configuration of:
  * custom library deployment (tar.gz)
  * web.xml
  * custom properties files
+ * postgres jdbc driver
 
 ## Setup
 
@@ -315,6 +316,29 @@ tomcat::lib { 'tomcat-8080':
   jar_name => 'ecj-4.4.3',
   source => 'puppet:///solr/ecj-4.4.3.jar',
 }
+```
+
+postgres JDBC driver:
+
+```
+tomcatinstances:
+  tomcat_retail01:
+    tomcatpw: 123456
+    xmx: 1024m
+    xms: 1024m
+    ajp_port: 9509
+    maxpermsize: 384m
+    heapdump_oom_dir: /opt/applogs/RETAIL01
+  tomcat_retail50:
+    tomcatpw: 123456
+    xmx: 1024m
+    xms: 1024m
+    ajp_port: 9510
+    maxpermsize: 384m
+    heapdump_oom_dir: /opt/applogs/RETAIL50
+tomcatdriverpostgres:
+  tomcat_retail01: {}
+  tomcat_retail50: {}
 ```
 
 ## Usage
