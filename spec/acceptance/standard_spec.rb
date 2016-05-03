@@ -42,12 +42,21 @@ describe 'tomcat class' do
       expect(shell("puppet --version").exit_code).to be_zero
     end
 
-    it "puppet version" do
+    it "puppet module list tree" do
       expect(shell("puppet module list --tree").exit_code).to be_zero
     end
 
     it "puppet version" do
       expect(shell("netstat -tpln").exit_code).to be_zero
+    end
+
+    #/opt/tomcat-8080/logs/catalina.out
+    it "catalina log 8080" do
+      expect(shell("cat /opt/tomcat-8080/logs/catalina.out").exit_code).to be_zero
+    end
+
+    it "catalina log 8888" do
+      expect(shell("cat /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
     end
 
     #instance tomcat-8080 HTTP connector
