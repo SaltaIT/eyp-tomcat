@@ -12,11 +12,16 @@ describe 'tomcat context' do
         nativelibrary => false,
       }
 
-      tomcat::instance { 'tomcat-8080':
+      tomcat::instance { 'tomcat-3333':
         tomcatpw => 'lol',
+        shutdown_port=>'3333',
+        ajp_port=>'3334',
+        connector_port=>'3335',
+        jmx_port => '3336',
+        lockoutrealm => true,
       }
 
-      tomcat::context { 'tomcat-8080':
+      tomcat::context { 'tomcat-3333':
         sessionCookiePath => '/',
         antiJARLocking => true,
         antiResourceLocking => true,

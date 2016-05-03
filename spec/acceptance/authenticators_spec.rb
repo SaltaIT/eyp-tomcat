@@ -12,11 +12,16 @@ describe 'tomcat context' do
         nativelibrary => false,
       }
 
-      tomcat::instance { 'tomcat-8080':
+      tomcat::instance { 'tomcat-7777':
         tomcatpw => 'lol',
+        shutdown_port=>'7778',
+        ajp_port=>'7780',
+        connector_port=>'7777',
+        jmx_port => '7779',
+        lockoutrealm => true,
       }
 
-      tomcat::authenticators { 'tomcat-8080':
+      tomcat::authenticators { 'tomcat-7777':
         basic => 'es.systemadmin.basic.sso.tomcat.BasicAuthenticator',
         form => 'es.systemadmin.form.sso.tomcat.BasicAuthenticator',
         clientcert => 'es.systemadmin.clientcert.sso.tomcat.BasicAuthenticator',
