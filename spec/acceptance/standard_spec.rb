@@ -55,6 +55,10 @@ describe 'tomcat class' do
       expect(shell("sleep 60").exit_code).to be_zero
     end
 
+    it "puppet version" do
+      expect(shell("puppet --version").exit_code).to be_zero
+    end
+
     #instance tomcat-8080 HTTP connector
     describe port(8080) do
       it { should be_listening }
