@@ -173,9 +173,15 @@ describe 'tomcat class' do
       expect(shell("netstat -tpln").exit_code).to be_zero
     end
 
-    it "bashx status tomcat8080" do
-      expect(shell("/etc/init.d/tomcat-8080 status").exit_code).to be_zero
+    #/var/run/
+    it "PID tomcat-8080" do
+      expect(shell("cat /var/run/tomcat-8080.pid").exit_code).to be_zero
     end
+
+    it "PID tomcat-8888" do
+      expect(shell("cat /var/run/tomcat-8888.pid").exit_code).to be_zero
+    end
+
 
     #/opt/tomcat-8080/logs/catalina.out
     it "catalina log 8080" do
