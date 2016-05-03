@@ -321,7 +321,7 @@ define tomcat::instance (
                         "${catalina_base}/conf",
                         "${catalina_base}/webapps",
                         "${catalina_base}/bin/startup.sh",
-                        "${catalina_base}/bin/shutdown.sh",
+                        "${catalina_base}/bin/shutdown.sh"
                       ]
                     ],
                   Concat[["${catalina_base}/bin/setenv.sh",
