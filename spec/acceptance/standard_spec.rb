@@ -14,6 +14,7 @@ describe 'tomcat class' do
 
     	tomcat::instance { 'tomcat-8080':
     		tomcatpw => 'lol',
+        lockoutrealm => false,
     	}
 
       tomcat::instance { 'tomcat-8888':
@@ -22,6 +23,7 @@ describe 'tomcat class' do
         ajp_port=>'8010',
         connector_port=>'8888',
         jmx_port => '9999',
+        lockoutrealm => true,
       }
 
       tomcat::resource { 'tomcat-8888':
@@ -104,11 +106,18 @@ describe 'tomcat class' do
     ### server.xml
     #org.apache.catalina.realm.UserDatabaseRealm
 
+    describe file("/opt/tomcat-8080/conf/server.xml") do
+      it { should be_file }
+      its(:content) { should match 'digest="sha"' }
+      its(:content) { should_not match 'LockOutRealm' }
+    end
+
     describe file("/opt/tomcat-8888/conf/server.xml") do
       it { should be_file }
       its(:content) { should match 'org.apache.catalina.realm.UserDatabaseRealm' }
       #defaul sha
       its(:content) { should match 'digest="sha"' }
+      its(:content) { should match 'LockOutRealm' }
       #resources
       its(:content) { should match '<GlobalNamingResources>' }
       its(:content) { should match '</GlobalNamingResources>' }
