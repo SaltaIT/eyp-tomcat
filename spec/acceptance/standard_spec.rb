@@ -111,9 +111,6 @@ describe 'tomcat class' do
       it { should be_listening }
     end
 
-    shutdown_port=>'2022',
-    connector_port=>'2020',
-    jmx_port => '2021',
 
     ### tomcat-users.xml
     # tomcat admin password
