@@ -63,7 +63,9 @@ describe 'tomcat class' do
       expect(shell("cat /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
     end
 
-    #instance tomcat-8080 HTTP connector
+    #HTTP connector
+
+    #instance tomcat-8080
     describe port(8080) do
       it { should be_listening }
     end
@@ -73,20 +75,45 @@ describe 'tomcat class' do
       it { should be_listening }
     end
 
-    #instance tomcat-8888 shutdown port
+    #shutdown port
+
+    #instance tomcat-8080
+    describe port(2022) do
+      it { should be_listening }
+    end
+
+    #instance tomcat-8888
     describe port(9000) do
       it { should be_listening }
     end
 
-    #instance tomcat-8888 JMX port
+    #JMX port
+
+    #instance tomcat-8080
+    describe port(2021) do
+      it { should be_listening }
+    end
+
+    #instance tomcat-8888
     describe port(9999) do
       it { should be_listening }
     end
 
-    #instance tomcat-8888 AJP port
-    describe port(8010) do
+    #AJP port
+
+    #instance tomcat-8080
+    describe port(8081) do
       it { should be_listening }
     end
+
+    #instance tomcat-8888
+    describe port(8885) do
+      it { should be_listening }
+    end
+
+    shutdown_port=>'2022',
+    connector_port=>'2020',
+    jmx_port => '2021',
 
     ### tomcat-users.xml
     # tomcat admin password
