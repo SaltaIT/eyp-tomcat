@@ -22,11 +22,11 @@
 
     <Engine name="Catalina" defaultHost="localhost">
 
-  <% if @LockOutRealm -%>
+<% if @lockoutrealm -%>
       <!-- Use the LockOutRealm to prevent attempts to guess user passwords
            via a brute-force attack -->
       <Realm className="org.apache.catalina.realm.LockOutRealm">
-
+<% end -%>
   <% if @pwdigest == 'plaintext' -%>
       <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
              resourceName="UserDatabase"/>
@@ -35,8 +35,9 @@
               resourceName="UserDatabase"
               digest="sha"/>
   <% end -%>
+<% if @lockoutrealm -%>
       </Realm>
-  <% end -%>
+<% end -%>
 
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true" <% if defined?(@errorReportValveClass) %>errorReportValveClass="<%= @errorReportValveClass %>" <% end %>>
