@@ -44,9 +44,9 @@ define tomcat::lib (
   if($purge_old)
   {
     exec{ "purge old ${catalina_base} ${jar_name}":
-      command     => "ls ${catalina_base}/lib/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar' | xargs rm",
-      onlyif      => "ls ${catalina_base}/lib/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar'",
-      notify      => $serviceinstance,
+      command => "ls ${catalina_base}/lib/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar' | xargs rm",
+      onlyif  => "ls ${catalina_base}/lib/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar'",
+      notify  => $serviceinstance,
     }
   }
 

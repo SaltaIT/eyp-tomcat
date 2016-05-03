@@ -82,10 +82,10 @@ class tomcat(
 
 
   file { $catalina_home:
-    ensure  => 'directory',
-    owner   => $tomcat_user,
-    group   => $tomcat_user,
-    mode    => '0755',
+    ensure => 'directory',
+    owner  => $tomcat_user,
+    group  => $tomcat_user,
+    mode   => '0755',
   }
 
   exec { "untar tomcat ${name} ${catalina_home}":
