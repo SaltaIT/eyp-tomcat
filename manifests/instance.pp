@@ -31,6 +31,7 @@ define tomcat::instance (
                           $catalina_size          = '100M',
                           $heapdump_oom_dir       = undef,
                           $install_tomcat_manager = true,
+                          $shutdown_command       = 'SHUTDOWN',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',

@@ -50,7 +50,7 @@ describe 'tomcat class' do
       expect(shell("puppet module list --tree").exit_code).to be_zero
     end
 
-    it "puppet version" do
+    it "netstat listen" do
       expect(shell("netstat -tpln").exit_code).to be_zero
     end
 
