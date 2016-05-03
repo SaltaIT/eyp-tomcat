@@ -135,7 +135,7 @@ describe 'tomcat class' do
         tomcatpw => 'lol',
         shutdown_port=>'2022',
         ajp_port=>'8081',
-        connector_port=>'8080',
+        connector_port=>'8085',
         jmx_port => '2021',
         lockoutrealm => false,
     	}
@@ -144,7 +144,7 @@ describe 'tomcat class' do
         tomcatpw => 'lol',
         shutdown_port=>'9000',
         ajp_port=>'8885',
-        connector_port=>'8888',
+        connector_port=>'8889',
         jmx_port => '9999',
         lockoutrealm => true,
       }
@@ -189,12 +189,12 @@ describe 'tomcat class' do
     #HTTP connector
 
     #instance tomcat-8080
-    describe port(8080) do
+    describe port(8085) do
       it { should be_listening }
     end
 
     #instance tomcat-8888 HTTP connector
-    describe port(8888) do
+    describe port(8889) do
       it { should be_listening }
     end
 
