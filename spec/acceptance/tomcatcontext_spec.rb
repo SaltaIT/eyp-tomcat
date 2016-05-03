@@ -3,6 +3,11 @@ require 'spec_helper_acceptance'
 describe 'tomcat context' do
 
   context 'tomcat context (+ basic setup, ie no native library)' do
+
+    it "kill java" do
+      expect(shell("pkill java").exit_code).to be_zero
+    end
+
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOF

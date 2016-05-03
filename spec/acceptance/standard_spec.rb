@@ -4,6 +4,11 @@ describe 'tomcat class' do
 
   context 'tomcat resource' do
     # Using puppet_apply as a helper
+
+    it "kill java" do
+      expect(shell("pkill java").exit_code).to be_zero
+    end
+
     it 'should work with no errors' do
       pp = <<-EOF
 
@@ -122,6 +127,11 @@ describe 'tomcat class' do
   end
 
   context 'basic setup (URL) - explicitly testing native library' do
+
+    it "kill java" do
+      expect(shell("pkill java").exit_code).to be_zero
+    end
+
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOF
