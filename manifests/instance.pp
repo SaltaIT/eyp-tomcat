@@ -22,8 +22,8 @@ define tomcat::instance (
                           $maxThreads             = '150',
                           $minSpareThreads        = '4',
                           $connectionTimeout      = '20000',
-                          $LockOutRealm           = true,
-                          $UserDatabase           = true,
+                          $lockoutrealm           = true,
+                          $userdatabase           = true,
                           $extra_vars             = undef,
                           $system_properties      = undef,
                           $rmi_server_hostname    = undef,
@@ -185,7 +185,7 @@ define tomcat::instance (
     content => template("${module_name}/serverxml/99_server_end.erb"),
   }
 
-  if($UserDatabase)
+  if($userdatabase)
   {
     if(!defined(Concat::Fragment["${catalina_base}/conf/server.xml globalnamingresources ini"]))
     {

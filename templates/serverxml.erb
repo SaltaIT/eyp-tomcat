@@ -58,7 +58,7 @@
 
     <Engine name="Catalina" defaultHost="localhost">
 
-<% if @LockOutRealm -%>
+<% if @lockoutrealm -%>
       <!-- Use the LockOutRealm to prevent attempts to guess user passwords
            via a brute-force attack -->
       <Realm className="org.apache.catalina.realm.LockOutRealm">

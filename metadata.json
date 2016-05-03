@@ -1,6 +1,6 @@
 {
   "name": "eyp-tomcat",
-  "version": "0.2.67",
+  "version": "0.3.1",
   "author": "eyp",
   "summary": "multi instance tomcat",
   "license": "Apache-2.0",
