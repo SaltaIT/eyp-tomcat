@@ -126,9 +126,9 @@ describe 'tomcat class' do
       its(:content) { should match 'name="jdbc/psp"' }
       its(:content) { should match 'factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"' }
       its(:content) { should match 'driverClassName="org.postgresql.Driver"' }
-      its(:content) { should match 'url="jdbc:postgresql://RTDKA1PQL02.dktetrix.net:60901/extension"' }
+      its(:content) { should match 'url="jdbc:postgresql://fuckyeah.systemadmin.es:60901/extension"' }
       its(:content) { should match 'username="extension"' }
-      its(:content) { should match 'password="XXXXX"' }
+      its(:content) { should match 'password="123456"' }
       its(:content) { should match 'initialSize="2"' }
       its(:content) { should match 'maxActive="20"' }
       its(:content) { should match 'maxIdle="10"' }
