@@ -13,7 +13,11 @@ describe 'tomcat class' do
     	}
 
     	tomcat::instance { 'tomcat-8080':
-    		tomcatpw => 'lol',
+        tomcatpw => 'lol',
+        shutdown_port=>'2022',
+        ajp_port=>'8010',
+        connector_port=>'2020',
+        jmx_port => '2021',
         lockoutrealm => false,
     	}
 
@@ -139,8 +143,12 @@ describe 'tomcat class' do
         nativelibrary => true,
       }
 
-      tomcat::instance { 'tomcat-8080':
+      tomcat::instance { 'tomcat-2020':
         tomcatpw => 'lol',
+        shutdown_port=>'2022',
+        ajp_port=>'8010',
+        connector_port=>'2020',
+        jmx_port => '2021',
         lockoutrealm => false,
       }
 
