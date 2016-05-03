@@ -46,6 +46,10 @@ describe 'tomcat class' do
       expect(shell("puppet module list --tree").exit_code).to be_zero
     end
 
+    it "puppet version" do
+      expect(shell("netstat -tpln").exit_code).to be_zero
+    end
+
     #instance tomcat-8080 HTTP connector
     describe port(8080) do
       it { should be_listening }
@@ -165,43 +169,6 @@ describe 'tomcat class' do
       expect(apply_manifest(pp).exit_code).to_not eq(1)
       expect(apply_manifest(pp).exit_code).to eq(0)
 
-    end
-
-    it "sleep 60 to make sure tomcat is started" do
-      expect(shell("sleep 60").exit_code).to be_zero
-    end
-
-    it "puppet version" do
-      expect(shell("puppet --version").exit_code).to be_zero
-    end
-
-    it "puppet version" do
-      expect(shell("puppet module list --tree").exit_code).to be_zero
-    end
-
-    #instance tomcat-8080 HTTP connector
-    describe port(8080) do
-      it { should be_listening }
-    end
-
-    #instance tomcat-8888 HTTP connector
-    describe port(8888) do
-      it { should be_listening }
-    end
-
-    #instance tomcat-8888 shutdown port
-    describe port(9000) do
-      it { should be_listening }
-    end
-
-    #instance tomcat-8888 JMX port
-    describe port(9999) do
-      it { should be_listening }
-    end
-
-    #instance tomcat-8888 AJP port
-    describe port(8010) do
-      it { should be_listening }
     end
 
     ### tomcat-users.xml
