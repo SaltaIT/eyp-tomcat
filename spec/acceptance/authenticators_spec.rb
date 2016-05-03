@@ -36,7 +36,7 @@ describe 'tomcat context' do
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
 
-    describe file("/opt/tomcat-8080/lib/org/apache/catalina/startup/Authenticators.properties") do
+    describe file("/opt/tomcat-7777/lib/org/apache/catalina/startup/Authenticators.properties") do
       it { should be_file }
       its(:content) { should match 'BASIC=es.systemadmin.basic.sso.tomcat.BasicAuthenticator' }
       its(:content) { should match 'CLIENT-CERT=es.systemadmin.clientcert.sso.tomcat.BasicAuthenticator' }

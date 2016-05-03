@@ -34,7 +34,7 @@ describe 'tomcat context' do
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
 
-    describe file("/opt/tomcat-8080/conf/context.xml") do
+    describe file("/opt/tomcat-3333/conf/context.xml") do
       it { should be_file }
       its(:content) { should match 'sessionCookiePath="/"' }
       its(:content) { should match 'antiJARLocking="true"' }
