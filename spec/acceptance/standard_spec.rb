@@ -19,7 +19,7 @@ describe 'tomcat class' do
 
       tomcat::instance { 'tomcat-8080':
         tomcatpw => 'lol',
-        shutdown_port=>'2022',
+        shutdown_port=>'5555',
         ajp_port=>'8081',
         connector_port=>'8080',
         jmx_port => '2021',
@@ -28,7 +28,7 @@ describe 'tomcat class' do
 
       tomcat::instance { 'tomcat-8888':
         tomcatpw => 'lol',
-        shutdown_port=>'9000',
+        shutdown_port=>'5566',
         ajp_port=>'8885',
         connector_port=>'8888',
         jmx_port => '9999',
