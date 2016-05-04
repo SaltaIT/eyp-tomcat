@@ -145,7 +145,7 @@ describe 'tomcat class' do
         tomcatpw => 'lol',
         shutdown_port=>'2022',
         ajp_port=>'8081',
-        connector_port=>'8085',
+        connector_port=>'8080',
         jmx_port => '2021',
         lockoutrealm => false,
     	}
@@ -154,7 +154,7 @@ describe 'tomcat class' do
         tomcatpw => 'lol',
         shutdown_port=>'9000',
         ajp_port=>'8885',
-        connector_port=>'8889',
+        connector_port=>'8888',
         jmx_port => '9999',
         lockoutrealm => true,
       }
