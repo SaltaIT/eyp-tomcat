@@ -5,7 +5,7 @@ describe 'tomcat context' do
   context 'tomcat authenticators (+ basic setup, ie no native library)' do
 
     it "kill java" do
-      expect(shell("pkill java").exit_code).to be_zero
+      expect(shell("bash -c 'pkill java; true'").exit_code).to be_zero
     end
 
     # Using puppet_apply as a helper

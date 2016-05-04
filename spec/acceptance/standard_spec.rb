@@ -6,7 +6,7 @@ describe 'tomcat class' do
     # Using puppet_apply as a helper
 
     it "kill java" do
-      expect(shell("pkill java").exit_code).to be_zero
+      expect(shell("bash -c 'pkill java; true'").exit_code).to be_zero
     end
 
     it 'should work with no errors' do
@@ -129,7 +129,7 @@ describe 'tomcat class' do
   context 'basic setup (URL) - explicitly testing native library' do
 
     it "kill java" do
-      expect(shell("pkill java").exit_code).to be_zero
+      expect(shell("bash -c 'pkill java; true'").exit_code).to be_zero
     end
 
     # Using puppet_apply as a helper
