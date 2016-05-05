@@ -17,7 +17,7 @@ describe 'tomcat class' do
         nativelibrary => true,
       }
 
-      tomcat::instance { 'tomcat-8080':
+      tomcat::instance { 'tomcat-5555':
         tomcatpw => 'lol',
         shutdown_port=>'5555',
         ajp_port=>'8081',
@@ -26,7 +26,7 @@ describe 'tomcat class' do
         lockoutrealm => false,
     	}
 
-      tomcat::instance { 'tomcat-8888':
+      tomcat::instance { 'tomcat-5566':
         tomcatpw => 'lol',
         shutdown_port=>'5566',
         ajp_port=>'8885',
@@ -35,7 +35,7 @@ describe 'tomcat class' do
         lockoutrealm => true,
       }
 
-      tomcat::resource { 'tomcat-8888':
+      tomcat::resource { 'tomcat-5555':
         resource_name => 'jdbc/psp',
         resource_type => 'javax.sql.DataSource',
         factory => 'org.apache.tomcat.jdbc.pool.DataSourceFactory',
@@ -65,12 +65,12 @@ describe 'tomcat class' do
     ### tomcat-users.xml
     # tomcat admin password
     # <user username="tomcat" password="403926033d001b5279df37cbbe5287b7c7c267fa"
-    describe file("/opt/tomcat-8080/conf/tomcat-users.xml") do
+    describe file("/opt/tomcat-5555/conf/tomcat-users.xml") do
       it { should be_file }
       its(:content) { should match '<user username="tomcat" password="403926033d001b5279df37cbbe5287b7c7c267fa"' }
     end
 
-    describe file("/opt/tomcat-8888/conf/tomcat-users.xml") do
+    describe file("/opt/tomcat-5566/conf/tomcat-users.xml") do
       it { should be_file }
       its(:content) { should match '<user username="tomcat" password="403926033d001b5279df37cbbe5287b7c7c267fa"' }
     end
@@ -78,13 +78,13 @@ describe 'tomcat class' do
     ### server.xml
     #org.apache.catalina.realm.UserDatabaseRealm
 
-    describe file("/opt/tomcat-8080/conf/server.xml") do
+    describe file("/opt/tomcat-5555/conf/server.xml") do
       it { should be_file }
       its(:content) { should match 'digest="sha"' }
       its(:content) { should_not match 'LockOutRealm' }
     end
 
-    describe file("/opt/tomcat-8888/conf/server.xml") do
+    describe file("/opt/tomcat-5566/conf/server.xml") do
       it { should be_file }
       its(:content) { should match 'org.apache.catalina.realm.UserDatabaseRealm' }
       #defaul sha
@@ -116,11 +116,11 @@ describe 'tomcat class' do
 
     #configtest server.xml
     #CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest
-    it 'configtest server.xml tomcat-8080' do
+    it 'configtest server.xml tomcat-5555' do
       expect(shell("CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest").exit_code).to be_zero
     end
 
-    it 'configtest server.xml tomcat-8888' do
+    it 'configtest server.xml tomcat-5566' do
       expect(shell("CATALINA_BASE=/opt/tomcat-8888 /opt/tomcat-home/bin/catalina.sh configtest").exit_code).to be_zero
     end
 
