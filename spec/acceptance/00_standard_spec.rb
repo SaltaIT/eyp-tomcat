@@ -5,6 +5,10 @@ describe 'tomcat class' do
   context 'tomcat resource' do
     # Using puppet_apply as a helper
 
+    it "ping" do
+      expect(shell("ping localhost -c 1").exit_code).to be_zero
+    end
+
     it "kill java" do
       expect(shell("bash -c 'for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
     end
