@@ -6,7 +6,7 @@ describe 'tomcat class' do
     # Using puppet_apply as a helper
 
     it "kill java" do
-      expect(shell("bash -c 'pkill java; sleep 5'").exit_code).to be_zero
+      expect(shell("bash -c 'for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
     end
 
     it 'should work with no errors' do
@@ -135,7 +135,7 @@ describe 'tomcat class' do
   context 'basic setup (URL) - explicitly testing native library' do
 
     it "kill java" do
-      expect(shell("bash -c 'pkill java; sleep 5'").exit_code).to be_zero
+      expect(shell("bash -c 'for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
     end
 
     it "fuck tomcats" do
