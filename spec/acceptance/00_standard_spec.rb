@@ -10,7 +10,7 @@ describe 'tomcat class' do
     end
 
     it "kill java" do
-      expect(shell("bash -c 'for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
+      expect(shell("bash -c 'pkill java; for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
     end
 
     it 'should work with no errors' do
@@ -139,7 +139,7 @@ describe 'tomcat class' do
   context 'basic setup (URL) - explicitly testing native library' do
 
     it "kill java" do
-      expect(shell("bash -c 'for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
+      expect(shell("bash -c 'pkill java; for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
     end
 
     it "fuck tomcats" do
@@ -189,8 +189,8 @@ describe 'tomcat class' do
 
     end
 
-    it "sleep 340 to make sure tomcat is started" do
-      expect(shell("sleep 340").exit_code).to be_zero
+    it "sleep 60 to make sure tomcat is started" do
+      expect(shell("sleep 60").exit_code).to be_zero
     end
 
     it "puppet version" do
