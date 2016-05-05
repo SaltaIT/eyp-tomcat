@@ -190,7 +190,7 @@ describe 'tomcat class' do
     end
 
     it "sleep 340 to make sure tomcat is started" do
-      expect(shell("sleep 240").exit_code).to be_zero
+      expect(shell("sleep 340").exit_code).to be_zero
     end
 
     it "puppet version" do
