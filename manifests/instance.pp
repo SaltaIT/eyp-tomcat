@@ -12,6 +12,7 @@ define tomcat::instance (
                           $maxpermsize            = '512m',
                           $permsize               = undef,
                           $shutdown_port          = '8005',
+                          $shutdown_address       = '127.0.0.1',
                           $ajp_port               = undef,
                           $connector_port         = '8080',
                           $jmx_port               = '8999',
