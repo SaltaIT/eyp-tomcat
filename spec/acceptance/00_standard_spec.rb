@@ -127,11 +127,11 @@ describe 'tomcat class' do
     #configtest server.xml
     #CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest
     it 'configtest server.xml tomcat-8080' do
-      expect(shell("CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest").exit_code).to be_zero
+      expect(shell("CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest >/dev/null 2>&1").exit_code).to be_zero
     end
 
     it 'configtest server.xml tomcat-8888' do
-      expect(shell("CATALINA_BASE=/opt/tomcat-8888 /opt/tomcat-home/bin/catalina.sh configtest").exit_code).to be_zero
+      expect(shell("CATALINA_BASE=/opt/tomcat-8888 /opt/tomcat-home/bin/catalina.sh configtest >/dev/null 2>&1").exit_code).to be_zero
     end
 
   end
@@ -309,11 +309,11 @@ describe 'tomcat class' do
     #configtest server.xml
     #CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest
     it 'configtest server.xml tomcat-8080' do
-      expect(shell("CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest").exit_code).to be_zero
+      expect(shell("CATALINA_BASE=/opt/tomcat-8080 /opt/tomcat-home/bin/catalina.sh configtest >/dev/null 2>&1").exit_code).to be_zero
     end
 
     it 'configtest server.xml tomcat-8888' do
-      expect(shell("CATALINA_BASE=/opt/tomcat-8888 /opt/tomcat-home/bin/catalina.sh configtest").exit_code).to be_zero
+      expect(shell("CATALINA_BASE=/opt/tomcat-8888 /opt/tomcat-home/bin/catalina.sh configtest >/dev/null 2>&1").exit_code).to be_zero
     end
 
   end
