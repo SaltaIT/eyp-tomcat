@@ -138,6 +138,10 @@ describe 'tomcat class' do
       expect(shell("bash -c 'pkill java; sleep 5'").exit_code).to be_zero
     end
 
+    it "fuck tomcats" do
+      expect(shell("bash -c 'rm -fr /opt/tomcat-[0-9]*; sleep 5'").exit_code).to be_zero
+    end
+
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOF
