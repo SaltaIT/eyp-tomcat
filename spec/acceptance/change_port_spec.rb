@@ -27,7 +27,7 @@ describe 'tomcat class' do
         shutdown_port=>'1113',
         ajp_port=>'1112',
         connector_port=>'1111',
-        jmx_port => '1114',,
+        jmx_port => '1114',
         java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
     	}
 
@@ -60,7 +60,7 @@ describe 'tomcat class' do
         shutdown_port=>'1113',
         ajp_port=>'1112',
         connector_port=>'1115',
-        jmx_port => '1114',,
+        jmx_port => '1114',
         java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
     	}
 

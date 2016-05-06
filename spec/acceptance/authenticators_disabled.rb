@@ -17,16 +17,16 @@ describe 'tomcat context' do
         nativelibrary => false,
       }
 
-      tomcat::instance { 'tomcat-7777':
+      tomcat::instance { 'tomcat-2222':
         tomcatpw => 'lol',
-        shutdown_port=>'7778',
-        ajp_port=>'7780',
-        connector_port=>'7777',
-        jmx_port => '7779',
+        shutdown_port=>'2223',
+        ajp_port=>'2224',
+        connector_port=>'2222',
+        jmx_port => '2225',
         lockoutrealm => true,
       }
 
-      tomcat::authenticators { 'tomcat-7777':
+      tomcat::authenticators { 'tomcat-2222':
         basic => 'es.systemadmin.basic.sso.tomcat.BasicAuthenticator',
         form => 'es.systemadmin.form.sso.tomcat.BasicAuthenticator',
         clientcert => 'es.systemadmin.clientcert.sso.tomcat.BasicAuthenticator',
@@ -41,7 +41,7 @@ describe 'tomcat context' do
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
 
-    describe file("/opt/tomcat-7777/lib/org/apache/catalina/startup/Authenticators.properties") do
+    describe file("/opt/tomcat-2222/lib/org/apache/catalina/startup/Authenticators.properties") do
       it { should be_file }
       its(:content) { should match 'BASIC=es.systemadmin.basic.sso.tomcat.BasicAuthenticator' }
       its(:content) { should match 'CLIENT-CERT=es.systemadmin.clientcert.sso.tomcat.BasicAuthenticator' }
