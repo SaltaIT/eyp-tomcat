@@ -85,3 +85,4 @@ describe 'tomcat class' do
     end
 
   end
+end
