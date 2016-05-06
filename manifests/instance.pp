@@ -374,14 +374,18 @@ define tomcat::instance (
     exec { "cp tomcat manager from tomcat-home ${instancename}":
       command => "cp -pr ${tomcat::catalina_home}/webapps/manager ${catalina_base}/webapps",
       creates => "${catalina_base}/webapps/manager",
-      require => [File["${catalina_base}/webapps"], Exec["untar tomcat tomcat ${tomcat::catalina_home}"]],
+      require => [File["${catalina_base}/webapps"],
+                  Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
+                  Class['tomcat']],
       before  => Service[$instancename],
     }
 
     exec { "cp tomcat host-manager from tomcat-home ${instancename}":
       command => "cp -pr ${tomcat::catalina_home}/webapps/host-manager ${catalina_base}/webapps",
       creates => "${catalina_base}/webapps/host-manager",
-      require => [File["${catalina_base}/webapps"], Exec["untar tomcat tomcat ${tomcat::catalina_home}"]],
+      require => [File["${catalina_base}/webapps"],
+                  Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
+                  Class['tomcat']],
       before  => Service[$instancename],
     }
   }
