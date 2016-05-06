@@ -39,6 +39,10 @@ describe 'tomcat class' do
 
     end
 
+    it "sleep 10" do
+      expect(shell("sleep 10").exit_code).to be_zero
+    end
+
     describe port(1111) do
       it { is_expected.to be_listening }
     end
@@ -70,6 +74,10 @@ describe 'tomcat class' do
       expect(apply_manifest(pp).exit_code).to_not eq(1)
       expect(apply_manifest(pp).exit_code).to eq(0)
 
+    end
+
+    it "sleep 10" do
+      expect(shell("sleep 10").exit_code).to be_zero
     end
 
     describe port(1111) do
