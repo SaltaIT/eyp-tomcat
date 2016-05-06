@@ -375,6 +375,10 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
 
 ## Reference
 
+### Global variables
+
+* **eyptomcat::shutdowncommand**: Defines a string to be used to shutdown tomcat (default: SHUTDOWN)
+
 TODO
 
 ## Limitations

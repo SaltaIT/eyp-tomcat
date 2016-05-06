@@ -32,7 +32,7 @@ define tomcat::instance (
                           $catalina_size          = '100M',
                           $heapdump_oom_dir       = undef,
                           $install_tomcat_manager = true,
-                          $shutdown_command       = 'SHUTDOWN',
+                          $shutdown_command       = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
                           $java_library_path      = undef,
                         ) {
   Exec {
@@ -349,9 +349,10 @@ define tomcat::instance (
   }
 
   service { $instancename:
-    ensure  => 'running',
-    enable  => true,
-    require => File["/etc/init.d/${instancename}"],
+    ensure     => 'running',
+    enable     => true,
+    hasrestart => true,
+    require    => File["/etc/init.d/${instancename}"],
   }
 
   if($catalina_rotate!=undef)
