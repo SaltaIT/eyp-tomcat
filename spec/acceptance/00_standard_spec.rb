@@ -214,6 +214,11 @@ describe 'tomcat class' do
       expect(shell("cat /var/run/tomcat-8888.pid").exit_code).to be_zero
     end
 
+    #/opt/tomcat-8080/webapps/host-manager
+    it "host-manager tomcat 8080" do
+      expect(shell("ls -la /opt/tomcat-8080/webapps/host-manager").exit_code).to be_zero
+    end
+
 
     #/opt/tomcat-8080/logs/catalina.out
     it "catalina log 8080" do
