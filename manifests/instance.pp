@@ -33,6 +33,7 @@ define tomcat::instance (
                           $heapdump_oom_dir       = undef,
                           $install_tomcat_manager = true,
                           $shutdown_command       = 'SHUTDOWN',
+                          $java_library_path      = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',

@@ -28,6 +28,7 @@ describe 'tomcat class' do
         connector_port=>'8080',
         jmx_port => '2021',
         lockoutrealm => false,
+        java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
     	}
 
       tomcat::instance { 'tomcat-8888':
@@ -37,6 +38,7 @@ describe 'tomcat class' do
         connector_port=>'8888',
         jmx_port => '9999',
         lockoutrealm => true,
+        java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
       }
 
       tomcat::driver::postgres { 'tomcat-8080':
@@ -162,6 +164,7 @@ describe 'tomcat class' do
         connector_port=>'8080',
         jmx_port => '2021',
         lockoutrealm => false,
+        java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
     	}
 
       tomcat::instance { 'tomcat-8888':
@@ -171,6 +174,7 @@ describe 'tomcat class' do
         connector_port=>'8888',
         jmx_port => '9999',
         lockoutrealm => true,
+        java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
       }
 
       tomcat::driver::postgres { 'tomcat-8080':
