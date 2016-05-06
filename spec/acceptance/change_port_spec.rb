@@ -21,7 +21,7 @@ describe 'tomcat class' do
 
       class { 'tomcat':
         tomcat_url => 'http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.tar.gz',
-        nativelibrary => true,
+        nativelibrary => false,
       }
 
       tomcat::instance { 'tomcat-1111':
@@ -61,7 +61,7 @@ describe 'tomcat class' do
 
       class { 'tomcat':
         tomcat_url => 'http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.tar.gz',
-        nativelibrary => true,
+        nativelibrary => false,
       }
 
       tomcat::instance { 'tomcat-1111':
