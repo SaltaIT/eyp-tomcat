@@ -1,8 +1,19 @@
 require 'spec_helper_acceptance'
 
+# tomcat-3333
+
 describe 'tomcat context' do
 
   context 'tomcat authenticators (+ basic setup, ie no native library)' do
+
+    it "kill java" do
+      expect(shell("bash -c 'pkill java; for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
+    end
+
+    it "fuck tomcats" do
+      expect(shell("bash -c 'rm -fr /usr/local/src/tomcat* /opt/tomcat* /etc/init.d/tomcat*; sleep 5'").exit_code).to be_zero
+    end
+
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOF
@@ -12,11 +23,16 @@ describe 'tomcat context' do
         nativelibrary => false,
       }
 
-      tomcat::instance { 'tomcat-8080':
+      tomcat::instance { 'tomcat-2222':
         tomcatpw => 'lol',
+        shutdown_port=>'2223',
+        ajp_port=>'2224',
+        connector_port=>'2222',
+        jmx_port => '2225',
+        lockoutrealm => true,
       }
 
-      tomcat::authenticators { 'tomcat-8080':
+      tomcat::authenticators { 'tomcat-2222':
         basic => 'es.systemadmin.basic.sso.tomcat.BasicAuthenticator',
         form => 'es.systemadmin.form.sso.tomcat.BasicAuthenticator',
         clientcert => 'es.systemadmin.clientcert.sso.tomcat.BasicAuthenticator',
@@ -31,7 +47,7 @@ describe 'tomcat context' do
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
 
-    describe file("/opt/tomcat-8080/lib/org/apache/catalina/startup/Authenticators.properties") do
+    describe file("/opt/tomcat-2222/lib/org/apache/catalina/startup/Authenticators.properties") do
       it { should be_file }
       its(:content) { should match 'BASIC=es.systemadmin.basic.sso.tomcat.BasicAuthenticator' }
       its(:content) { should match 'CLIENT-CERT=es.systemadmin.clientcert.sso.tomcat.BasicAuthenticator' }

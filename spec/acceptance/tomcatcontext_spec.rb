@@ -1,8 +1,19 @@
 require 'spec_helper_acceptance'
 
+# tomcat-3333
+
 describe 'tomcat context' do
 
   context 'tomcat context (+ basic setup, ie no native library)' do
+
+    it "kill java" do
+      expect(shell("bash -c 'pkill java; for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
+    end
+
+    it "fuck tomcats" do
+      expect(shell("bash -c 'rm -fr /usr/local/src/tomcat* /opt/tomcat* /etc/init.d/tomcat*; sleep 5'").exit_code).to be_zero
+    end
+
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOF
@@ -12,11 +23,16 @@ describe 'tomcat context' do
         nativelibrary => false,
       }
 
-      tomcat::instance { 'tomcat-8080':
+      tomcat::instance { 'tomcat-3333':
         tomcatpw => 'lol',
+        shutdown_port=>'3333',
+        ajp_port=>'3334',
+        connector_port=>'3335',
+        jmx_port => '3336',
+        lockoutrealm => true,
       }
 
-      tomcat::context { 'tomcat-8080':
+      tomcat::context { 'tomcat-3333':
         sessionCookiePath => '/',
         antiJARLocking => true,
         antiResourceLocking => true,
@@ -29,7 +45,7 @@ describe 'tomcat context' do
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
 
-    describe file("/opt/tomcat-8080/conf/context.xml") do
+    describe file("/opt/tomcat-3333/conf/context.xml") do
       it { should be_file }
       its(:content) { should match 'sessionCookiePath="/"' }
       its(:content) { should match 'antiJARLocking="true"' }

@@ -1,6 +1,9 @@
 export CATALINA_PID=/var/run/<%= @instancename %>.pid
 export CATALINA_HOME=<%= scope.lookupvar('tomcat::catalina_home') %>
 export CATALINA_BASE=<%= @catalina_base %>
+<% if defined?(@java_library_path) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Djava.library.path=<%= @java_library_path %>"
+<% end -%>
 <% if defined?(@xmx) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Xmx<%= @xmx %>"
 <% end -%>

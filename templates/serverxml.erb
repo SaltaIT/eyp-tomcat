@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!--
-  puppet managed file
+  puppet managed file - DEPRECATED????
 -->
 
 <Server port="<%= @shutdown_port %>" shutdown="SHUTDOWN">
@@ -14,7 +14,7 @@
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
 
-<% if @UserDatabase -%>
+<% if @userdatabase -%>
 
   <!-- Global JNDI resources
        Documentation at /docs/jndi-resources-howto.html
@@ -58,19 +58,20 @@
 
     <Engine name="Catalina" defaultHost="localhost">
 
-<% if @LockOutRealm -%>
+<% if @lockoutrealm -%>
       <!-- Use the LockOutRealm to prevent attempts to guess user passwords
            via a brute-force attack -->
       <Realm className="org.apache.catalina.realm.LockOutRealm">
-
-<% if @pwdigest == 'plaintext' -%>
-      <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-             resourceName="UserDatabase"/>
-<% else -%>
-      <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-              resourceName="UserDatabase"
-              digest="sha"/>
 <% end -%>
+  <%- if @pwdigest == 'plaintext' -%>
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+  <%- else -%>
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+                resourceName="UserDatabase"
+                digest="sha"/>
+  <%- end -%>
+<% if @lockoutrealm -%>
       </Realm>
 <% end -%>
 

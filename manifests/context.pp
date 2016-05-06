@@ -1,7 +1,7 @@
 define tomcat::context (
                             $sessionCookiePath   = undef,
-                            $WatchedResource     = 'WEB-INF/web.xml',
-                            $Manager             = '',
+                            $watchedResource     = 'WEB-INF/web.xml',
+                            $manager             = '',
                             $antiJARLocking      = false,
                             $antiResourceLocking = false,
                             $servicename         = $name,

@@ -82,17 +82,17 @@ class tomcat(
 
 
   file { $catalina_home:
-    ensure  => 'directory',
-    owner   => $tomcat_user,
-    group   => $tomcat_user,
-    mode    => '0755',
+    ensure => 'directory',
+    owner  => $tomcat_user,
+    group  => $tomcat_user,
+    mode   => '0755',
   }
 
   exec { "untar tomcat ${name} ${catalina_home}":
-    command     => "tar xzf ${srcdir}/tomcat.tgz -C ${catalina_home} --strip 1",
-    require     => File[ [$catalina_home, "${srcdir}/tomcat.tgz" ] ],
-    refreshonly => true,
-    notify      => Exec["chown ${tomcat_user} ${name} ${catalina_home}"],
+    command => "tar xzf ${srcdir}/tomcat.tgz -C ${catalina_home} --strip 1",
+    creates => "${catalina_home}/bin/catalina.sh",
+    require => File[ [$catalina_home, "${srcdir}/tomcat.tgz" ] ],
+    notify  => Exec["chown ${tomcat_user} ${name} ${catalina_home}"],
   }
 
   exec { "chown ${tomcat_user} ${name} ${catalina_home}":

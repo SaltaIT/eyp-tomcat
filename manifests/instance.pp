@@ -12,6 +12,7 @@ define tomcat::instance (
                           $maxpermsize            = '512m',
                           $permsize               = undef,
                           $shutdown_port          = '8005',
+                          $shutdown_address       = '127.0.0.1',
                           $ajp_port               = undef,
                           $connector_port         = '8080',
                           $jmx_port               = '8999',
@@ -22,8 +23,8 @@ define tomcat::instance (
                           $maxThreads             = '150',
                           $minSpareThreads        = '4',
                           $connectionTimeout      = '20000',
-                          $LockOutRealm           = true,
-                          $UserDatabase           = true,
+                          $lockoutrealm           = true,
+                          $userdatabase           = true,
                           $extra_vars             = undef,
                           $system_properties      = undef,
                           $rmi_server_hostname    = undef,
@@ -31,6 +32,8 @@ define tomcat::instance (
                           $catalina_size          = '100M',
                           $heapdump_oom_dir       = undef,
                           $install_tomcat_manager = true,
+                          $shutdown_command       = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
+                          $java_library_path      = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -185,7 +188,7 @@ define tomcat::instance (
     content => template("${module_name}/serverxml/99_server_end.erb"),
   }
 
-  if($UserDatabase)
+  if($userdatabase)
   {
     if(!defined(Concat::Fragment["${catalina_base}/conf/server.xml globalnamingresources ini"]))
     {
@@ -311,8 +314,7 @@ define tomcat::instance (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    require => [ File [
-                      [
+    require => [ File[ [
                         "${catalina_base}/conf/tomcat-users.xml",
                         "${catalina_base}/lib",
                         "${catalina_base}/logs",
@@ -321,12 +323,10 @@ define tomcat::instance (
                         "${catalina_base}/conf",
                         "${catalina_base}/webapps",
                         "${catalina_base}/bin/startup.sh",
-                        "${catalina_base}/bin/shutdown.sh",
-                      ]
-                    ],
-                  Concat[["${catalina_base}/bin/setenv.sh",
-                          "${catalina_base}/conf/server.xml"]],
-                    ],
+                        "${catalina_base}/bin/shutdown.sh"
+                      ] ],
+                  Concat[ [ "${catalina_base}/bin/setenv.sh",
+                            "${catalina_base}/conf/server.xml" ] ] ],
     content => template("${module_name}/multi/tomcat-init.erb"),
     notify  => Service[$instancename],
   }
@@ -349,9 +349,10 @@ define tomcat::instance (
   }
 
   service { $instancename:
-    ensure  => 'running',
-    enable  => true,
-    require => File["/etc/init.d/${instancename}"],
+    ensure     => 'running',
+    enable     => true,
+    hasrestart => true,
+    require    => File["/etc/init.d/${instancename}"],
   }
 
   if($catalina_rotate!=undef)
@@ -375,14 +376,18 @@ define tomcat::instance (
     exec { "cp tomcat manager from tomcat-home ${instancename}":
       command => "cp -pr ${tomcat::catalina_home}/webapps/manager ${catalina_base}/webapps",
       creates => "${catalina_base}/webapps/manager",
-      require => File["${catalina_base}/webapps"],
+      require => [File["${catalina_base}/webapps"],
+                  Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
+                  Class['tomcat']],
       before  => Service[$instancename],
     }
 
     exec { "cp tomcat host-manager from tomcat-home ${instancename}":
       command => "cp -pr ${tomcat::catalina_home}/webapps/host-manager ${catalina_base}/webapps",
       creates => "${catalina_base}/webapps/host-manager",
-      require => File["${catalina_base}/webapps"],
+      require => [File["${catalina_base}/webapps"],
+                  Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
+                  Class['tomcat']],
       before  => Service[$instancename],
     }
   }
