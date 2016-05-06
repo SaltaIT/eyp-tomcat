@@ -143,7 +143,7 @@ describe 'tomcat class' do
     end
 
     it "fuck tomcats" do
-      expect(shell("bash -c 'rm -fr /opt/tomcat-[0-9]*; sleep 5'").exit_code).to be_zero
+      expect(shell("bash -c 'rm -fr /usr/local/src/tomcat* /opt/tomcat* /etc/init.d/tomcat*; sleep 5'").exit_code).to be_zero
     end
 
     # Using puppet_apply as a helper
