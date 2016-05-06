@@ -1,11 +1,13 @@
 class tomcat::params() {
 
-  $develpkg=[ 'apr-devel' ]
+
 
   case $::osfamily
   {
     'redhat':
     {
+      $develpkg=[ 'apr-devel' ]
+
       case $::operatingsystemrelease
       {
         /^[5-6].*$/:
@@ -30,6 +32,7 @@ class tomcat::params() {
             /^14.*$/:
             {
               $systemd=false
+              $develpkg=[ 'libapr1-dev' ]
             }
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
