@@ -39,8 +39,8 @@ describe 'tomcat class' do
 
     end
 
-    it "sleep 10" do
-      expect(shell("sleep 10").exit_code).to be_zero
+    it "sleep 30" do
+      expect(shell("sleep 30").exit_code).to be_zero
     end
 
     describe port(1111) do
@@ -76,8 +76,8 @@ describe 'tomcat class' do
 
     end
 
-    it "sleep 10" do
-      expect(shell("sleep 10").exit_code).to be_zero
+    it "sleep 30" do
+      expect(shell("sleep 30").exit_code).to be_zero
     end
 
     describe port(1111) do
