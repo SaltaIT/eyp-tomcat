@@ -2,7 +2,7 @@ require 'spec_helper_acceptance'
 
 describe 'tomcat class' do
 
-  context 'testing changing port' do
+  context 'simple port testing' do
     # Using puppet_apply as a helper
 
     it "kill java" do
@@ -50,6 +50,9 @@ describe 'tomcat class' do
     it "catalina log 1111" do
       expect(shell("cat /opt/tomcat-1111/logs/catalina.out").exit_code).to be_zero
     end
+  end
+
+  context 'changing port from 1111 to 1115' do
 
     it 'should work with no errors' do
       pp = <<-EOF
