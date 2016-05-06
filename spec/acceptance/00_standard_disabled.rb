@@ -13,6 +13,10 @@ describe 'tomcat class' do
       expect(shell("bash -c 'pkill java; for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
     end
 
+    it "fuck tomcats" do
+      expect(shell("bash -c 'rm -fr /usr/local/src/tomcat* /opt/tomcat* /etc/init.d/tomcat*; sleep 5'").exit_code).to be_zero
+    end
+
     it 'should work with no errors' do
       pp = <<-EOF
 
