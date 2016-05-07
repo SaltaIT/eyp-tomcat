@@ -2,7 +2,7 @@ require 'spec_helper_acceptance'
 
 describe 'tomcat class' do
 
-  context 'basic setup (URL) - explicitly testing native library' do
+  context 'resource testing' do
 
     it "kill java" do
       expect(shell("bash -c 'pkill java; for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
@@ -27,7 +27,7 @@ describe 'tomcat class' do
         ajp_port=>'6662',
         connector_port=>'6666',
         jmx_port => '6663',
-        lockoutrealm => false,
+        lockoutrealm => true,
         java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
     	}
 
