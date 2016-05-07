@@ -41,14 +41,6 @@ describe 'tomcat class' do
         java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
       }
 
-      tomcat::driver::postgres { 'tomcat-6666':
-        ensure => 'absent',
-      }
-
-      tomcat::driver::postgres { 'tomcat-6668':
-        ensure => 'absent',
-      }
-
       EOF
 
       # Run it twice and test for idempotency
