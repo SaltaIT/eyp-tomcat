@@ -49,7 +49,8 @@ describe 'tomcat class' do
       it { is_expected.to be_listening }
     end
 
-    # TODO: 
+    # TODO: no se pq no acaba d'arrencar el tomcat
+    #
     # May 08, 2016 7:32:25 AM org.apache.coyote.AbstractProtocol init
     # INFO: Initializing ProtocolHandler ["ajp-bio-7773"]
     # May 08, 2016 7:32:25 AM org.apache.catalina.startup.Catalina load
