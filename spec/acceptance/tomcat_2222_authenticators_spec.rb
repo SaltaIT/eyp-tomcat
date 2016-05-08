@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-# tomcat-3333
+# tomcat-2222
 
 describe 'tomcat context' do
 
