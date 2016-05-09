@@ -43,6 +43,12 @@ describe 'tomcat class' do
 
     end
 
+    describe file("/opt/tomcat-5555/logs/catalina.out") do
+      it { should be_file }
+      its(:content) { should_not match 'Apache Tomcat Native library which allows optimal performance in production environments was not found' }
+    end
+
+
   end
 
 end
