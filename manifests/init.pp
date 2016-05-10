@@ -122,7 +122,7 @@ class tomcat(
     }
 
     exec { "configure native library ${srcdir}":
-      command => 'bash -c "./configure --with-apr=/usr/bin/apr-1-config --with-java-home=$(dirname $(dirname $(dirname $(find / -xdev -iname jni_md.h | head -n1))))"',
+      command => 'bash -c "./configure --with-apr=/usr/bin/apr-1-config --with-java-home=$(dirname $(jrunscript -e \'java.lang.System.out.println(java.lang.System.getProperty("java.home"));\'))"',
       require => [ Package[$tomcat::params::develpkg], Exec["tar xzf native library ${srcdir}"] ],
       cwd     => "${srcdir}/tomcat-native-library/jni/native",
       creates => "${srcdir}/tomcat-native-library/jni/native/Makefile",
