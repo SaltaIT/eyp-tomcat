@@ -4,9 +4,9 @@
   "author": "eyp",
   "summary": "multi instance tomcat",
   "license": "Apache-2.0",
-  "source": "https://github.com/AtlasIT-AM/eyp-tomcat",
+  "source": "https://github.com/NTTCom-MS/eyp-tomcat",
   "project_page": null,
-  "issues_url": "https://github.com/AtlasIT-AM/eyp-tomcat/issues",
+  "issues_url": "https://github.com/NTTCom-MS/eyp-tomcat/issues",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0"},
     {"name":"puppetlabs/concat","version_requirement":">= 1.2.3"},
