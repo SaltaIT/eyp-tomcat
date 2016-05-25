@@ -2,7 +2,7 @@
 
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-**AtlasIT-AM/eyp-tomcat**: [![Build Status](https://travis-ci.org/AtlasIT-AM/eyp-tomcat.png?branch=master)](https://travis-ci.org/AtlasIT-AM/eyp-tomcat)
+**NTTCom-MS/eyp-tomcat**: [![Build Status](https://travis-ci.org/NTTCom-MS/eyp-tomcat.png?branch=master)](https://travis-ci.org/NTTCom-MS/eyp-tomcat)
 
 #### Table of Contents
 
@@ -47,7 +47,7 @@ By default,
 
 ### Setup Requirements
 
-This module requires pluginsync enabled and eyp/nsswitch module installed
+This module requires pluginsync enabled and **eyp/nsswitch** module installed, optionally **eyp-java**
 
 ### Beginning with tomcat
 
