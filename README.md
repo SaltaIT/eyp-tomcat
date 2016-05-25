@@ -47,7 +47,7 @@ By default,
 
 ### Setup Requirements
 
-This module requires pluginsync enabled and eyp/nsswitch module installed
+This module requires pluginsync enabled and **eyp/nsswitch** module installed, optionally **eyp-java**
 
 ### Beginning with tomcat
 
