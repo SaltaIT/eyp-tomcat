@@ -51,6 +51,33 @@ This module requires pluginsync enabled and **eyp/nsswitch** module installed, o
 
 ### Beginning with tomcat
 
+simple example:
+
+```puppet
+class { 'tomcat':
+  tomcat_url => 'http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.tar.gz',
+  nativelibrary => true,
+}
+
+tomcat::instance { 'tomcat-8080':
+  tomcatpw => 'lol',
+  shutdown_port=>'2022',
+  ajp_port=>'8081',
+  connector_port=>'8080',
+  jmx_port => '2021',
+  lockoutrealm => false,
+}
+
+tomcat::instance { 'tomcat-8888':
+  tomcatpw => 'lol',
+  shutdown_port=>'9000',
+  ajp_port=>'8885',
+  connector_port=>'8888',
+  jmx_port => '9999',
+  lockoutrealm => true,
+}
+```
+
 Multi instance installation example:
 
 ```yaml
