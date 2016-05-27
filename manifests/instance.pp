@@ -34,6 +34,7 @@ define tomcat::instance (
                           $install_tomcat_manager = true,
                           $shutdown_command       = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
                           $java_library_path      = undef,
+                          $java_home              = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
