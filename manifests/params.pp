@@ -1,6 +1,6 @@
 class tomcat::params() {
 
-  $tomcat::params::default_tomcat_user='tomcat'
+  $default_tomcat_user='tomcat'
   $default_webapps_mode='0775'
 
 
