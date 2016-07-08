@@ -78,7 +78,9 @@ tomcat::instance { 'tomcat-8888':
 }
 ```
 
-Multi instance installation example:
+## Usage
+
+#### Multi instance installation example:
 
 ```yaml
 ---
@@ -167,7 +169,7 @@ tomcatinstances:
     rmi_server_hostname: "%{::ipaddress_eth0}"
 ```
 
-jaas properties example:
+#### jaas properties example
 
 ```yaml
 jaasproperties:
@@ -189,7 +191,7 @@ jaasproperties:
     filter: (&(uid={USERNAME})(objectClass=inetOrgPerson))
 ```
 
-jndi properties example:
+#### jndi properties example
 
 ```yaml
 jndiproperties:
@@ -223,7 +225,7 @@ jndiproperties:
     ldapadminpassword: "%{hiera('openldap::server::adminpassword')}"
 ```
 
-authenticators example:
+#### authenticators example
 
 ```yaml
 tomcatauthenticators:
@@ -241,7 +243,7 @@ tomcatauthenticators:
     form: es.systemadmin.sso.tomcat.FormAuthenticator
 ```
 
-library tarball installation example:
+####  library tarball installation example
 
 ```yaml
 tomcatlibstarballs:
@@ -255,7 +257,7 @@ tomcatlibstarballs:
     source: puppet:///customers/example/tomcatlibs.tgz
 ```
 
-custom tomcat properties file deployment example:
+#### custom tomcat properties file deployment example
 
 ```yaml
 tomcatproperties:
@@ -301,7 +303,7 @@ tomcatproperties:
     servicename: tomcat8083
 ```
 
-web.xml example:
+#### web.xml example
 
 ```yaml
 tomcatwebxml:
@@ -315,7 +317,7 @@ tomcatwebxml:
     source: puppet:///customers/example/web.xml
 ```
 
-context.xml example:
+#### context.xml example
 
 ```yaml
 tomcatcontext:
@@ -337,7 +339,7 @@ tomcatcontext:
     antiResourceLocking: true
 ```
 
-update library:
+#### update library
 ```puppet
 tomcat::lib { 'tomcat-8080':
   jar_name => 'ecj-4.4.3',
@@ -345,7 +347,7 @@ tomcat::lib { 'tomcat-8080':
 }
 ```
 
-postgres JDBC driver:
+#### postgres JDBC driver
 
 ```
 tomcatinstances:
@@ -367,10 +369,6 @@ tomcatdriverpostgres:
   tomcat_retail01: {}
   tomcat_retail50: {}
 ```
-
-## Usage
-
-TODO
 
 ### known errors
 
@@ -405,8 +403,6 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
 ### Global variables
 
 * **eyptomcat::shutdowncommand**: Defines a string to be used to shutdown tomcat (default: SHUTDOWN)
-
-TODO
 
 ## Limitations
 
