@@ -3,7 +3,7 @@ define tomcat::instance (
                           $catalina_base          = "/opt/${name}",
                           $instancename           = $name,
                           $pwdigest               = 'sha',
-                          $tomcat_user            = 'tomcat',
+                          $tomcat_user            = $tomcat::params::default_tomcat_user,
                           $server_info            = '.',
                           $server_number          = '.',
                           $server_built           = 'Long long ago',
@@ -35,6 +35,9 @@ define tomcat::instance (
                           $shutdown_command       = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
                           $java_library_path      = undef,
                           $java_home              = undef,
+                          $webapps_owner          = $tomcat::params::default_tomcat_user,
+                          $webapps_group          = $tomcat::params::default_tomcat_user,
+                          $webapps_mode           = $tomcat::params::default_webapps_mode,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -142,9 +145,9 @@ define tomcat::instance (
 
   file { "${catalina_base}/webapps":
     ensure  => 'directory',
-    owner   => $tomcat_user,
-    group   => $tomcat_user,
-    mode    => '0775',
+    owner   => $webapps_owner,
+    group   => $webapps_group,
+    mode    => $webapps_mode,
     require => File[$catalina_base],
   }
 
