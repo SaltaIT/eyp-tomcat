@@ -404,6 +404,34 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
 
 * **eyptomcat::shutdowncommand**: Defines a string to be used to shutdown tomcat (default: SHUTDOWN)
 
+### classes
+
+#### tomcat
+
+### defines
+
+#### tomcat::instance
+
+#### tomcat::driver::postgres
+
+#### tomcat::authenticators
+
+#### tomcat::context
+
+#### tomcat::jaas
+
+#### tomcat::jndi
+
+#### tomcat::lib
+
+#### tomcat::libstarball
+
+#### tomcat::properties
+
+#### tomcat::resource
+
+#### tomcat::webxml
+
 ## Limitations
 
 Tested on:
