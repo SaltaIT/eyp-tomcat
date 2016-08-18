@@ -469,8 +469,8 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
 
 Install postgres driver for a given tomcat instance:
 
-* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${name})
-* **servicename**      = $name,
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
 * **jdbc_version**     = '4',
 * **postgres_version** = '9.2',
 * **srcdir**           = '/usr/local/src',
@@ -478,21 +478,96 @@ Install postgres driver for a given tomcat instance:
 
 #### tomcat::authenticators
 
+* **basic**         = 'org.apache.catalina.authenticator.BasicAuthenticator',
+* **form**          = 'org.apache.catalina.authenticator.FormAuthenticator',
+* **clientcert**    = 'org.apache.catalina.authenticator.SSLAuthenticator',
+* **digest**        = 'org.apache.catalina.authenticator.DigestAuthenticator',
+* **none**          = 'org.apache.catalina.authenticator.NonLoginAuthenticator',
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
 #### tomcat::context
+
+* **sessionCookiePath**   = undef,
+* **watchedResource**     = 'WEB-INF/web.xml',
+* **manager**             = '',
+* **antiJARLocking**      = false,
+* **antiResourceLocking** = false,
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
 
 #### tomcat::jaas
 
+* **app**,
+* **provider**,
+* **filter**,
+* **username**      = 'tomcat',
+* **password**      = 'tomcat',
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
 #### tomcat::jndi
+
+* **ldapservers**,
+* **ldapbase**,
+* **ldapadmin**,
+* **ldapadminpassword**,
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
 
 #### tomcat::lib
 
+* **jar_name**,
+* **source**        = undef,
+* **file_ln**       = undef,
+* **purge_old**: purge other versions of this library (default: true)
+* **ensure**        = 'present',
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
 #### tomcat::libstarball
+
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+* **source**,
+* **libstarballname** = $name,
+* **purge_old**       = false,
 
 #### tomcat::properties
 
+* **source**,
+* **properties_file**,
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
 #### tomcat::resource
 
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+* **resource_type**
+* **resource_name**,
+* **factory**                         = undef,
+* **driver_class_name**               = undef,
+* **resource_url**                    = undef,
+* **username**                        = undef,
+* **password**                        = undef,
+* **initial_size**                    = undef,
+* **max_active**                      = undef,
+* **max_idle**                        = undef,
+* **min_idle**                        = undef,
+* **validation_query**                = undef,
+* **min_evictable_idletimemillis**    = undef,
+* **time_between_evictionrunsmillis** = undef,
+* **numtests_per_evictionrun**        = undef,
+* **init_sql**                        = undef,
+* **auth**                            = undef,
+* **location**                        = undef,
+
 #### tomcat::webxml
+
+* **source**,
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
 
 ## Limitations
 
