@@ -49,6 +49,8 @@ By default,
 
 This module requires pluginsync enabled and **eyp/nsswitch** module installed, optionally **eyp-java**
 
+If **eyp-logrotate** is available, it can define catalina.out file rotation
+
 ### Beginning with tomcat
 
 simple example:
@@ -403,6 +405,169 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
 ### Global variables
 
 * **eyptomcat::shutdowncommand**: Defines a string to be used to shutdown tomcat (default: SHUTDOWN)
+
+### classes
+
+#### tomcat
+* installation options (at least one is required):
+  * **tomcat_src**: resource with the tomcat package (default: undef)
+  * **tomcat_url**: URL to download the tomcat package (default: undef)
+* other options:
+  * **manage_tomcat_user**: Manage or not the **tomcat_user** user (default: true)
+  * **tomcat_user**: User to run tomcat (default: tomcat)
+  * **tomcat_user_home**: tomcat user home dir (default: /home/tomcat)
+  * **tomcat_user_shell**: tomcat user shell (default: /bin/bash)
+  * **catalina_home**: where to install tomcat (default: /opt/tomcat-home)
+  * **srcdir**: Place to store .tar.gz and other temporal files (default: /usr/local/src)
+  * **nativelibrary**: Install tomcat native library (default: true)
+
+### defines
+
+#### tomcat::instance
+
+* **tomcatpw**: Password for tomcat GUI user (default: *password*, **must be changed**)
+* **catalina_base**          = "/opt/${name}",
+* **instancename**           = $name,
+* **pwdigest**: Hashing algorithm for tomcat-users.xml file, valid values: sha, plaintext (default: sha)
+* **tomcat_user**            = $tomcat::params::default_tomcat_user,
+* **server_info**: server identification for this version of Tomcat (default: .)
+* **server_number**: server's version number (default: .)
+* **server_built**: server built time for this version of Tomcat (default: .)
+* **xmx**: JVM max memory: (default: 512m)
+* **xms**: JVM start memory: (default: 512m)
+* **maxpermsize**: JVM -XX:MaxPermSize (if available): (default: 512m)
+* **permsize**: JVM -XX:PermSize (default: undef)
+* **shutdown_port**: shutdown port (default: 8005)
+* **shutdown_address**: shutdown listen address (default: 127.0.0.1)
+* **ajp_port**: AJP listen port (default: undef)
+* **connector_port**: HTTP connector port (default: 8080)
+* **jmx_port**: JMX listen port (default: 8999)
+* **redirectPort**           = '8443',
+* **realms**                 = undef,
+* **values**                 = undef,
+* **errorReportValveClass**  = undef,
+* **maxThreads**: tomcat max threads (default: 150)
+* **minSpareThreads**        = '4',
+* **connectionTimeout**      = '20000',
+* **lockoutrealm**           = true,
+* **userdatabase**           = true,
+* **extra_vars**             = undef,
+* **system_properties**      = undef,
+* **rmi_server_hostname**    = undef,
+* **catalina_rotate**: if eyp-logrotate is available defines a daily catalina.out rotation with this value retention (default: 15)
+* **catalina_size**: if eyp-logrotate is available defines a max size to rotate catalina.out (default: 100M)
+* **heapdump_oom_dir**: heapdump dir, if defined enables heapdumping (default: undef)
+* **install_tomcat_manager** = true,
+* **shutdown_command**: shutdown command for the shutdown port (default: eyptomcat::shutdowncommand which, by default, is SHUTDOWN)
+* **java_library_path**: -Djava.library.path (default: undef)
+* **java_home**              = undef,
+* **webapps_owner**: webapps folder owner
+* **webapps_group**: webapps folder group
+* **webapps_mode**: webapps folder mode
+
+#### tomcat::driver::postgres
+
+Install postgres driver for a given tomcat instance:
+
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+* **jdbc_version**     = '4',
+* **postgres_version** = '9.2',
+* **srcdir**           = '/usr/local/src',
+* **ensure**           = 'present',
+
+#### tomcat::authenticators
+
+* **basic**         = 'org.apache.catalina.authenticator.BasicAuthenticator',
+* **form**          = 'org.apache.catalina.authenticator.FormAuthenticator',
+* **clientcert**    = 'org.apache.catalina.authenticator.SSLAuthenticator',
+* **digest**        = 'org.apache.catalina.authenticator.DigestAuthenticator',
+* **none**          = 'org.apache.catalina.authenticator.NonLoginAuthenticator',
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
+#### tomcat::context
+
+* **sessionCookiePath**   = undef,
+* **watchedResource**     = 'WEB-INF/web.xml',
+* **manager**             = '',
+* **antiJARLocking**      = false,
+* **antiResourceLocking** = false,
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
+#### tomcat::jaas
+
+* **app**,
+* **provider**,
+* **filter**,
+* **username**      = 'tomcat',
+* **password**      = 'tomcat',
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
+#### tomcat::jndi
+
+* **ldapservers**,
+* **ldapbase**,
+* **ldapadmin**,
+* **ldapadminpassword**,
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
+#### tomcat::lib
+
+* **jar_name**,
+* **source**        = undef,
+* **file_ln**       = undef,
+* **purge_old**: purge other versions of this library (default: true)
+* **ensure**        = 'present',
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
+#### tomcat::libstarball
+
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+* **source**,
+* **libstarballname** = $name,
+* **purge_old**       = false,
+
+#### tomcat::properties
+
+* **source**,
+* **properties_file**,
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+
+#### tomcat::resource
+
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
+* **resource_type**
+* **resource_name**,
+* **factory**                         = undef,
+* **driver_class_name**               = undef,
+* **resource_url**                    = undef,
+* **username**                        = undef,
+* **password**                        = undef,
+* **initial_size**                    = undef,
+* **max_active**                      = undef,
+* **max_idle**                        = undef,
+* **min_idle**                        = undef,
+* **validation_query**                = undef,
+* **min_evictable_idletimemillis**    = undef,
+* **time_between_evictionrunsmillis** = undef,
+* **numtests_per_evictionrun**        = undef,
+* **init_sql**                        = undef,
+* **auth**                            = undef,
+* **location**                        = undef,
+
+#### tomcat::webxml
+
+* **source**,
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
+* **servicename**: tomcat's servicename (default: resource's name)
 
 ## Limitations
 
