@@ -1,5 +1,5 @@
 define tomcat::instance (
-                          $tomcatpw,
+                          $tomcatpw               = 'password',
                           $catalina_base          = "/opt/${name}",
                           $instancename           = $name,
                           $pwdigest               = 'sha',
@@ -41,6 +41,11 @@ define tomcat::instance (
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
+  }
+
+  if($password=='password')
+  {
+    fail("Please change default password for tomcat instance: ${instancename}")
   }
 
   if ! defined(Class['tomcat'])

@@ -49,6 +49,8 @@ By default,
 
 This module requires pluginsync enabled and **eyp/nsswitch** module installed, optionally **eyp-java**
 
+If **eyp-logrotate** is available, it can define catalina.out file rotation
+
 ### Beginning with tomcat
 
 simple example:
@@ -420,6 +422,45 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
   * **nativelibrary**: Install tomcat native library (default: true)
 
 ### defines
+* **tomcatpw**: Password for tomcat GUI user (default: *password*, **must be changed**)
+* **catalina_base**          = "/opt/${name}",
+* **instancename**           = $name,
+* **pwdigest**: Hashing algorithm for tomcat-users.xml file, valid values: sha, plaintext (default: sha)
+* **tomcat_user**            = $tomcat::params::default_tomcat_user,
+* **server_info**: server identification for this version of Tomcat (default: .)
+* **server_number**: server's version number (default: .)
+* **server_built**: server built time for this version of Tomcat (default: .)
+* **xmx**: JVM max memory: (default: 512m)
+* **xms**: JVM start memory: (default: 512m)
+* **maxpermsize**: JVM -XX:MaxPermSize (if available): (default: 512m)
+* **permsize**: JVM -XX:PermSize (default: undef)
+* **shutdown_port**: shutdown port (default: 8005)
+* **shutdown_address**: shutdown listen address (default: 127.0.0.1)
+* **ajp_port**: AJP listen port (default: undef)
+* **connector_port**: HTTP connector port (default: 8080)
+* **jmx_port**: JMX listen port (default: 8999)
+* **redirectPort**           = '8443',
+* **realms**                 = undef,
+* **values**                 = undef,
+* **errorReportValveClass**  = undef,
+* **maxThreads**: tomcat max threads (default: 150)
+* **minSpareThreads**        = '4',
+* **connectionTimeout**      = '20000',
+* **lockoutrealm**           = true,
+* **userdatabase**           = true,
+* **extra_vars**             = undef,
+* **system_properties**      = undef,
+* **rmi_server_hostname**    = undef,
+* **catalina_rotate**: if eyp-logrotate is available defines a daily catalina.out rotation with this value retention (default: 15)
+* **catalina_size**: if eyp-logrotate is available defines a max size to rotate catalina.out (default: 100M)
+* **heapdump_oom_dir**: heapdump dir, if defined enables heapdumping (default: undef)
+* **install_tomcat_manager** = true,
+* **shutdown_command**: shutdown command for the shutdown port (default: eyptomcat::shutdowncommand which, by default, is SHUTDOWN)
+* **java_library_path**: -Djava.library.path (default: undef)
+* **java_home**              = undef,
+* **webapps_owner**: webapps folder owner
+* **webapps_group**: webapps folder group
+* **webapps_mode**: webapps folder mode
 
 #### tomcat::instance
 
