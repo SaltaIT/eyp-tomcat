@@ -43,7 +43,7 @@ define tomcat::instance (
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
   }
 
-  if($password=='password')
+  if($tomcatpw=='password')
   {
     fail("Please change default password for tomcat instance: ${instancename}")
   }
