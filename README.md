@@ -422,6 +422,9 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
   * **nativelibrary**: Install tomcat native library (default: true)
 
 ### defines
+
+#### tomcat::instance
+
 * **tomcatpw**: Password for tomcat GUI user (default: *password*, **must be changed**)
 * **catalina_base**          = "/opt/${name}",
 * **instancename**           = $name,
@@ -462,9 +465,16 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
 * **webapps_group**: webapps folder group
 * **webapps_mode**: webapps folder mode
 
-#### tomcat::instance
-
 #### tomcat::driver::postgres
+
+Install postgres driver for a given tomcat instance:
+
+* **catalina_base**: catalina_base for the tomcat instance (default: /opt/${name})
+* **servicename**      = $name,
+* **jdbc_version**     = '4',
+* **postgres_version** = '9.2',
+* **srcdir**           = '/usr/local/src',
+* **ensure**           = 'present',
 
 #### tomcat::authenticators
 
