@@ -407,6 +407,17 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
 ### classes
 
 #### tomcat
+* installation options (at least one is required):
+  * **tomcat_src**: resource with the tomcat package (default: undef)
+  * **tomcat_url**: URL to download the tomcat package (default: undef)
+* other options:
+  * **manage_tomcat_user**: Manage or not the **tomcat_user** user (default: true)
+  * **tomcat_user**: User to run tomcat (default: tomcat)
+  * **tomcat_user_home**: tomcat user home dir (default: /home/tomcat)
+  * **tomcat_user_shell**: tomcat user shell (default: /bin/bash)
+  * **catalina_home**: where to install tomcat (default: /opt/tomcat-home)
+  * **srcdir**: Place to store .tar.gz and other temporal files (default: /usr/local/src)
+  * **nativelibrary**: Install tomcat native library (default: true)
 
 ### defines
 
