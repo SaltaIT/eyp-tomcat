@@ -584,6 +584,11 @@ But should work anywhere
 We are pushing to have acceptance testing in place, so any new feature must
 have tests to check both presence and absence of any feature
 
+### TODO
+
+* rename variables with uppercase letters
+* remove disable_variable_is_lowercase from Rakefile (once variables with uppercase letters are removed)
+
 ### Contributing
 
 1. Fork it
