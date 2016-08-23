@@ -376,8 +376,8 @@ define tomcat::instance (
     if($manage_service)
     {
       service { $instancename:
-        ensure  => $ensure,
-        enable  => $enable,
+        ensure     => $ensure,
+        enable     => $enable,
         hasrestart => true,
         require    => File["/etc/init.d/${instancename}"],
       }
