@@ -38,6 +38,10 @@ define tomcat::instance (
                           $webapps_owner          = $tomcat::params::default_tomcat_user,
                           $webapps_group          = $tomcat::params::default_tomcat_user,
                           $webapps_mode           = $tomcat::params::default_webapps_mode,
+                          $ensure                 = 'running',
+                          $manage_service         = true,
+                          $manage_docker_service  = true,
+                          $enable                 = true,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -82,6 +86,15 @@ define tomcat::instance (
   {
     $dependency_check_java=undef
   }
+
+  validate_bool($manage_docker_service)
+  validate_bool($manage_service)
+  validate_bool($enable)
+
+  validate_re($ensure, [ '^running$', '^stopped$' ], "Not a valid daemon status: ${ensure}")
+
+  $is_docker_container_var=getvar('::eyp_docker_iscontainer')
+  $is_docker_container=str2bool($is_docker_container_var)
 
   exec { "mkdir base tomcat instance ${instancename} ${catalina_base}":
     command => "mkdir -p ${catalina_base}",
@@ -357,11 +370,18 @@ define tomcat::instance (
     }
   }
 
-  service { $instancename:
-    ensure     => 'running',
-    enable     => true,
-    hasrestart => true,
-    require    => File["/etc/init.d/${instancename}"],
+  if( $is_docker_container==false or
+      $manage_docker_service)
+  {
+    if($manage_service)
+    {
+      service { $instancename:
+        ensure  => $ensure,
+        enable  => $enable,
+        hasrestart => true,
+        require    => File["/etc/init.d/${instancename}"],
+      }
+    }
   }
 
   if($catalina_rotate!=undef)
