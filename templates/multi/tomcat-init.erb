@@ -51,6 +51,10 @@ start(){
 stop() {
   pid=$( cat $CATALINA_PID 2>/dev/null )
   if [ -n "$pid" ]; then
+
+    #aqui kill -3 thread dump
+
+
     $EXECSTART $CATALINA_BASE/bin/shutdown.sh
     echo -n "Stopping <%= @instancename %>"
 
