@@ -350,6 +350,7 @@ define tomcat::instance (
                   Concat[ [ "${catalina_base}/bin/setenv.sh",
                             "${catalina_base}/conf/server.xml" ] ] ],
     content => template("${module_name}/multi/tomcat-init.erb"),
+    notify  => Service[$instancename],
   }
 
   if($tomcat::params::systemd)
