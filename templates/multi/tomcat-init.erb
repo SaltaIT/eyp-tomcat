@@ -176,7 +176,7 @@ case $1 in
     $0 start
   ;;
   *)
-    echo 'Usage: /etc/init.d/<%= @instancename %> start|stop|status'
+    echo 'Usage: /etc/init.d/<%= @instancename %> start | stop | status | threadump | heapdump <file>'
   ;;
 esac
 exit 0
