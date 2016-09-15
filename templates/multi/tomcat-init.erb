@@ -65,8 +65,7 @@ heapdump() {
         exit 1
       else
         $JMAPBIN -dump:format=b,file=$1 $pid
-        echo "heap dump - OK"
-        exit 0
+        exit $?
       fi
 
     fi
