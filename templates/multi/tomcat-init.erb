@@ -31,8 +31,48 @@ else
 fi
 
 #aqui kill -3 thread dump
+threadump() {
+  pid=$( cat $CATALINA_PID 2>/dev/null )
+  if [ -n "$pid" ]; then
+    ps -p $pid | tail -n1 | grep java >/dev/null 2>&1
+    if [ $? -eq 0 ];
+    then
+      kill -3 $pid
+      echo "thread dump - OK"
+      exit 0
+    fi
+  fi
+}
 
 # manual heap dump - $JAVA_HOME/bin/jmap -dump:format=b,file=heap.bin <pid>
+heapdump() {
+
+  if [ -z "$1" ];
+  then
+    echo "destination file needed - heap dump aborted"
+    exit 1
+  fi
+
+  pid=$( cat $CATALINA_PID 2>/dev/null )
+  if [ -n "$pid" ]; then
+    ps -p $pid | tail -n1 | grep java >/dev/null 2>&1
+    if [ $? -eq 0 ];
+    then
+      JMAPBIN=$(which jmap)
+      if [ -z "${JMAPBIN}" ];
+      then
+        echo "jmap not found"
+        exit 1
+      else
+        $JMAPBIN -dump:format=b,file=$1 $pid
+        echo "heap dump - OK"
+        exit 0
+      fi
+
+    fi
+  fi
+}
+
 
 start(){
   pid=$( cat $CATALINA_PID 2>/dev/null )
@@ -123,6 +163,12 @@ case $1 in
   ;;
   status)
     status
+  ;;
+  threadump)
+    threadump
+  ;;
+  heapdump)
+    heapdump $2
   ;;
   restart)
     $0 stop
