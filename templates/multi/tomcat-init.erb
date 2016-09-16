@@ -27,7 +27,7 @@ if [ "$(id -u)" -eq "$(id -u <%= @tomcat_user %>)" ];
 then
   EXECSTART="/bin/bash"
 else
-  EXECSTART="/bin/su -p -s /bin/sh $TOMCAT_USER"
+  EXECSTART="/bin/su -p -s /bin/bash $TOMCAT_USER"
 fi
 
 #aqui kill -3 thread dump
@@ -64,11 +64,11 @@ heapdump() {
         echo "jmap not found"
         exit 1
       else
-        $EXECSTART $JMAPBIN -dump:format=b,file=$1 $pid
+        $EXECSTART -c "$JMAPBIN -dump:format=b,file=$1 $pid"
 
         if [ "$?" -ne 0 ];
         then
-          $EXECSTART $JMAPBIN -F -dump:format=b,file=$1 $pid
+          $EXECSTART -c "$JMAPBIN -F -dump:format=b,file=$1 $pid"
           exit $?
         fi
 
