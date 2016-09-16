@@ -82,6 +82,181 @@ tomcat::instance { 'tomcat-8888':
 
 ## Usage
 
+### init script usage
+
+#### options
+
+```
+[root@ldapm ~]# /etc/init.d/tomcat-8080
+Usage: /etc/init.d/tomcat-8080 start | stop | status | threadump | heapdump <file>
+```
+
+#### threadump
+
+Will create a thread dump on catalina.out
+
+```
+# /etc/init.d/tomcat-8080 threadump
+thread dump - OK
+```
+
+For example:
+
+```
+Full thread dump OpenJDK 64-Bit Server VM (25.101-b13 mixed mode):
+
+"ajp-bio-8888-AsyncTimeout" #20 daemon prio=5 os_prio=0 tid=0x00007f71343c7000 nid=0x226f waiting on condition [0x00007f7120fab000]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at org.apache.tomcat.util.net.JIoEndpoint$AsyncTimeout.run(JIoEndpoint.java:152)
+	at java.lang.Thread.run(Thread.java:745)
+
+"ajp-bio-8888-Acceptor-0" #19 daemon prio=5 os_prio=0 tid=0x00007f71343c6000 nid=0x226e runnable [0x00007f71210ac000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
+	at java.net.ServerSocket.accept(ServerSocket.java:513)
+	at org.apache.tomcat.util.net.DefaultServerSocketFactory.acceptSocket(DefaultServerSocketFactory.java:60)
+	at org.apache.tomcat.util.net.JIoEndpoint$Acceptor.run(JIoEndpoint.java:222)
+	at java.lang.Thread.run(Thread.java:745)
+
+"http-bio-8080-AsyncTimeout" #18 daemon prio=5 os_prio=0 tid=0x00007f71343c3800 nid=0x226d waiting on condition [0x00007f71211ad000]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at org.apache.tomcat.util.net.JIoEndpoint$AsyncTimeout.run(JIoEndpoint.java:152)
+	at java.lang.Thread.run(Thread.java:745)
+
+"http-bio-8080-Acceptor-0" #17 daemon prio=5 os_prio=0 tid=0x00007f71343c1800 nid=0x226c runnable [0x00007f71212ae000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
+	at java.net.ServerSocket.accept(ServerSocket.java:513)
+	at org.apache.tomcat.util.net.DefaultServerSocketFactory.acceptSocket(DefaultServerSocketFactory.java:60)
+	at org.apache.tomcat.util.net.JIoEndpoint$Acceptor.run(JIoEndpoint.java:222)
+	at java.lang.Thread.run(Thread.java:745)
+
+"ContainerBackgroundProcessor[StandardEngine[Catalina]]" #16 daemon prio=5 os_prio=0 tid=0x00007f71343b2800 nid=0x226b waiting on condition [0x00007f71213af000]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1513)
+	at java.lang.Thread.run(Thread.java:745)
+
+"GC Daemon" #13 daemon prio=2 os_prio=0 tid=0x00007f7134307800 nid=0x225c in Object.wait() [0x00007f7122d01000]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000e16a8560> (a sun.misc.GC$LatencyLock)
+	at sun.misc.GC$Daemon.run(GC.java:117)
+	- locked <0x00000000e16a8560> (a sun.misc.GC$LatencyLock)
+
+"RMI TCP Accept-0" #12 daemon prio=5 os_prio=0 tid=0x00007f713419e000 nid=0x2252 runnable [0x00007f7123170000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
+	at java.net.ServerSocket.accept(ServerSocket.java:513)
+	at sun.management.jmxremote.LocalRMIServerSocketFactory$1.accept(LocalRMIServerSocketFactory.java:52)
+	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.executeAcceptLoop(TCPTransport.java:400)
+	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.run(TCPTransport.java:372)
+	at java.lang.Thread.run(Thread.java:745)
+
+"RMI TCP Accept-8999" #11 daemon prio=5 os_prio=0 tid=0x00007f7134194800 nid=0x224f runnable [0x00007f7123271000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
+	at java.net.ServerSocket.accept(ServerSocket.java:513)
+	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.executeAcceptLoop(TCPTransport.java:400)
+	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.run(TCPTransport.java:372)
+	at java.lang.Thread.run(Thread.java:745)
+
+"RMI TCP Accept-0" #10 daemon prio=5 os_prio=0 tid=0x00007f7134180800 nid=0x224b runnable [0x00007f7123372000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
+	at java.net.ServerSocket.accept(ServerSocket.java:513)
+	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.executeAcceptLoop(TCPTransport.java:400)
+	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.run(TCPTransport.java:372)
+	at java.lang.Thread.run(Thread.java:745)
+
+"Service Thread" #7 daemon prio=9 os_prio=0 tid=0x00007f71340d4800 nid=0x220e runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"C1 CompilerThread1" #6 daemon prio=9 os_prio=0 tid=0x00007f71340c1800 nid=0x220d waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"C2 CompilerThread0" #5 daemon prio=9 os_prio=0 tid=0x00007f71340b4800 nid=0x220c waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Signal Dispatcher" #4 daemon prio=9 os_prio=0 tid=0x00007f71340b3000 nid=0x220b waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Finalizer" #3 daemon prio=8 os_prio=0 tid=0x00007f7134089800 nid=0x220a in Object.wait() [0x00007f7123eaa000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000e0008ee0> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+	- locked <0x00000000e0008ee0> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:164)
+	at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:209)
+
+"Reference Handler" #2 daemon prio=10 os_prio=0 tid=0x00007f7134085000 nid=0x2209 in Object.wait() [0x00007f7123fab000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000e0006b50> (a java.lang.ref.Reference$Lock)
+	at java.lang.Object.wait(Object.java:502)
+	at java.lang.ref.Reference.tryHandlePending(Reference.java:191)
+	- locked <0x00000000e0006b50> (a java.lang.ref.Reference$Lock)
+	at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:153)
+
+"main" #1 prio=5 os_prio=0 tid=0x00007f7134009800 nid=0x2203 runnable [0x00007f713af9b000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
+	at java.net.ServerSocket.accept(ServerSocket.java:513)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:453)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:777)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:723)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:321)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:455)
+
+"VM Thread" os_prio=0 tid=0x00007f713407b800 nid=0x2208 runnable
+
+"VM Periodic Task Thread" os_prio=0 tid=0x00007f71341a5800 nid=0x2253 waiting on condition
+
+JNI global references: 51
+
+Heap
+ def new generation   total 157248K, used 100655K [0x00000000e0000000, 0x00000000eaaa0000, 0x00000000eaaa0000)
+  eden space 139776K,  72% used [0x00000000e0000000, 0x00000000e624bfd8, 0x00000000e8880000)
+  from space 17472K,   0% used [0x00000000e8880000, 0x00000000e8880000, 0x00000000e9990000)
+  to   space 17472K,   0% used [0x00000000e9990000, 0x00000000e9990000, 0x00000000eaaa0000)
+ tenured generation   total 349568K, used 0K [0x00000000eaaa0000, 0x0000000100000000, 0x0000000100000000)
+   the space 349568K,   0% used [0x00000000eaaa0000, 0x00000000eaaa0000, 0x00000000eaaa0200, 0x0000000100000000)
+ Metaspace       used 15177K, capacity 15452K, committed 15744K, reserved 1062912K
+  class space    used 1547K, capacity 1609K, committed 1664K, reserved 1048576K
+```
+
+#### heapdump
+
+Requires **jmap** installed
+
+```
+# /etc/init.d/tomcat-8080 heapdump heap.bin
+Dumping heap to /tmp/hsperfdata_tomcat/heap.bin ...
+Heap dump file created
+```
+
+
+### typical configuration options
+
 #### Multi instance installation example:
 
 ```yaml
