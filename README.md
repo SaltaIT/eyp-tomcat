@@ -111,30 +111,10 @@ Full thread dump OpenJDK 64-Bit Server VM (25.101-b13 mixed mode):
 	at org.apache.tomcat.util.net.JIoEndpoint$AsyncTimeout.run(JIoEndpoint.java:152)
 	at java.lang.Thread.run(Thread.java:745)
 
-"ajp-bio-8888-Acceptor-0" #19 daemon prio=5 os_prio=0 tid=0x00007f71343c6000 nid=0x226e runnable [0x00007f71210ac000]
-   java.lang.Thread.State: RUNNABLE
-	at java.net.PlainSocketImpl.socketAccept(Native Method)
-	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
-	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
-	at java.net.ServerSocket.accept(ServerSocket.java:513)
-	at org.apache.tomcat.util.net.DefaultServerSocketFactory.acceptSocket(DefaultServerSocketFactory.java:60)
-	at org.apache.tomcat.util.net.JIoEndpoint$Acceptor.run(JIoEndpoint.java:222)
-	at java.lang.Thread.run(Thread.java:745)
-
 "http-bio-8080-AsyncTimeout" #18 daemon prio=5 os_prio=0 tid=0x00007f71343c3800 nid=0x226d waiting on condition [0x00007f71211ad000]
    java.lang.Thread.State: TIMED_WAITING (sleeping)
 	at java.lang.Thread.sleep(Native Method)
 	at org.apache.tomcat.util.net.JIoEndpoint$AsyncTimeout.run(JIoEndpoint.java:152)
-	at java.lang.Thread.run(Thread.java:745)
-
-"http-bio-8080-Acceptor-0" #17 daemon prio=5 os_prio=0 tid=0x00007f71343c1800 nid=0x226c runnable [0x00007f71212ae000]
-   java.lang.Thread.State: RUNNABLE
-	at java.net.PlainSocketImpl.socketAccept(Native Method)
-	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
-	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
-	at java.net.ServerSocket.accept(ServerSocket.java:513)
-	at org.apache.tomcat.util.net.DefaultServerSocketFactory.acceptSocket(DefaultServerSocketFactory.java:60)
-	at org.apache.tomcat.util.net.JIoEndpoint$Acceptor.run(JIoEndpoint.java:222)
 	at java.lang.Thread.run(Thread.java:745)
 
 "ContainerBackgroundProcessor[StandardEngine[Catalina]]" #16 daemon prio=5 os_prio=0 tid=0x00007f71343b2800 nid=0x226b waiting on condition [0x00007f71213af000]
@@ -150,48 +130,7 @@ Full thread dump OpenJDK 64-Bit Server VM (25.101-b13 mixed mode):
 	at sun.misc.GC$Daemon.run(GC.java:117)
 	- locked <0x00000000e16a8560> (a sun.misc.GC$LatencyLock)
 
-"RMI TCP Accept-0" #12 daemon prio=5 os_prio=0 tid=0x00007f713419e000 nid=0x2252 runnable [0x00007f7123170000]
-   java.lang.Thread.State: RUNNABLE
-	at java.net.PlainSocketImpl.socketAccept(Native Method)
-	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
-	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
-	at java.net.ServerSocket.accept(ServerSocket.java:513)
-	at sun.management.jmxremote.LocalRMIServerSocketFactory$1.accept(LocalRMIServerSocketFactory.java:52)
-	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.executeAcceptLoop(TCPTransport.java:400)
-	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.run(TCPTransport.java:372)
-	at java.lang.Thread.run(Thread.java:745)
-
-"RMI TCP Accept-8999" #11 daemon prio=5 os_prio=0 tid=0x00007f7134194800 nid=0x224f runnable [0x00007f7123271000]
-   java.lang.Thread.State: RUNNABLE
-	at java.net.PlainSocketImpl.socketAccept(Native Method)
-	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
-	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
-	at java.net.ServerSocket.accept(ServerSocket.java:513)
-	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.executeAcceptLoop(TCPTransport.java:400)
-	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.run(TCPTransport.java:372)
-	at java.lang.Thread.run(Thread.java:745)
-
-"RMI TCP Accept-0" #10 daemon prio=5 os_prio=0 tid=0x00007f7134180800 nid=0x224b runnable [0x00007f7123372000]
-   java.lang.Thread.State: RUNNABLE
-	at java.net.PlainSocketImpl.socketAccept(Native Method)
-	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:409)
-	at java.net.ServerSocket.implAccept(ServerSocket.java:545)
-	at java.net.ServerSocket.accept(ServerSocket.java:513)
-	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.executeAcceptLoop(TCPTransport.java:400)
-	at sun.rmi.transport.tcp.TCPTransport$AcceptLoop.run(TCPTransport.java:372)
-	at java.lang.Thread.run(Thread.java:745)
-
-"Service Thread" #7 daemon prio=9 os_prio=0 tid=0x00007f71340d4800 nid=0x220e runnable [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
-
-"C1 CompilerThread1" #6 daemon prio=9 os_prio=0 tid=0x00007f71340c1800 nid=0x220d waiting on condition [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
-
-"C2 CompilerThread0" #5 daemon prio=9 os_prio=0 tid=0x00007f71340b4800 nid=0x220c waiting on condition [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
-
-"Signal Dispatcher" #4 daemon prio=9 os_prio=0 tid=0x00007f71340b3000 nid=0x220b waiting on condition [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
+(...)
 
 "Finalizer" #3 daemon prio=8 os_prio=0 tid=0x00007f7134089800 nid=0x220a in Object.wait() [0x00007f7123eaa000]
    java.lang.Thread.State: WAITING (on object monitor)
