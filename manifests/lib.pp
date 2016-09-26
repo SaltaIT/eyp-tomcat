@@ -70,6 +70,4 @@ define tomcat::lib (
       require => File["${catalina_base}/lib"],
     }
   }
-
-
 }
