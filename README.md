@@ -350,6 +350,17 @@ tomcat::lib { 'tomcat-8080':
   source => 'puppet:///solr/ecj-4.4.3.jar',
 }
 ```
+#### java agent
+
+```
+tomcat::agent { 'tomcat-8080':
+  agent_name => 'agenttest',
+  comment => 'example agent',
+  jar_name => 'agenttest-1.0.29',
+  source => 'puppet:///tomcat/agenttest-1.0.29.jar',
+}
+```
+
 
 #### postgres JDBC driver
 
@@ -583,6 +594,18 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
   * **webapps_owner**: webapps folder owner
   * **webapps_group**: webapps folder group
   * **webapps_mode**: webapps folder mode
+
+#### tomcat::agent
+
+* **jar_name**: jar to deploy (required)
+* **agent_name**: agent name, agent will be deployed on **catalina_base**/**agent_name** (required)
+* **source**: file source, must be a puppet resource (incompatible with **file_ln**)
+* **file_ln**: jar already in place, just add a softlink to it (incompatible with **source**)
+* **catalina_base**: (default: /opt/${name})
+* **servicename**: (default: $name)
+* **purge_old**: purge old agent versions (default: false)
+* **ensure**: (default: present)
+* **comment**: commet to add in the setenv file to identify this agent (default: undef)
 
 #### tomcat::driver::postgres
 
