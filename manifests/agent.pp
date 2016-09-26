@@ -78,4 +78,10 @@ define tomcat::agent (
       require => File["${catalina_base}/${name}"],
     }
   }
+
+  concat::fragment{ "${catalina_base}/bin/setenv.sh javaagent ${name} ${jar_name}":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '10',
+    content => template("${module_name}/multi/setenv_javaagent.erb"),
+  }
 }
