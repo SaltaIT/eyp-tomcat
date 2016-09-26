@@ -5,7 +5,7 @@ define tomcat::agent (
                         $file_ln       = undef,
                         $catalina_base = "/opt/${name}",
                         $servicename   = $name,
-                        $purge_old     = true,
+                        $purge_old     = false,
                         $ensure        = 'present',
                         $comment       = undef
                       ) {
@@ -45,7 +45,7 @@ define tomcat::agent (
 
   if($purge_old)
   {
-    exec{ "purge old ${catalina_base} ${jar_name}":
+    exec{ "purge old ${catalina_base} ${agent_name} ${jar_name}":
       command => "ls ${catalina_base}/${name}/${agent_name}/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar' | xargs rm",
       onlyif  => "ls ${catalina_base}/${name}/${agent_name}/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar'",
       notify  => $serviceinstance,
@@ -81,7 +81,7 @@ define tomcat::agent (
     }
   }
 
-  concat::fragment{ "${catalina_base}/bin/setenv.sh javaagent ${name} ${jar_name}":
+  concat::fragment{ "${catalina_base}/bin/setenv.sh javaagent ${agent_name} ${jar_name}":
     target  => "${catalina_base}/bin/setenv.sh",
     order   => '10',
     content => template("${module_name}/multi/setenv_javaagent.erb"),
