@@ -7,6 +7,7 @@ define tomcat::agent (
                         $servicename   = $name,
                         $purge_old     = true,
                         $ensure        = 'present',
+                        $comment       = undef
                       ) {
 
   if ! defined(Class['tomcat'])
