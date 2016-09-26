@@ -1,8 +1,10 @@
 require 'spec_helper_acceptance'
 
 describe 'tomcat agent' do
-
   context 'tomcat agent testing' do
+    it "demo agent" do
+      expect(shell("bash -c 'echo \"import java.lang.instrument.Instrumentation; class TestAgent{ public static void premain(String args, Instrumentation inst) { System.out.println(\"TEST Agent\"); } }\" > /tmp/TestAgent.java'").exit_code).to be_zero
+    end
 
     it 'should work with no errors' do
       pp = <<-EOF
@@ -20,8 +22,11 @@ describe 'tomcat agent' do
         jmx_port => '1114',
         java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
     	}
-
       EOF
+    end
 
+    it "TODO - spec incomplet" do
+      expect(shell("/bin/false").exit_code).to be_zero
+    end
   end
 end
