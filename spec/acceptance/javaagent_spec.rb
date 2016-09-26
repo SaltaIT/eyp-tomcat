@@ -6,6 +6,22 @@ describe 'tomcat agent' do
       expect(shell("bash -c 'echo \"import java.lang.instrument.Instrumentation; class TestAgent{ public static void premain(String args, Instrumentation inst) { System.out.println(\"TEST Agent\"); } }\" > /tmp/TestAgent.java'").exit_code).to be_zero
     end
 
+    it "manifest agent" do
+      expect(shell("bash -c 'echo \"Premain-Class: TestAgent\" > /tmp/manifest.txt'").exit_code).to be_zero
+    end
+
+    it "javac demo agent" do
+      expect(shell("bash -c 'javac /tmp/TestAgent.java'").exit_code).to be_zero
+    end
+
+    it "jar demo agent" do
+      expect(shell("bash -c 'jar cmf /tmp/manifest.txt /tmp/testagent.jar /tmp/TestAgent.class'").exit_code).to be_zero
+    end
+
+    describe file("/tmp/testagent.jar") do
+      it { should be_file }
+    end
+
     it 'should work with no errors' do
       pp = <<-EOF
 
