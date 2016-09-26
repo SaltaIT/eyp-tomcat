@@ -730,7 +730,7 @@ have tests to check both presence and absence of any feature
 
 * rename variables with uppercase letters
 * remove disable_variable_is_lowercase from Rakefile (once variables with uppercase letters are removed)
-* optionally: thread dump before killing it (kill -3)
+* acceptance testing for tomcat::agent
 
 ### Contributing
 
