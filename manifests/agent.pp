@@ -52,7 +52,7 @@ define tomcat::agent (
   }
 
   file { "${catalina_base}/${agent_name}":
-    ensure  => $ensure,
+    ensure  => 'directory',
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
