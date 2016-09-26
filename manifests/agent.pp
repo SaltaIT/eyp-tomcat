@@ -1,5 +1,6 @@
 define tomcat::agent (
                         $jar_name,
+                        $agent_name,
                         $source        = undef,
                         $file_ln       = undef,
                         $catalina_base = "/opt/${name}",
@@ -44,13 +45,13 @@ define tomcat::agent (
   if($purge_old)
   {
     exec{ "purge old ${catalina_base} ${jar_name}":
-      command => "ls ${catalina_base}/${name}/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar' | xargs rm",
-      onlyif  => "ls ${catalina_base}/${name}/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar'",
+      command => "ls ${catalina_base}/${name}/${agent_name}/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar' | xargs rm",
+      onlyif  => "ls ${catalina_base}/${name}/${agent_name}/*jar | grep -v ${jar_name} | grep -E $(echo ${jar_name}.jar | sed 's/^\\(.*\\)-[0-9.]*\\.jar$/\\1/')'-[0-9.]+.jar'",
       notify  => $serviceinstance,
     }
   }
 
-  file { "${catalina_base}/${name}":
+  file { "${catalina_base}/${agent_name}":
     ensure  => $ensure,
     owner   => 'root',
     group   => 'root',
@@ -60,22 +61,22 @@ define tomcat::agent (
 
   if($source!=undef)
   {
-    file { "${catalina_base}/${name}/${jar_name}.jar":
+    file { "${catalina_base}/${agent_name}/${jar_name}.jar":
       ensure  => $ensure,
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
-      require => File["${catalina_base}/${name}"],
+      require => File["${catalina_base}/${agent_name}"],
       source  => $source,
     }
   }
 
   if($file_ln!=undef)
   {
-    file { "${catalina_base}/${name}/${jar_name}.jar":
+    file { "${catalina_base}/${agent_name}/${jar_name}.jar":
       ensure  => 'link',
       target  => $file_ln,
-      require => File["${catalina_base}/${name}"],
+      require => File["${catalina_base}/${agent_name}"],
     }
   }
 
