@@ -1,0 +1,4 @@
+<% if defined?(@comment) -%>
+# <%= @comment %>
+<% end -%>
+export JAVA_OPTS="$JAVA_OPTS -javaagent:<%= @catalina_base %>/<%= @agent_name %>/<%= @jar_name %>.jar"
