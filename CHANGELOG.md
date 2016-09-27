@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.11
+
+* added configurable HTTP Server header (**connector_http_server**)
+
 ## 0.3.10
 
 * Added tomcat::agent

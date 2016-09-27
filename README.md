@@ -571,6 +571,7 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
   * **shutdown_address**: shutdown listen address (default: 127.0.0.1)
   * **ajp_port**: AJP listen port (default: undef)
   * **connector_port**: HTTP connector port (default: 8080)
+  * **connector_http_server**: HTTP server Header (default: undef which adds the default name: **Server: Apache-Coyote/1.1**)
   * **jmx_port**: JMX listen port (default: 8999)
   * **redirectPort**           = '8443',
   * **realms**                 = undef,
