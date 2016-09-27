@@ -31,6 +31,7 @@ describe 'tomcat class' do
         connector_port=>'1111',
         jmx_port => '1114',
         java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
+        connector_http_server => 'LOLserver',
     	}
 
       EOF
@@ -51,6 +52,10 @@ describe 'tomcat class' do
 
     it "catalina log 1111" do
       expect(shell("cat /opt/tomcat-1111/logs/catalina.out").exit_code).to be_zero
+    end
+
+    it "connector_http_server" do
+      expect(shell("curl -I localhost:1111 | greo LOLserver").exit_code).to be_zero
     end
   end
 
