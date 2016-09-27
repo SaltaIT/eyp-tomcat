@@ -41,8 +41,8 @@ describe 'tomcat agent' do
       EOF
     end
 
-    it "TODO - spec incomplet" do
-      expect(shell("/bin/false").exit_code).to be_zero
+    it "check TEST Agent" do
+      expect(shell("grep \"TEST Agent\" /opt/tomcat-1111/logs/catalina.out").exit_code).to be_zero
     end
   end
 end
