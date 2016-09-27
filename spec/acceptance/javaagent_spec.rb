@@ -3,7 +3,7 @@ require 'spec_helper_acceptance'
 describe 'tomcat agent' do
   context 'tomcat agent testing' do
     it "demo agent" do
-      expect(shell("bash -c 'echo \"import java.lang.instrument.Instrumentation; class TestAgent{ public static void premain(String args, Instrumentation inst) { System.out.println(\"TEST Agent\"); } }\" > /tmp/TestAgent.java'").exit_code).to be_zero
+      expect(shell("bash -c 'echo \"import java.lang.instrument.Instrumentation; class TestAgent{ public static void premain(String args, Instrumentation inst) { System.out.println(\"'\"'\"TEST Agent\"'\"'\"); } }\" > /tmp/TestAgent.java'").exit_code).to be_zero
     end
 
     it "manifest agent" do
