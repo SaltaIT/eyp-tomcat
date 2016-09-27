@@ -55,7 +55,7 @@ describe 'tomcat class' do
     end
 
     it "connector_http_server" do
-      expect(shell("curl -I localhost:1111 | greo LOLserver").exit_code).to be_zero
+      expect(shell("curl -I localhost:1111 | grep LOLserver").exit_code).to be_zero
     end
   end
 
