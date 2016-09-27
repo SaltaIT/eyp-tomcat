@@ -4,7 +4,7 @@ require 'spec_helper_acceptance'
 
 describe 'tomcat class' do
 
-  context 'simple port testing' do
+  context 'changigh port' do
     # Using puppet_apply as a helper
 
     it "kill java" do
