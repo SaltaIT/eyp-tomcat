@@ -36,6 +36,7 @@ describe 'tomcat context' do
         sessionCookiePath => '/',
         antiJARLocking => true,
         antiResourceLocking => true,
+        session_cookie_name => 'INDEPENDENCIA',
       }
 
       EOF
@@ -49,9 +50,14 @@ describe 'tomcat context' do
       it { should be_file }
       its(:content) { should match 'sessionCookiePath="/"' }
       its(:content) { should match 'antiJARLocking="true"' }
+      its(:content) { should match 'sessionCookieName="INDEPENDENCIA"' }
       its(:content) { should match 'antiResourceLocking="true"' }
       its(:content) { should match '<WatchedResource>WEB-INF/web.xml</WatchedResource>' }
       its(:content) { should match '<Manager pathname="" />' }
+    end
+
+    it "session cookie name" do
+      expect(shell("curl -u tomcat:lol localhost:8080/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
     end
 
   end
