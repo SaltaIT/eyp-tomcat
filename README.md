@@ -638,6 +638,8 @@ Install postgres driver for a given tomcat instance:
 * **antiResourceLocking** = false,
 * **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
 * **servicename**: tomcat's servicename (default: resource's name)
+* **path**: (default: undef)
+* **session_cookie_name**: change default session cookie name (default: undef, **JSESSIONID**)
 
 #### tomcat::jaas
 

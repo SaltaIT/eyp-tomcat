@@ -1,12 +1,16 @@
 # CHANGELOG
 
+## 0.3.12
+
+* added **path** and **session_cookie_name** to **tomcat::context**
+
 ## 0.3.11
 
-* added configurable HTTP Server header (**connector_http_server**)
+* added configurable HTTP Server header (**connector_http_server**) to **tomcat::instance**
 
 ## 0.3.10
 
-* Added tomcat::agent
+* Added **tomcat::agent**
 
 ## 0.3.9
 
