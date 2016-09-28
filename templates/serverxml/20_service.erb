@@ -8,6 +8,9 @@
     <Connector port="<%= @connector_port %>" protocol="HTTP/1.1"
                connectionTimeout="<%= @connectionTimeout %>"
                executor="tomcatThreadPool"
+               <%- if defined?(@connector_http_server) -%>
+               server="<%= @connector_http_server %>"
+               <%- end -%>
                redirectPort="<%= @redirectPort %>" />
   <% end %>
 
