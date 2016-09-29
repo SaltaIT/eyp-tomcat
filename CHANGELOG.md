@@ -1,8 +1,12 @@
 # CHANGELOG
 
+## 0.3.16
+
+* *bugfix*: avoid service notifications if manage_service=false
+
 ## 0.3.15
 
-* **HOTFIX**: honor userdatabase setting
+* *bugfix*: honor userdatabase setting
 
 ## 0.3.12
 
