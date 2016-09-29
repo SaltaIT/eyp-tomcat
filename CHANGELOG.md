@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.3.14
+## 0.3.15
 
 * **HOTFIX**: honor userdatabase setting
 
