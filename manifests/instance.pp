@@ -390,6 +390,10 @@ define tomcat::instance (
       $service_to_notify=undef
     }
   }
+  else
+  {
+    $service_to_notify=undef
+  }
 
   if($catalina_rotate!=undef)
   {
