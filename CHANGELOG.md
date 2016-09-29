@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.14
+
+* **HOTFIX**: honor userdatabase setting
+
 ## 0.3.12
 
 * added **path** and **session_cookie_name** to **tomcat::context**
