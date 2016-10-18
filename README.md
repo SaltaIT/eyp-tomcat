@@ -1,6 +1,4 @@
-# tomcat
-
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+# tomcat ![status ready](https://img.shields.io/badge/status-ready-brightgreen.svg)
 
 **NTTCom-MS/eyp-tomcat**: [![Build Status](https://travis-ci.org/NTTCom-MS/eyp-tomcat.png?branch=master)](https://travis-ci.org/NTTCom-MS/eyp-tomcat)
 
@@ -734,6 +732,7 @@ have tests to check both presence and absence of any feature
 * rename variables with uppercase letters
 * remove disable_variable_is_lowercase from Rakefile (once variables with uppercase letters are removed)
 * acceptance testing for tomcat::agent
+* acceptance testing manage_service=false
 
 ### Contributing
 

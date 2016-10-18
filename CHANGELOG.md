@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.3.16
+
+* *bugfix*: avoid service notifications if manage_service=false
+
+## 0.3.15
+
+* *bugfix*: honor userdatabase setting
+
 ## 0.3.12
 
 * added **path** and **session_cookie_name** to **tomcat::context**
@@ -23,3 +31,11 @@ Notice: /Stage[main]/Main/Node[ldapm]/Tomcat::Instance[tomcat-8081]/File[/etc/in
 Info: /Stage[main]/Main/Node[ldapm]/Tomcat::Instance[tomcat-8081]/File[/etc/init.d/tomcat-8081]: Scheduling refresh of Service[tomcat-8081]
 Notice: /Stage[main]/Main/Node[ldapm]/Tomcat::Instance[tomcat-8081]/Service[tomcat-8081]: Triggered 'refresh' from 1 events
 ```
+
+## (...)
+
+## 0.3.0
+
+* **INCOMPATIBLE CHANGE**: variable rename:
+  * **LockOutRealm to lockoutrealm**
+  * **UserDatabase** to **userdatabase**
