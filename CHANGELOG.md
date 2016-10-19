@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.17
+
+* *bugfix*: added notification on systemd changes
+
 ## 0.3.16
 
 * *bugfix*: avoid service notifications if manage_service=false
