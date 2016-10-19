@@ -8,8 +8,31 @@
     <Connector port="<%= @connector_port %>" protocol="HTTP/1.1"
                connectionTimeout="<%= @connectionTimeout %>"
                executor="tomcatThreadPool"
+               enableLookups="<%= @connector_http_enable_lookups %>"
+               disableUploadTimeout="<%= @connector_http_disable_upload_timeout %>"
                <%- if defined?(@connector_http_server) -%>
                server="<%= @connector_http_server %>"
+               <%- end -%>
+               <%- if defined?(@connector_http_max_header_size) -%>
+               maxHttpHeaderSize="<%= @connector_http_max_header_size %>"
+               <%- end -%>
+               <%- if defined?(@connector_http_max_threads) -%>
+               maxThreads="<%= @connector_http_max_threads %>"
+               <%- end -%>
+               <%- if defined?(@connector_http_min_spare_threads) -%>
+               minSpareThreads="<%= @connector_http_min_spare_threads %>"
+               <%- end -%>
+               <%- if defined?(@connector_http_max_spare_threads) -%>
+               maxSpareThreads="<%= @connector_http_max_spare_threads %>"
+               <%- end -%>
+               <%- if defined?(@connector_http_accept_count) -%>
+               acceptCount="<%= @connector_http_accept_count %>"
+               <%- end -%>
+               <%- if defined?(@connector_http_connection_timeout) -%>
+               connectionTimeout="<%= @connector_http_connection_timeout %>"
+               <%- end -%>
+               <%- if defined?(@connector_http_uri_encoding) -%>
+               URIEncoding="<%= @connector_http_uri_encoding %>"
                <%- end -%>
                redirectPort="<%= @redirectPort %>" />
   <% end %>
