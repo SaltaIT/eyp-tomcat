@@ -354,23 +354,6 @@ define tomcat::instance (
     notify  => $service_to_notify,
   }
 
-  if($tomcat::params::systemd)
-  {
-    include systemd
-
-    systemd::service { $instancename:
-      execstart => "/etc/init.d/${instancename} start",
-      execstop  => "/etc/init.d/${instancename} stop",
-      require   => File["/etc/init.d/${instancename}"],
-      before    => $service_to_notify,
-      notify    => $service_to_notify,
-      forking   => true,
-      restart   => 'no',
-      user      => 'tomcat',
-      group     => 'tomcat',
-    }
-  }
-
   if( $is_docker_container==false or
       $manage_docker_service)
   {
@@ -393,6 +376,23 @@ define tomcat::instance (
   else
   {
     $service_to_notify=undef
+  }
+
+  if($tomcat::params::systemd)
+  {
+    include systemd
+
+    systemd::service { $instancename:
+      execstart => "/etc/init.d/${instancename} start",
+      execstop  => "/etc/init.d/${instancename} stop",
+      require   => File["/etc/init.d/${instancename}"],
+      before    => $service_to_notify,
+      notify    => $service_to_notify,
+      forking   => true,
+      restart   => 'no',
+      user      => 'tomcat',
+      group     => 'tomcat',
+    }
   }
 
   if($catalina_rotate!=undef)
