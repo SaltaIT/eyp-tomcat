@@ -1,4 +1,4 @@
-# tomcat ![status ready](https://img.shields.io/badge/status-ready-brightgreen.svg)
+# tomcat ![status ready](https://img.shields.io/badge/status-ready-brightgreen.svg)s
 
 **NTTCom-MS/eyp-tomcat**: [![Build Status](https://travis-ci.org/NTTCom-MS/eyp-tomcat.png?branch=master)](https://travis-ci.org/NTTCom-MS/eyp-tomcat)
 
@@ -109,8 +109,8 @@ tomcatinstances:
     values:
       - org.apache.catalina.authenticator.SingleSignOn
     errorReportValveClass: es.systemadmin.es.sso.tomcat.SSOErrorValve
-    LockOutRealm: false
-    UserDatabase: false
+    lockoutrealm: false
+    userdatabase: false
     extra_vars:
       CONNECTOR_PORT:
         8080
@@ -128,8 +128,8 @@ tomcatinstances:
     values:
       - org.apache.catalina.authenticator.SingleSignOn
     errorReportValveClass: es.systemadmin.es.sso.tomcat.SSOErrorValve
-    LockOutRealm: false
-    UserDatabase: false
+    lockoutrealm: false
+    userdatabase: false
     extra_vars:
       CONNECTOR_PORT:
         8081
@@ -147,8 +147,8 @@ tomcatinstances:
     values:
       - org.apache.catalina.authenticator.SingleSignOn
     errorReportValveClass: es.systemadmin.es.sso.tomcat.SSOErrorValve
-    LockOutRealm: false
-    UserDatabase: false
+    lockoutrealm: false
+    userdatabase: false
     extra_vars:
       CONNECTOR_PORT:
         8082
@@ -166,8 +166,8 @@ tomcatinstances:
     values:
       - org.apache.catalina.authenticator.SingleSignOn
     errorReportValveClass: es.systemadmin.es.sso.tomcat.SSOErrorValve
-    LockOutRealm: false
-    UserDatabase: false
+    lockoutrealm: false
+    userdatabase: false
     rmi_server_hostname: "%{::ipaddress_eth0}"
 ```
 
