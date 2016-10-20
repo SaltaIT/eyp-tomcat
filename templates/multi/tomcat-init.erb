@@ -30,6 +30,11 @@ else
   EXECSTART="/bin/su -p -s /bin/bash $TOMCAT_USER"
 fi
 
+configtest() {
+  $EXECSTART $CATALINA_BASE/bin/configtest.sh
+  exit $?
+}
+
 #aqui kill -3 thread dump
 threadump() {
   pid=$( cat $CATALINA_PID 2>/dev/null )

@@ -288,6 +288,15 @@ define tomcat::instance (
     content => template("${module_name}/multi/startup.erb"),
   }
 
+  file { "${catalina_base}/bin/configtest.sh":
+    ensure  => 'present',
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
+    mode    => '0755',
+    require => File["${catalina_base}/bin"],
+    content => template("${module_name}/multi/configtest.erb"),
+  }
+
   file { "${catalina_base}/bin/shutdown.sh":
     ensure  => 'present',
     owner   => $tomcat_user,
@@ -370,6 +379,7 @@ define tomcat::instance (
                         "${catalina_base}/webapps",
                         "${catalina_base}/bin/startup.sh",
                         "${catalina_base}/bin/shutdown.sh"
+                        "${catalina_base}/bin/configtest.sh"
                       ] ],
                   Concat[ [ "${catalina_base}/bin/setenv.sh",
                             "${catalina_base}/conf/server.xml" ] ] ],
