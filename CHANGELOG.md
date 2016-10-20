@@ -13,6 +13,8 @@
   * connector_http_connection_timeout
   * connector_http_disable_upload_timeout
   * connector_http_uri_encoding
+  * xml_validation
+  * xml_namespace_aware
 
 ## 0.3.17
 

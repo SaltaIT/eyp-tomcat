@@ -68,7 +68,10 @@
 <% end -%>
 
       <Host name="localhost"  appBase="webapps"
-            unpackWARs="true" autoDeploy="true" <% if defined?(@errorReportValveClass) %>errorReportValveClass="<%= @errorReportValveClass %>" <% end %>>
+            unpackWARs="true" autoDeploy="true"
+            <% if defined?(@xml_validation) -%>xmlValidation="<%= @xml_validation %>"<% end %>
+            <% if defined?(@xml_namespace_aware) -%>xmlNamespaceAware="<%= @xml_namespace_aware %>"<% end %>
+            <% if defined?(@errorReportValveClass) -%>errorReportValveClass="<%= @errorReportValveClass %>" <% end %>>
 
         <!-- SingleSignOn valve, share authentication between web applications
              Documentation at: /docs/config/valve.html -->

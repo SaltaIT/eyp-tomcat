@@ -36,7 +36,7 @@ define tomcat::instance (
                           $connector_http_accept_count           = undef,
                           $connector_http_connection_timeout     = undef,
                           $connector_http_disable_upload_timeout = true,
-                          $connector_http_uri_encoding          = undef,
+                          $connector_http_uri_encoding           = undef,
                           $jmx_port                              = '8999',
                           $redirectPort                          = '8443',
                           $realms                                = undef,
@@ -64,6 +64,8 @@ define tomcat::instance (
                           $manage_service                        = true,
                           $manage_docker_service                 = true,
                           $enable                                = true,
+                          $xml_validation                        = undef,
+                          $xml_namespace_aware                   = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
