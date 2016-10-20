@@ -3,6 +3,7 @@
 ## 0.3.18
 
 * serverxml concat reorder
+* tomcat configtest
 * added the following tomcat::instance options **WARNING** server.xml it's going to change, service will be reloaded unless **manage_service** is set to **false**
   * connector_http_max_header_size
   * connector_http_max_threads
