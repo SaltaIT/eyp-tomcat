@@ -5,8 +5,8 @@
             maxThreads="<%= @maxThreads %>" minSpareThreads="<%= @minSpareThreads %>"/>
 
   <% if defined?(@connector_port) %>
-    <Connector port="<%= @connector_port %>" protocol="HTTP/1.1"
-               connectionTimeout="<%= @connectionTimeout %>"
+    <Connector port="<%= @connector_port %>"
+               protocol="HTTP/1.1"
                executor="tomcatThreadPool"
                enableLookups="<%= @connector_http_enable_lookups %>"
                disableUploadTimeout="<%= @connector_http_disable_upload_timeout %>"

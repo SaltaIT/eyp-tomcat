@@ -34,7 +34,7 @@ define tomcat::instance (
                           $connector_http_max_spare_threads      = undef,
                           $connector_http_enable_lookups         = false,
                           $connector_http_accept_count           = undef,
-                          $connector_http_connection_timeout     = undef,
+                          $connector_http_connection_timeout     = '20000',
                           $connector_http_disable_upload_timeout = true,
                           $connector_http_uri_encoding           = undef,
                           $jmx_port                              = '8999',

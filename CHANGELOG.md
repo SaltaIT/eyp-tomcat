@@ -3,7 +3,7 @@
 ## 0.3.18
 
 * serverxml concat reorder
-* tomcat configtest
+* tomcat configtest **WARNING** init script it's going to change, service will be reloaded unless **manage_service** is set to **false**
 * added the following tomcat::instance options **WARNING** server.xml it's going to change, service will be reloaded unless **manage_service** is set to **false**
   * connector_http_max_header_size
   * connector_http_max_threads
@@ -11,7 +11,7 @@
   * connector_http_max_spare_threads
   * connector_http_enable_lookups
   * connector_http_accept_count
-  * connector_http_connection_timeout
+  * **WARNING** renamed **connectionTimeout** to **connector_http_connection_timeout**
   * connector_http_disable_upload_timeout
   * connector_http_uri_encoding
   * xml_validation
