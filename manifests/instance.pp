@@ -66,10 +66,6 @@ define tomcat::instance (
                           $enable                                = true,
                           $xml_validation                        = undef,
                           $xml_namespace_aware                   = undef,
-                          $include_external_resources            = false,
-                          $include_external_jndi                 = false,
-                          $include_external_root                 = false,
-                          $include_external_dso                  = false,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -217,13 +213,13 @@ define tomcat::instance (
   concat::fragment{ "${catalina_base}/conf/server.xml server":
     target  => "${catalina_base}/conf/server.xml",
     order   => '01',
-    content => template("${module_name}/serverxml/01_server.erb"),
+    content => template("${module_name}/serverxml/05_server.erb"),
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml listeners":
     target  => "${catalina_base}/conf/server.xml",
     order   => '02',
-    content => template("${module_name}/serverxml/02_listeners.erb"),
+    content => template("${module_name}/serverxml/06_listeners.erb"),
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml service":
