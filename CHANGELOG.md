@@ -2,6 +2,11 @@
 
 ## 0.3.18
 
+* support include files for server.xml:
+  * include_external_jdbc
+  * include_external_jndi
+  * include_external_root
+  * include_external_dso
 * tomcat::context changed to concat
 * serverxml concat reorder
 * modified startup, shutdown and configtest scripts to be able to work in a **CATALINA_HOME**==**CATALINA_BASE** environments

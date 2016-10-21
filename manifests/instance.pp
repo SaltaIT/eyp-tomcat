@@ -66,6 +66,10 @@ define tomcat::instance (
                           $enable                                = true,
                           $xml_validation                        = undef,
                           $xml_namespace_aware                   = undef,
+                          $include_external_resources            = false,
+                          $include_external_jndi                 = false,
+                          $include_external_root                 = false,
+                          $include_external_dso                  = false,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
