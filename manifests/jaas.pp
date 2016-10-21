@@ -1,9 +1,15 @@
 define tomcat::jaas (
-                            $app,
-                            $provider,
-                            $filter,
+                            $type          = undef,
+                            #LDAP zookeeper
+                            $app           = undef,
+                            $provider      = undef,
+                            $filter        = undef,
                             $username      = 'tomcat',
                             $password      = 'tomcat',
+                            #KRB5
+                            $realm         = undef,
+                            $dc            = undef,
+                            #altres
                             $servicename   = $name,
                             $catalina_base = "/opt/${name}",
                           ) {

@@ -7,6 +7,15 @@ define tomcat::krb5 (
   #
   validate_array($kdc)
 
+  if($servicename!=undef)
+  {
+    $serviceinstance=Service[$servicename]
+  }
+  else
+  {
+    $serviceinstance=undef
+  }
+
   file { "${catalina_base}/conf/krb5.conf":
     ensure  => 'present',
     owner   => 'root',

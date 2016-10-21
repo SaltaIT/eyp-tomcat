@@ -1,3 +1,25 @@
+<%- if defined?(@realm) -%>
+com.sun.security.jgss.krb5.initiate {
+    com.sun.security.auth.module.Krb5LoginModule required
+    doNotPrompt=true
+    principal="HTTP/<%= @dc %>@<%= @realm %>"
+    useKeyTab=true
+    keyTab="../conf/krb5.keytab"
+    storeKey=true
+    debug=false;
+};
+
+com.sun.security.jgss.krb5.accept {
+    com.sun.security.auth.module.Krb5LoginModule required
+    doNotPrompt=true
+    principal="HTTP/<%= @dc %>@<%= @realm %>"
+    useKeyTab=true
+    keyTab="../conf/krb5.keytab"
+    storeKey=true
+    isInitiator=false
+    debug=false;
+};
+<%- else -%>
 <%= @app %> {
     com.sun.security.auth.module.LdapLoginModule SUFFICIENT
         userProvider="<%= @provider %>"
@@ -12,3 +34,4 @@ Client {
         username="<%= @username %>"
         password="<%= @password %>";
 };
+<%- end -%>
