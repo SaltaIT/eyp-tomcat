@@ -1,0 +1,22 @@
+#
+# puppet managed file
+#
+
+[libdefaults]
+	default_realm = <%= @realm %>
+
+	default_tkt_enctypes = aes128-cts rc4-hmac des3-cbc-sha1 des-cbc-crc
+	default_tgs_enctypes = aes128-cts rc4-hmac des3-cbc-sha1 des-cbc-crc
+	permitted_enctypes   = aes128-cts rc4-hmac des3-cbc-sha1 des-cbc-crc
+
+[realms]
+	LIFECAPNET.COM  = {
+    <%- @kdc.each do | eachkdc | -%>
+		kdc = <%= eachkdc %>
+    <%- end -%>
+		default_domain = <%= @realm %>
+}
+
+[domain_realm]
+	.<%= @realm %> = <%= @realm %>
+	<%= @realm %> = <%= @realm %>

@@ -2,6 +2,7 @@
 
 ## 0.3.18
 
+* tomcat::context changed to concat
 * serverxml concat reorder
 * modified startup, shutdown and configtest scripts to be able to work in a **CATALINA_HOME**==**CATALINA_BASE** environments
 * tomcat configtest **WARNING** init script it's going to change, service will be reloaded unless **manage_service** is set to **false**

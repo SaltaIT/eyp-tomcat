@@ -23,14 +23,26 @@ define tomcat::context (
     $serviceinstance=Service[$servicename]
   }
 
-  file { "${catalina_base}/conf/context.xml":
+  concat { "${catalina_base}/conf/context.xml":
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     require => File["${catalina_base}/conf"],
     notify  => $serviceinstance,
+  }
+
+  concat::fragment{ "${catalina_base}/conf/context.xml header":
+    target  => "${catalina_base}/conf/context.xml",
+    order   => '00',
     content => template("${module_name}/conf/context.erb"),
   }
+  
+  concat::fragment{ "${catalina_base}/conf/server.xml fi context":
+    target  => "${catalina_base}/conf/context.xml",
+    order   => '99',
+    content => "</Context>\n",
+  }
+
 
 }
