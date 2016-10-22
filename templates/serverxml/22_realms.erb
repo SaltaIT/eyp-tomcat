@@ -1,7 +1,5 @@
 
-<%- if @combinedrealm -%>
       <Realm className="org.apache.catalina.realm.CombinedRealm" >
-<%- end -%>
 <% if @lockoutrealm -%>
          <!-- Use the LockOutRealm to prevent brute-force attack -->
          <Realm className="org.apache.catalina.realm.LockOutRealm">
@@ -19,6 +17,3 @@
 <% if @lockoutrealm -%>
         </Realm>
 <% end -%>
-<%- if @combinedrealm -%>
-      </Realm>
-<%- end -%>

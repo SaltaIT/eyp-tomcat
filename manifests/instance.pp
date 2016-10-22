@@ -52,7 +52,6 @@ define tomcat::instance (
                           $maxThreads                            = '150',
                           $minSpareThreads                       = '4',
                           $connectionTimeout                     = '20000',
-                          $combinedrealm                         =  false,
                           $lockoutrealm                          = true,
                           $userdatabase                          = true,
                           $extra_vars                            = undef,
