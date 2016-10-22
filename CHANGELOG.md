@@ -12,7 +12,7 @@
   * changed to concat pattern
   * allow inline context in Host
   * **INCOMPABLE CHANGE** variable rename:
-    * **watchedResource** to **watched_resource**, changed default value from **WEB-INF/web.xml** to **undef**
+    * **watchedResource** to **watched_resource**
     * **antiJARLocking** to **anti_jar_locking**, changed default value from **false** to **undef**
     * **sessionCookiePath** to **session_cookie_path**
     * **antiResourceLocking** to **anti_resource_locking**, changed default value from **false** to **undef**
