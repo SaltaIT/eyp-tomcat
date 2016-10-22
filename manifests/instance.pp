@@ -1,13 +1,14 @@
 #
 # concat server.xml
 # 00 - init xml
-# 01 - server tag
-# 02 - listeners
+# 05 - server tag
+# 06 - listeners
 # 10 - globalnaming
 # 11 - userdb
 # 11 - resource pools
 # 15 - end globalnaming
 # 20 - service tag
+# 30 - end service
 # 99 - end server
 #
 define tomcat::instance (
@@ -226,6 +227,12 @@ define tomcat::instance (
     target  => "${catalina_base}/conf/server.xml",
     order   => '20',
     content => template("${module_name}/serverxml/20_service.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml end service":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '30',
+    content => template("${module_name}/serverxml/30_endservice.erb"),
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml server end":

@@ -1,6 +1,6 @@
 define tomcat::context (
                             $sessionCookiePath   = undef,
-                            $session_cookie_name  = undef,
+                            $session_cookie_name = undef,
                             $watchedResource     = 'WEB-INF/web.xml',
                             $manager             = '',
                             $antiJARLocking      = false,
@@ -8,6 +8,7 @@ define tomcat::context (
                             $servicename         = $name,
                             $catalina_base       = "/opt/${name}",
                             $path                = undef,
+                            $inline              = false,
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -23,26 +24,31 @@ define tomcat::context (
     $serviceinstance=Service[$servicename]
   }
 
-  concat { "${catalina_base}/conf/context.xml":
-    ensure  => 'present',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => File["${catalina_base}/conf"],
-    notify  => $serviceinstance,
+  if($inline)
+  {
+    
   }
+  else
+  {
+    concat { "${catalina_base}/conf/context.xml":
+      ensure  => 'present',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      require => File["${catalina_base}/conf"],
+      notify  => $serviceinstance,
+    }
 
-  concat::fragment{ "${catalina_base}/conf/context.xml header":
-    target  => "${catalina_base}/conf/context.xml",
-    order   => '00',
-    content => template("${module_name}/conf/context.erb"),
+    concat::fragment{ "${catalina_base}/conf/context.xml header":
+      target  => "${catalina_base}/conf/context.xml",
+      order   => '00',
+      content => template("${module_name}/conf/context.erb"),
+    }
+
+    concat::fragment{ "${catalina_base}/conf/server.xml fi context":
+      target  => "${catalina_base}/conf/context.xml",
+      order   => '99',
+      content => "</Context>\n",
+    }
   }
-  
-  concat::fragment{ "${catalina_base}/conf/server.xml fi context":
-    target  => "${catalina_base}/conf/context.xml",
-    order   => '99',
-    content => "</Context>\n",
-  }
-
-
 }
