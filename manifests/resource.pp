@@ -12,6 +12,7 @@ define tomcat::resource (
                           $max_active                      = undef,
                           $max_idle                        = undef,
                           $min_idle                        = undef,
+                          $max_wait                        = undef,
                           $validation_query                = undef,
                           $min_evictable_idletimemillis    = undef,
                           $time_between_evictionrunsmillis = undef,

@@ -28,6 +28,9 @@
                  <%- if defined?(@min_idle) -%>
                  minIdle="<%= @min_idle %>"
                  <%- end -%>
+                 <%- if defined?(@max_wait) -%>
+                 minWait="<%= @max_wait %>"
+                 <%- end -%>
                  <%- if defined?(@validation_query) -%>
                  validationQuery="<%= @validation_query %>"
                  <%- end -%>

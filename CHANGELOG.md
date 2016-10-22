@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ## 0.4.1
-
+* **tomcat::resource** added max_wait
 * **tomcat::context** changed to concat
 * addded **tomcat::loggingproperties** (from source file)
 * serverxml concat reorder
