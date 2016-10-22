@@ -9,9 +9,11 @@
 # 15 - end globalnaming
 # 20 - connectors
 # 21 - engine
-# 22 - realms
-# 23 - host
-# 25 - context
+# 22 - realms - combined realm and optionally userdatabase wiht lockoutrealm
+# 23 - **other realms**
+# 24 - end realms
+# 25 - host
+# 28 - context
 # 30 - end service
 # 99 - end server
 #
@@ -50,6 +52,7 @@ define tomcat::instance (
                           $maxThreads                            = '150',
                           $minSpareThreads                       = '4',
                           $connectionTimeout                     = '20000',
+                          $combinedrealm                         =  false,
                           $lockoutrealm                          = true,
                           $userdatabase                          = true,
                           $extra_vars                            = undef,
@@ -248,7 +251,7 @@ define tomcat::instance (
   concat::fragment{ "${catalina_base}/conf/server.xml host":
     target  => "${catalina_base}/conf/server.xml",
     order   => '20',
-    content => template("${module_name}/serverxml/24_host.erb"),
+    content => template("${module_name}/serverxml/25_host.erb"),
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml end service":

@@ -1,19 +1,20 @@
 
+<% if @combinedrealm -%>
+      <Realm className="org.apache.catalina.realm.CombinedRealm" >
 <% if @lockoutrealm -%>
-      <!-- Use the LockOutRealm to prevent attempts to guess user passwords
-           via a brute-force attack -->
-      <Realm className="org.apache.catalina.realm.LockOutRealm">
+         <!-- Use the LockOutRealm to prevent brute-force attack -->
+         <Realm className="org.apache.catalina.realm.LockOutRealm">
 <% end -%>
   <%- if @userdatabase -%>
   <%- if @pwdigest == 'plaintext' -%>
-        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-               resourceName="UserDatabase"/>
+          <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+                 resourceName="UserDatabase"/>
   <%- else -%>
-        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-               resourceName="UserDatabase"
-               digest="sha"/>
+          <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+                 resourceName="UserDatabase"
+                 digest="sha"/>
   <%- end -%>
   <%- end -%>
 <% if @lockoutrealm -%>
-      </Realm>
+        </Realm>
 <% end -%>
