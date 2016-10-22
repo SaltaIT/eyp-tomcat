@@ -1,15 +1,18 @@
 # CHANGELOG
 
 ## 0.4.1
+
+Major release with **incompatible changes**, please review it carefully:
+
 * **tomcat::resource** added max_wait
 * **tomcat::context**:
   * changed to concat
   * allow inline context in Host
   * **INCOMPABLE CHANGE** variable rename:
-    * watchedResource to watched_resource, changed default value from **WEB-INF/web.xml** to **undef**
-    * **antiJARLocking** to **anti_jar_locking**, changed default value from false to undef
+    * **watchedResource** to **watched_resource**, changed default value from **WEB-INF/web.xml** to **undef**
+    * **antiJARLocking** to **anti_jar_locking**, changed default value from **false** to **undef**
     * **sessionCookiePath** to **session_cookie_path**
-    * **antiResourceLocking** to **anti_resource_locking**, changed default value from false to undef
+    * **antiResourceLocking** to **anti_resource_locking**, changed default value from **false** to **undef**
 * addded **tomcat::loggingproperties** (from source file)
 * serverxml concat reorder
 * modified startup, shutdown and configtest scripts to be able to work in a **CATALINA_HOME**==**CATALINA_BASE** environments

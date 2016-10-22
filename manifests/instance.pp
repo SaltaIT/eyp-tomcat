@@ -7,8 +7,11 @@
 # 11 - userdb
 # 11 - resource pools
 # 15 - end globalnaming
-# 20 - service tag
-# 22 - context
+# 20 - connectors
+# 21 - engine
+# 22 - realms
+# 23 - host
+# 25 - context
 # 30 - end service
 # 99 - end server
 #
@@ -224,10 +227,28 @@ define tomcat::instance (
     content => template("${module_name}/serverxml/06_listeners.erb"),
   }
 
-  concat::fragment{ "${catalina_base}/conf/server.xml service":
+  concat::fragment{ "${catalina_base}/conf/server.xml connectors":
     target  => "${catalina_base}/conf/server.xml",
     order   => '20',
-    content => template("${module_name}/serverxml/20_service.erb"),
+    content => template("${module_name}/serverxml/20_connectors.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml engine":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '20',
+    content => template("${module_name}/serverxml/21_engine.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml realms":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '20',
+    content => template("${module_name}/serverxml/22_realms.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml host":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '20',
+    content => template("${module_name}/serverxml/24_host.erb"),
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml end service":
