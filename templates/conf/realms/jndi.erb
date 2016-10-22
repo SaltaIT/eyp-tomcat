@@ -1,0 +1,23 @@
+<Realm className="org.apache.catalina.realm.JNDIRealm"
+	connectionURL="<%= @connection_url %>"
+  <%- if defined?(@alternate_url) -%>
+	alternateURL="<%= @alternate_url %>"
+  <%- end -%>
+
+	connectionName="<%= @connection_name %>"
+	connectionPassword="<%= @connection_password %>"
+  <%- if defined?(@referrals) -%>
+	referrals="<%= @referrals %>"
+  <%- end -%>
+
+	userBase="<%= @user_base %>"
+	userSearch="<%= @user_search %>"
+	userSubtree="<%= @user_subtree %>"
+
+	roleBase="<%= @role_base %>"
+	roleSubtree="<%= @role_subtree %>"
+	roleName="<%= @role_name %>"
+	roleSearch="<%= @role_search %>"
+	roleNested="<%= @role_nested %>"
+	userRoleName="<%= @user_role_name %>"
+/>
