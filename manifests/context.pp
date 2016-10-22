@@ -9,6 +9,8 @@ define tomcat::context (
                             $catalina_base       = "/opt/${name}",
                             $path                = undef,
                             $inline              = false,
+                            $docbase             = undef,
+                            $reloadable          = undef,
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -26,7 +28,11 @@ define tomcat::context (
 
   if($inline)
   {
-    
+    concat::fragment{ "${catalina_base}/conf/server.xml resource ${resource_type} ${resource_name}":
+      target  => "${catalina_base}/conf/server.xml",
+      order   => '11',
+      content => template("${module_name}/serverxml/11_resource.erb"),
+    }
   }
   else
   {

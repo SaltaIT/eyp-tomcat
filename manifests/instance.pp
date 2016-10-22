@@ -8,6 +8,7 @@
 # 11 - resource pools
 # 15 - end globalnaming
 # 20 - service tag
+# 22 - context
 # 30 - end service
 # 99 - end server
 #

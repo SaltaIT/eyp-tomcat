@@ -2,7 +2,9 @@
 
 ## 0.4.1
 * **tomcat::resource** added max_wait
-* **tomcat::context** changed to concat
+* **tomcat::context**:
+  * changed to concat
+  * allow inline context in Host
 * addded **tomcat::loggingproperties** (from source file)
 * serverxml concat reorder
 * modified startup, shutdown and configtest scripts to be able to work in a **CATALINA_HOME**==**CATALINA_BASE** environments
