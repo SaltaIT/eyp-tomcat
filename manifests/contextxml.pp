@@ -1,4 +1,4 @@
-define tomcat::context (
+define tomcat::contextxml (
                             $session_cookie_path   = undef,
                             $session_cookie_name   = undef,
                             $watched_resource      = 'WEB-INF/web.xml',
