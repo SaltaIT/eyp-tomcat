@@ -1,16 +1,16 @@
 define tomcat::context (
-                            $sessionCookiePath   = undef,
-                            $session_cookie_name = undef,
-                            $watchedResource     = 'WEB-INF/web.xml',
-                            $manager             = '',
-                            $antiJARLocking      = false,
-                            $antiResourceLocking = false,
-                            $servicename         = $name,
-                            $catalina_base       = "/opt/${name}",
-                            $path                = undef,
-                            $inline              = false,
-                            $docbase             = undef,
-                            $reloadable          = undef,
+                            $session_cookie_path   = undef,
+                            $session_cookie_name   = undef,
+                            $watched_resource      = undef,
+                            $manager               = '',
+                            $anti_jar_locking      = undef,
+                            $anti_resource_locking = undef,
+                            $servicename           = $name,
+                            $catalina_base         = "/opt/${name}",
+                            $path                  = undef,
+                            $inline                = false,
+                            $docbase               = undef,
+                            $reloadable            = undef,
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -28,10 +28,10 @@ define tomcat::context (
 
   if($inline)
   {
-    concat::fragment{ "${catalina_base}/conf/server.xml resource ${resource_type} ${resource_name}":
+    concat::fragment{ "${catalina_base}/conf/server.xml context ${path}":
       target  => "${catalina_base}/conf/server.xml",
-      order   => '11',
-      content => template("${module_name}/serverxml/11_resource.erb"),
+      order   => '21',
+      content => template("${module_name}/conf/context.erb"),
     }
   }
   else
