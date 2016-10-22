@@ -2,8 +2,8 @@
 
 ## 0.4.1
 
-* support include files for server.xml
-* tomcat::context changed to concat
+* **tomcat::context** changed to concat
+* addded **tomcat::loggingproperties** (from source file)
 * serverxml concat reorder
 * modified startup, shutdown and configtest scripts to be able to work in a **CATALINA_HOME**==**CATALINA_BASE** environments
 * tomcat configtest **WARNING** init script it's going to change, service will be reloaded unless **manage_service** is set to **false**
