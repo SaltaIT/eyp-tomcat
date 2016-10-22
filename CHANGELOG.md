@@ -8,9 +8,8 @@
 * **server.xml** concat rewrite - it's going to change due to this, service will be restarted unless **manage_service** is set to **false**
 * **tomcat::resource** added max_wait
 * added **tomcat::realm::jndi**
-* **tomcat::context**:
-  * changed to concat pattern
-  * allow inline context in Host
+* added **tomcat::context** for **server.xml** context definition
+* **tomcat::context** renamed to **tomcat::contextxml**:
   * **INCOMPABLE CHANGE** variable rename:
     * **watchedResource** to **watched_resource**
     * **antiJARLocking** to **anti_jar_locking**, changed default value from **false** to **undef**

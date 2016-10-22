@@ -5,7 +5,7 @@
   <% if defined?(@session_cookie_path) %>sessionCookiePath="<%= @session_cookie_path %>"<% end %>
   <% if defined?(@anti_jar_locking) %>antiJARLocking="<%= @anti_jar_locking %>"<% end %>
   <% if defined?(@anti_resource_locking) %>antiResourceLocking="<%= @anti_resource_locking %>"<% end %>
-    <% if @inline %>/><% else %>><% end %>
+  >
     <%- if defined?(@watched_resource) -%>
     <WatchedResource><%= @watched_resource %></WatchedResource>
     <%- end -%>

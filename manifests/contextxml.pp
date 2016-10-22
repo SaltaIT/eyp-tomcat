@@ -1,15 +1,13 @@
 define tomcat::context (
                             $session_cookie_path   = undef,
                             $session_cookie_name   = undef,
-                            $watched_resource      = undef,
+                            $watched_resource      = 'WEB-INF/web.xml',
                             $manager               = '',
                             $anti_jar_locking      = undef,
                             $anti_resource_locking = undef,
                             $servicename           = $name,
                             $catalina_base         = "/opt/${name}",
                             $path                  = undef,
-                            $docbase               = undef,
-                            $reloadable            = undef,
                           ) {
 
   if ! defined(Class['tomcat'])
