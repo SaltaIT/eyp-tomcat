@@ -237,19 +237,25 @@ define tomcat::instance (
 
   concat::fragment{ "${catalina_base}/conf/server.xml engine":
     target  => "${catalina_base}/conf/server.xml",
-    order   => '20',
+    order   => '21',
     content => template("${module_name}/serverxml/21_engine.erb"),
   }
 
-  concat::fragment{ "${catalina_base}/conf/server.xml realms":
+  concat::fragment{ "${catalina_base}/conf/server.xml default realms":
     target  => "${catalina_base}/conf/server.xml",
-    order   => '20',
-    content => template("${module_name}/serverxml/22_realms.erb"),
+    order   => '22',
+    content => template("${module_name}/serverxml/22_default_realms.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml end realms":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '24',
+    content => template("${module_name}/serverxml/24_endrealms.erb"),
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml host":
     target  => "${catalina_base}/conf/server.xml",
-    order   => '20',
+    order   => '25',
     content => template("${module_name}/serverxml/25_host.erb"),
   }
 
