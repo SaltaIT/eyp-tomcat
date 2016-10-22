@@ -2,11 +2,12 @@
 
 ## 0.4.1
 
-Major release with **incompatible changes**, please review it carefully:
-
+**Major release** with **incompatible changes**, please review this list carefully:
+* server.xml concat rewrite - server.xml  it's going to change due to this, service will be reloaded unless **manage_service** is set to **false**
 * **tomcat::resource** added max_wait
+* added **tomcat::realm::jndi**
 * **tomcat::context**:
-  * changed to concat
+  * changed to concat pattern
   * allow inline context in Host
   * **INCOMPABLE CHANGE** variable rename:
     * **watchedResource** to **watched_resource**, changed default value from **WEB-INF/web.xml** to **undef**
@@ -14,10 +15,10 @@ Major release with **incompatible changes**, please review it carefully:
     * **sessionCookiePath** to **session_cookie_path**
     * **antiResourceLocking** to **anti_resource_locking**, changed default value from **false** to **undef**
 * addded **tomcat::loggingproperties** (from source file)
-* serverxml concat reorder
+
 * modified startup, shutdown and configtest scripts to be able to work in a **CATALINA_HOME**==**CATALINA_BASE** environments
 * tomcat configtest **WARNING** init script it's going to change, service will be reloaded unless **manage_service** is set to **false**
-* added the following tomcat::instance options **WARNING** server.xml it's going to change, service will be reloaded unless **manage_service** is set to **false**
+* added the following tomcat::instance options **WARNING** server.xml
   * connector_http_max_header_size
   * connector_http_max_threads
   * connector_http_min_spare_threads
