@@ -15,7 +15,6 @@
     * **sessionCookiePath** to **session_cookie_path**
     * **antiResourceLocking** to **anti_resource_locking**, changed default value from **false** to **undef**
 * addded **tomcat::loggingproperties** (from source file)
-
 * modified startup, shutdown and configtest scripts to be able to work in a **CATALINA_HOME**==**CATALINA_BASE** environments
 * tomcat configtest **WARNING** init script it's going to change, service will be reloaded unless **manage_service** is set to **false**
 * added the following tomcat::instance options **WARNING** server.xml
