@@ -3,8 +3,8 @@
 ## 0.4.1
 
 **Major release** with **incompatible changes**, please review this list carefully:
-* added combined realm by default to allow multiple realms (**COMPATIBILITY ISSUE**: LockOutRealm cannot be enabled on tomcat 7.0.32 and older)
-* server.xml concat rewrite - server.xml  it's going to change due to this, service will be reloaded unless **manage_service** is set to **false**
+* added combined realm by default to allow multiple realms (**COMPATIBILITY ISSUE**: **LockOutRealm** cannot be enabled on **tomcat 7.0.32 or older** because we are using **CombinedRealm** by default)
+* **server.xml** concat rewrite - it's going to change due to this, service will be restarted unless **manage_service** is set to **false**
 * **tomcat::resource** added max_wait
 * added **tomcat::realm::jndi**
 * **tomcat::context**:
