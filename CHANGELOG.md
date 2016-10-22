@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## 0.4.1
+
+**Major release** with **incompatible changes**, please review this list carefully:
+* added combined realm by default to allow multiple realms (**COMPATIBILITY ISSUE**: **LockOutRealm** cannot be enabled on **tomcat 7.0.32 or older** because we are using **CombinedRealm** by default)
+* added **jvmRoute** support as **jvm_route**
+* **server.xml** concat rewrite - it's going to change due to this, service will be restarted unless **manage_service** is set to **false**
+* **tomcat::resource** added max_wait
+* added **tomcat::realm::jndi**
+* added **tomcat::context** for **server.xml** context definition
+* **tomcat::context** renamed to **tomcat::contextxml**:
+  * **INCOMPABLE CHANGE** variable rename:
+    * **watchedResource** to **watched_resource**
+    * **antiJARLocking** to **anti_jar_locking**, changed default value from **false** to **undef**
+    * **sessionCookiePath** to **session_cookie_path**
+    * **antiResourceLocking** to **anti_resource_locking**, changed default value from **false** to **undef**
+* addded **tomcat::loggingproperties** (from source file)
+* modified startup, shutdown and configtest scripts to be able to work in a **CATALINA_HOME**==**CATALINA_BASE** environments
+* tomcat configtest **WARNING** init script it's going to change, service will be reloaded unless **manage_service** is set to **false**
+* added the following tomcat::instance options **WARNING** server.xml
+  * connector_http_max_header_size
+  * connector_http_max_threads
+  * connector_http_min_spare_threads
+  * connector_http_max_spare_threads
+  * connector_http_enable_lookups
+  * connector_http_accept_count
+  * **WARNING** renamed **connectionTimeout** to **connector_http_connection_timeout**
+  * connector_http_disable_upload_timeout
+  * connector_http_uri_encoding
+  * xml_validation
+  * xml_namespace_aware
+
 ## 0.3.17
 
 * *bugfix*: added notification on systemd changes

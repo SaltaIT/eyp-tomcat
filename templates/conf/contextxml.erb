@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context
+  <% if defined?(@path) %>path="<%= @path %>"<% end %>
+  <% if defined?(@session_cookie_name) %>sessionCookieName="<%= @session_cookie_name %>"<% end %>
+  <% if defined?(@session_cookie_path) %>sessionCookiePath="<%= @session_cookie_path %>"<% end %>
+  <% if defined?(@anti_jar_locking) %>antiJARLocking="<%= @anti_jar_locking %>"<% end %>
+  <% if defined?(@anti_resource_locking) %>antiResourceLocking="<%= @anti_resource_locking %>"<% end %>
+  >
+    <%- if defined?(@watched_resource) -%>
+    <WatchedResource><%= @watched_resource %></WatchedResource>
+    <%- end -%>
+    <%-  if defined?(@manager) -%>
+    <Manager pathname="<%= @manager %>" />
+    <%- end -%>

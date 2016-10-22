@@ -1,48 +1,79 @@
+#
+# concat server.xml
+# 00 - init xml
+# 05 - server tag
+# 06 - listeners
+# 10 - globalnaming
+# 11 - userdb
+# 11 - resource pools
+# 15 - end globalnaming
+# 20 - connectors
+# 21 - engine
+# 22 - realms - combined realm and optionally userdatabase wiht lockoutrealm
+# 23 - **other realms**
+# 24 - end realms
+# 25 - host
+# 28 - context
+# 30 - end service
+# 99 - end server
+#
 define tomcat::instance (
-                          $tomcatpw               = 'password',
-                          $catalina_base          = "/opt/${name}",
-                          $instancename           = $name,
-                          $pwdigest               = 'sha',
-                          $tomcat_user            = $tomcat::params::default_tomcat_user,
-                          $server_info            = '.',
-                          $server_number          = '.',
-                          $server_built           = 'Long long ago',
-                          $xmx                    = '512m',
-                          $xms                    = '512m',
-                          $maxpermsize            = '512m',
-                          $permsize               = undef,
-                          $shutdown_port          = '8005',
-                          $shutdown_address       = '127.0.0.1',
-                          $ajp_port               = undef,
-                          $connector_port         = '8080',
-                          $connector_http_server  = undef,
-                          $jmx_port               = '8999',
-                          $redirectPort           = '8443',
-                          $realms                 = undef,
-                          $values                 = undef,
-                          $errorReportValveClass  = undef,
-                          $maxThreads             = '150',
-                          $minSpareThreads        = '4',
-                          $connectionTimeout      = '20000',
-                          $lockoutrealm           = true,
-                          $userdatabase           = true,
-                          $extra_vars             = undef,
-                          $system_properties      = undef,
-                          $rmi_server_hostname    = undef,
-                          $catalina_rotate        = '15',
-                          $catalina_size          = '100M',
-                          $heapdump_oom_dir       = undef,
-                          $install_tomcat_manager = true,
-                          $shutdown_command       = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
-                          $java_library_path      = undef,
-                          $java_home              = undef,
-                          $webapps_owner          = $tomcat::params::default_tomcat_user,
-                          $webapps_group          = $tomcat::params::default_tomcat_user,
-                          $webapps_mode           = $tomcat::params::default_webapps_mode,
-                          $ensure                 = 'running',
-                          $manage_service         = true,
-                          $manage_docker_service  = true,
-                          $enable                 = true,
+                          $tomcatpw                              = 'password',
+                          $catalina_base                         = "/opt/${name}",
+                          $instancename                          = $name,
+                          $pwdigest                              = 'sha',
+                          $tomcat_user                           = $tomcat::params::default_tomcat_user,
+                          $server_info                           = '.',
+                          $server_number                         = '.',
+                          $server_built                          = 'Long long ago',
+                          $xmx                                   = '512m',
+                          $xms                                   = '512m',
+                          $maxpermsize                           = '512m',
+                          $permsize                              = undef,
+                          $shutdown_port                         = '8005',
+                          $shutdown_address                      = '127.0.0.1',
+                          $ajp_port                              = undef,
+                          $connector_port                        = '8080',
+                          $connector_http_server                 = undef,
+                          $connector_http_max_header_size        = undef,
+                          $connector_http_max_threads            = undef,
+                          $connector_http_min_spare_threads      = undef,
+                          $connector_http_max_spare_threads      = undef,
+                          $connector_http_enable_lookups         = false,
+                          $connector_http_accept_count           = undef,
+                          $connector_http_connection_timeout     = '20000',
+                          $connector_http_disable_upload_timeout = true,
+                          $connector_http_uri_encoding           = undef,
+                          $jmx_port                              = '8999',
+                          $redirectPort                          = '8443',
+                          $realms                                = undef,
+                          $values                                = undef,
+                          $errorReportValveClass                 = undef,
+                          $maxThreads                            = '150',
+                          $minSpareThreads                       = '4',
+                          $connectionTimeout                     = '20000',
+                          $lockoutrealm                          = true,
+                          $userdatabase                          = true,
+                          $extra_vars                            = undef,
+                          $system_properties                     = undef,
+                          $rmi_server_hostname                   = undef,
+                          $catalina_rotate                       = '15',
+                          $catalina_size                         = '100M',
+                          $heapdump_oom_dir                      = undef,
+                          $install_tomcat_manager                = true,
+                          $shutdown_command                      = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
+                          $java_library_path                     = undef,
+                          $java_home                             = undef,
+                          $webapps_owner                         = $tomcat::params::default_tomcat_user,
+                          $webapps_group                         = $tomcat::params::default_tomcat_user,
+                          $webapps_mode                          = $tomcat::params::default_webapps_mode,
+                          $ensure                                = 'running',
+                          $manage_service                        = true,
+                          $manage_docker_service                 = true,
+                          $enable                                = true,
+                          $xml_validation                        = undef,
+                          $xml_namespace_aware                   = undef,
+                          $jvm_route                             = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -190,19 +221,49 @@ define tomcat::instance (
   concat::fragment{ "${catalina_base}/conf/server.xml server":
     target  => "${catalina_base}/conf/server.xml",
     order   => '01',
-    content => template("${module_name}/serverxml/01_server.erb"),
+    content => template("${module_name}/serverxml/05_server.erb"),
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml listeners":
     target  => "${catalina_base}/conf/server.xml",
     order   => '02',
-    content => template("${module_name}/serverxml/02_listeners.erb"),
+    content => template("${module_name}/serverxml/06_listeners.erb"),
   }
 
-  concat::fragment{ "${catalina_base}/conf/server.xml service":
+  concat::fragment{ "${catalina_base}/conf/server.xml connectors":
     target  => "${catalina_base}/conf/server.xml",
     order   => '20',
-    content => template("${module_name}/serverxml/20_service.erb"),
+    content => template("${module_name}/serverxml/20_connectors.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml engine":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '21',
+    content => template("${module_name}/serverxml/21_engine.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml default realms":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '22',
+    content => template("${module_name}/serverxml/22_default_realms.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml end realms":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '24',
+    content => template("${module_name}/serverxml/24_endrealms.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml host":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '25',
+    content => template("${module_name}/serverxml/25_host.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml end service":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '30',
+    content => template("${module_name}/serverxml/30_endservice.erb"),
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml server end":
@@ -232,8 +293,8 @@ define tomcat::instance (
     {
       concat::fragment{ "${catalina_base}/conf/server.xml globalnamingresources end":
         target  => "${catalina_base}/conf/server.xml",
-        order   => '12',
-        content => template("${module_name}/serverxml/12_global_naming_resources_fi.erb"),
+        order   => '15',
+        content => template("${module_name}/serverxml/15_global_naming_resources_fi.erb"),
       }
     }
 
@@ -263,6 +324,15 @@ define tomcat::instance (
     mode    => '0755',
     require => File["${catalina_base}/bin"],
     content => template("${module_name}/multi/startup.erb"),
+  }
+
+  file { "${catalina_base}/bin/configtest.sh":
+    ensure  => 'present',
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
+    mode    => '0755',
+    require => File["${catalina_base}/bin"],
+    content => template("${module_name}/multi/configtest.erb"),
   }
 
   file { "${catalina_base}/bin/shutdown.sh":
@@ -346,7 +416,8 @@ define tomcat::instance (
                         "${catalina_base}/conf",
                         "${catalina_base}/webapps",
                         "${catalina_base}/bin/startup.sh",
-                        "${catalina_base}/bin/shutdown.sh"
+                        "${catalina_base}/bin/shutdown.sh",
+                        "${catalina_base}/bin/configtest.sh",
                       ] ],
                   Concat[ [ "${catalina_base}/bin/setenv.sh",
                             "${catalina_base}/conf/server.xml" ] ] ],
