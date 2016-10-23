@@ -17,7 +17,7 @@ define tomcat::krb5 (
     $serviceinstance=undef
   }
 
-  file { "${catalina_base}/conf/krb5.conf":
+  file { "${catalina_base}/conf/krb5.ini":
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.10
+
+* bugfix krb5 file naming
+
 ## 0.4.9
 
 * **tomcat::contextxml::environment** and **tomcat::contextxml::resourcelink** aligment
