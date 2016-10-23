@@ -17,7 +17,7 @@ define tomcat::context(
     $serviceinstance=Service[$servicename]
   }
 
-  concat::fragment{ "${catalina_base}/conf/server.xml context ${path}":
+  concat::fragment{ "${catalina_base}/conf/server.xml context ${name} ${catalina_base} ${servicename} ${path}":
     target  => "${catalina_base}/conf/server.xml",
     order   => '28',
     content => template("${module_name}/conf/context.erb"),

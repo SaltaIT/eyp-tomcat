@@ -10,7 +10,7 @@ define tomcat::contextxml::environment(
                                         $servicename   = $name,
                                         $catalina_base = "/opt/${name}",
                                       ) {
-  concat::fragment{ "${catalina_base}/conf/context.xml environment ${envname}":
+  concat::fragment{ "${catalina_base}/conf/context.xml environment ${envname} ${value} ${type} ${servicename} ${catalina_base}":
     target  => "${catalina_base}/conf/context.xml",
     order   => '10',
     content => template("${module_name}/conf/contextxml/environment.erb"),

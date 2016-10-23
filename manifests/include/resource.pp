@@ -10,10 +10,4 @@ define tomcat::include::resource(
 #   <!ENTITY AdminRe-ROOT SYSTEM "AdminRe-ROOT.xml">
 # ]>
 
-concat::fragment{ "${catalina_base}/conf/server.xml service":
-  target  => "${catalina_base}/conf/server.xml",
-  order   => '20',
-  content => template("${module_name}/serverxml/20_service.erb"),
-}
-
 }

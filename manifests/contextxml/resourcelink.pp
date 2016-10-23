@@ -9,7 +9,7 @@ define tomcat::contextxml::resourcelink(
                                         $servicename   = $name,
                                         $catalina_base = "/opt/${name}",
                                       ) {
-  concat::fragment{ "${catalina_base}/conf/context.xml resourcelink ${resname}":
+  concat::fragment{ "${catalina_base}/conf/context.xml resourcelink ${resname} ${global} ${type} ${servicename} ${catalina_base}":
     target  => "${catalina_base}/conf/context.xml",
     order   => '10',
     content => template("${module_name}/conf/contextxml/resourcelink.erb"),
