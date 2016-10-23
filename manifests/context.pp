@@ -1,7 +1,7 @@
 define tomcat::context(
+                        $path,
                         $servicename           = $name,
                         $catalina_base         = "/opt/${name}",
-                        $path                  = undef,
                         $docbase               = undef,
                         $reloadable            = true,
                       ) {
