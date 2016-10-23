@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.8
+
+* tomcat::contextxml: bugfix
+
 ## 0.4.7
 
 * tomcat::contextxml:

@@ -1,5 +1,4 @@
 define tomcat::jaas (
-                            $type          = undef,
                             #LDAP zookeeper
                             $app           = undef,
                             $provider      = undef,
