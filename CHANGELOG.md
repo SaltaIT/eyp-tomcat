@@ -3,6 +3,7 @@
 ## 0.4.9
 
 * **tomcat::contextxml::environment** and **tomcat::contextxml::resourcelink** aligment
+* bugfix SPN **tomcat::jaas**
 
 ## 0.4.8
 
