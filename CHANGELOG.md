@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.4
+
+* **tomcat::context** reloadable set by default to true
+
 ## 0.4.3
 
 * flag to be able to disable version_logger_listener
