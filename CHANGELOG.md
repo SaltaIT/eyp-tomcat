@@ -9,6 +9,7 @@
 * **tomcat::resource** added max_wait
 * added **tomcat::realm::jndi**
 * added **tomcat::catalinapolicy**
+* added **tomcat::login**
 * added **tomcat::context** for **server.xml** context definition
 * **tomcat::context** renamed to **tomcat::contextxml**:
   * **INCOMPABLE CHANGE** variable rename:
