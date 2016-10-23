@@ -4,6 +4,7 @@
 
 * **tomcat::contextxml::environment** and **tomcat::contextxml::resourcelink** aligment
 * bugfix SPN **tomcat::jaas**
+* **tomcat::krb5** added keytab_source
 
 ## 0.4.8
 
