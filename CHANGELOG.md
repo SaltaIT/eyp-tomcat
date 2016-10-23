@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.11
+
+* added **tomcat::deploywar**
+
 ## 0.4.10
 
 * bugfix krb5 file naming
