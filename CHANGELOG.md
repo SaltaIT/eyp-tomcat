@@ -2,7 +2,10 @@
 
 ## 0.4.4
 
-* **tomcat::context** reloadable set by default to true
+* **tomcat::context**:
+  * reloadable set by default to true
+  * path is now mandatory
+  * path related bugfix
 
 ## 0.4.3
 
