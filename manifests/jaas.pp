@@ -19,7 +19,7 @@ define tomcat::jaas (
                             $password      = 'tomcat',
                             #KRB5
                             $realm         = undef,
-                            $dc            = undef,
+                            $spn           = undef,
                             #altres
                             $servicename   = $name,
                             $catalina_base = "/opt/${name}",
