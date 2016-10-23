@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.5
+
+* added enable_default_access_log to be able to disable default Valve
+
 ## 0.4.4
 
 * **tomcat::context**:
