@@ -8,6 +8,7 @@
 * **server.xml** concat rewrite - it's going to change due to this, service will be restarted unless **manage_service** is set to **false**
 * **tomcat::resource** added max_wait
 * added **tomcat::realm::jndi**
+* added **tomcat::catalinapolicy**
 * added **tomcat::context** for **server.xml** context definition
 * **tomcat::context** renamed to **tomcat::contextxml**:
   * **INCOMPABLE CHANGE** variable rename:
