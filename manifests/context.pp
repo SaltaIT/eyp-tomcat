@@ -3,7 +3,7 @@ define tomcat::context(
                         $catalina_base         = "/opt/${name}",
                         $path                  = undef,
                         $docbase               = undef,
-                        $reloadable            = undef,
+                        $reloadable            = true,
                       ) {
 
   if ! defined(Class['tomcat'])
