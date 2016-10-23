@@ -2,7 +2,7 @@ define tomcat::contextxml (
                             $session_cookie_path   = undef,
                             $session_cookie_name   = undef,
                             $watched_resource      = 'WEB-INF/web.xml',
-                            $manager               = '',
+                            $manager               = undef,
                             $anti_jar_locking      = undef,
                             $anti_resource_locking = undef,
                             $servicename           = $name,
@@ -35,7 +35,7 @@ define tomcat::contextxml (
   concat::fragment{ "${catalina_base}/conf/context.xml header":
     target  => "${catalina_base}/conf/context.xml",
     order   => '00',
-    content => template("${module_name}/conf/context.erb"),
+    content => template("${module_name}/conf/contextxml.erb"),
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml fi context":

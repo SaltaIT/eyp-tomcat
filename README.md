@@ -733,6 +733,8 @@ have tests to check both presence and absence of any feature
 * remove disable_variable_is_lowercase from Rakefile (once variables with uppercase letters are removed)
 * acceptance testing for tomcat::agent
 * acceptance testing manage_service=false
+* review documentation for version 0.4
+* manually managed include files for server.xml
 
 ### Contributing
 

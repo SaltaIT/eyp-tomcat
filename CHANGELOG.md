@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## 0.4.7
+
+* tomcat::contextxml:
+  * estil **tomcat::contextxml**
+  * **INCOMPATIBLE CHANGE**: manager default value changed from '' to undef
+
+## 0.4.6
+
+* bugfix **tomcat::contextxml**
+
+## 0.4.5
+
+* added enable_default_access_log to be able to disable default Valve
+
+## 0.4.4
+
+* **tomcat::context**:
+  * reloadable set by default to true
+  * path is now mandatory
+  * path related bugfix
+
+## 0.4.3
+
+* flag to be able to disable version_logger_listener
+
+## 0.4.2
+
+* added option **packetSize** (**connector_ajp_packet_size**) for the **AJP connector**
+
 ## 0.4.1
 
 **Major release** with **incompatible changes**, please review this list carefully:
