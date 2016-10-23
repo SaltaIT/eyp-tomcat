@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.9
+
+* **tomcat::contextxml::environment** and **tomcat::contextxml::resourcelink** aligment
+
 ## 0.4.8
 
 * tomcat::contextxml: bugfix
