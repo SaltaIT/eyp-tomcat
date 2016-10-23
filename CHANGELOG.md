@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.4.7
+
+* tomcat::contextxml:
+  * estil **tomcat::contextxml**
+  * **INCOMPATIBLE CHANGE**: manager default value changed from '' to undef
+
 ## 0.4.6
 
 * bugfix **tomcat::contextxml**

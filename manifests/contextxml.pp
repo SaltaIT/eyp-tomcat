@@ -2,7 +2,7 @@ define tomcat::contextxml (
                             $session_cookie_path   = undef,
                             $session_cookie_name   = undef,
                             $watched_resource      = 'WEB-INF/web.xml',
-                            $manager               = '',
+                            $manager               = undef,
                             $anti_jar_locking      = undef,
                             $anti_resource_locking = undef,
                             $servicename           = $name,
