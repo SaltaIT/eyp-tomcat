@@ -3,6 +3,7 @@
 ## 0.4.8
 
 * tomcat::contextxml: bugfix
+* deleted type option from **tomcat::jaas**
 
 ## 0.4.7
 
