@@ -75,6 +75,7 @@ define tomcat::instance (
                           $xml_validation                        = undef,
                           $xml_namespace_aware                   = undef,
                           $jvm_route                             = undef,
+                          $version_logger_listener               = true,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
