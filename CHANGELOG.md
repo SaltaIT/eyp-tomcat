@@ -4,6 +4,7 @@
 
 * tomcat::contextxml: bugfix
 * deleted type option from **tomcat::jaas**
+* renaming variables from **tomcat::jaas** for krb5 to a more meaningful name
 
 ## 0.4.7
 
