@@ -33,6 +33,7 @@ define tomcat::instance (
                           $shutdown_port                         = '8005',
                           $shutdown_address                      = '127.0.0.1',
                           $ajp_port                              = undef,
+                          $connector_ajp_packet_size             = undef,
                           $connector_port                        = '8080',
                           $connector_http_server                 = undef,
                           $connector_http_max_header_size        = undef,

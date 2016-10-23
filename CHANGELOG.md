@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.2
+
+* added option **packetSize** (**connector_ajp_packet_size**) for the **AJP connector**
+
 ## 0.4.1
 
 **Major release** with **incompatible changes**, please review this list carefully:
