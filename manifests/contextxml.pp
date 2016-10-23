@@ -23,35 +23,24 @@ define tomcat::contextxml (
     $serviceinstance=Service[$servicename]
   }
 
-  if($inline)
-  {
-    concat::fragment{ "${catalina_base}/conf/server.xml context ${path}":
-      target  => "${catalina_base}/conf/server.xml",
-      order   => '28',
-      content => template("${module_name}/conf/context.erb"),
-    }
+  concat { "${catalina_base}/conf/context.xml":
+    ensure  => 'present',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => File["${catalina_base}/conf"],
+    notify  => $serviceinstance,
   }
-  else
-  {
-    concat { "${catalina_base}/conf/context.xml":
-      ensure  => 'present',
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      require => File["${catalina_base}/conf"],
-      notify  => $serviceinstance,
-    }
 
-    concat::fragment{ "${catalina_base}/conf/context.xml header":
-      target  => "${catalina_base}/conf/context.xml",
-      order   => '00',
-      content => template("${module_name}/conf/context.erb"),
-    }
+  concat::fragment{ "${catalina_base}/conf/context.xml header":
+    target  => "${catalina_base}/conf/context.xml",
+    order   => '00',
+    content => template("${module_name}/conf/context.erb"),
+  }
 
-    concat::fragment{ "${catalina_base}/conf/server.xml fi context":
-      target  => "${catalina_base}/conf/context.xml",
-      order   => '99',
-      content => "</Context>\n",
-    }
+  concat::fragment{ "${catalina_base}/conf/server.xml fi context":
+    target  => "${catalina_base}/conf/context.xml",
+    order   => '99',
+    content => "</Context>\n",
   }
 }

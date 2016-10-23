@@ -56,6 +56,7 @@ define tomcat::realm::jndi(
                             #required options
                             $connection_url,
                             $connection_name,
+                            $connection_password,
                             $user_base,
                             $user_search,
                             $role_base,
@@ -67,7 +68,6 @@ define tomcat::realm::jndi(
                             $order          = '1',
                             #options
                             $alternate_url  = undef,
-                            $connection_password,
                             $referrals      = 'follow',
                             $user_subtree   = true,
                             $role_subtree   = true,
