@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.3
+
+* flag to be able to disable version_logger_listener
+
 ## 0.4.2
 
 * added option **packetSize** (**connector_ajp_packet_size**) for the **AJP connector**
