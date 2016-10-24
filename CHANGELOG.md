@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 0.4.11
+
+* added **tomcat::deploywar**
+
+## 0.4.10
+
+* bugfix krb5 file naming
+
+## 0.4.9
+
+* **tomcat::contextxml::environment** and **tomcat::contextxml::resourcelink** aligment
+* bugfix SPN **tomcat::jaas**
+* **tomcat::krb5** added keytab_source
+
+## 0.4.8
+
+* tomcat::contextxml: bugfix
+* deleted type option from **tomcat::jaas**
+* renaming variables from **tomcat::jaas** for krb5 to a more meaningful name
+
 ## 0.4.7
 
 * tomcat::contextxml:
