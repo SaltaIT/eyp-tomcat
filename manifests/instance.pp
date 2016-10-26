@@ -210,7 +210,7 @@ define tomcat::instance (
     group   => $tomcat_user,
     mode    => '0644',
     require => File["${catalina_base}/conf"],
-    notify  => $service_to_notify,
+    notify  => Tomcat::Instance::Service[$instancename],
   }
 
   #content => template("${module_name}/serverxml.erb"),
@@ -307,7 +307,7 @@ define tomcat::instance (
       group   => $tomcat_user,
       mode    => '0644',
       require => File["${catalina_base}/conf"],
-      notify  => $service_to_notify,
+      notify  => Tomcat::Instance::Service[$instancename],
       content => template("${module_name}/tomcatusers.erb"),
     }
   }
@@ -316,7 +316,7 @@ define tomcat::instance (
     file { "${catalina_base}/conf/tomcat-users.xml":
       ensure  => 'absent',
       require => File["${catalina_base}/conf"],
-      notify  => $service_to_notify,
+      notify  => Tomcat::Instance::Service[$instancename],
     }
   }
 
@@ -353,7 +353,7 @@ define tomcat::instance (
     group   => $tomcat_user,
     mode    => '0644',
     require => File["${catalina_base}/bin"],
-    notify  => $service_to_notify,
+    notify  => Tomcat::Instance::Service[$instancename],
   }
 
   concat::fragment{ "${catalina_base}/bin/setenv.sh base":
@@ -399,7 +399,7 @@ define tomcat::instance (
       group   => $tomcat_user,
       mode    => '0644',
       require => File[$catalina_base],
-      notify  => $service_to_notify,
+      notify  => Tomcat::Instance::Service[$instancename],
       content => template("${module_name}/serverinfo.erb"),
       before  => File["/etc/init.d/${instancename}"],
     }
@@ -425,48 +425,14 @@ define tomcat::instance (
                   Concat[ [ "${catalina_base}/bin/setenv.sh",
                             "${catalina_base}/conf/server.xml" ] ] ],
     content => template("${module_name}/multi/tomcat-init.erb"),
-    notify  => $service_to_notify,
+    notify  => Tomcat::Instance::Service[$instancename],
   }
 
-  if( $is_docker_container==false or
-      $manage_docker_service)
-  {
-    if($manage_service)
-    {
-      $service_to_notify=Service[$instancename]
-
-      service { $instancename:
-        ensure     => $ensure,
-        enable     => $enable,
-        hasrestart => true,
-        require    => File["/etc/init.d/${instancename}"],
-      }
-    }
-    else
-    {
-      $service_to_notify=undef
-    }
-  }
-  else
-  {
-    $service_to_notify=undef
-  }
-
-  if($tomcat::params::systemd)
-  {
-    include systemd
-
-    systemd::service { $instancename:
-      execstart => "/etc/init.d/${instancename} start",
-      execstop  => "/etc/init.d/${instancename} stop",
-      require   => File["/etc/init.d/${instancename}"],
-      before    => $service_to_notify,
-      notify    => $service_to_notify,
-      forking   => true,
-      restart   => 'no',
-      user      => 'tomcat',
-      group     => 'tomcat',
-    }
+  tomcat::instance::service { $instancename:
+    manage_service        => $manage_service,
+    manage_docker_service => $manage_docker_service,
+    service_ensure        => $ensure,
+    service_enable        => $enable,
   }
 
   if($catalina_rotate!=undef)
@@ -493,7 +459,7 @@ define tomcat::instance (
       require => [File["${catalina_base}/webapps"],
                   Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
                   Class['tomcat']],
-      before  => $service_to_notify,
+      before  => Tomcat::Instance::Service[$instancename],
     }
 
     exec { "cp tomcat host-manager from tomcat-home ${instancename}":
@@ -502,7 +468,7 @@ define tomcat::instance (
       require => [File["${catalina_base}/webapps"],
                   Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
                   Class['tomcat']],
-      before  => $service_to_notify,
+      before  => Tomcat::Instance::Service[$instancename],
     }
   }
 

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.14
+
+* rewrite servei instancia
+
 ## 0.4.12
 
 * keytab full path
