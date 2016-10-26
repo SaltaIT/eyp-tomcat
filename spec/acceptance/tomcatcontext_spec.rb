@@ -32,7 +32,7 @@ describe 'tomcat context' do
         lockoutrealm => true,
       }
 
-      tomcat::context { 'tomcat-3333':
+      tomcat::contextxml { 'tomcat-3333':
         sessionCookiePath => '/',
         antiJARLocking => true,
         antiResourceLocking => true,
