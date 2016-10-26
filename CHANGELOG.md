@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.12
+
+* keytab full path
+
 ## 0.4.11
 
 * added **tomcat::deploywar**
