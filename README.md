@@ -1,4 +1,4 @@
-# tomcat ![status ready](https://img.shields.io/badge/status-ready-brightgreen.svg)s
+# tomcat ![status ready](https://img.shields.io/badge/status-ready-brightgreen.svg)
 
 **NTTCom-MS/eyp-tomcat**: [![Build Status](https://travis-ci.org/NTTCom-MS/eyp-tomcat.png?branch=master)](https://travis-ci.org/NTTCom-MS/eyp-tomcat)
 
