@@ -37,6 +37,7 @@ describe 'tomcat context' do
         anti_jar_locking => true,
         anti_resource_locking => true,
         session_cookie_name => 'INDEPENDENCIA',
+        manager => '',
       }
 
       EOF
