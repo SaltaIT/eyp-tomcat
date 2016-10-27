@@ -49,7 +49,7 @@ describe 'tomcat context' do
 
     #! cat /opt/tomcat-8080/logs/catalina.out  | grep SEVERE
     it "error free server startup" do
-      expect(shell("sleep 10; ! cat /opt/tomcat-8080/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
+      expect(shell("sleep 10; ! cat /opt/tomcat-3333/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
     end
 
 
@@ -64,7 +64,7 @@ describe 'tomcat context' do
     end
 
     it "session cookie name" do
-      expect(shell("curl -u tomcat:lol localhost:8080/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
+      expect(shell("curl -u tomcat:lol localhost:3335/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
     end
 
   end

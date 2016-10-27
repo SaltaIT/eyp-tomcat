@@ -45,7 +45,7 @@ describe 'tomcat class' do
 
     #! cat /opt/tomcat-8080/logs/catalina.out  | grep SEVERE
     it "error free server startup" do
-      expect(shell("sleep 10; ! cat /opt/tomcat-8080/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
+      expect(shell("sleep 10; ! cat /opt/tomcat-5555/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
     end
 
     describe file("/opt/tomcat-5555/logs/catalina.out") do
