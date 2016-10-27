@@ -43,6 +43,11 @@ describe 'tomcat class' do
 
     end
 
+    #! cat /opt/tomcat-8080/logs/catalina.out  | grep SEVERE
+    it "error free server startup" do
+      expect(shell("sleep 10; ! cat /opt/tomcat-8080/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
+    end
+
     describe file("/opt/tomcat-5555/logs/catalina.out") do
       it { should be_file }
       its(:content) { should_not match 'Apache Tomcat Native library which allows optimal performance in production environments was not found' }
