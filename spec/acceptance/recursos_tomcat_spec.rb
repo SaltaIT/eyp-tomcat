@@ -77,6 +77,15 @@ describe 'recursos tomcat' do
 
     end
 
+    #! cat /opt/tomcat-8080/logs/catalina.out  | grep SEVERE
+    it "error free server startup 4444" do
+      expect(shell("sleep 10; ! cat /opt/tomcat-4444/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
+    end
+
+    it "error free server startup 4448" do
+      expect(shell("sleep 10; ! cat /opt/tomcat-4448/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
+    end
+
     ### tomcat-users.xml
     # tomcat admin password
     # <user username="tomcat" password="403926033d001b5279df37cbbe5287b7c7c267fa"

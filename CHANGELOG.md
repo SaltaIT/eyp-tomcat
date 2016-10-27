@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 0.4.15
+
+* contextxml lint
+
+## 0.4.14
+
+* rewrite servei instancia
+
+## 0.4.12
+
+* keytab full path
+
 ## 0.4.11
 
 * added **tomcat::deploywar**

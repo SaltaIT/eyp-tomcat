@@ -32,11 +32,12 @@ describe 'tomcat context' do
         lockoutrealm => true,
       }
 
-      tomcat::context { 'tomcat-3333':
-        sessionCookiePath => '/',
-        antiJARLocking => true,
-        antiResourceLocking => true,
+      tomcat::contextxml { 'tomcat-3333':
+        session_cookie_path => '/',
+        anti_jar_locking => true,
+        anti_resource_locking => true,
         session_cookie_name => 'INDEPENDENCIA',
+        manager => '',
       }
 
       EOF
@@ -45,6 +46,12 @@ describe 'tomcat context' do
       expect(apply_manifest(pp).exit_code).to_not eq(1)
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
+
+    #! cat /opt/tomcat-8080/logs/catalina.out  | grep SEVERE
+    it "error free server startup" do
+      expect(shell("sleep 10; ! cat /opt/tomcat-3333/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
+    end
+
 
     describe file("/opt/tomcat-3333/conf/context.xml") do
       it { should be_file }
@@ -57,7 +64,7 @@ describe 'tomcat context' do
     end
 
     it "session cookie name" do
-      expect(shell("curl -u tomcat:lol localhost:8080/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
+      expect(shell("curl -u tomcat:lol localhost:3335/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
     end
 
   end

@@ -4,7 +4,7 @@ com.sun.security.jgss.krb5.initiate {
     doNotPrompt=true
     principal="<%= @spn %>@<%= @realm %>"
     useKeyTab=true
-    keyTab="../conf/krb5.keytab"
+    keyTab="<%= @catalina_base %>/conf/krb5.keytab"
     storeKey=true
     debug=false;
 };
@@ -14,7 +14,7 @@ com.sun.security.jgss.krb5.accept {
     doNotPrompt=true
     principal="<%= @spn %>@<%= @realm %>"
     useKeyTab=true
-    keyTab="../conf/krb5.keytab"
+    keyTab="<%= @catalina_base %>/conf/krb5.keytab"
     storeKey=true
     isInitiator=false
     debug=false;
