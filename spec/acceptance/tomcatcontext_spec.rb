@@ -33,9 +33,9 @@ describe 'tomcat context' do
       }
 
       tomcat::contextxml { 'tomcat-3333':
-        sessionCookiePath => '/',
-        antiJARLocking => true,
-        antiResourceLocking => true,
+        session_cookie_path => '/',
+        anti_jar_locking => true,
+        anti_resource_locking => true,
         session_cookie_name => 'INDEPENDENCIA',
       }
 
