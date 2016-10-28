@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.18
+
+* minor change krb5 template
+
 ## 0.4.17
 
 * added default_keytab
