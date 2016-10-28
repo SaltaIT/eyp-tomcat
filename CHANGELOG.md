@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.16
+
+* added default_keytab
+
 ## 0.4.15
 
 * contextxml lint

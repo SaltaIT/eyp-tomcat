@@ -2,6 +2,7 @@ define tomcat::krb5 (
                             $realm,
                             $kdc,
                             $keytab_source,
+                            $default_keytab = undef,
                             $servicename   = $name,
                             $catalina_base = "/opt/${name}",
                           ) {
