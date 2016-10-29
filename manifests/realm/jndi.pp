@@ -58,15 +58,15 @@ define tomcat::realm::jndi(
                             $connection_name,
                             $connection_password,
                             $user_base,
-                            $user_search,
                             $role_base,
-                            $role_name,
-                            $role_search,
                             #instance options
                             $catalina_base  = "/opt/${name}",
                             $servicename    = $name,
                             $order          = '1',
                             #options
+                            $role_search = '(member={0})',
+                            $role_name = 'cn',
+                            $user_search = '(sAMAccountName={0})',
                             $alternate_url  = undef,
                             $referrals      = 'follow',
                             $user_subtree   = true,

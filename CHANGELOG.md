@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.19
+
+* added defaults for **tomcat::realm::jndi**
+
 ## 0.4.18
 
 * minor change krb5 template
