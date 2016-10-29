@@ -1,3 +1,4 @@
+# https://dzone.com/articles/do-not-publish-configuring-tomcat-single-sign-on-w
 define tomcat::krb5 (
                             $realm,
                             $kdc,
