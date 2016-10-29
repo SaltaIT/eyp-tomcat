@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 0.4.19
+
+* added defaults for **tomcat::realm::jndi**
+
+## 0.4.18
+
+* minor change krb5 template
+
+## 0.4.17
+
+* added default_keytab
+
 ## 0.4.15
 
 * contextxml lint

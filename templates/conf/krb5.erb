@@ -4,10 +4,13 @@
 
 [libdefaults]
 	default_realm = <%= @realm %>
+	<%- if defined?(@default_keytab) -%>
+	default_keytab_name = FILE:<%= @catalina_base %>/conf/<%= @default_keytab %>
+	<%- end -%>
 
-	default_tkt_enctypes = aes128-cts rc4-hmac des3-cbc-sha1 des-cbc-crc
-	default_tgs_enctypes = aes128-cts rc4-hmac des3-cbc-sha1 des-cbc-crc
-	permitted_enctypes   = aes128-cts rc4-hmac des3-cbc-sha1 des-cbc-crc
+	default_tkt_enctypes = aes128-cts,rc4-hmac,des3-cbc-sha1,des-cbc-crc
+	default_tgs_enctypes = aes128-cts,rc4-hmac,des3-cbc-sha1,des-cbc-crc
+	permitted_enctypes   = aes128-cts,rc4-hmac,des3-cbc-sha1,des-cbc-crc
 
 [realms]
 	LIFECAPNET.COM  = {
