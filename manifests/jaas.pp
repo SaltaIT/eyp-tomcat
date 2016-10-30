@@ -35,6 +35,9 @@ define tomcat::jaas (
     $serviceinstance=Service[$servicename]
   }
 
+  # opcionalment afegir:
+  #-Dsun.security.krb5.debug=true
+
   file { "${catalina_base}/conf/jaas.conf":
     ensure  => 'present',
     owner   => 'root',
