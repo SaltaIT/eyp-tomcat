@@ -3,6 +3,8 @@
 ## 0.4.19
 
 * added defaults for **tomcat::realm::jndi**
+* added debug option for **tomcat::krb5**
+* added **tomcat::jvmproperty**
 
 ## 0.4.18
 
