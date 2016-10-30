@@ -43,9 +43,9 @@ describe 'tomcat context headers' do
       expect(apply_manifest(pp).exit_code).to eq(0)
     end
 
-    #! cat /opt/tomcat-8080/logs/catalina.out  | grep SEVERE
+    #! cat /opt/tomcat-8888/logs/catalina.out  | grep SEVERE
     #it "error free server startup" do
-    #  expect(shell("sleep 10; ! cat /opt/tomcat-3333/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
+    #  expect(shell("sleep 10; ! cat /opt/tomcat-8888/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
     #end
 
 
