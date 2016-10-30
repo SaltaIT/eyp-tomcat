@@ -2,9 +2,9 @@ require 'spec_helper_acceptance'
 
 # tomcat-3333
 
-describe 'tomcat context' do
+describe 'tomcat context headers' do
 
-  context 'tomcat context (+ basic setup, ie no native library)' do
+  context 'tomcat context (HTTP headers)' do
 
     it "kill java" do
       expect(shell("bash -c 'pkill java; for i in $(netstat -tpln | grep java | rev | grep -Eo /[0-9]* | rev | cut -f1 -d/); do kill $i; sleep 10; kill -9 $i; sleep 10; done'").exit_code).to be_zero
@@ -23,21 +23,17 @@ describe 'tomcat context' do
         nativelibrary => false,
       }
 
-      tomcat::instance { 'tomcat-3333':
+      tomcat::instance { 'tomcat-8888':
         tomcatpw => 'lol',
         shutdown_port=>'3333',
         ajp_port=>'3334',
-        connector_port=>'3335',
+        connector_port=>'8888',
         jmx_port => '3336',
         lockoutrealm => true,
       }
 
       tomcat::contextxml { 'tomcat-3333':
-        session_cookie_path => '/',
-        anti_jar_locking => true,
-        anti_resource_locking => true,
         session_cookie_name => 'INDEPENDENCIA',
-        manager => '',
       }
 
       EOF
@@ -53,19 +49,14 @@ describe 'tomcat context' do
     #end
 
 
-    describe file("/opt/tomcat-3333/conf/context.xml") do
+    describe file("/opt/tomcat-8888/conf/context.xml") do
       it { should be_file }
-      its(:content) { should match 'sessionCookiePath="/"' }
-      its(:content) { should match 'antiJARLocking="true"' }
       its(:content) { should match 'sessionCookieName="INDEPENDENCIA"' }
-      its(:content) { should match 'antiResourceLocking="true"' }
-      its(:content) { should match '<WatchedResource>WEB-INF/web.xml</WatchedResource>' }
-      its(:content) { should match '<Manager pathname="" />' }
     end
 
-    #it "session cookie name" do
-    #  expect(shell("curl -u tomcat:lol localhost:3335/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
-    #end
+    it "session cookie name" do
+      expect(shell("curl -u tomcat:lol localhost:8888/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
+    end
 
   end
 end
