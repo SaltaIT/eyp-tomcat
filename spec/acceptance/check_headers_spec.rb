@@ -32,7 +32,7 @@ describe 'tomcat context headers' do
         lockoutrealm => true,
       }
 
-      tomcat::contextxml { 'tomcat-3333':
+      tomcat::contextxml { 'tomcat-8888':
         session_cookie_name => 'INDEPENDENCIA',
       }
 
