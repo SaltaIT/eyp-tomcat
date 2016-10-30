@@ -20,6 +20,7 @@ define tomcat::jaas (
                             #KRB5
                             $realm         = undef,
                             $spn           = undef,
+                            $debug         = false,
                             #altres
                             $servicename   = $name,
                             $catalina_base = "/opt/${name}",
@@ -35,8 +36,15 @@ define tomcat::jaas (
     $serviceinstance=Service[$servicename]
   }
 
-  # opcionalment afegir:
-  #-Dsun.security.krb5.debug=true
+  if($debug)
+  {
+    #-Dsun.security.krb5.debug=true
+    tomcat::jvmproperty { 'sun.security.krb5.debug':
+      value         => $debug,
+      servicename   => $servicename,
+      catalina_base => $catalina_base,
+    }
+  }
 
   file { "${catalina_base}/conf/jaas.conf":
     ensure  => 'present',
