@@ -3,6 +3,7 @@ define tomcat::deploywar (
                             $source,
                             $catalina_base = "/opt/${name}",
                             $servicename   = $name,
+                            $app_base      = 'webapps',
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -15,7 +16,7 @@ define tomcat::deploywar (
     $serviceinstance=Service[$servicename]
   }
 
-  file { "${catalina_base}/webapps/${warname}.war":
+  file { "${catalina_base}/${app_base}/${warname}.war":
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',

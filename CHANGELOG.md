@@ -5,6 +5,7 @@
 * added defaults for **tomcat::realm::jndi**
 * added debug option for **tomcat::krb5**
 * added **tomcat::jvmproperty**
+* added app_base to **tomcat::deploywar**
 
 ## 0.4.18
 
