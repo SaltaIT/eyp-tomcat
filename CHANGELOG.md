@@ -6,6 +6,7 @@
 * added debug option for **tomcat::krb5**
 * added **tomcat::jvmproperty**
 * added app_base to **tomcat::deploywar**
+* improved acceptance testing
 
 ## 0.4.18
 
