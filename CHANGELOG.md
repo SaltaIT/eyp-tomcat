@@ -7,6 +7,7 @@
 * added **tomcat::jvmproperty**
 * added app_base to **tomcat::deploywar**
 * improved acceptance testing
+* added concat serverxml: 29 - end host
 
 ## 0.4.18
 
@@ -68,7 +69,6 @@
   * reloadable set by default to true
   * path is now mandatory
   * path related bugfix
-  * added concat serverxml: 29 - end host
 
 ## 0.4.3
 
