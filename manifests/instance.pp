@@ -14,7 +14,8 @@
 # 24 - end realms
 # 25 - host
 # 28 - context
-# 30 - end service
+# 29 - end host
+# 30 - end engine - end service
 # 99 - end server
 #
 define tomcat::instance (
@@ -261,6 +262,12 @@ define tomcat::instance (
     target  => "${catalina_base}/conf/server.xml",
     order   => '25',
     content => template("${module_name}/serverxml/25_host.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/conf/server.xml end host":
+    target  => "${catalina_base}/conf/server.xml",
+    order   => '29',
+    content => "</Host>\n",
   }
 
   concat::fragment{ "${catalina_base}/conf/server.xml end service":
