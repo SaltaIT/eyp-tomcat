@@ -21,7 +21,7 @@ define tomcat::deploywar (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    require => File["${catalina_base}/webapps"],
+    require => File["${catalina_base}/${app_base}"],
     notify  => $serviceinstance,
     source  => $source,
   }
