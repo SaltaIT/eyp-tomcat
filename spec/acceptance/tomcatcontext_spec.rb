@@ -63,9 +63,9 @@ describe 'tomcat context' do
       its(:content) { should match '<Manager pathname="" />' }
     end
 
-    it "session cookie name" do
-      expect(shell("curl -u tomcat:lol localhost:3335/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
-    end
+    #it "session cookie name" do
+    #  expect(shell("curl -u tomcat:lol localhost:3335/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
+    #end
 
   end
 end
