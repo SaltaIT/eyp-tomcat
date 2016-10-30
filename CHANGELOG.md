@@ -68,7 +68,7 @@
   * reloadable set by default to true
   * path is now mandatory
   * path related bugfix
-  * added concat serverxml: 29: end host
+  * added concat serverxml: 29 - end host
 
 ## 0.4.3
 
