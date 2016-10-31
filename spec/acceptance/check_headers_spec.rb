@@ -45,7 +45,7 @@ describe 'tomcat context headers' do
     end
 
     it "catalina.out content" do
-      expect(shell("sleep 30s; cat /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
+      expect(shell("sleep 100s; cat /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
     end
 
     #! cat /opt/tomcat-8888/logs/catalina.out  | grep SEVERE
