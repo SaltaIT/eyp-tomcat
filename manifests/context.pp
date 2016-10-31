@@ -19,7 +19,7 @@ define tomcat::context(
 
   concat::fragment{ "${catalina_base}/conf/server.xml context ${name} ${catalina_base} ${servicename} ${path}":
     target  => "${catalina_base}/conf/server.xml",
-    order   => '28',
+    order   => '26',
     content => template("${module_name}/conf/context.erb"),
   }
 
