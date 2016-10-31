@@ -279,7 +279,7 @@ define tomcat::instance (
   concat::fragment{ "${catalina_base}/conf/server.xml end host":
     target  => "${catalina_base}/conf/server.xml",
     order   => '27',
-    content => "</Host>\n",
+    content => "        </Host>\n",
   }
 
   #

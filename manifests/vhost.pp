@@ -45,7 +45,7 @@ define tomcat::vhost(
   concat::fragment{ "${catalina_base}/conf/sites/${vhostname}.xml end host":
     target  => "${catalina_base}/conf/sites/${vhostname}.xml",
     order   => '99',
-    content => "</Host>\n",
+    content => "        </Host>\n",
   }
 
 }
