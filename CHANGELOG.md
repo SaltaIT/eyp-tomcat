@@ -3,6 +3,11 @@
 ## 0.4.19
 
 * added defaults for **tomcat::realm::jndi**
+* added debug option for **tomcat::krb5**
+* added **tomcat::jvmproperty**
+* added app_base to **tomcat::deploywar**
+* improved acceptance testing
+* added concat serverxml: 29 - end host
 
 ## 0.4.18
 

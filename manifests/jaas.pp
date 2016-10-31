@@ -38,6 +38,7 @@ define tomcat::jaas (
 
   if($debug)
   {
+    #TODO: identificar LDAP vs kerberos
     #-Dsun.security.krb5.debug=true
     tomcat::jvmproperty { 'sun.security.krb5.debug':
       value         => $debug,
