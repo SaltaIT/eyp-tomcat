@@ -48,6 +48,10 @@ describe 'tomcat context headers' do
       expect(shell("sleep 100s; cat /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
     end
 
+    it "netstat listen" do
+      expect(shell("netstat -tpln").exit_code).to be_zero
+    end
+
     it "server.xml content" do
       expect(shell("cat /opt/tomcat-8888/conf/server.xml").exit_code).to be_zero
     end
