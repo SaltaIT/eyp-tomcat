@@ -30,6 +30,7 @@ describe 'tomcat context headers' do
         connector_port=>'8888',
         jmx_port => '3336',
         lockoutrealm => true,
+        connector_http_server => ''TERRALLIURE,
       }
 
       tomcat::contextxml { 'tomcat-8888':
@@ -63,6 +64,10 @@ describe 'tomcat context headers' do
 
     it "session cookie name" do
       expect(shell("curl -u tomcat:lol localhost:8888/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
+    end
+
+    it "server header" do
+      expect(shell("curl -u tomcat:lol localhost:8888/manager/html -vvv 2>&1 | grep TERRALLIURE").exit_code).to be_zero
     end
 
   end
