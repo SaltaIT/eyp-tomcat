@@ -5,6 +5,7 @@ define tomcat::vhost(
                       $autodeploy    = true,
                       $servicename   = $name,
                       $catalina_base = "/opt/${name}",
+                      $tomcat_user   = $tomcat::params::default_tomcat_user,
                     ) {
 
   if ! defined(Class['tomcat'])

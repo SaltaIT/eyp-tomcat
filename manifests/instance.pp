@@ -210,7 +210,7 @@ define tomcat::instance (
     owner   => $tomcat_user,
     group   => $tomcat_user,
     mode    => '0755',
-    require => File["$catalina_base/conf"],
+    require => File["${catalina_base}/conf"],
   }
 
   concat { "${catalina_base}/conf/server.xml":
