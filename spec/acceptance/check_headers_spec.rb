@@ -63,11 +63,11 @@ describe 'tomcat context headers' do
     end
 
     it "session cookie name" do
-      expect(shell("curl -u tomcat:lol localhost:8888/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
+      expect(shell("curl --connect-timeout 30 --max-time 30 -u tomcat:lol localhost:8888/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
     end
 
     it "server header" do
-      expect(shell("curl -u tomcat:lol localhost:8888/manager/html -vvv 2>&1 | grep TERRALLIURE").exit_code).to be_zero
+      expect(shell("curl --connect-timeout 30 --max-time 30 -u tomcat:lol localhost:8888/manager/html -vvv 2>&1 | grep TERRALLIURE").exit_code).to be_zero
     end
 
   end
