@@ -30,7 +30,7 @@ describe 'tomcat context headers' do
         connector_port=>'8888',
         jmx_port => '3336',
         lockoutrealm => true,
-        connector_http_server => ''TERRALLIURE,
+        connector_http_server => 'TERRALLIURE',
       }
 
       tomcat::contextxml { 'tomcat-8888':
