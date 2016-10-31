@@ -27,7 +27,7 @@ describe 'tomcat context headers' do
         tomcatpw => 'lol',
         shutdown_port=>'3333',
         ajp_port=>'3334',
-        connector_port=>'8888',
+        connector_port=>'1111',
         jmx_port => '3336',
         lockoutrealm => true,
         connector_http_server => 'TERRALLIURE',
@@ -48,8 +48,9 @@ describe 'tomcat context headers' do
       expect(shell("sleep 100s; cat /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
     end
 
-    it "netstat listen" do
-      expect(shell("netstat -tpln").exit_code).to be_zero
+    #INFO: Server startup
+    it "Server startup" do
+      expect(shell("sleep 100s; greo 'Server startup' /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
     end
 
     it "server.xml content" do
@@ -75,11 +76,11 @@ describe 'tomcat context headers' do
     end
 
     it "session cookie name" do
-      expect(shell("curl --connect-timeout 30 --max-time 30 -u tomcat:lol localhost:8888/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
+      expect(shell("curl --connect-timeout 30 --max-time 30 -u tomcat:lol 127.0.0.1:1111/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
     end
 
     it "server header" do
-      expect(shell("curl --connect-timeout 30 --max-time 30 -u tomcat:lol localhost:8888/manager/html -vvv 2>&1 | grep TERRALLIURE").exit_code).to be_zero
+      expect(shell("curl --connect-timeout 30 --max-time 30 -u tomcat:lol 127.0.0.1:1111/manager/html -vvv 2>&1 | grep TERRALLIURE").exit_code).to be_zero
     end
 
   end
