@@ -72,7 +72,7 @@ describe 'tomcat context headers' do
     end
 
     describe port(1111) do
-      it { should_not be_listening }
+      it { should be_listening }
     end
 
     it "session cookie name" do
