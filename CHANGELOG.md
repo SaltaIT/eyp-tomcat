@@ -8,6 +8,7 @@
 * added app_base to **tomcat::deploywar**
 * improved acceptance testing
 * added concat serverxml: 29 - end host
+* debian 8 acceptance testing
 
 ## 0.4.18
 
