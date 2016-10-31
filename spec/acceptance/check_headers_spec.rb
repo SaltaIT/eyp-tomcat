@@ -44,14 +44,18 @@ describe 'tomcat context headers' do
     end
 
     #! cat /opt/tomcat-8888/logs/catalina.out  | grep SEVERE
-    #it "error free server startup" do
-    #  expect(shell("sleep 10; ! cat /opt/tomcat-8888/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
-    #end
+    it "error free server startup" do
+      expect(shell("sleep 10; ! cat /opt/tomcat-8888/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
+    end
 
 
     describe file("/opt/tomcat-8888/conf/context.xml") do
       it { should be_file }
       its(:content) { should match 'sessionCookieName="INDEPENDENCIA"' }
+    end
+
+    describe port(1111) do
+      it { should_not be_listening }
     end
 
     it "session cookie name" do
