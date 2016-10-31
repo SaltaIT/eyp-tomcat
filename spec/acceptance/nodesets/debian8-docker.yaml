@@ -5,7 +5,7 @@ HOSTS:
       strict_variables:
     platform: debian-8-amd64
     hypervisor : docker
-    image: ubuntu:14.04
+    image: debian:8
     docker_preserve_image: true
     docker_image_commands:
       - 'apt-get install libssl-dev gcc make tar wget openjdk-7-jdk -y'
