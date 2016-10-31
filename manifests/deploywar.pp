@@ -13,7 +13,11 @@ define tomcat::deploywar (
 
   if($servicename!=undef)
   {
-    $serviceinstance=Service[$servicename]
+    $serviceinstance=Tomcat::Instance::Service[$servicename]
+  }
+  else
+  {
+    $serviceinstance=undef
   }
 
   file { "${catalina_base}/${app_base}/${warname}.war":

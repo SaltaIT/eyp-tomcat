@@ -17,7 +17,11 @@ define tomcat::libstarball(
 
   if($servicename!=undef)
   {
-    $serviceinstance=Service[$servicename]
+    $serviceinstance=Tomcat::Instance::Service[$servicename]
+  }
+  else
+  {
+    $serviceinstance=undef
   }
 
   if($purge_old)

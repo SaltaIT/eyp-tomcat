@@ -20,7 +20,11 @@ define tomcat::contextxml (
 
   if($servicename!=undef)
   {
-    $serviceinstance=Service[$servicename]
+    $serviceinstance=Tomcat::Instance::Service[$servicename]
+  }
+  else
+  {
+    $serviceinstance=undef
   }
 
   concat { "${catalina_base}/conf/context.xml":

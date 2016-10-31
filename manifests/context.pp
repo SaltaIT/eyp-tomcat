@@ -11,12 +11,6 @@ define tomcat::context(
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-
-  if($servicename!=undef)
-  {
-    $serviceinstance=Service[$servicename]
-  }
-
   concat::fragment{ "${catalina_base}/conf/server.xml context ${name} ${catalina_base} ${servicename} ${path}":
     target  => "${catalina_base}/conf/server.xml",
     order   => '26',
