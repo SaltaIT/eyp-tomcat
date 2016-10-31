@@ -50,7 +50,7 @@ describe 'tomcat context headers' do
 
     #INFO: Server startup
     it "Server startup" do
-      expect(shell("sleep 100s; greo 'Server startup' /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
+      expect(shell("sleep 100s; grep 'Server startup' /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
     end
 
     it "server.xml content" do
