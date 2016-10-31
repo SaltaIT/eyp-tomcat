@@ -9,6 +9,7 @@
 * improved acceptance testing
 * added concat serverxml: 29 - end host
 * debian 8 acceptance testing
+* added **tomcat::alias**
 
 ## 0.4.18
 

@@ -205,6 +205,14 @@ define tomcat::instance (
     require => File[$catalina_base],
   }
 
+  file { "${catalina_base}/conf/sites":
+    ensure  => 'directory',
+    owner   => $tomcat_user,
+    group   => $tomcat_user,
+    mode    => '0755',
+    require => File["$catalina_base/conf"],
+  }
+
   concat { "${catalina_base}/conf/server.xml":
     ensure  => 'present',
     owner   => $tomcat_user,
@@ -258,6 +266,10 @@ define tomcat::instance (
     content => template("${module_name}/serverxml/24_endrealms.erb"),
   }
 
+  #
+  # default vhost
+  #
+
   concat::fragment{ "${catalina_base}/conf/server.xml host":
     target  => "${catalina_base}/conf/server.xml",
     order   => '25',
@@ -269,6 +281,10 @@ define tomcat::instance (
     order   => '27',
     content => "</Host>\n",
   }
+
+  #
+  # end default vhost
+  #
 
   concat::fragment{ "${catalina_base}/conf/server.xml end service":
     target  => "${catalina_base}/conf/server.xml",
@@ -424,6 +440,7 @@ define tomcat::instance (
                         "${catalina_base}/temp",
                         "${catalina_base}/bin",
                         "${catalina_base}/conf",
+                        "${catalina_base}/conf/sites",
                         "${catalina_base}/webapps",
                         "${catalina_base}/bin/startup.sh",
                         "${catalina_base}/bin/shutdown.sh",
