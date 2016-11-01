@@ -10,11 +10,6 @@ define tomcat::jvmproperty(
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-  if($servicename!=undef)
-  {
-    $serviceinstance=Service[$servicename]
-  }
-
   concat::fragment{ "${catalina_base}/bin/setenv.sh JVM property ${property} ${value}":
     target  => "${catalina_base}/bin/setenv.sh",
     order   => '55',

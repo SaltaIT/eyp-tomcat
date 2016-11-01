@@ -48,11 +48,6 @@ define tomcat::resource (
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-  if($servicename!=undef)
-  {
-    $serviceinstance=Service[$servicename]
-  }
-
   if(!defined(Concat::Fragment["${catalina_base}/conf/server.xml globalnamingresources ini"]))
   {
     concat::fragment{ "${catalina_base}/conf/server.xml globalnamingresources ini":

@@ -17,7 +17,7 @@ define tomcat::krb5::keytab (
 
   if($servicename!=undef)
   {
-    $serviceinstance=Service[$servicename]
+    $serviceinstance=Tomcat::Instance::Service[$servicename]
   }
   else
   {
@@ -31,5 +31,6 @@ define tomcat::krb5::keytab (
     mode    => '0644',
     require => File["${catalina_base}/conf"],
     source  => $source,
+    notify  => $serviceinstance,
   }
 }

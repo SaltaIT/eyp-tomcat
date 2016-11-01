@@ -36,10 +36,26 @@ class tomcat::params() {
               $systemd=false
               $develpkg=[ 'libapr1-dev', 'libapr1' ]
             }
+            /^16.*$/:
+            {
+              $systemd=true
+              $develpkg=[ 'libapr1-dev', 'libapr1' ]
+            }
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
-        'Debian': { fail('Unsupported')  }
+        'Debian':
+        {
+          case $::operatingsystemrelease
+          {
+            /^8.*$/:
+            {
+              $systemd=true
+              $develpkg=[ 'libapr1-dev', 'libapr1' ]
+            }
+            default: { fail("Unsupported Debian version! - ${::operatingsystemrelease}")  }
+          }
+        }
         default: { fail('Unsupported Debian flavour!')  }
       }
     }

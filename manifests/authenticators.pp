@@ -25,7 +25,11 @@ define tomcat::authenticators (
 
   if($servicename!=undef)
   {
-    $serviceinstance=Service[$servicename]
+    $serviceinstance=Tomcat::Instance::Service[$servicename]
+  }
+  else
+  {
+    $serviceinstance=undef
   }
 
   exec { "mkdir p tomcat::authenticators ${name} ${catalina_base}":

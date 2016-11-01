@@ -13,7 +13,11 @@ define tomcat::login(
 
   if($servicename!=undef)
   {
-    $serviceinstance=Service[$servicename]
+    $serviceinstance=Tomcat::Instance::Service[$servicename]
+  }
+  else
+  {
+    $serviceinstance=undef
   }
 
   file { "${catalina_base}/conf/login.conf":

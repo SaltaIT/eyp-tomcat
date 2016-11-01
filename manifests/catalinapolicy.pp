@@ -11,7 +11,11 @@ define tomcat::catalinapolicy (
 
   if($servicename!=undef)
   {
-    $serviceinstance=Service[$servicename]
+    $serviceinstance=Tomcat::Instance::Service[$servicename]
+  }
+  else
+  {
+    $serviceinstance=undef
   }
 
   file { "${catalina_base}/conf/catalina.policy":

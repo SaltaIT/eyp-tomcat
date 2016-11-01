@@ -1,9 +1,7 @@
-define tomcat::context(
-                        $path,
+define tomcat::alias(
+                        $url,
                         $servicename           = $name,
                         $catalina_base         = "/opt/${name}",
-                        $docbase               = undef,
-                        $reloadable            = true,
                       ) {
 
   if ! defined(Class['tomcat'])
@@ -11,10 +9,10 @@ define tomcat::context(
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-  concat::fragment{ "${catalina_base}/conf/server.xml context ${name} ${catalina_base} ${servicename} ${path}":
+  concat::fragment{ "${catalina_base}/conf/server.xml alias ${name} ${catalina_base} ${servicename} ${url}":
     target  => "${catalina_base}/conf/server.xml",
     order   => '26',
-    content => template("${module_name}/conf/context.erb"),
+    content => "<Alias>${url}</Alias>\n",
   }
 
 }
