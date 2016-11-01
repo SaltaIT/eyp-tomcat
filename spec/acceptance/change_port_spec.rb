@@ -4,7 +4,7 @@ require 'spec_helper_acceptance'
 
 describe 'tomcat class' do
 
-  context 'changigh port' do
+  context 'changing port' do
     # Using puppet_apply as a helper
 
     it "kill java" do
@@ -34,6 +34,10 @@ describe 'tomcat class' do
         connector_http_server => 'LOLserver',
     	}
 
+      tomcat::contextxml { 'tomcat-1111':
+        session_cookie_name => 'INDEPENDENCIA',
+      }
+
       EOF
 
       # Run it twice and test for idempotency
@@ -58,6 +62,10 @@ describe 'tomcat class' do
     it "connector_http_server" do
       expect(shell("curl -I localhost:1111 | grep LOLserver").exit_code).to be_zero
     end
+
+    it "session cookie name" do
+      expect(shell("curl --connect-timeout 30 --max-time 30 -u tomcat:lol 127.0.0.1:1111/manager/html -vvv 2>&1 | grep \"Set-Cookie\" | grep INDEPENDENCIA").exit_code).to be_zero
+    end
   end
 
   context 'changing port from 1111 to 1115' do
@@ -78,6 +86,10 @@ describe 'tomcat class' do
         jmx_port => '1114',
         java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
     	}
+
+      tomcat::contextxml { 'tomcat-1111':
+        session_cookie_name => 'INDEPENDENCIA',
+      }
 
       EOF
 
