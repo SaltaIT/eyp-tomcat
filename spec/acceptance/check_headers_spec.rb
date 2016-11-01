@@ -20,20 +20,20 @@ describe 'tomcat context headers' do
 
       class { 'tomcat':
         tomcat_url => 'http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.tar.gz',
-        nativelibrary => false,
+        nativelibrary => true,
       }
 
-      tomcat::instance { 'tomcat-8888':
+      tomcat::instance { 'tomcat-1111':
         tomcatpw => 'lol',
-        shutdown_port=>'3333',
-        ajp_port=>'3334',
+        shutdown_port=>'1113',
+        ajp_port=>'1112',
         connector_port=>'1111',
-        jmx_port => '3336',
-        lockoutrealm => true,
-        connector_http_server => 'TERRALLIURE',
+        jmx_port => '1114',
+        java_library_path => '/usr/local/apr/lib/:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib',
+        connector_http_server => 'LOLserver',
       }
 
-      tomcat::contextxml { 'tomcat-8888':
+      tomcat::contextxml { 'tomcat-1111':
         session_cookie_name => 'INDEPENDENCIA',
       }
 
@@ -45,28 +45,28 @@ describe 'tomcat context headers' do
     end
 
     it "catalina.out content" do
-      expect(shell("sleep 100s; cat /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
+      expect(shell("sleep 100s; cat /opt/tomcat-1111/logs/catalina.out").exit_code).to be_zero
     end
 
     #INFO: Server startup
     it "Server startup" do
-      expect(shell("sleep 100s; grep 'Server startup' /opt/tomcat-8888/logs/catalina.out").exit_code).to be_zero
+      expect(shell("sleep 100s; grep 'Server startup' /opt/tomcat-1111/logs/catalina.out").exit_code).to be_zero
     end
 
     it "server.xml content" do
-      expect(shell("cat /opt/tomcat-8888/conf/server.xml").exit_code).to be_zero
+      expect(shell("cat /opt/tomcat-1111/conf/server.xml").exit_code).to be_zero
     end
 
     it "context.xml content" do
-      expect(shell("cat /opt/tomcat-8888/conf/context.xml").exit_code).to be_zero
+      expect(shell("cat /opt/tomcat-1111/conf/context.xml").exit_code).to be_zero
     end
 
     #! cat /opt/tomcat-8888/logs/catalina.out  | grep SEVERE
     it "error free server startup" do
-      expect(shell("sleep 10; ! cat /opt/tomcat-8888/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
+      expect(shell("sleep 10; ! cat /opt/tomcat-1111/logs/catalina.out  | grep SEVERE").exit_code).to be_zero
     end
 
-    describe file("/opt/tomcat-8888/conf/context.xml") do
+    describe file("/opt/tomcat-1111/conf/context.xml") do
       it { should be_file }
       its(:content) { should match 'sessionCookieName="INDEPENDENCIA"' }
     end
