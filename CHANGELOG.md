@@ -10,6 +10,7 @@
 * added concat serverxml: 29 - end host
 * debian 8 acceptance testing
 * added **tomcat::alias**
+* added ubuntu 16.04
 
 ## 0.4.18
 

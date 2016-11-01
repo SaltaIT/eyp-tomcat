@@ -36,6 +36,11 @@ class tomcat::params() {
               $systemd=false
               $develpkg=[ 'libapr1-dev', 'libapr1' ]
             }
+            /^16.*$/:
+            {
+              $systemd=true
+              $develpkg=[ 'libapr1-dev', 'libapr1' ]
+            }
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
