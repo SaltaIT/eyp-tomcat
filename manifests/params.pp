@@ -48,7 +48,7 @@ class tomcat::params() {
         {
           case $::operatingsystemrelease
           {
-            '8':
+            /^8.*$/:
             {
               $systemd=true
               $develpkg=[ 'libapr1-dev', 'libapr1' ]
