@@ -53,6 +53,7 @@ class tomcat::params() {
               $systemd=true
               $develpkg=[ 'libapr1-dev', 'libapr1' ]
             }
+            default: { fail("Unsupported Debian version! - ${::operatingsystemrelease}")  }
         }
         default: { fail('Unsupported Debian flavour!')  }
       }
