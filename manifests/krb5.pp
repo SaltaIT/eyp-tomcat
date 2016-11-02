@@ -3,9 +3,11 @@ define tomcat::krb5 (
                             $realm,
                             $kdc,
                             $keytab_source,
-                            $default_keytab = undef,
-                            $servicename   = $name,
-                            $catalina_base = "/opt/${name}",
+                            $forwardable            = true,
+                            $use_subject_creds_only = false,
+                            $default_keytab         = undef,
+                            $servicename            = $name,
+                            $catalina_base          = "/opt/${name}",
                           ) {
   #
   validate_array($kdc)
@@ -17,6 +19,24 @@ define tomcat::krb5 (
   else
   {
     $serviceinstance=undef
+  }
+
+  #javax.security.auth.useSubjectCredsOnly=false
+  tomcat::jvmproperty { "${catalina_base} javax.security.auth.useSubjectCredsOnly":
+    property      => 'javax.security.auth.useSubjectCredsOnly',
+    value         => $use_subject_creds_only,
+    servicename   => $servicename,
+    catalina_base => $catalina_base,
+    require       => File["${catalina_base}/conf/krb5.ini"],
+  }
+
+  # redundat, just to be on the safe side
+  tomcat::jvmproperty { "${catalina_base} java.security.krb5.conf":
+    property      => 'java.security.krb5.conf',
+    value         => "${catalina_base}/conf/krb5.ini",
+    servicename   => $servicename,
+    catalina_base => $catalina_base,
+    require       => File["${catalina_base}/conf/krb5.ini"],
   }
 
   file { "${catalina_base}/conf/krb5.ini":
