@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 0.4.20
+
+* rollback use **tomcat:jvmproperty** for java.security.auth.login.config instead of a template file due to this:
+```
+# puppet agent --test
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Loading facts
+Error: Could not retrieve catalog from remote server: Error 400 on SERVER: Duplicate declaration: Tomcat::Jvmproperty[java.security.auth.login.config] is already declared in file /etc/instance-puppet-modules/tomcat/manifests/jaas.pp:74; cannot redeclare at /etc/instance-puppet-modules/tomcat/manifests/jaas.pp:74 on node demotomcat.systemadmin.es
+Warning: Not using cache on failed catalog
+Error: Could not retrieve catalog; skipping run
+
+```
+
 ## 0.4.19
 
 * added defaults for **tomcat::realm::jndi**

@@ -10,7 +10,7 @@ define tomcat::jvmproperty(
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-  concat::fragment{ "${catalina_base}/bin/setenv.sh JVM property ${property} ${value}":
+  concat::fragment{ "${catalina_base}/bin/setenv.sh JVM property ${property} ${value} ${servicename}":
     target  => "${catalina_base}/bin/setenv.sh",
     order   => '55',
     content => template("${module_name}/conf/jvm/jvm_properties.erb"),
