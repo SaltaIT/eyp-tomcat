@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.24
+
+* jaas typo
+
 ## 0.4.23
 
 * pushing back use **tomcat:jvmproperty** for java.security.auth.login.config instead of a template
