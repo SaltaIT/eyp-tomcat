@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.26
+
+* init script: cd to CATALINA_BASE
+
 ## 0.4.25
 
 * jaas typo
