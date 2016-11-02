@@ -48,7 +48,7 @@ define tomcat::jaas (
   {
     #TODO: identificar LDAP vs kerberos
     #-Dsun.security.krb5.debug=true
-    tomcat::jvmproperty { 'sun.security.krb5.debug':
+    tomcat::jvmproperty { "${catalina_base} sun.security.krb5.debug":
       property      => 'sun.security.krb5.debug',
       value         => $debug,
       servicename   => $servicename,
@@ -67,7 +67,7 @@ define tomcat::jaas (
   }
 
   #java.security.auth.login.config
-  tomcat::jvmproperty { 'java.security.auth.login.config':
+  tomcat::jvmproperty { "${catalina_base} java.security.auth.login.config":
     property      => 'java.security.auth.login.config',
     value         => "${catalina_base}/conf/jaas.conf",
     servicename   => $servicename,

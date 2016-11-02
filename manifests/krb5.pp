@@ -22,7 +22,7 @@ define tomcat::krb5 (
   }
 
   #javax.security.auth.useSubjectCredsOnly=false
-  tomcat::jvmproperty { 'javax.security.auth.useSubjectCredsOnly':
+  tomcat::jvmproperty { "${catalina_base} javax.security.auth.useSubjectCredsOnly":
     property      => 'javax.security.auth.useSubjectCredsOnly',
     value         => $use_subject_creds_only,
     servicename   => $servicename,
@@ -31,7 +31,7 @@ define tomcat::krb5 (
   }
 
   # redundat, just to be on the safe side
-  tomcat::jvmproperty { 'java.security.krb5.conf':
+  tomcat::jvmproperty { "${catalina_base} java.security.krb5.conf":
     property      => 'java.security.krb5.conf',
     value         => "${catalina_base}/conf/krb5.ini",
     servicename   => $servicename,
