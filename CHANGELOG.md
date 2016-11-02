@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.22
+
+* bugfix **tomcat::jvmproperty**
+
 ## 0.4.21
 
 * added debug option for jaas
