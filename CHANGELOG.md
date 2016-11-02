@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.4.21
+
+* added debug option for jaas
+
+
 ## 0.4.20
 
 * rollback use **tomcat:jvmproperty** for java.security.auth.login.config instead of a template file due to this:

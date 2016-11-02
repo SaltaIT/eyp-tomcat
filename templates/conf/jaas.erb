@@ -10,7 +10,7 @@ com.sun.security.jgss.krb5.initiate {
     moduleBanner=<%= @module_banner %>
     storePass=<%= @store_pass %>
     storeKey=true
-    debug=false;
+    debug=<%= @debug %>;
 };
 
 com.sun.security.jgss.krb5.accept {
@@ -25,7 +25,7 @@ com.sun.security.jgss.krb5.accept {
     refreshKrb5Config=<% @refresh_krb5_config %>
     moduleBanner=<%= @module_banner %>
     storePass=<%= @store_pass %>
-    debug=false;
+    debug=<%= @debug %>;
 };
 <%- else -%>
 <%= @app %> {
