@@ -3,14 +3,17 @@
 ## 0.4.19
 
 * added defaults for **tomcat::realm::jndi**
-* added debug option for **tomcat::krb5**
 * added **tomcat::jvmproperty**
 * added app_base to **tomcat::deploywar**
 * improved acceptance testing
 * added concat serverxml: 29 - end host
-* debian 8 acceptance testing
 * added **tomcat::alias**
-* added ubuntu 16.04
+* added debian 8 to acceptance testing
+* **tomcat::jaas** rewritten to use **tomcat:jvmproperty** for java.security.auth.login.config instead of a template file
+* **tomcat::krb5**:
+  * added **debug** and **forwardable** options
+  * added java.security.krb5.conf as a **tomcat::jvmproperty**
+  * added javax.security.auth.useSubjectCredsOnly as **tomcat::jvmproperty**
 
 ## 0.4.18
 
