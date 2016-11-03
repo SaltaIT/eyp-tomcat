@@ -4,6 +4,7 @@ define tomcat::deploywar (
                             $catalina_base = "/opt/${name}",
                             $servicename   = $name,
                             $app_base      = 'webapps',
+                            $add_root_ln   = false,
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -30,4 +31,12 @@ define tomcat::deploywar (
     source  => $source,
   }
 
+  if($add_root_ln)
+  {
+    file { "${catalina_base}/${app_base}/ROOT.war":
+      ensure  => 'link',
+      target  => "${catalina_base}/${app_base}/${warname}.war",
+      require => File["${catalina_base}/${app_base}/${warname}.war"],
+    }
+  }
 }

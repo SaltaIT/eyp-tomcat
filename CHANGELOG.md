@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.27
+
+* added option add_root_ln to tomcat::deploywar to create a symlink for ROOT.war
+
 ## 0.4.26
 
 * init script: cd to CATALINA_BASE
