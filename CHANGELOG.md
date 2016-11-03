@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.28
+
+* tomcat::krb5 added allow_weak_crypto
+
 ## 0.4.27
 
 * added option add_root_ln to tomcat::deploywar to create a symlink for ROOT.war
