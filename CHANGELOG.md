@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.30
+
+* updated systemd to use PIDfile
+
 ## 0.4.29
 
 * template krb5 lowercase and weak crypto to false

@@ -1,6 +1,6 @@
 {
   "name": "eyp-tomcat",
-  "version": "0.4.29",
+  "version": "0.4.30",
   "author": "eyp",
   "summary": "multi instance tomcat",
   "license": "Apache-2.0",
@@ -10,7 +10,7 @@
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0"},
     {"name":"puppetlabs/concat","version_requirement":">= 1.2.3"},
-    {"version_requirement":">= 0.1.7 < 0.2.0","name":"eyp/systemd"}
+    {"version_requirement":">= 0.1.11 < 0.2.0","name":"eyp/systemd"}
   ],
   "operatingsystem_support": [
     {
