@@ -37,6 +37,7 @@ define tomcat::deploywar (
       ensure  => 'link',
       target  => "${catalina_base}/${app_base}/${warname}.war",
       require => File["${catalina_base}/${app_base}/${warname}.war"],
+      notify  => $serviceinstance,
     }
   }
 }
