@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.29
+
+* template krb5 lowercase and weak crypto to false
+
 ## 0.4.28
 
 * tomcat::krb5 added allow_weak_crypto
