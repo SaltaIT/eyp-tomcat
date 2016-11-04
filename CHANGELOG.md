@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.4.34
+## 0.4.35
 
 * PID path back to /var/run
 * changed startup systemd's startup user
