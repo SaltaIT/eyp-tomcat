@@ -8,10 +8,9 @@
 	default_keytab_name = FILE:<%= @catalina_base %>/conf/<%= @default_keytab %>
 	<%- end -%>
 
-	default_tkt_enctypes = aes256-cts-hmac-sha1-96,aes128-cts,rc4-hmac,des3-cbc-sha1,des-cbc-crc
-	default_tgs_enctypes = aes256-cts-hmac-sha1-96,aes128-cts,rc4-hmac,des3-cbc-sha1,des-cbc-crc
-	permitted_enctypes   = aes256-cts-hmac-sha1-96,aes128-cts,rc4-hmac,des3-cbc-sha1,des-cbc-crc
-
+	default_tkt_enctypes = arcfour-hmac-md5,rc4-hmac
+	default_tgs_enctypes = arcfour-hmac-md5,rc4-hmac
+	permitted_enctypes   = arcfour-hmac-md5,rc4-hmac
 	forwardable=<%= @forwardable %>
 
 	allow_weak_crypto=<%= @allow_weak_crypto %>

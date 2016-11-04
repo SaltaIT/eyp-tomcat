@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.4.42
+
+* template krb4, rc4 only
+
+## 0.4.41
+
+* template krb5
+
 ## 0.4.40
 
 * added **tomcat::valve**
