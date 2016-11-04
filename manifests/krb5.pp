@@ -5,6 +5,7 @@ define tomcat::krb5 (
                             $keytab_source,
                             $forwardable            = true,
                             $use_subject_creds_only = false,
+                            $allow_weak_crypto      = false,
                             $default_keytab         = undef,
                             $servicename            = $name,
                             $catalina_base          = "/opt/${name}",

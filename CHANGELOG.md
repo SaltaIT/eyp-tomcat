@@ -1,5 +1,69 @@
 # CHANGELOG
 
+## 0.4.42
+
+* template krb4, rc4 only
+
+## 0.4.41
+
+* template krb5
+  * arcfour-hmac-md5,aes256-cts-hmac-sha1-96,aes128-cts,rc4-hmac
+
+## 0.4.40
+
+* added **tomcat::valve**
+
+## 0.4.39
+
+* dropped debug for JNDI realm
+
+## 0.4.38
+
+* lint
+
+## 0.4.37
+
+* added JNDI realm debug
+
+## 0.4.36
+
+* enforced group ID if tomcat_user_uid is set
+
+## 0.4.35
+
+* PID path back to /var/run
+* changed startup systemd's startup user
+
+## 0.4.33
+
+* bugfix systemd PID
+
+## 0.4.32
+
+* variable tomcat_user_uid to define tomcat's uid
+* added "user" variable to **tomcat::resource**
+* changed PID path
+
+## 0.4.31
+
+* changed systemd's init script to force /bin/bash
+
+## 0.4.30
+
+* updated systemd to use PIDfile
+
+## 0.4.29
+
+* template krb5 lowercase and weak crypto to false
+
+## 0.4.28
+
+* tomcat::krb5 added allow_weak_crypto
+
+## 0.4.27
+
+* added option add_root_ln to tomcat::deploywar to create a symlink for ROOT.war
+
 ## 0.4.26
 
 * init script: cd to CATALINA_BASE
