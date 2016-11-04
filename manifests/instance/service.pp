@@ -35,7 +35,7 @@ define tomcat::instance::service(
           restart   => 'no',
           user      => 'tomcat',
           group     => 'tomcat',
-          pid_file  => "/var/run/${instancename}.pid",
+          pid_file  => "${catalina_base}/.tomcat.pid",
         }
       }
     }

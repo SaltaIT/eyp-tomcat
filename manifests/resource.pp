@@ -28,6 +28,7 @@ define tomcat::resource (
                           $driver_class_name               = undef,
                           $resource_url                    = undef,
                           $username                        = undef,
+                          $user                            = undef,
                           $password                        = undef,
                           $initial_size                    = undef,
                           $max_active                      = undef,

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.4.32
+
+* variable tomcat_user_uid to define tomcat's uid
+* added "user" variable to **tomcat::resource**
+* changed PID path
+
 ## 0.4.31
 
 * changed systemd's init script to force /bin/bash
