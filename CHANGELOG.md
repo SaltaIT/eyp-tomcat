@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.36
+
+* enforced group ID if tomcat_user_uid is set
+
 ## 0.4.35
 
 * PID path back to /var/run

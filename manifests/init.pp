@@ -24,7 +24,8 @@ class tomcat(
   if($manage_tomcat_user)
   {
     group { $tomcat_user:
-      ensure  => present,
+      ensure => present,
+      gid    => $tomcat_user_uid,
     }
 
     user { $tomcat_user:
