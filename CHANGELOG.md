@@ -7,6 +7,7 @@
 ## 0.4.41
 
 * template krb5
+  * arcfour-hmac-md5,aes256-cts-hmac-sha1-96,aes128-cts,rc4-hmac
 
 ## 0.4.40
 
