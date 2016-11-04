@@ -4,7 +4,6 @@ define tomcat::instance::service(
                                   $service_ensure        = 'running',
                                   $service_enable        = true,
                                   $instancename          = $name,
-                                  $catalina_base         = "/opt/${name}",
                                 ) {
   #
   $is_docker_container_var=getvar('::eyp_docker_iscontainer')
@@ -34,9 +33,7 @@ define tomcat::instance::service(
           notify    => Service[$instancename],
           forking   => true,
           restart   => 'no',
-          user      => 'tomcat',
-          group     => 'tomcat',
-          pid_file  => "${catalina_base}/.tomcat.pid",
+          pid_file  => "/var/run/${instancename}.pid",
         }
       }
     }
