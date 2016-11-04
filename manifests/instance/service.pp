@@ -26,8 +26,8 @@ define tomcat::instance::service(
         include systemd
 
         systemd::service { $instancename:
-          execstart => "/etc/init.d/${instancename} start",
-          execstop  => "/etc/init.d/${instancename} stop",
+          execstart => "/bin/bash /etc/init.d/${instancename} start",
+          execstop  => "/bin/bash /etc/init.d/${instancename} stop",
           require   => File["/etc/init.d/${instancename}"],
           before    => Service[$instancename],
           notify    => Service[$instancename],

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.31
+
+* changed systemd's init script to force /bin/bash
+
 ## 0.4.30
 
 * updated systemd to use PIDfile
