@@ -2,7 +2,8 @@
         <Valve
           className="<%= @classname %>"
           <%- if defined?(@options) -%>
-          <% @options.each do | key, value | -%>
+            <% @options.each do | key, value | -%>
           <%= key %>="<%= value %>"
+            <%- end -%>
           <%- end -%>
           />
