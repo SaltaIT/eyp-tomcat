@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.37
+
+* added JNDI realm debug
+
 ## 0.4.36
 
 * enforced group ID if tomcat_user_uid is set
