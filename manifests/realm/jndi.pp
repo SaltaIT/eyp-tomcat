@@ -73,7 +73,6 @@ define tomcat::realm::jndi(
                             $role_subtree   = true,
                             $role_nested    = true,
                             $user_role_name = 'memberOf',
-                            $debug          = undef,
                           ) {
   #
   concat::fragment{ "${catalina_base}/conf/server.xml realm jdni":

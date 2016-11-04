@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 0.4.40
+
+* added **tomcat::valve**
+
+## 0.4.39
+
+* dropped debug for JNDI realm
+
+## 0.4.38
+
+* lint
+
 ## 0.4.37
 
 * added JNDI realm debug
