@@ -4,6 +4,7 @@ define tomcat::instance::service(
                                   $service_ensure        = 'running',
                                   $service_enable        = true,
                                   $instancename          = $name,
+                                  $catalina_base         = "/opt/${name}",
                                 ) {
   #
   $is_docker_container_var=getvar('::eyp_docker_iscontainer')

@@ -457,6 +457,7 @@ define tomcat::instance (
     manage_docker_service => $manage_docker_service,
     service_ensure        => $ensure,
     service_enable        => $enable,
+    catalina_base         => $catalina_base,
   }
 
   if($catalina_rotate!=undef)

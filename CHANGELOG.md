@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.33
+
+* bugfix systemd PID
+
 ## 0.4.32
 
 * variable tomcat_user_uid to define tomcat's uid
