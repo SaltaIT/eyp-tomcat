@@ -64,15 +64,16 @@ define tomcat::realm::jndi(
                             $servicename    = $name,
                             $order          = '1',
                             #options
-                            $role_search = '(member={0})',
-                            $role_name = 'cn',
-                            $user_search = '(sAMAccountName={0})',
+                            $role_search    = '(member={0})',
+                            $role_name      = 'cn',
+                            $user_search    = '(sAMAccountName={0})',
                             $alternate_url  = undef,
                             $referrals      = 'follow',
                             $user_subtree   = true,
                             $role_subtree   = true,
                             $role_nested    = true,
                             $user_role_name = 'memberOf',
+                            $debug          = undef,
                           ) {
   #
   concat::fragment{ "${catalina_base}/conf/server.xml realm jdni":

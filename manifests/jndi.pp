@@ -3,7 +3,6 @@ define tomcat::jndi (
                             $ldapbase,
                             $ldapadmin,
                             $ldapadminpassword,
-                            $debug         = undef,
                             $servicename   = $name,
                             $catalina_base = "/opt/${name}",
                           ) {
