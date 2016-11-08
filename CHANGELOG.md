@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.4.44
+
+* added default template for logging properties
+* **INCOMPATIBLE CHANGE**: changed catalina.out default date format to ISO 8601
+
 ## 0.4.43
 
 * deleted **eyp_tomcat_check_jdk**

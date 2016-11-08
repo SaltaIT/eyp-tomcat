@@ -1,7 +1,15 @@
+#
+# -Djava.util.logging.config.file
+#
+# ISO 8601 date:
+# java.util.logging.SimpleFormatter.format = %1$tF %1$tT %2$s%n%4$s: %5$s%6$s%n
+#
+#
 define tomcat::loggingproperties(
                                   $source,
-                                  $catalina_base = "/opt/${name}",
-                                  $servicename   = $name,
+                                  $catalina_base          = "/opt/${name}",
+                                  $servicename            = $name,
+                                  $simpleformatter_format = '%1$tF %1$tT %2$s%n%4$s: %5$s%6$s%n',
                                 ) {
 
   if ! defined(Class['tomcat'])
@@ -18,14 +26,28 @@ define tomcat::loggingproperties(
     $serviceinstance=undef
   }
 
-  file { "${catalina_base}/conf/logging.properties":
-    ensure  => 'present',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => File["${catalina_base}/conf"],
-    notify  => $serviceinstance,
-    source  => $source,
+  if($source!=undef)
+  {
+    file { "${catalina_base}/conf/logging.properties":
+      ensure  => 'present',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      require => File["${catalina_base}/conf"],
+      notify  => $serviceinstance,
+      source  => $source,
+    }
   }
-
+  else
+  {
+    file { "${catalina_base}/conf/logging.properties":
+      ensure  => 'present',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      require => File["${catalina_base}/conf"],
+      notify  => $serviceinstance,
+      source  => $source,
+    }
+  }
 }
