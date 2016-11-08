@@ -6,10 +6,11 @@
 #
 #
 define tomcat::loggingproperties(
-                                  $source                 = undef,
-                                  $catalina_base          = "/opt/${name}",
-                                  $servicename            = $name,
-                                  $simpleformatter_format = '%1$tF %1$tT %2$s%n%4$s: %5$s%6$s%n',
+                                  $source                  = undef,
+                                  $catalina_base           = "/opt/${name}",
+                                  $logging_properties_file = "/opt/${name}/conf/logging.properties",
+                                  $servicename             = $name,
+                                  $simpleformatter_format  = '%1$tF %1$tT %2$s%n%4$s: %5$s%6$s%n',
                                 ) {
 
   if ! defined(Class['tomcat'])
@@ -26,9 +27,18 @@ define tomcat::loggingproperties(
     $serviceinstance=undef
   }
 
+  #java.util.logging.config.file
+  tomcat::jvmproperty { "${catalina_base} java.util.logging.config.file":
+    property      => 'java.util.logging.config.file',
+    value         => $logging_properties_file,
+    servicename   => $serviceinstance,
+    catalina_base => $catalina_base,
+    require       => File[$logging_properties_file],
+  }
+
   if($source!=undef)
   {
-    file { "${catalina_base}/conf/logging.properties":
+    file { $logging_properties_file:
       ensure  => 'present',
       owner   => 'root',
       group   => 'root',
@@ -40,7 +50,7 @@ define tomcat::loggingproperties(
   }
   else
   {
-    file { "${catalina_base}/conf/logging.properties":
+    file { $logging_properties_file:
       ensure  => 'present',
       owner   => 'root',
       group   => 'root',

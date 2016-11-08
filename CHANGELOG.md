@@ -2,8 +2,10 @@
 
 ## 0.4.44
 
-* added default template for logging properties
-* **INCOMPATIBLE CHANGE**: changed catalina.out default date format to ISO 8601
+* logging properties:
+  * added default template for logging properties
+  * **INCOMPATIBLE CHANGE**: changed catalina.out default date format to ISO 8601
+  * added -Djava.util.logging.config.file to be able to configure an custom file
 * bugfix **connector_ajp_packet_size**
 
 ## 0.4.43
