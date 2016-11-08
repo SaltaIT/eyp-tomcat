@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.43
+
+* deleted **eyp_tomcat_check_jdk**
+
 ## 0.4.42
 
 * template krb4, rc4 only
