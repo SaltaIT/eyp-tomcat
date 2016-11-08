@@ -1,12 +1,12 @@
 #
 # -Djava.util.logging.config.file
 #
-# ISO 8601 date:
+# ISO  date:
 # java.util.logging.SimpleFormatter.format = %1$tF %1$tT %2$s%n%4$s: %5$s%6$s%n
 #
 #
 define tomcat::loggingproperties(
-                                  $source,
+                                  $source                 = undef,
                                   $catalina_base          = "/opt/${name}",
                                   $servicename            = $name,
                                   $simpleformatter_format = '%1$tF %1$tT %2$s%n%4$s: %5$s%6$s%n',
@@ -47,7 +47,7 @@ define tomcat::loggingproperties(
       mode    => '0644',
       require => File["${catalina_base}/conf"],
       notify  => $serviceinstance,
-      source  => $source,
+      content => template("${module_name}/properties/logging.properties.erb"),
     }
   }
 }
