@@ -4,7 +4,7 @@
 
 * added default template for logging properties
 * **INCOMPATIBLE CHANGE**: changed catalina.out default date format to ISO 8601
-* bugfix connector_ajp_packet_size
+* bugfix **connector_ajp_packet_size**
 
 ## 0.4.43
 
