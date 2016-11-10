@@ -24,6 +24,7 @@ define tomcat::krb5 (
                             $default_keytab         = undef,
                             $servicename            = $name,
                             $catalina_base          = "/opt/${name}",
+                            $enctypes               = [ 'rc4-hmac', 'des-cbc-crc', 'des-cbc-md5' ],
                           ) {
   #
   validate_array($kdc)
