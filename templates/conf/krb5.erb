@@ -8,9 +8,12 @@
 	default_keytab_name = FILE:<%= @catalina_base %>/conf/<%= @default_keytab %>
 	<%- end -%>
 
-	default_tkt_enctypes = aes128-cts,rc4-hmac,des3-cbc-sha1,des-cbc-crc
-	default_tgs_enctypes = aes128-cts,rc4-hmac,des3-cbc-sha1,des-cbc-crc
-	permitted_enctypes   = aes128-cts,rc4-hmac,des3-cbc-sha1,des-cbc-crc
+	default_tgs_enctypes = <%= @enctypes.join(' ') %>
+	default_tkt_enctypes = <%= @enctypes.join(' ') %>
+	permitted_enctypes = <%= @enctypes.join(' ') %>
+	forwardable=<%= @forwardable %>
+
+	allow_weak_crypto=<%= @allow_weak_crypto %>
 
 [realms]
 	LIFECAPNET.COM  = {
@@ -23,3 +26,5 @@
 [domain_realm]
 	.<%= @realm %> = <%= @realm %>
 	<%= @realm %> = <%= @realm %>
+	.<%= @realm.downcase %> = <%= @realm %>
+	<%= @realm.downcase %> = <%= @realm %>

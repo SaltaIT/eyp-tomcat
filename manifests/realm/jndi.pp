@@ -64,9 +64,9 @@ define tomcat::realm::jndi(
                             $servicename    = $name,
                             $order          = '1',
                             #options
-                            $role_search = '(member={0})',
-                            $role_name = 'cn',
-                            $user_search = '(sAMAccountName={0})',
+                            $role_search    = '(member={0})',
+                            $role_name      = 'cn',
+                            $user_search    = '(sAMAccountName={0})',
                             $alternate_url  = undef,
                             $referrals      = 'follow',
                             $user_subtree   = true,

@@ -9,6 +9,7 @@ class tomcat(
               $tomcat_user        = 'tomcat',
               $tomcat_user_home   = '/home/tomcat',
               $tomcat_user_shell  = '/bin/bash',
+              $tomcat_user_uid    = undef,
               $catalina_home      = '/opt/tomcat-home',
               $srcdir             = '/usr/local/src',
               $nativelibrary      = true,
@@ -23,12 +24,14 @@ class tomcat(
   if($manage_tomcat_user)
   {
     group { $tomcat_user:
-      ensure  => present,
+      ensure => present,
+      gid    => $tomcat_user_uid,
     }
 
     user { $tomcat_user:
       ensure     => present,
       shell      => $tomcat_user_shell,
+      uid        => $tomcat_user_uid,
       gid        => $tomcat_user,
       managehome => true,
       home       => $tomcat_user_home,

@@ -1,16 +1,131 @@
 # CHANGELOG
 
+## 0.4.44
+
+* logging properties:
+  * added default template for logging properties
+  * **INCOMPATIBLE CHANGE**: changed catalina.out default date format to ISO 8601
+  * added -Djava.util.logging.config.file to be able to configure an custom file
+* bugfix **connector_ajp_packet_size**
+* variables enctypes for krb5 
+
+## 0.4.43
+
+* deleted **eyp_tomcat_check_jdk**
+
+## 0.4.42
+
+* template krb5, rc4 only
+
+## 0.4.41
+
+* template krb5
+  * arcfour-hmac-md5,aes256-cts-hmac-sha1-96,aes128-cts,rc4-hmac
+
+## 0.4.40
+
+* added **tomcat::valve**
+
+## 0.4.39
+
+* dropped debug for JNDI realm
+
+## 0.4.38
+
+* lint
+
+## 0.4.37
+
+* added JNDI realm debug
+
+## 0.4.36
+
+* enforced group ID if tomcat_user_uid is set
+
+## 0.4.35
+
+* PID path back to /var/run
+* changed startup systemd's startup user
+
+## 0.4.33
+
+* bugfix systemd PID
+
+## 0.4.32
+
+* variable tomcat_user_uid to define tomcat's uid
+* added "user" variable to **tomcat::resource**
+* changed PID path
+
+## 0.4.31
+
+* changed systemd's init script to force /bin/bash
+
+## 0.4.30
+
+* updated systemd to use PIDfile
+
+## 0.4.29
+
+* template krb5 lowercase and weak crypto to false
+
+## 0.4.28
+
+* tomcat::krb5 added allow_weak_crypto
+
+## 0.4.27
+
+* added option add_root_ln to tomcat::deploywar to create a symlink for ROOT.war
+
+## 0.4.26
+
+* init script: cd to CATALINA_BASE
+
+## 0.4.25
+
+* jaas typo
+
+## 0.4.23
+
+* pushing back use **tomcat:jvmproperty** for java.security.auth.login.config instead of a template
+
+## 0.4.22
+
+* bugfix **tomcat::jvmproperty**
+
+## 0.4.21
+
+* added debug option for jaas
+
+
+## 0.4.20
+
+* rollback use **tomcat:jvmproperty** for java.security.auth.login.config instead of a template file due to this:
+```
+# puppet agent --test
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Loading facts
+Error: Could not retrieve catalog from remote server: Error 400 on SERVER: Duplicate declaration: Tomcat::Jvmproperty[java.security.auth.login.config] is already declared in file /etc/instance-puppet-modules/tomcat/manifests/jaas.pp:74; cannot redeclare at /etc/instance-puppet-modules/tomcat/manifests/jaas.pp:74 on node demotomcat.systemadmin.es
+Warning: Not using cache on failed catalog
+Error: Could not retrieve catalog; skipping run
+
+```
+
 ## 0.4.19
 
 * added defaults for **tomcat::realm::jndi**
-* added debug option for **tomcat::krb5**
 * added **tomcat::jvmproperty**
 * added app_base to **tomcat::deploywar**
 * improved acceptance testing
 * added concat serverxml: 29 - end host
-* debian 8 acceptance testing
 * added **tomcat::alias**
-* added ubuntu 16.04
+* added debian 8 to acceptance testing
+* **tomcat::jaas** rewritten to use **tomcat:jvmproperty** for java.security.auth.login.config instead of a template file
+* **tomcat::krb5**:
+  * added **debug** and **forwardable** options
+  * added java.security.krb5.conf as a **tomcat::jvmproperty**
+  * added javax.security.auth.useSubjectCredsOnly as **tomcat::jvmproperty**
 
 ## 0.4.18
 
