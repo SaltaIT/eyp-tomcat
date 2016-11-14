@@ -42,7 +42,7 @@
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector port="<%= @ajp_port %>"
                protocol="AJP/1.3"
-               <%- if defined?(@ajp_port) -%>
+               <%- if defined?(@connector_ajp_packet_size) -%>
                packetSize="<%= @connector_ajp_packet_size %>"
                <%- end -%>
                redirectPort="<%= @redirectPort %>" />

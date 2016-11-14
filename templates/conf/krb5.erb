@@ -8,9 +8,9 @@
 	default_keytab_name = FILE:<%= @catalina_base %>/conf/<%= @default_keytab %>
 	<%- end -%>
 
-	default_tkt_enctypes = arcfour-hmac-md5,rc4-hmac
-	default_tgs_enctypes = arcfour-hmac-md5,rc4-hmac
-	permitted_enctypes   = arcfour-hmac-md5,rc4-hmac
+	default_tgs_enctypes = <%= @enctypes.join(' ') %>
+	default_tkt_enctypes = <%= @enctypes.join(' ') %>
+	permitted_enctypes = <%= @enctypes.join(' ') %>
 	forwardable=<%= @forwardable %>
 
 	allow_weak_crypto=<%= @allow_weak_crypto %>

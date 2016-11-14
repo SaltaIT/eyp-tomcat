@@ -1,4 +1,19 @@
 # https://dzone.com/articles/do-not-publish-configuring-tomcat-single-sign-on-w
+
+# ; for Windows 2003
+#
+# ;          default_tgs_enctypes = rc4-hmac des-cbc-crc des-cbc-md5
+# ;          default_tkt_enctypes = rc4-hmac des-cbc-crc des-cbc-md5
+# ;          permitted_enctypes = rc4-hmac des-cbc-crc des-cbc-md5
+#
+# ; for Windows 2008 with AES
+#
+# ;        default_tgs_enctypes = aes256-cts-hmac-sha1-96 rc4-hmac des-cbc-crc des-cbc-md5
+# ;        default_tkt_enctypes = aes256-cts-hmac-sha1-96 rc4-hmac des-cbc-crc des-cbc-md5
+# ;        permitted_enctypes = aes256-cts-hmac-sha1-96 rc4-hmac des-cbc-crc des-cbc-md5
+#
+# ; for MIT/Heimdal kdc no need to restrict encryption type
+
 define tomcat::krb5 (
                             $realm,
                             $kdc,
@@ -9,6 +24,7 @@ define tomcat::krb5 (
                             $default_keytab         = undef,
                             $servicename            = $name,
                             $catalina_base          = "/opt/${name}",
+                            $enctypes               = [ 'rc4-hmac', 'des-cbc-crc', 'des-cbc-md5' ],
                           ) {
   #
   validate_array($kdc)

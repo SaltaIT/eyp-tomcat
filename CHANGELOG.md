@@ -1,8 +1,25 @@
 # CHANGELOG
 
+## 0.4.45
+
+* added variable for **pid_file**
+
+## 0.4.44
+
+* logging properties:
+  * added default template for logging properties
+  * **INCOMPATIBLE CHANGE**: changed catalina.out default date format to ISO 8601
+  * added -Djava.util.logging.config.file to be able to configure an custom file
+* bugfix **connector_ajp_packet_size**
+* variables enctypes for krb5
+
+## 0.4.43
+
+* deleted **eyp_tomcat_check_jdk**
+
 ## 0.4.42
 
-* template krb4, rc4 only
+* template krb5, rc4 only
 
 ## 0.4.41
 

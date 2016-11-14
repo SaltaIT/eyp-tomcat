@@ -16,7 +16,7 @@
 #
 #
 # Environment
-export CATALINA_PID=/var/run/<%= @instancename %>.pid
+export CATALINA_PID=<%= @pid_file %>
 export CATALINA_HOME=<%= scope.lookupvar('tomcat::catalina_home') %>
 export CATALINA_BASE=<%= @catalina_base %>
 export PATH=$JAVA_HOME/bin:$PATH
