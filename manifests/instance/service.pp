@@ -4,6 +4,7 @@ define tomcat::instance::service(
                                   $service_ensure        = 'running',
                                   $service_enable        = true,
                                   $instancename          = $name,
+                                  $pid_file              = "/var/run/${name}.pid",
                                 ) {
   #
   $is_docker_container_var=getvar('::eyp_docker_iscontainer')
@@ -33,7 +34,7 @@ define tomcat::instance::service(
           notify    => Service[$instancename],
           forking   => true,
           restart   => 'no',
-          pid_file  => "/var/run/${instancename}.pid",
+          pid_file  => $pid_file,
         }
       }
     }

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.45
+
+* added variable for **pid_file**
+
 ## 0.4.44
 
 * logging properties:
@@ -7,7 +11,7 @@
   * **INCOMPATIBLE CHANGE**: changed catalina.out default date format to ISO 8601
   * added -Djava.util.logging.config.file to be able to configure an custom file
 * bugfix **connector_ajp_packet_size**
-* variables enctypes for krb5 
+* variables enctypes for krb5
 
 ## 0.4.43
 

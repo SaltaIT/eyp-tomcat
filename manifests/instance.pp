@@ -21,6 +21,7 @@
 define tomcat::instance (
                           $tomcatpw                              = 'password',
                           $catalina_base                         = "/opt/${name}",
+                          $pid_file                              = "/var/run/${name}.pid",
                           $instancename                          = $name,
                           $pwdigest                              = 'sha',
                           $tomcat_user                           = $tomcat::params::default_tomcat_user,
@@ -457,6 +458,7 @@ define tomcat::instance (
     manage_docker_service => $manage_docker_service,
     service_ensure        => $ensure,
     service_enable        => $enable,
+    pid_file              => $pid_file,
   }
 
   if($catalina_rotate!=undef)
