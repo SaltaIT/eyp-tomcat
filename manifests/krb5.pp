@@ -18,13 +18,12 @@ define tomcat::krb5 (
                             $realm,
                             $kdc,
                             $keytab_source,
-                            $forwardable            = true,
                             $use_subject_creds_only = false,
-                            $allow_weak_crypto      = false,
                             $default_keytab         = undef,
                             $servicename            = $name,
                             $catalina_base          = "/opt/${name}",
-                            $enctypes               = [ 'rc4-hmac', 'des-cbc-crc', 'des-cbc-md5' ],
+                            $enctypes               = [ 'aes256-cts', 'aes128-cts', 'rc4-hmac', 'des3-cbc-sha1', 'des-cbc-crc' ],
+
                           ) {
   #
   validate_array($kdc)

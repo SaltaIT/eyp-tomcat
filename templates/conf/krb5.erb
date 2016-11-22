@@ -1,7 +1,3 @@
-#
-# puppet managed file
-#
-
 [libdefaults]
 	default_realm = <%= @realm %>
 	<%- if defined?(@default_keytab) -%>
@@ -11,9 +7,6 @@
 	default_tgs_enctypes = <%= @enctypes.join(' ') %>
 	default_tkt_enctypes = <%= @enctypes.join(' ') %>
 	permitted_enctypes = <%= @enctypes.join(' ') %>
-	forwardable=<%= @forwardable %>
-
-	allow_weak_crypto=<%= @allow_weak_crypto %>
 
 [realms]
 	LIFECAPNET.COM  = {
@@ -26,5 +19,3 @@
 [domain_realm]
 	.<%= @realm %> = <%= @realm %>
 	<%= @realm %> = <%= @realm %>
-	.<%= @realm.downcase %> = <%= @realm %>
-	<%= @realm.downcase %> = <%= @realm %>

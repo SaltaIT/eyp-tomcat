@@ -5,10 +5,6 @@ com.sun.security.jgss.krb5.initiate {
     principal="<%= @spn %>@<%= @realm %>"
     useKeyTab=true
     keyTab="<%= @catalina_base %>/conf/krb5.keytab"
-    isInitiator=<%= @is_initiator %>
-    refreshKrb5Config=<%= @refresh_krb5_config %>
-    moduleBanner=<%= @module_banner %>
-    storePass=<%= @store_pass %>
     storeKey=true
     debug=<%= @debug %>;
 };
@@ -21,10 +17,6 @@ com.sun.security.jgss.krb5.accept {
     keyTab="<%= @catalina_base %>/conf/krb5.keytab"
     storeKey=true
     useTicketCache=true
-    isInitiator=<%= @is_initiator %>
-    refreshKrb5Config=<%= @refresh_krb5_config %>
-    moduleBanner=<%= @module_banner %>
-    storePass=<%= @store_pass %>
     debug=<%= @debug %>;
 };
 <%- else -%>
