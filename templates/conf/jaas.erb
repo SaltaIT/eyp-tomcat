@@ -16,7 +16,7 @@ com.sun.security.jgss.krb5.accept {
     useKeyTab=true
     keyTab="<%= @catalina_base %>/conf/krb5.keytab"
     storeKey=true
-    useTicketCache=true
+    isInitiator=false
     debug=<%= @debug %>;
 };
 <%- else -%>

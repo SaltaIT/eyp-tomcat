@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.47
+
+* lint AD SSO
+
 ## 0.4.46
 
 * tomcat AD SSO cleanup
