@@ -1,30 +1,21 @@
-#
-# puppet managed file
-#
-
 [libdefaults]
-	default_realm = <%= @realm %>
-	<%- if defined?(@default_keytab) -%>
-	default_keytab_name = FILE:<%= @catalina_base %>/conf/<%= @default_keytab %>
-	<%- end -%>
+  default_realm = <%= @realm %>
+  <%- if defined?(@default_keytab) -%>
+  default_keytab_name = FILE:<%= @catalina_base %>/conf/<%= @default_keytab %>
+  <%- end -%>
 
-	default_tgs_enctypes = <%= @enctypes.join(' ') %>
-	default_tkt_enctypes = <%= @enctypes.join(' ') %>
-	permitted_enctypes = <%= @enctypes.join(' ') %>
-	forwardable=<%= @forwardable %>
-
-	allow_weak_crypto=<%= @allow_weak_crypto %>
+  default_tgs_enctypes = <%= @enctypes.join(' ') %>
+  default_tkt_enctypes = <%= @enctypes.join(' ') %>
+  permitted_enctypes   = <%= @enctypes.join(' ') %>
 
 [realms]
-	LIFECAPNET.COM  = {
+  LIFECAPNET.COM  = {
     <%- @kdc.each do | eachkdc | -%>
-		kdc = <%= eachkdc %>
+    kdc = <%= eachkdc %>
     <%- end -%>
-		default_domain = <%= @realm %>
+    default_domain = <%= @realm %>
 }
 
 [domain_realm]
-	.<%= @realm %> = <%= @realm %>
-	<%= @realm %> = <%= @realm %>
-	.<%= @realm.downcase %> = <%= @realm %>
-	<%= @realm.downcase %> = <%= @realm %>
+  .<%= @realm %> = <%= @realm %>
+  <%= @realm %> = <%= @realm %>

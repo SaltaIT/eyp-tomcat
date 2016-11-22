@@ -21,10 +21,6 @@ define tomcat::jaas (
                             $realm               = undef,
                             $spn                 = undef,
                             $debug               = false,
-                            $is_initiator        = true,
-                            $refresh_krb5_config = true,
-                            $module_banner       = true,
-                            $store_pass          = true,
                             #altres
                             $servicename         = $name,
                             $catalina_base       = "/opt/${name}",

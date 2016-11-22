@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.4.47
+
+* lint AD SSO
+
+## 0.4.46
+
+* tomcat AD SSO cleanup
+
 ## 0.4.45
 
 * added variable for **pid_file**
