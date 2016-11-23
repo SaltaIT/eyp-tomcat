@@ -2,7 +2,7 @@
 
 ## 0.4.48
 
-* added ensure for **tomcat::jaas**, **tomcat::krb5**
+* added ensure for **tomcat::jaas**, **tomcat::krb5** and **tomcat::jndi**
 
 ## 0.4.47
 
