@@ -23,7 +23,7 @@ define tomcat::krb5 (
                             $servicename            = $name,
                             $catalina_base          = "/opt/${name}",
                             $enctypes               = [ 'aes256-cts', 'aes128-cts', 'rc4-hmac', 'des3-cbc-sha1', 'des-cbc-crc' ],
-
+                            $ensure                 = 'present',
                           ) {
   #
   validate_array($kdc)
@@ -37,26 +37,39 @@ define tomcat::krb5 (
     $serviceinstance=undef
   }
 
-  #javax.security.auth.useSubjectCredsOnly=false
-  tomcat::jvmproperty { "${catalina_base} javax.security.auth.useSubjectCredsOnly":
-    property      => 'javax.security.auth.useSubjectCredsOnly',
-    value         => $use_subject_creds_only,
-    servicename   => $servicename,
-    catalina_base => $catalina_base,
-    require       => File["${catalina_base}/conf/krb5.ini"],
-  }
+  case $ensure
+  {
+    'present':
+    {
+      #javax.security.auth.useSubjectCredsOnly=false
+      tomcat::jvmproperty { "${catalina_base} javax.security.auth.useSubjectCredsOnly":
+        property      => 'javax.security.auth.useSubjectCredsOnly',
+        value         => $use_subject_creds_only,
+        servicename   => $servicename,
+        catalina_base => $catalina_base,
+        require       => File["${catalina_base}/conf/krb5.ini"],
+      }
 
-  # redundat, just to be on the safe side
-  tomcat::jvmproperty { "${catalina_base} java.security.krb5.conf":
-    property      => 'java.security.krb5.conf',
-    value         => "${catalina_base}/conf/krb5.ini",
-    servicename   => $servicename,
-    catalina_base => $catalina_base,
-    require       => File["${catalina_base}/conf/krb5.ini"],
+      # redundat, just to be on the safe side
+      tomcat::jvmproperty { "${catalina_base} java.security.krb5.conf":
+        property      => 'java.security.krb5.conf',
+        value         => "${catalina_base}/conf/krb5.ini",
+        servicename   => $servicename,
+        catalina_base => $catalina_base,
+        require       => File["${catalina_base}/conf/krb5.ini"],
+      }
+    }
+    'absent':
+    {
+    }
+    default:
+    {
+      fail('unsupported ensure for tomcat::krb5')
+    }
   }
 
   file { "${catalina_base}/conf/krb5.ini":
-    ensure  => 'present',
+    ensure  => $ensure,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
@@ -66,7 +79,7 @@ define tomcat::krb5 (
   }
 
   file { "${catalina_base}/conf/krb5.keytab":
-    ensure  => 'present',
+    ensure  => $ensure,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',

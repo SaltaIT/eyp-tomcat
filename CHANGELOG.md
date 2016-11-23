@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.48
+
+* added ensure for **tomcat::jaas**, **tomcat::krb5**, **tomcat::jndi** and **tomcat::login**
+
 ## 0.4.47
 
 * lint AD SSO

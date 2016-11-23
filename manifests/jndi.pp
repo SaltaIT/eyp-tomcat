@@ -5,6 +5,7 @@ define tomcat::jndi (
                             $ldapadminpassword,
                             $servicename   = $name,
                             $catalina_base = "/opt/${name}",
+                            $ensure        = 'present',
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -25,7 +26,7 @@ define tomcat::jndi (
   }
 
   file { "${catalina_base}/conf/jndi.properties":
-    ensure  => 'present',
+    ensure  => $ensure,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
