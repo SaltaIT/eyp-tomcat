@@ -4,6 +4,7 @@
 define tomcat::login(
                       $servicename   = $name,
                       $catalina_base = "/opt/${name}",
+                      $ensure        = 'present',
                     ) {
 
   if ! defined(Class['tomcat'])
@@ -21,7 +22,7 @@ define tomcat::login(
   }
 
   file { "${catalina_base}/conf/login.conf":
-    ensure  => 'present',
+    ensure  => $ensure,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
