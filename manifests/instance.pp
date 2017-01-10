@@ -467,7 +467,7 @@ define tomcat::instance (
     if(defined(Class['::logrotate']))
     {
       logrotate::logs { "${instancename}.catalina.out":
-        ensure       => $catalina_logrotate_ensure
+        ensure       => $catalina_logrotate_ensure,
         log          => "${catalina_base}/logs/catalina.out",
         compress     => true,
         copytruncate => true,
