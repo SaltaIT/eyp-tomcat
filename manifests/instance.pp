@@ -62,6 +62,7 @@ define tomcat::instance (
                           $rmi_server_hostname                   = undef,
                           $catalina_rotate                       = '15',
                           $catalina_size                         = '100M',
+                          $catalina_logrotate_ensure             = 'present',
                           $heapdump_oom_dir                      = undef,
                           $install_tomcat_manager                = true,
                           $shutdown_command                      = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
@@ -466,6 +467,7 @@ define tomcat::instance (
     if(defined(Class['::logrotate']))
     {
       logrotate::logs { "${instancename}.catalina.out":
+        ensure       => $catalina_logrotate_ensure,
         log          => "${catalina_base}/logs/catalina.out",
         compress     => true,
         copytruncate => true,
