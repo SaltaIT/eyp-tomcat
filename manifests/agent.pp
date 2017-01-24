@@ -2,12 +2,14 @@ define tomcat::agent (
                         $jar_name,
                         $agent_name,
                         $source        = undef,
+                        $tar_source    = undef,
                         $file_ln       = undef,
                         $catalina_base = "/opt/${name}",
                         $servicename   = $name,
                         $purge_old     = false,
                         $ensure        = 'present',
                         $comment       = undef
+                        $srcdir        = '/usr/local/src',
                       ) {
 
   if ! defined(Class['tomcat'])
@@ -15,14 +17,19 @@ define tomcat::agent (
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-  if($source==undef and $file_ln==undef)
+  if($source==undef and $file_ln==undef and $tar_source==undef )
   {
-    fail('You have to specify source or file_ln')
+    fail('You have to specify source, tar_source or file_ln')
   }
 
-  if($source!=undef and $file_ln!=undef)
+  if(($source!=undef or $tar_source!=undef) and $file_ln!=undef)
   {
-    fail('You cannotspecify both source and file_ln')
+    fail('You cannot specify both source and file_ln')
+  }
+
+  if($source!=undef and $tar_source!=undef)
+  {
+    fail('You cannot specify both source and tar_source')
   }
 
   if($file_ln!=undef)
@@ -69,6 +76,31 @@ define tomcat::agent (
       mode    => '0644',
       require => File["${catalina_base}/${agent_name}"],
       source  => $source,
+      notify  => $serviceinstance,
+    }
+  }
+
+  if($tar_source!=undef)
+  {
+    exec { "mkdir p ${srcdir} eyp-tomcat agent":
+      command => "mkdir -p ${srcdir}",
+      creates => $srcdir,
+    }
+
+    file { "${srcdir}/${agent_name}.tgz":
+      ensure  => $ensure,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      require => Exec["mkdir p ${srcdir} eyp-tomcat agent"],
+      source  => $tar_source,
+    }
+
+    exec { "untar ${srcdir}/${agent_name}.tgz":
+      command => "tar -xzf ${srcdir}/${agent_name}.tgz -C ${catalina_base}/${agent_name}/ ",
+      creates => "${catalina_base}/${agent_name}/${jar_name}.jar",
+      notify  => $serviceinstance,
+      require => File[ [ "${srcdir}/${agent_name}.tgz", "${catalina_base}/${agent_name}" ] ],
     }
   }
 
@@ -77,6 +109,7 @@ define tomcat::agent (
     file { "${catalina_base}/${agent_name}/${jar_name}.jar":
       ensure  => 'link',
       target  => $file_ln,
+      notify  => $serviceinstance,
       require => File["${catalina_base}/${agent_name}"],
     }
   }
