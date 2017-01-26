@@ -9,7 +9,7 @@ define tomcat::agent (
                         $servicename   = $name,
                         $purge_old     = false,
                         $ensure        = 'present',
-                        $comment       = undef,
+                        $description   = undef,
                         $srcdir        = '/usr/local/src',
                       ) {
 
