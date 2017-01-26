@@ -4,6 +4,7 @@ define tomcat::agent (
                         $source        = undef,
                         $tar_source    = undef,
                         $file_ln       = undef,
+                        $install_type  = 'tar',
                         $catalina_base = "/opt/${name}",
                         $servicename   = $name,
                         $purge_old     = false,
@@ -17,19 +18,48 @@ define tomcat::agent (
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-  if($source==undef and $file_ln==undef and $tar_source==undef )
+  case $install_type
   {
-    fail('You have to specify source, tar_source or file_ln')
-  }
+    'tar':
+    {
+      if($source!=undef or $file_ln!=undef)
+      {
+        fail("please ensure you are using the correct install_type(${install_type})")
+      }
 
-  if(($source!=undef or $tar_source!=undef) and $file_ln!=undef)
-  {
-    fail('You cannot specify both source and file_ln')
-  }
+      if($tar_source==undef)
+      {
+        fail('please provide a tar_source')
+      }
+    }
+    'source':
+    {
+      if($tar_source!=undef or $file_ln!=undef)
+      {
+        fail("please ensure you are using the correct install_type(${install_type})")
+      }
 
-  if($source!=undef and $tar_source!=undef)
-  {
-    fail('You cannot specify both source and tar_source')
+      if($source==undef)
+      {
+        fail('please provide a source')
+      }
+    }
+    'link':
+    {
+      if($tar_source!=undef or $source!=undef)
+      {
+        fail("please ensure you are using the correct install_type(${install_type})")
+      }
+
+      if($file_ln==undef)
+      {
+        fail('please provide a file_ln')
+      }
+    }
+    default:
+    {
+      fail('unsupported installation type')
+    }
   }
 
   if($file_ln!=undef)
