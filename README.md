@@ -522,6 +522,16 @@ Error: bash -c "./configure --with-apr=/usr/bin/apr-1-config --with-java-home=$(
 Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: change from notrun to 0 failed: bash -c "./configure --with-apr=/usr/bin/apr-1-config --with-java-home=$(dirname $(dirname $(dirname $(find / -xdev -iname jni_md.h | head -n1))))" returned 1 instead of one of [0]
 ```
 
+tomcat agent
+
+```puppet
+tomcat::agent { 'tomcat-8080':
+  agent_name => 'demo',
+  jar_name => 'demo',
+  tar_source => 'puppet:///solr/apache-tomcat-7.0.62.tar.gz',
+}
+```
+
 ## Reference
 
 ### Global variables
