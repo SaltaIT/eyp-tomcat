@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.50
+
+* added tar as a installation method for tomcat::agent (changed behaviour)
+
 ## 0.4.49
 
 * added **catalina_logrotate_ensure** to enable/disable (present/absent) logrotate configuration
