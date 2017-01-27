@@ -608,13 +608,16 @@ tomcat::agent { 'tomcat-8080':
 
 * **jar_name**: jar to deploy (required)
 * **agent_name**: agent name, agent will be deployed on **catalina_base**/**agent_name** (required)
-* **source**: file source, must be a puppet resource (incompatible with **file_ln**)
-* **file_ln**: jar already in place, just add a softlink to it (incompatible with **source**)
+* **install_type**: installation type: source/tar/link (default: tar)
+* **source**: file source, must be a puppet resource (for installation type **source**)
+* **file_ln**: jar already in place, just add a softlink to it (for installation type **link**)
+* **tar_source**: tar source, must be a puppet resource (for installation type **tar**)
 * **catalina_base**: (default: /opt/${name})
 * **servicename**: (default: $name)
 * **purge_old**: purge old agent versions (default: false)
 * **ensure**: (default: present)
-* **comment**: commet to add in the setenv file to identify this agent (default: undef)
+* **description**: commet to add in the setenv file to identify this agent (default: undef)
+* **srcdir**: where to keep temporal files for tar based installation type (default: /usr/local/src)
 
 #### tomcat::driver::postgres
 
