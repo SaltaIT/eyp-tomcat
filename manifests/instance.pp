@@ -90,6 +90,10 @@ define tomcat::instance (
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
   }
 
+  # obtenir versio tomcat instalada al tomcathome
+  # [root@cpe0012044-front conf]# /opt/tomcat-home/bin/version.sh  | grep "Server version" | rev | cut -f 1 -d/ | rev
+  # 8.5.11
+
   if($tomcatpw=='password')
   {
     fail("Please change default password for tomcat instance: ${instancename}")
