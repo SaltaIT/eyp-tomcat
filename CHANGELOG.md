@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.53
+
+* bugfix tomcat-users.xml dependency
+
 ## 0.4.52
 
 * **INCOMPATIBLE CHANGE**: added variable **custom_webxml** to **tomcat::instance** (default: false) it copies web.xml from catalina_home to catalina_base (if you need to use a **custom web.xml** you are going to need to set it to **true**)
