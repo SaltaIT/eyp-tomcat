@@ -80,6 +80,7 @@ define tomcat::instance (
                           $jvm_route                             = undef,
                           $version_logger_listener               = true,
                           $enable_default_access_log             = true,
+                          $custom_webxml                         = false,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -103,17 +104,6 @@ define tomcat::instance (
   if($values)
   {
     validate_array($values)
-  }
-
-  validate_re($pwdigest, [ '^sha$', '^plaintext$'], 'Not a supported digest: sha/plaintext')
-
-  if ($pwdigest=='sha')
-  {
-    $digestedtomcatpw=sha1($tomcatpw)
-  }
-  else
-  {
-    $digestedtomcatpw=$tomcatpw
   }
 
   if(defined(Class['java']))
@@ -326,14 +316,35 @@ define tomcat::instance (
       }
     }
 
-    file { "${catalina_base}/conf/tomcat-users.xml":
+    concat { "${catalina_base}/conf/tomcat-users.xml":
       ensure  => 'present',
       owner   => $tomcat_user,
       group   => $tomcat_user,
       mode    => '0644',
       require => File["${catalina_base}/conf"],
       notify  => Tomcat::Instance::Service[$instancename],
+    }
+
+    concat::fragment{ "${catalina_base}/conf/tomcat-users.xml head":
+      target  => "${catalina_base}/conf/tomcat-users.xml",
+      order   => '00',
       content => template("${module_name}/tomcatusers.erb"),
+    }
+
+    tomcat::tomcatuser { "$instancename tomcat user":
+      tomcatuser    => 'tomcat',
+      password      => $tomcatpw,
+      catalina_base => $catalina_base,
+      servicename   => $instancename,
+      pwdigest      => $pwdigest,
+      roles         => [ 'tomcat', 'manager', 'admin', 'manager-gui' ],
+    }
+
+    #
+    concat::fragment{ "${catalina_base}/conf/tomcat-users.xml end":
+      target  => "${catalina_base}/conf/tomcat-users.xml",
+      order   => '99',
+      content => "</tomcat-users>\n",
     }
   }
   else
@@ -436,7 +447,6 @@ define tomcat::instance (
     group   => 'root',
     mode    => '0755',
     require => [ File[ [
-                        "${catalina_base}/conf/tomcat-users.xml",
                         "${catalina_base}/lib",
                         "${catalina_base}/logs",
                         "${catalina_base}/temp",
@@ -449,6 +459,7 @@ define tomcat::instance (
                         "${catalina_base}/bin/configtest.sh",
                       ] ],
                   Concat[ [ "${catalina_base}/bin/setenv.sh",
+                            "${catalina_base}/conf/tomcat-users.xml",
                             "${catalina_base}/conf/server.xml" ] ] ],
     content => template("${module_name}/multi/tomcat-init.erb"),
     notify  => Tomcat::Instance::Service[$instancename],
@@ -496,6 +507,18 @@ define tomcat::instance (
       require => [File["${catalina_base}/webapps"],
                   Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
                   Class['tomcat']],
+      before  => Tomcat::Instance::Service[$instancename],
+    }
+  }
+
+  if(!$custom_webxml)
+  {
+    exec { "cp web.xml from tomcat-home ${instancename}":
+      command => "cp -pr ${tomcat::catalina_home}/conf/web.xml ${catalina_base}/conf",
+      creates => "${catalina_base}/conf/web.xml",
+      require => [File["${catalina_base}/conf"],
+                  Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
+                  Class['tomcat'] ],
       before  => Tomcat::Instance::Service[$instancename],
     }
   }

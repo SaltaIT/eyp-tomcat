@@ -383,6 +383,15 @@ tomcatdriverpostgres:
   tomcat_retail50: {}
 ```
 
+#### add a new tomcatuser
+
+```puppet
+tomcat::tomcatuser { 'tomcat-8080':
+  tomcatuser => 'test',
+  tomcatpw => 'lol',
+}
+```
+
 ### init script usage
 
 #### options
@@ -603,6 +612,7 @@ tomcat::agent { 'tomcat-8080':
   * **webapps_owner**: webapps folder owner
   * **webapps_group**: webapps folder group
   * **webapps_mode**: webapps folder mode
+  * **custom_webxml**: copies web.xml from catalina_home to catalina_base. If you need to use a **custom web.xml** you are going to need to set it to **true**. (default: false)
 
 #### tomcat::agent
 
@@ -725,6 +735,15 @@ Install postgres driver for a given tomcat instance:
 * **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
 * **servicename**: tomcat's servicename (default: resource's name)
 
+#### tomcat:tomcatuser
+
+* **tomcatuser**: username (mandatory)
+* **password**: password (mandatory)
+* **catalina_base**: catalina base (default: /opt/<resource's name>)
+* **servicename**: instance name (default: resource's name)
+* **pwdigest**: password format, must match instance configuration (default: sha)
+* **roles**: list of roles (default: [ 'tomcat', 'manager', 'admin', 'manager-gui' ])
+
 ## Limitations
 
 Tested on:
@@ -732,6 +751,7 @@ Tested on:
 * CentOS 6
 * CentOS 7
 * Ubuntu 14.04
+* Ubuntu 16.04
 
 But should work anywhere
 
