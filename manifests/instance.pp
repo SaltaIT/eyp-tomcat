@@ -447,7 +447,6 @@ define tomcat::instance (
     group   => 'root',
     mode    => '0755',
     require => [ File[ [
-                        "${catalina_base}/conf/tomcat-users.xml",
                         "${catalina_base}/lib",
                         "${catalina_base}/logs",
                         "${catalina_base}/temp",
@@ -460,6 +459,7 @@ define tomcat::instance (
                         "${catalina_base}/bin/configtest.sh",
                       ] ],
                   Concat[ [ "${catalina_base}/bin/setenv.sh",
+                            "${catalina_base}/conf/tomcat-users.xml",
                             "${catalina_base}/conf/server.xml" ] ] ],
     content => template("${module_name}/multi/tomcat-init.erb"),
     notify  => Tomcat::Instance::Service[$instancename],
