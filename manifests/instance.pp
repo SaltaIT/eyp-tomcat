@@ -105,17 +105,6 @@ define tomcat::instance (
     validate_array($values)
   }
 
-  validate_re($pwdigest, [ '^sha$', '^plaintext$'], 'Not a supported digest: sha/plaintext')
-
-  if ($pwdigest=='sha')
-  {
-    $digestedtomcatpw=sha1($tomcatpw)
-  }
-  else
-  {
-    $digestedtomcatpw=$tomcatpw
-  }
-
   if(defined(Class['java']))
   {
     $dependency_check_java=Class['java']
@@ -326,14 +315,34 @@ define tomcat::instance (
       }
     }
 
-    file { "${catalina_base}/conf/tomcat-users.xml":
+    concat { "${catalina_base}/conf/tomcat-users.xml":
       ensure  => 'present',
       owner   => $tomcat_user,
       group   => $tomcat_user,
       mode    => '0644',
       require => File["${catalina_base}/conf"],
       notify  => Tomcat::Instance::Service[$instancename],
+    }
+
+    concat::fragment{ "${catalina_base}/conf/tomcat-users.xml head":
+      target  => "${catalina_base}/conf/tomcat-users.xml",
+      order   => '00',
       content => template("${module_name}/tomcatusers.erb"),
+    }
+
+    tomcat::tomcatuser { $instancename:
+      tomcatuser    => 'tomcat',
+      password      => $tomcatpw,
+      catalina_base => $catalina_base,
+      pwdigest      => $pwdigest,
+      roles         => [ 'tomcat', 'manager', 'admin', 'manager-gui' ],
+    }
+
+    #
+    concat::fragment{ "${catalina_base}/conf/tomcat-users.xml end":
+      target  => "${catalina_base}/conf/tomcat-users.xml",
+      order   => '99',
+      content => "</tomcat-users>\n",
     }
   }
   else

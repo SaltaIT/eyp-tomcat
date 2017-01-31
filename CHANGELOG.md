@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.4.51
+
+* added **tomcat::tomcatuser** (tomcat-user.xml user management)
+* **tomcat::instance** rewritten to use **tomcat::tomcatuser**
+
 ## 0.4.50
 
 * added tar as a installation method for tomcat::agent (changed behaviour)
