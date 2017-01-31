@@ -612,6 +612,7 @@ tomcat::agent { 'tomcat-8080':
   * **webapps_owner**: webapps folder owner
   * **webapps_group**: webapps folder group
   * **webapps_mode**: webapps folder mode
+  * **custom_webxml**: copies web.xml from catalina_home to catalina_base. If you need to use a **custom web.xml** you are going to need to set it to **true**. (default: false)
 
 #### tomcat::agent
 
