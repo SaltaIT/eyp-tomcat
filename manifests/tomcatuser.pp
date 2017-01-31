@@ -17,7 +17,7 @@ define tomcat::tomcatuser (
     $digestedpassword=$password
   }
 
-  concat::fragment{ "${catalina_base}/conf/tomcat-users.xml user ${tomcat_user}":
+  concat::fragment{ "${catalina_base}/conf/tomcat-users.xml user ${tomcatuser}":
     target  => "${catalina_base}/conf/tomcat-users.xml",
     order   => '55',
     content => template("${module_name}/tomcatusers/user.erb"),
