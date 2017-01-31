@@ -10,11 +10,11 @@ define tomcat::tomcatuser (
 
   if ($pwdigest=='sha')
   {
-    $digestedpassword=sha1($tomcatpw)
+    $digestedpassword=sha1($password)
   }
   else
   {
-    $digestedpassword=$tomcatpw
+    $digestedpassword=$password
   }
 
   concat::fragment{ "${catalina_base}/conf/tomcat-users.xml user ${tomcat_user}":
