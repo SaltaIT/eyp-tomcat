@@ -91,8 +91,12 @@ define tomcat::instance (
   }
 
   # obtenir versio tomcat instalada al tomcathome
-  # [root@cpe0012044-front conf]# /opt/tomcat-home/bin/version.sh  | grep "Server version" | rev | cut -f 1 -d/ | rev
+  # 
+  # # /opt/tomcat-home/bin/version.sh  | grep "Server version" | rev | cut -f 1 -d/ | rev
   # 8.5.11
+  # /opt/tomcat-home/bin/version.sh  | grep "Server version" | awk -F/ '{ print $NF }'
+  # 8.5.11
+
 
   if($tomcatpw=='password')
   {
