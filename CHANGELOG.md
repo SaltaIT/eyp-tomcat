@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.4.54
+
+* **INCOMPATIBLE CHANGE**: renamed **tomcat::instance** variable **errorReportValveClass** to **error_report_valve_class**
+* added **org.apache.catalina.valves.ErrorReportValve** management (showReport and showServerInfo) to be able to disable stack traces by default
+
 ## 0.4.53
 
 * bugfix tomcat-users.xml dependency

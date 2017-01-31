@@ -51,7 +51,7 @@ define tomcat::instance (
                           $redirectPort                          = '8443',
                           $realms                                = undef,
                           $values                                = undef,
-                          $errorReportValveClass                 = undef,
+                          $error_report_valve_class              = undef,
                           $maxThreads                            = '150',
                           $minSpareThreads                       = '4',
                           $connectionTimeout                     = '20000',
@@ -81,6 +81,8 @@ define tomcat::instance (
                           $version_logger_listener               = true,
                           $enable_default_access_log             = true,
                           $custom_webxml                         = false,
+                          $error_report_valve_show_report        = undef,
+                          $error_report_valve_show_server_info   = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -522,5 +524,41 @@ define tomcat::instance (
       before  => Tomcat::Instance::Service[$instancename],
     }
   }
+
+  # $error_report_valve_show_report        = undef,
+  # $error_report_valve_show_server_info   = undef,
+
+  if($error_report_valve_show_report!= undef or $error_report_valve_show_server_info!=undef)
+  {
+    if($error_report_valve_show_report==undef)
+    {
+      $error_report_valve_show_report_value=false
+    }
+    else
+    {
+      $error_report_valve_show_report_value=$error_report_valve_show_report
+    }
+
+    if($error_report_valve_show_server_info==undef)
+    {
+      $error_report_valve_show_server_info_value=false
+    }
+    else
+    {
+      $error_report_valve_show_server_info_value=$error_report_valve_show_server_info
+    }
+
+    tomcat::valve { 'org.apache.catalina.valves.ErrorReportValve':
+      servicename   => $instancename,
+      catalina_base => $catalina_base,
+      options       => {
+                          'showReport' => $error_report_valve_show_report_value,
+                          'showServerInfo' => $error_report_valve_show_server_info_value,
+                        },
+    }
+
+  }
+
+
 
 }
