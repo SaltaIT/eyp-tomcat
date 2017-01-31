@@ -330,10 +330,11 @@ define tomcat::instance (
       content => template("${module_name}/tomcatusers.erb"),
     }
 
-    tomcat::tomcatuser { $instancename:
+    tomcat::tomcatuser { "$instancename tomcat user":
       tomcatuser    => 'tomcat',
       password      => $tomcatpw,
       catalina_base => $catalina_base,
+      servicename   => $instancename
       pwdigest      => $pwdigest,
       roles         => [ 'tomcat', 'manager', 'admin', 'manager-gui' ],
     }
