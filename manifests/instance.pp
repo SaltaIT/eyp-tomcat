@@ -51,7 +51,6 @@ define tomcat::instance (
                           $redirectPort                          = '8443',
                           $realms                                = undef,
                           $values                                = undef,
-                          $error_report_valve_class              = undef,
                           $maxThreads                            = '150',
                           $minSpareThreads                       = '4',
                           $connectionTimeout                     = '20000',
@@ -81,8 +80,10 @@ define tomcat::instance (
                           $version_logger_listener               = true,
                           $enable_default_access_log             = true,
                           $custom_webxml                         = false,
-                          $error_report_valve_show_report        = undef,
-                          $error_report_valve_show_server_info   = undef,
+                          $add_error_report_valve_settings       = true,
+                          $error_report_valve_show_report        = false,
+                          $error_report_valve_show_server_info   = false,
+                          $error_report_valve_class              = 'org.apache.catalina.valves.ErrorReportValve',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -528,33 +529,16 @@ define tomcat::instance (
   # $error_report_valve_show_report        = undef,
   # $error_report_valve_show_server_info   = undef,
 
-  if($error_report_valve_show_report!= undef or $error_report_valve_show_server_info!=undef)
+  if($add_error_report_valve_settings)
   {
-    if($error_report_valve_show_report==undef)
-    {
-      $error_report_valve_show_report_value=false
-    }
-    else
-    {
-      $error_report_valve_show_report_value=$error_report_valve_show_report
-    }
-
-    if($error_report_valve_show_server_info==undef)
-    {
-      $error_report_valve_show_server_info_value=false
-    }
-    else
-    {
-      $error_report_valve_show_server_info_value=$error_report_valve_show_server_info
-    }
 
     tomcat::valve { $instancename:
-      classname     => 'org.apache.catalina.valves.ErrorReportValve',
+      classname     => $error_report_valve_class,
       servicename   => $instancename,
       catalina_base => $catalina_base,
       options       => {
-                          'showReport' => $error_report_valve_show_report_value,
-                          'showServerInfo' => $error_report_valve_show_server_info_value,
+                          'showReport' => $error_report_valve_show_report,
+                          'showServerInfo' => $error_report_valve_show_server_info,
                         },
     }
 
