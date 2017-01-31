@@ -548,7 +548,8 @@ define tomcat::instance (
       $error_report_valve_show_server_info_value=$error_report_valve_show_server_info
     }
 
-    tomcat::valve { 'org.apache.catalina.valves.ErrorReportValve':
+    tomcat::valve { $instancename:
+      classname     => 'org.apache.catalina.valves.ErrorReportValve'
       servicename   => $instancename,
       catalina_base => $catalina_base,
       options       => {
