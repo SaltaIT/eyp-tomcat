@@ -51,7 +51,6 @@ define tomcat::instance (
                           $redirectPort                          = '8443',
                           $realms                                = undef,
                           $values                                = undef,
-                          $errorReportValveClass                 = undef,
                           $maxThreads                            = '150',
                           $minSpareThreads                       = '4',
                           $connectionTimeout                     = '20000',
@@ -81,6 +80,10 @@ define tomcat::instance (
                           $version_logger_listener               = true,
                           $enable_default_access_log             = true,
                           $custom_webxml                         = false,
+                          $add_error_report_valve_settings       = true,
+                          $error_report_valve_show_report        = false,
+                          $error_report_valve_show_server_info   = false,
+                          $error_report_valve_class              = 'org.apache.catalina.valves.ErrorReportValve',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -522,5 +525,25 @@ define tomcat::instance (
       before  => Tomcat::Instance::Service[$instancename],
     }
   }
+
+  # $error_report_valve_show_report        = undef,
+  # $error_report_valve_show_server_info   = undef,
+
+  if($add_error_report_valve_settings)
+  {
+
+    tomcat::valve { $instancename:
+      classname     => $error_report_valve_class,
+      servicename   => $instancename,
+      catalina_base => $catalina_base,
+      options       => {
+                          'showReport' => $error_report_valve_show_report,
+                          'showServerInfo' => $error_report_valve_show_server_info,
+                        },
+    }
+
+  }
+
+
 
 }
