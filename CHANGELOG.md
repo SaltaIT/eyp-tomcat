@@ -8,6 +8,7 @@
   * error_report_valve_show_report (default: false)
   * error_report_valve_show_server_info (default: false)
 * added **org.apache.catalina.valves.ErrorReportValve** management (showReport and showServerInfo) to be able to disable stack traces by default
+* added variable to enable/disable JasperListener
 
 ## 0.4.53
 

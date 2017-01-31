@@ -78,6 +78,7 @@ define tomcat::instance (
                           $xml_namespace_aware                   = undef,
                           $jvm_route                             = undef,
                           $version_logger_listener               = true,
+                          $jasper_listener                       = true,
                           $enable_default_access_log             = true,
                           $custom_webxml                         = false,
                           $add_error_report_valve_settings       = true,
