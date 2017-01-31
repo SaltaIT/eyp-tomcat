@@ -334,7 +334,7 @@ define tomcat::instance (
       tomcatuser    => 'tomcat',
       password      => $tomcatpw,
       catalina_base => $catalina_base,
-      servicename   => $instancename
+      servicename   => $instancename,
       pwdigest      => $pwdigest,
       roles         => [ 'tomcat', 'manager', 'admin', 'manager-gui' ],
     }
