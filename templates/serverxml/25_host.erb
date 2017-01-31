@@ -5,7 +5,6 @@
             <% if defined?(@xml_namespace_aware) %>xmlNamespaceAware="<%= @xml_namespace_aware %>"<% end -%>
             <% if defined?(@errorReportValveClass) %>errorReportValveClass="<%= @errorReportValveClass %>" <% end -%>>
 
-
   <% if(@realms) -%>
   <% @realms.each do | realm | -%>
         <Realm className="<%= realm %>" />
