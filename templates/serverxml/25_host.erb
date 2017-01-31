@@ -5,11 +5,7 @@
             <% if defined?(@xml_namespace_aware) %>xmlNamespaceAware="<%= @xml_namespace_aware %>"<% end -%>
             <% if defined?(@errorReportValveClass) %>errorReportValveClass="<%= @errorReportValveClass %>" <% end -%>>
 
-        <!-- SingleSignOn valve, share authentication between web applications
-             Documentation at: /docs/config/valve.html -->
-        <!--
-        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
-        -->
+
   <% if(@realms) -%>
   <% @realms.each do | realm | -%>
         <Realm className="<%= realm %>" />
