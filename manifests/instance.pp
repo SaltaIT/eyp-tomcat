@@ -80,6 +80,7 @@ define tomcat::instance (
                           $jvm_route                             = undef,
                           $version_logger_listener               = true,
                           $enable_default_access_log             = true,
+                          $custom_webxml                         = false,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -506,6 +507,18 @@ define tomcat::instance (
       require => [File["${catalina_base}/webapps"],
                   Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
                   Class['tomcat']],
+      before  => Tomcat::Instance::Service[$instancename],
+    }
+  }
+
+  if(!$custom_webxml)
+  {
+    exec { "cp web.xml from tomcat-home ${instancename}":
+      command => "cp -pr ${tomcat::catalina_home}/conf/web.xml ${catalina_base}/conf",
+      creates => "${catalina_base}/conf/web.xml",
+      require => [File["${catalina_base}/conf"],
+                  Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
+                  Class['tomcat'] ],
       before  => Tomcat::Instance::Service[$instancename],
     }
   }
