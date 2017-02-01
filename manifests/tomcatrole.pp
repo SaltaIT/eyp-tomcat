@@ -1,6 +1,8 @@
 define tomcat::tomcatrole (
-                            $rolename    = $name,
+                            $rolename,
                             $description = undef,
+                            $catalina_base = "/opt/${name}",
+                            $servicename   = $name,
                           ) {
   concat::fragment{ "${catalina_base}/conf/tomcat-users.xml role ${rolename}":
     target  => "${catalina_base}/conf/tomcat-users.xml",

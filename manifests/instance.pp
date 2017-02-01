@@ -349,7 +349,7 @@ define tomcat::instance (
     }
 
     # tomcat user
-    tomcat::tomcatuser { "$instancename tomcat user":
+    tomcat::tomcatuser { "${instancename} tomcat user":
       tomcatuser    => 'tomcat',
       password      => $tomcatpw,
       catalina_base => $catalina_base,
@@ -363,10 +363,29 @@ define tomcat::instance (
     # <role rolename="admin"/>
     # <role rolename="manager-gui"/>
 
-    tomcat::tomcatrole { 'tomcat': }
-    tomcat::tomcatrole { 'manager': }
-    tomcat::tomcatrole { 'admin': }
-    tomcat::tomcatrole { 'manager-gui': }
+    tomcat::tomcatrole { "${instancename} tomcat role tomcat":
+      rolename      => 'tomcat',
+      catalina_base => $catalina_base,
+      servicename   => ${instancename},
+    }
+
+    tomcat::tomcatrole { "${instancename} tomcat role manager":
+      rolename      => 'manager',
+      catalina_base => $catalina_base,
+      servicename   => ${instancename},
+    }
+
+    tomcat::tomcatrole { "${instancename} tomcat role admin":
+    rolename      => 'admin',
+    catalina_base => $catalina_base,
+    servicename   => ${instancename},
+    }
+
+    tomcat::tomcatrole { "${instancename} tomcat role manager-gui":
+    rolename      => 'manager-gui',
+    catalina_base => $catalina_base,
+    servicename   => ${instancename},
+    }
 
     concat::fragment{ "${catalina_base}/conf/tomcat-users.xml end":
       target  => "${catalina_base}/conf/tomcat-users.xml",
@@ -561,7 +580,7 @@ define tomcat::instance (
       servicename   => $instancename,
       catalina_base => $catalina_base,
       options       => {
-                          'showReport' => $error_report_valve_show_report,
+                          'showReport'     => $error_report_valve_show_report,
                           'showServerInfo' => $error_report_valve_show_server_info,
                         },
     }
