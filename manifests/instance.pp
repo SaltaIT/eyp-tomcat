@@ -18,6 +18,11 @@
 # 30 - end engine - end service
 # 99 - end server
 #
+# concat tomcat-users.xml
+# 00 - header
+# 44 - roles
+# 55 - users
+# 99 - end tag
 define tomcat::instance (
                           $tomcatpw                              = 'password',
                           $catalina_base                         = "/opt/${name}",
@@ -91,7 +96,7 @@ define tomcat::instance (
   }
 
   # obtenir versio tomcat instalada al tomcathome
-  # 
+  #
   # # /opt/tomcat-home/bin/version.sh  | grep "Server version" | rev | cut -f 1 -d/ | rev
   # 8.5.11
   # /opt/tomcat-home/bin/version.sh  | grep "Server version" | awk -F/ '{ print $NF }'
@@ -343,6 +348,7 @@ define tomcat::instance (
       content => template("${module_name}/tomcatusers.erb"),
     }
 
+    # tomcat user
     tomcat::tomcatuser { "$instancename tomcat user":
       tomcatuser    => 'tomcat',
       password      => $tomcatpw,
@@ -352,7 +358,16 @@ define tomcat::instance (
       roles         => [ 'tomcat', 'manager', 'admin', 'manager-gui' ],
     }
 
-    #
+    # <role rolename="tomcat"/>
+    # <role rolename="manager"/>
+    # <role rolename="admin"/>
+    # <role rolename="manager-gui"/>
+
+    tomcat::tomcatrole { 'tomcat': }
+    tomcat::tomcatrole { 'manager': }
+    tomcat::tomcatrole { 'admin': }
+    tomcat::tomcatrole { 'manager-gui': }
+
     concat::fragment{ "${catalina_base}/conf/tomcat-users.xml end":
       target  => "${catalina_base}/conf/tomcat-users.xml",
       order   => '99',
