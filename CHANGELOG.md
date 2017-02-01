@@ -3,6 +3,11 @@
 ## 0.5.1
 
 * added **tomcat::tomcatrole** as a define (**tomcat::instance** has been rewritten to use it)
+* renamed uppercase variables from **tomcat::intance**:
+  * **redirectPort** to **redirect_port**
+  * **maxThreads** to **max_threads**
+  * **minSpareThreads** to **min_spare_threads**
+* deleted obsolete variable **connectionTimeout** from **tomcat::instance**
 
 ## 0.5.0
 
