@@ -3,7 +3,9 @@
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   <%- end -%>
   <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+  <%- if @jasper_listener -%>
   <Listener className="org.apache.catalina.core.JasperListener" />
+  <%- end -%>
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.1
+
+* added **tomcat::tomcatrole** as a define (**tomcat::instance** has been rewritten to use it)
+
 ## 0.5.0
 
 * **INCOMPATIBLE CHANGE**: renamed **tomcat::instance** variable **errorReportValveClass** to **error_report_valve_class**
@@ -8,6 +12,7 @@
   * error_report_valve_show_report (default: false)
   * error_report_valve_show_server_info (default: false)
 * added **org.apache.catalina.valves.ErrorReportValve** management (showReport and showServerInfo) to be able to disable stack traces by default
+* added variable to enable/disable JasperListener
 
 ## 0.4.53
 
