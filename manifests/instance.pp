@@ -366,25 +366,25 @@ define tomcat::instance (
     tomcat::tomcatrole { "${instancename} tomcat role tomcat":
       rolename      => 'tomcat',
       catalina_base => $catalina_base,
-      servicename   => ${instancename},
+      servicename   => $instancename,
     }
 
     tomcat::tomcatrole { "${instancename} tomcat role manager":
       rolename      => 'manager',
       catalina_base => $catalina_base,
-      servicename   => ${instancename},
+      servicename   => $instancename,
     }
 
     tomcat::tomcatrole { "${instancename} tomcat role admin":
-    rolename      => 'admin',
-    catalina_base => $catalina_base,
-    servicename   => ${instancename},
+      rolename      => 'admin',
+      catalina_base => $catalina_base,
+      servicename   => $instancename,
     }
 
     tomcat::tomcatrole { "${instancename} tomcat role manager-gui":
-    rolename      => 'manager-gui',
-    catalina_base => $catalina_base,
-    servicename   => ${instancename},
+      rolename      => 'manager-gui',
+      catalina_base => $catalina_base,
+      servicename   => $instancename,
     }
 
     concat::fragment{ "${catalina_base}/conf/tomcat-users.xml end":
