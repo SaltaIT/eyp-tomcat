@@ -8,7 +8,7 @@ define tomcat::vhost(
                       $tomcat_user   = $tomcat::params::default_tomcat_user,
                     ) {
 
-  fail('TODO: not implamented')
+  fail('TODO: not implemented')
 
   if ! defined(Class['tomcat'])
   {
