@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.1
+
+* added **tomcat::tomcatrole** as a define (**tomcat::instance** has been rewritten to use it)
+
 ## 0.5.0
 
 * **INCOMPATIBLE CHANGE**: renamed **tomcat::instance** variable **errorReportValveClass** to **error_report_valve_class**
