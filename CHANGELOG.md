@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.5.2
+
+* added variables to deploywar for file ownership and mode:
+  * war_owner
+  * war_group
+  * war_mode
+
 ## 0.5.1
 
 * added **tomcat::tomcatrole** as a define (**tomcat::instance** has been rewritten to use it)
