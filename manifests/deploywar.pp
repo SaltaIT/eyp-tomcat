@@ -5,6 +5,9 @@ define tomcat::deploywar (
                             $servicename   = $name,
                             $app_base      = 'webapps',
                             $add_root_ln   = false,
+                            $war_owner     = 'root',
+                            $war_group     = 'root',
+                            $war_mode      = '0644',
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -23,9 +26,9 @@ define tomcat::deploywar (
 
   file { "${catalina_base}/${app_base}/${warname}.war":
     ensure  => 'present',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+    owner   => $war_owner,
+    group   => $war_group,
+    mode    => $war_mode,
     require => File["${catalina_base}/${app_base}"],
     notify  => $serviceinstance,
     source  => $source,
