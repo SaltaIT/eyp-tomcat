@@ -339,6 +339,7 @@ define tomcat::instance (
       mode    => '0644',
       require => File["${catalina_base}/conf"],
       notify  => Tomcat::Instance::Service[$instancename],
+      before  => File["/etc/init.d/${instancename}"],
     }
 
     concat::fragment{ "${catalina_base}/conf/tomcat-users.xml head":
@@ -504,7 +505,6 @@ define tomcat::instance (
                         "${catalina_base}/bin/configtest.sh",
                       ] ],
                   Concat[ [ "${catalina_base}/bin/setenv.sh",
-                            "${catalina_base}/conf/tomcat-users.xml",
                             "${catalina_base}/conf/server.xml" ] ] ],
     content => template("${module_name}/multi/tomcat-init.erb"),
     notify  => Tomcat::Instance::Service[$instancename],
