@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.3
+
+* bugfix tomcat-users.xml not present when userdatabase=false
+
 ## 0.5.2
 
 * added variables to deploywar for file ownership and mode:
