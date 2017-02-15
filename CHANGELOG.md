@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.4
+
+* **tomcat::agent** in tarball mode: added **--no-same-owner** and **--strip 1**
+
 ## 0.5.3
 
 * bugfix tomcat-users.xml not present when userdatabase=false
