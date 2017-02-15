@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.5.6
+## 0.5.7
 
 * added **tomcat::agent::tarball_path** to allow different agent tarballs for multiple instances
 
