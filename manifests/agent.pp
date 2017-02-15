@@ -113,9 +113,12 @@ define tomcat::agent (
 
   if($tar_source!=undef)
   {
-    exec { "mkdir p ${srcdir} eyp-tomcat agent":
-      command => "mkdir -p ${srcdir}",
-      creates => $srcdir,
+    if(!defined(Exec["mkdir p ${srcdir} eyp-tomcat agent"]))
+    {
+      exec { "mkdir p ${srcdir} eyp-tomcat agent":
+        command => "mkdir -p ${srcdir}",
+        creates => $srcdir,
+      }
     }
 
     if($tarball_path==undef)
