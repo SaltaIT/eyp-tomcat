@@ -139,8 +139,8 @@ define tomcat::agent (
       }
     }
 
-    exec { "untar ${srcdir}/${agent_name}.tgz":
-      command => "tar -xzf ${srcdir}/${agent_name}.tgz --no-same-owner --strip 1 -C ${catalina_base}/${agent_name}/ ",
+    exec { "untar ${path_agent_tarball}":
+      command => "tar -xzf ${path_agent_tarball} --no-same-owner --strip 1 -C ${catalina_base}/${agent_name}/ ",
       creates => "${catalina_base}/${agent_name}/${jar_name}.jar",
       notify  => $serviceinstance,
       require => File[ [ $path_agent_tarball, "${catalina_base}/${agent_name}" ] ],

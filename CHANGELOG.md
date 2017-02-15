@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.8
+
+* bugfix: tar name in **tomcat::agent**
+
 ## 0.5.7
 
 * added **tomcat::agent::tarball_path** to allow different agent tarballs for multiple instances
