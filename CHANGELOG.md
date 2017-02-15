@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.5
+
+* bugfix **tomcat::agent**: allow installation agents on multiple instances using the same source tar
+
 ## 0.5.4
 
 * **tomcat::agent** in tarball mode: added **--no-same-owner** and **--strip 1**

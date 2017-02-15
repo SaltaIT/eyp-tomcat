@@ -117,13 +117,16 @@ define tomcat::agent (
       creates => $srcdir,
     }
 
-    file { "${srcdir}/${agent_name}.tgz":
-      ensure  => $ensure,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      require => Exec["mkdir p ${srcdir} eyp-tomcat agent"],
-      source  => $tar_source,
+    if(!defined(File["${srcdir}/${agent_name}.tgz"]))
+    {
+      file { "${srcdir}/${agent_name}.tgz":
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        require => Exec["mkdir p ${srcdir} eyp-tomcat agent"],
+        source  => $tar_source,
+      }
     }
 
     exec { "untar ${srcdir}/${agent_name}.tgz":
