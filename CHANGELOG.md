@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 0.5.9
+
+* bugfix mkdir srcdir dependencies on **tomcat::agent**
+
+## 0.5.8
+
+* bugfix: tar name in **tomcat::agent**
+
+## 0.5.7
+
+* added **tomcat::agent::tarball_path** to allow different agent tarballs for multiple instances
+
+## 0.5.5
+
+* bugfix **tomcat::agent**: allow installation agents on multiple instances using the same source tar
+
 ## 0.5.4
 
 * **tomcat::agent** in tarball mode: added **--no-same-owner** and **--strip 1**

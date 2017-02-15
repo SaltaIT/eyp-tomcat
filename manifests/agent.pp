@@ -11,6 +11,7 @@ define tomcat::agent (
                         $ensure        = 'present',
                         $description   = undef,
                         $srcdir        = '/usr/local/src',
+                        $tarball_path  = undef,
                       ) {
 
   if ! defined(Class['tomcat'])
@@ -112,25 +113,40 @@ define tomcat::agent (
 
   if($tar_source!=undef)
   {
-    exec { "mkdir p ${srcdir} eyp-tomcat agent":
-      command => "mkdir -p ${srcdir}",
-      creates => $srcdir,
+    if(!defined(Exec["mkdir p ${srcdir} eyp-tomcat agent"]))
+    {
+      exec { "mkdir p ${srcdir} eyp-tomcat agent":
+        command => "mkdir -p ${srcdir}",
+        creates => $srcdir,
+      }
     }
 
-    file { "${srcdir}/${agent_name}.tgz":
-      ensure  => $ensure,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      require => Exec["mkdir p ${srcdir} eyp-tomcat agent"],
-      source  => $tar_source,
+    if($tarball_path==undef)
+    {
+      $path_agent_tarball="${srcdir}/${agent_name}.tgz"
+    }
+    else
+    {
+      $path_agent_tarball=$tarball_path
     }
 
-    exec { "untar ${srcdir}/${agent_name}.tgz":
-      command => "tar -xzf ${srcdir}/${agent_name}.tgz --no-same-owner --strip 1 -C ${catalina_base}/${agent_name}/ ",
+    if(!defined(File[$path_agent_tarball]))
+    {
+      file { $path_agent_tarball:
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        require => Exec["mkdir p ${srcdir} eyp-tomcat agent"],
+        source  => $tar_source,
+      }
+    }
+
+    exec { "untar ${path_agent_tarball}":
+      command => "tar -xzf ${path_agent_tarball} --no-same-owner --strip 1 -C ${catalina_base}/${agent_name}/ ",
       creates => "${catalina_base}/${agent_name}/${jar_name}.jar",
       notify  => $serviceinstance,
-      require => File[ [ "${srcdir}/${agent_name}.tgz", "${catalina_base}/${agent_name}" ] ],
+      require => File[ [ $path_agent_tarball, "${catalina_base}/${agent_name}" ] ],
     }
   }
 
