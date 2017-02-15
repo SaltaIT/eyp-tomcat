@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.9
+
+* bugfix mkdir srcdir dependencies on **tomcat::agent**
+
 ## 0.5.8
 
 * bugfix: tar name in **tomcat::agent**
