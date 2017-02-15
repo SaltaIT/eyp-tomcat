@@ -11,6 +11,7 @@ define tomcat::agent (
                         $ensure        = 'present',
                         $description   = undef,
                         $srcdir        = '/usr/local/src',
+                        $tarball_path  = undef,
                       ) {
 
   if ! defined(Class['tomcat'])
@@ -117,9 +118,18 @@ define tomcat::agent (
       creates => $srcdir,
     }
 
-    if(!defined(File["${srcdir}/${agent_name}.tgz"]))
+    if($tarball_path==undef)
     {
-      file { "${srcdir}/${agent_name}.tgz":
+      $path_agent_tarball="${srcdir}/${agent_name}.tgz"
+    }
+    else
+    {
+      $path_agent_tarball=$tarball_path
+    }
+
+    if(!defined(File[$path_agent_tarball]))
+    {
+      file { $path_agent_tarball:
         ensure  => $ensure,
         owner   => 'root',
         group   => 'root',

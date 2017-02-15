@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.6
+
+* added **tomcat::agent::tarball_path** to allow different agent tarballs for multiple instances
+
 ## 0.5.5
 
 * bugfix **tomcat::agent**: allow installation agents on multiple instances using the same source tar
