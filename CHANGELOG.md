@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.10
+
+*  **tomcat::properties**: allow custom dir
+
 ## 0.5.9
 
 * bugfix mkdir srcdir dependencies on **tomcat::agent**
