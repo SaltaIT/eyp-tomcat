@@ -705,6 +705,7 @@ Install postgres driver for a given tomcat instance:
 * **properties_file**,
 * **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
 * **servicename**: tomcat's servicename (default: resource's name)
+* **dir**: properties directory (default: conf)
 
 #### tomcat::resource
 
