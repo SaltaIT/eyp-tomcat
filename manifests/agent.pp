@@ -92,8 +92,8 @@ define tomcat::agent (
 
   file { "${catalina_base}/${agent_name}":
     ensure  => 'directory',
-    owner   => 'root',
-    group   => 'root',
+    owner   => 'tomcat',
+    group   => 'tomcat',
     mode    => '0755',
     require => File[$catalina_base],
   }
@@ -145,6 +145,7 @@ define tomcat::agent (
     exec { "untar ${path_agent_tarball}":
       command => "tar -xzf ${path_agent_tarball} --no-same-owner --strip 1 -C ${catalina_base}/${agent_name}/ ",
       creates => "${catalina_base}/${agent_name}/${jar_name}.jar",
+      user    => 'tomcat',
       notify  => $serviceinstance,
       require => File[ [ $path_agent_tarball, "${catalina_base}/${agent_name}" ] ],
     }
