@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#source <%= @catalina_base %>/bin/setenv.sh
-
 cd <%= @catalina_base %>
 
 exec <%= scope.lookupvar('tomcat::catalina_home') %>/bin/catalina.sh start
