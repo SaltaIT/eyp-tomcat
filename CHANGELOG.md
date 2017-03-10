@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.11
+
+* chown to tomcot for **tomcat::agent**
+
 ## 0.5.10
 
 *  **tomcat::properties**: allow custom dir
