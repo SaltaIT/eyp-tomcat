@@ -1,5 +1,5 @@
 #!/bin/bash
 
-source <%= @catalina_base %>/bin/setenv.sh
+#source <%= @catalina_base %>/bin/setenv.sh
 
-exec $CATALINA_HOME/bin/catalina.sh stop
+exec <%= scope.lookupvar('tomcat::catalina_home') %>/bin/catalina.sh stop
