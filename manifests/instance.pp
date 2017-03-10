@@ -409,6 +409,7 @@ define tomcat::instance (
     mode    => '0755',
     require => File["${catalina_base}/bin"],
     content => template("${module_name}/multi/startup.erb"),
+    notify  => Tomcat::Instance::Service[$instancename],
   }
 
   file { "${catalina_base}/bin/configtest.sh":
@@ -427,6 +428,7 @@ define tomcat::instance (
     mode    => '0755',
     require => File["${catalina_base}/bin"],
     content => template("${module_name}/multi/shutdown.erb"),
+    notify  => Tomcat::Instance::Service[$instancename],
   }
 
   concat { "${catalina_base}/bin/setenv.sh":

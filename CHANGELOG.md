@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.12
+
+* bugfix: **CATALINA_OPTS** loaded twice (catalina.sh & startup.sh)
+
 ## 0.5.11
 
 * chown to tomcot for **tomcat::agent**
