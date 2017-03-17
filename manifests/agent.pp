@@ -137,6 +137,7 @@ define tomcat::agent (
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
+        notify  => Exec["untar ${path_agent_tarball}"],
         require => Exec["mkdir p ${srcdir} eyp-tomcat agent"],
         source  => $tar_source,
       }

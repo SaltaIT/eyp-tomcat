@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.13
+
+* **java::agent** notify untar on tar changes
+
 ## 0.5.12
 
 * bugfix: **CATALINA_OPTS** loaded twice (catalina.sh & startup.sh)
