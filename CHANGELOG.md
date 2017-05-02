@@ -2,7 +2,7 @@
 
 ## 0.5.14
 
-* added puppet managed banner to **setenv.sh**
+* added puppet managed banner to **setenv.sh**, **startup.sh**, **shutdown.sh** and **init script**
 
 ## 0.5.13
 
