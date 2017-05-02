@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# puppet managed file
+#
+
 cd <%= @catalina_base %>
 
 exec <%= scope.lookupvar('tomcat::catalina_home') %>/bin/catalina.sh start

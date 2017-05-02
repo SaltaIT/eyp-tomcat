@@ -763,7 +763,7 @@ have tests to check both presence and absence of any feature
 
 ### TODO
 
-* acceptance testing for tomcat::agent
+* acceptance testing for **tomcat::agent**
 * acceptance testing manage_service=false
 * review documentation for version 0.4 and 0.5
 * include files for server.xml

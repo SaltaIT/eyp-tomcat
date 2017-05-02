@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 0.5.14
+
+* added puppet managed banner to **setenv.sh**, **startup.sh**, **shutdown.sh** and **init script**
+* added locale and encoding variables to **tomcat::instance**:
+  * user_language
+  * user_region
+  * user_country
+  * user_variant
+  * file_encoding
+  * sun_jnu_encoding
+  * file_encoding_pkg
+
+## 0.5.13
+
+* **java::agent** notify untar on tar changes
+
 ## 0.5.12
 
 * bugfix: **CATALINA_OPTS** loaded twice (catalina.sh & startup.sh)

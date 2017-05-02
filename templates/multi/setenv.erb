@@ -1,3 +1,6 @@
+#
+# puppet managed file
+#
 <% if defined?(@java_home) -%>
 export JAVA_HOME="<%= @java_home %>"
 <% end -%>
@@ -22,4 +25,25 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxPermSize=<%= @maxpermsize %>"
 <% if defined?(@heapdump_oom_dir) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:+HeapDumpOnOutOfMemoryError"
 export CATALINA_OPTS="$CATALINA_OPTS -XX:HeapDumpPath=<%= @heapdump_oom_dir %>"
+<% end -%>
+<% if defined?(@user_language) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Duser.language=<%= @user_language %>"
+<% end -%>
+<% if defined?(@user_region) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Duser.region=<%= @user_region %>"
+<% end -%>
+<% if defined?(@user_country) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Duser.country=<%= @user_country %>"
+<% end -%>
+<% if defined?(@user_variant) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Duser.variant=<%= @user_variant %>"
+<% end -%>
+<% if defined?(@file_encoding) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding=<%= @file_encoding %>"
+<% end -%>
+<% if defined?(@sun_jnu_encoding) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Dsun.jnu.encoding=<%= @sun_jnu_encoding %>"
+<% end -%>
+<% if defined?(@file_encoding_pkg) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding.pkg=<%= @file_encoding_pkg %>"
 <% end -%>
