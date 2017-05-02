@@ -2,7 +2,7 @@
 
 ## 0.5.14
 
-* added puppet managed banner to setenv.sh
+* added puppet managed banner to **setenv.sh**
 
 ## 0.5.13
 
