@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.14
+
+* added puppet managed banner to setenv.sh
+
 ## 0.5.13
 
 * **java::agent** notify untar on tar changes
