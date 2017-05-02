@@ -89,6 +89,13 @@ define tomcat::instance (
                           $error_report_valve_show_report        = false,
                           $error_report_valve_show_server_info   = false,
                           $error_report_valve_class              = 'org.apache.catalina.valves.ErrorReportValve',
+                          $user_language                         = undef,
+                          $user_region                           = undef,
+                          $user_country                          = undef,
+                          $user_variant                          = undef,
+                          $file_encoding                         = undef,
+                          $sun_jnu_encoding                      = undef,
+                          $file_encoding_pkg                     = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
