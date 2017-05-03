@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.15
+
+* added umask variable for **tomcat::instance**
+
 ## 0.5.14
 
 * added puppet managed banner to **setenv.sh**, **startup.sh**, **shutdown.sh** and **init script**

@@ -96,6 +96,7 @@ define tomcat::instance (
                           $file_encoding                         = undef,
                           $sun_jnu_encoding                      = undef,
                           $file_encoding_pkg                     = undef,
+                          $umask                                 = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
