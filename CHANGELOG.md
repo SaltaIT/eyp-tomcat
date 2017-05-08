@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.5.16
+
+* added -Xmns and -Xmnx variables
+* **INCOMPATIBLE CHANGE** set **+UseConcMarkSweepGC** by default (use_concurrent_mark_sweep: true)
+
 ## 0.5.15
 
 * added umask variable for **tomcat::instance**

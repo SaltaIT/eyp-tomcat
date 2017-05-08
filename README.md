@@ -566,6 +566,12 @@ tomcat::agent { 'tomcat-8080':
 
 #### tomcat::instance
 
+references:
+* [http://www.fasterj.com/articles/oraclecollectors1.shtml](Oracle JVM Garbage Collectors)
+* [https://blog.codecentric.de/en/2013/10/useful-jvm-flags-part-7-cms-collector/](Useful JVM Flags – Part 7 (CMS Collector))
+
+instance options:
+
 * service options:
   * **ensure**                 = 'running',
   * **manage_service**         = true,
