@@ -28,6 +28,9 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:+UseConcMarkSweepGC"
 <% if defined?(@cms_initiating_occupancy_fraction) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:CMSInitiatingOccupancyFraction=<%= @cms_initiating_occupancy_fraction %>"
 <% end -%>
+<% if @disable_explicit_gc -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+DisableExplicitGC"
+<% end -%>
 <% if defined?(@permsize) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:PermSize=<%= @permsize %>"
 <% end -%>

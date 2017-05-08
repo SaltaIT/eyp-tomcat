@@ -101,6 +101,7 @@ define tomcat::instance (
                           $xmnx                                  = undef,
                           $use_concurrent_mark_sweep             = true,
                           $cms_initiating_occupancy_fraction     = undef,
+                          $disable_explicit_gc                   = false,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
