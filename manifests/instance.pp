@@ -102,6 +102,9 @@ define tomcat::instance (
                           $use_concurrent_mark_sweep             = true,
                           $cms_initiating_occupancy_fraction     = undef,
                           $disable_explicit_gc                   = false,
+                          $max_gc_pause_millis                   = undef,
+                          $print_gc_datestamps                   = false,
+                          
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -487,6 +490,17 @@ define tomcat::instance (
     content => template("${module_name}/multi/setenv_jmx.erb"),
   }
 
+  concat::fragment{ "${catalina_base}/bin/setenv.sh GC":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '10',
+    content => template("${module_name}/multi/setenv_gc.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/bin/setenv.sh locale":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '11',
+    content => template("${module_name}/multi/setenv_locale.erb"),
+  }
 
   if($server_info!=undef) or ($server_number!=undef) or ($server_built!=undef)
   {

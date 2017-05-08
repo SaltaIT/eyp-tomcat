@@ -22,15 +22,6 @@ export CATALINA_OPTS="$CATALINA_OPTS -Xmns<%= @xmns %>"
 <% if defined?(@xmnx) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Xmnx<%= @xmnx %>"
 <% end -%>
-<% if @use_concurrent_mark_sweep -%>
-export CATALINA_OPTS="$CATALINA_OPTS -XX:+UseConcMarkSweepGC"
-<% end -%>
-<% if defined?(@cms_initiating_occupancy_fraction) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -XX:CMSInitiatingOccupancyFraction=<%= @cms_initiating_occupancy_fraction %>"
-<% end -%>
-<% if @disable_explicit_gc -%>
-export CATALINA_OPTS="$CATALINA_OPTS -XX:+DisableExplicitGC"
-<% end -%>
 <% if defined?(@permsize) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:PermSize=<%= @permsize %>"
 <% end -%>
@@ -40,18 +31,6 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxPermSize=<%= @maxpermsize %>"
 <% if defined?(@heapdump_oom_dir) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:+HeapDumpOnOutOfMemoryError"
 export CATALINA_OPTS="$CATALINA_OPTS -XX:HeapDumpPath=<%= @heapdump_oom_dir %>"
-<% end -%>
-<% if defined?(@user_language) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -Duser.language=<%= @user_language %>"
-<% end -%>
-<% if defined?(@user_region) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -Duser.region=<%= @user_region %>"
-<% end -%>
-<% if defined?(@user_country) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -Duser.country=<%= @user_country %>"
-<% end -%>
-<% if defined?(@user_variant) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -Duser.variant=<%= @user_variant %>"
 <% end -%>
 <% if defined?(@file_encoding) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding=<%= @file_encoding %>"
