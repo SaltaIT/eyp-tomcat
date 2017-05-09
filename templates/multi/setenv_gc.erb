@@ -33,3 +33,19 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGCApplicationStoppedTime"
 <% if defined?(@cms_initiating_occupancy_fraction) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:CMSInitiatingOccupancyFraction=<%= @cms_initiating_occupancy_fraction %>"
 <% end -%>
+
+<% if @use_cms_initiating_occupancy_only -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+UseCMSInitiatingOccupancyOnly"
+<% end -%>
+
+<% if @cms_scavenge_before_remark -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+CMSScavengeBeforeRemark"
+<% end -%>
+
+<% if @cms_parallel_remark_enabled -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+CMSParallelRemarkEnabled"
+<% end -%>
+
+<% if @print_tenuring_distribution -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintTenuringDistribution"
+<% end -%>
