@@ -7,6 +7,9 @@ export JAVA_HOME="<%= @java_home %>"
 export CATALINA_PID=/var/run/<%= @instancename %>.pid
 export CATALINA_HOME=<%= scope.lookupvar('tomcat::catalina_home') %>
 export CATALINA_BASE=<%= @catalina_base %>
+<% if defined?(@jvm_error_file) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:ErrorFile=<%= @jvm_error_file %>"
+<% end -%>
 <% if defined?(@java_library_path) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Djava.library.path=<%= @java_library_path %>"
 <% end -%>
