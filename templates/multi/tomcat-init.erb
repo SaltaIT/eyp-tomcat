@@ -29,6 +29,10 @@ export PATH=$JAVA_HOME/bin:$PATH
 TOMCAT_USER=<%= @tomcat_user %>
 KILL_WAIT=10
 
+<% if defined?(@umask) -%>
+umask <%= @umask %>
+<% end -%>
+
 if [ "$(id -u)" -eq "$(id -u <%= @tomcat_user %>)" ];
 then
   EXECSTART="/bin/bash"

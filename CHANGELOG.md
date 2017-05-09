@@ -1,5 +1,28 @@
 # CHANGELOG
 
+## 0.5.16
+
+* added -Xmns and -Xmnx variables
+* **INCOMPATIBLE CHANGE** set **+UseConcMarkSweepGC** by default (use_concurrent_mark_sweep: true)
+* added GC variables:
+  * cms_initiating_occupancy_fraction
+  * use_cms_initiating_occupancy_only
+  * cms_scavenge_before_remark
+  * cms_parallel_remark_enabled
+  * print_tenuring_distribution
+  * disable_explicit_gc
+  * max_gc_pause_millis
+  * print_gc
+  * print_gc_details
+  * print_gc_datestamps
+  * print_gc_application_stopped_time
+  * print_gc_file
+* added tomcat instance variable **jvm_error_file**
+
+## 0.5.15
+
+* added umask variable for **tomcat::instance**
+
 ## 0.5.14
 
 * added puppet managed banner to **setenv.sh**, **startup.sh**, **shutdown.sh** and **init script**

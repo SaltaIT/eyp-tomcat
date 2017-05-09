@@ -96,6 +96,23 @@ define tomcat::instance (
                           $file_encoding                         = undef,
                           $sun_jnu_encoding                      = undef,
                           $file_encoding_pkg                     = undef,
+                          $umask                                 = undef,
+                          $xmns                                  = undef,
+                          $xmnx                                  = undef,
+                          $use_concurrent_mark_sweep             = true,
+                          $cms_initiating_occupancy_fraction     = undef,
+                          $use_cms_initiating_occupancy_only     = false,
+                          $cms_scavenge_before_remark            = false,
+                          $cms_parallel_remark_enabled           = false,
+                          $print_tenuring_distribution           = false,
+                          $disable_explicit_gc                   = false,
+                          $max_gc_pause_millis                   = undef,
+                          $print_gc                              = false,
+                          $print_gc_details                      = false,
+                          $print_gc_datestamps                   = false,
+                          $print_gc_application_stopped_time     = false,
+                          $print_gc_file                         = undef,
+                          $jvm_error_file                        = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -481,6 +498,17 @@ define tomcat::instance (
     content => template("${module_name}/multi/setenv_jmx.erb"),
   }
 
+  concat::fragment{ "${catalina_base}/bin/setenv.sh GC":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '10',
+    content => template("${module_name}/multi/setenv_gc.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/bin/setenv.sh locale":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '11',
+    content => template("${module_name}/multi/setenv_locale.erb"),
+  }
 
   if($server_info!=undef) or ($server_number!=undef) or ($server_built!=undef)
   {

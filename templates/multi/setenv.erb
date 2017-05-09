@@ -7,6 +7,9 @@ export JAVA_HOME="<%= @java_home %>"
 export CATALINA_PID=/var/run/<%= @instancename %>.pid
 export CATALINA_HOME=<%= scope.lookupvar('tomcat::catalina_home') %>
 export CATALINA_BASE=<%= @catalina_base %>
+<% if defined?(@jvm_error_file) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:ErrorFile=<%= @jvm_error_file %>"
+<% end -%>
 <% if defined?(@java_library_path) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Djava.library.path=<%= @java_library_path %>"
 <% end -%>
@@ -15,6 +18,12 @@ export CATALINA_OPTS="$CATALINA_OPTS -Xmx<%= @xmx %>"
 <% end -%>
 <% if defined?(@xms) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Xms<%= @xms %>"
+<% end -%>
+<% if defined?(@xmns) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Xmns<%= @xmns %>"
+<% end -%>
+<% if defined?(@xmnx) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Xmnx<%= @xmnx %>"
 <% end -%>
 <% if defined?(@permsize) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:PermSize=<%= @permsize %>"
@@ -25,18 +34,6 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxPermSize=<%= @maxpermsize %>"
 <% if defined?(@heapdump_oom_dir) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:+HeapDumpOnOutOfMemoryError"
 export CATALINA_OPTS="$CATALINA_OPTS -XX:HeapDumpPath=<%= @heapdump_oom_dir %>"
-<% end -%>
-<% if defined?(@user_language) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -Duser.language=<%= @user_language %>"
-<% end -%>
-<% if defined?(@user_region) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -Duser.region=<%= @user_region %>"
-<% end -%>
-<% if defined?(@user_country) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -Duser.country=<%= @user_country %>"
-<% end -%>
-<% if defined?(@user_variant) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -Duser.variant=<%= @user_variant %>"
 <% end -%>
 <% if defined?(@file_encoding) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding=<%= @file_encoding %>"
