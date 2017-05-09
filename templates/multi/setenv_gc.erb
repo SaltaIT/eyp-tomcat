@@ -14,10 +14,14 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:+DisableExplicitGC"
 export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxGCPauseMillis=500"
 <% end -%>
 
-<% if defined?(@cms_initiating_occupancy_fraction) -%>
-export CATALINA_OPTS="$CATALINA_OPTS -XX:CMSInitiatingOccupancyFraction=<%= @cms_initiating_occupancy_fraction %>"
+<% if @print_gc -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGC"
 <% end -%>
 
 <% if @print_gc_datestamps -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGCDateStamps"
+<% end -%>
+
+<% if defined?(@cms_initiating_occupancy_fraction) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:CMSInitiatingOccupancyFraction=<%= @cms_initiating_occupancy_fraction %>"
 <% end -%>

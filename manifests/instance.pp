@@ -103,8 +103,8 @@ define tomcat::instance (
                           $cms_initiating_occupancy_fraction     = undef,
                           $disable_explicit_gc                   = false,
                           $max_gc_pause_millis                   = undef,
+                          $print_gc                              = false,
                           $print_gc_datestamps                   = false,
-                          
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
