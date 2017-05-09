@@ -104,7 +104,9 @@ define tomcat::instance (
                           $disable_explicit_gc                   = false,
                           $max_gc_pause_millis                   = undef,
                           $print_gc                              = false,
+                          $print_gc_details                      = false,
                           $print_gc_datestamps                   = false,
+                          $print_gc_application_stopped_time     = false,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',

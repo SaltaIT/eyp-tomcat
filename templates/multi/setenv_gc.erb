@@ -18,8 +18,16 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxGCPauseMillis=500"
 export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGC"
 <% end -%>
 
+<% if @print_gc_details -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGCDetails"
+<% end -%>
+
 <% if @print_gc_datestamps -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGCDateStamps"
+<% end -%>
+
+<% if @print_gc_application_stopped_time -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGCApplicationStoppedTime"
 <% end -%>
 
 <% if defined?(@cms_initiating_occupancy_fraction) -%>
