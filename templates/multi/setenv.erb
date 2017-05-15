@@ -19,6 +19,9 @@ export CATALINA_OPTS="$CATALINA_OPTS -Xmx<%= @xmx %>"
 <% if defined?(@xms) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Xms<%= @xms %>"
 <% end -%>
+<% if defined?(@xmn) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Xmn<%= @xmn %>"
+<% end -%>
 <% if defined?(@xmns) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Xmns<%= @xmns %>"
 <% end -%>
