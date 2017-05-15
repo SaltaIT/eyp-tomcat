@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.17
+
+* added -Xmn using xmn tomcat instance variable
+
 ## 0.5.16
 
 * added -Xmns and -Xmnx variables
