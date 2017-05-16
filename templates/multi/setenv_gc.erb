@@ -15,7 +15,7 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxGCPauseMillis=500"
 <% end -%>
 
 <% if @print_gc -%>
-export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGC<% if defined?(@print_gc_file) %> -Xloggc:<%= @print_gc_file %><% end %>"
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGC<% if defined?(@print_gc_file) %> -Xloggc:<% @print_gc_file %><% end %>"
 <% end -%>
 
 <% if @print_gc_details -%>
