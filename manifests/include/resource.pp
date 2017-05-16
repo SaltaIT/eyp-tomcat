@@ -3,11 +3,13 @@ define tomcat::include::resource(
                                   $servicename   = $name,
                                   $catalina_base = "/opt/${name}",
                                 ) {
-#   <!DOCTYPE server-xml [
-#   <!ENTITY AdminRe-DSO SYSTEM "AdminRe-DSO.xml">
-#   <!ENTITY AdminRe-JDBC SYSTEM "AdminRe-JDBC.xml">
-#   <!ENTITY AdminRe-JNDI SYSTEM "AdminRe-JNDI.xml">
-#   <!ENTITY AdminRe-ROOT SYSTEM "AdminRe-ROOT.xml">
-# ]>
+
+  fail('TODO: not implemented')
+  #   <!DOCTYPE server-xml [
+  #   <!ENTITY systemadmin-DSO SYSTEM "systemadmin-DSO.xml">
+  #   <!ENTITY systemadmin-JDBC SYSTEM "systemadmin-JDBC.xml">
+  #   <!ENTITY systemadmin-JNDI SYSTEM "systemadmin-JNDI.xml">
+  #   <!ENTITY systemadmin-ROOT SYSTEM "systemadmin-ROOT.xml">
+  # ]>
 
 }

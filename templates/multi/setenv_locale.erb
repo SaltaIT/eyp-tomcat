@@ -1,0 +1,17 @@
+
+#
+# locale JVM options
+#
+
+<% if defined?(@user_language) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Duser.language=<%= @user_language %>"
+<% end -%>
+<% if defined?(@user_region) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Duser.region=<%= @user_region %>"
+<% end -%>
+<% if defined?(@user_country) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Duser.country=<%= @user_country %>"
+<% end -%>
+<% if defined?(@user_variant) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Duser.variant=<%= @user_variant %>"
+<% end -%>

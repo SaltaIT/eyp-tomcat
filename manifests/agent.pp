@@ -4,12 +4,14 @@ define tomcat::agent (
                         $source        = undef,
                         $tar_source    = undef,
                         $file_ln       = undef,
+                        $install_type  = 'tar',
                         $catalina_base = "/opt/${name}",
                         $servicename   = $name,
                         $purge_old     = false,
                         $ensure        = 'present',
-                        $comment       = undef
+                        $description   = undef,
                         $srcdir        = '/usr/local/src',
+                        $tarball_path  = undef,
                       ) {
 
   if ! defined(Class['tomcat'])
@@ -17,19 +19,48 @@ define tomcat::agent (
     fail('You must include the tomcat base class before using any tomcat defined resources')
   }
 
-  if($source==undef and $file_ln==undef and $tar_source==undef )
+  case $install_type
   {
-    fail('You have to specify source, tar_source or file_ln')
-  }
+    'tar':
+    {
+      if($source!=undef or $file_ln!=undef)
+      {
+        fail("please ensure you are using the correct install_type(${install_type})")
+      }
 
-  if(($source!=undef or $tar_source!=undef) and $file_ln!=undef)
-  {
-    fail('You cannot specify both source and file_ln')
-  }
+      if($tar_source==undef)
+      {
+        fail('please provide a tar_source')
+      }
+    }
+    'source':
+    {
+      if($tar_source!=undef or $file_ln!=undef)
+      {
+        fail("please ensure you are using the correct install_type(${install_type})")
+      }
 
-  if($source!=undef and $tar_source!=undef)
-  {
-    fail('You cannot specify both source and tar_source')
+      if($source==undef)
+      {
+        fail('please provide a source')
+      }
+    }
+    'link':
+    {
+      if($tar_source!=undef or $source!=undef)
+      {
+        fail("please ensure you are using the correct install_type(${install_type})")
+      }
+
+      if($file_ln==undef)
+      {
+        fail('please provide a file_ln')
+      }
+    }
+    default:
+    {
+      fail('unsupported installation type')
+    }
   }
 
   if($file_ln!=undef)
@@ -61,8 +92,8 @@ define tomcat::agent (
 
   file { "${catalina_base}/${agent_name}":
     ensure  => 'directory',
-    owner   => 'root',
-    group   => 'root',
+    owner   => 'tomcat',
+    group   => 'tomcat',
     mode    => '0755',
     require => File[$catalina_base],
   }
@@ -82,25 +113,42 @@ define tomcat::agent (
 
   if($tar_source!=undef)
   {
-    exec { "mkdir p ${srcdir} eyp-tomcat agent":
-      command => "mkdir -p ${srcdir}",
-      creates => $srcdir,
+    if(!defined(Exec["mkdir p ${srcdir} eyp-tomcat agent"]))
+    {
+      exec { "mkdir p ${srcdir} eyp-tomcat agent":
+        command => "mkdir -p ${srcdir}",
+        creates => $srcdir,
+      }
     }
 
-    file { "${srcdir}/${agent_name}.tgz":
-      ensure  => $ensure,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      require => Exec["mkdir p ${srcdir} eyp-tomcat agent"],
-      source  => $tar_source,
+    if($tarball_path==undef)
+    {
+      $path_agent_tarball="${srcdir}/${agent_name}.tgz"
+    }
+    else
+    {
+      $path_agent_tarball=$tarball_path
     }
 
-    exec { "untar ${srcdir}/${agent_name}.tgz":
-      command => "tar -xzf ${srcdir}/${agent_name}.tgz -C ${catalina_base}/${agent_name}/ ",
+    if(!defined(File[$path_agent_tarball]))
+    {
+      file { $path_agent_tarball:
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        notify  => Exec["untar ${path_agent_tarball}"],
+        require => Exec["mkdir p ${srcdir} eyp-tomcat agent"],
+        source  => $tar_source,
+      }
+    }
+
+    exec { "untar ${path_agent_tarball}":
+      command => "tar -xzf ${path_agent_tarball} --no-same-owner --strip 1 -C ${catalina_base}/${agent_name}/ ",
       creates => "${catalina_base}/${agent_name}/${jar_name}.jar",
+      user    => 'tomcat',
       notify  => $serviceinstance,
-      require => File[ [ "${srcdir}/${agent_name}.tgz", "${catalina_base}/${agent_name}" ] ],
+      require => File[ [ $path_agent_tarball, "${catalina_base}/${agent_name}" ] ],
     }
   }
 

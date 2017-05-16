@@ -3,13 +3,8 @@
             unpackWARs="true" autoDeploy="true"
             <% if defined?(@xml_validation) %>xmlValidation="<%= @xml_validation %>"<% end -%>
             <% if defined?(@xml_namespace_aware) %>xmlNamespaceAware="<%= @xml_namespace_aware %>"<% end -%>
-            <% if defined?(@errorReportValveClass) %>errorReportValveClass="<%= @errorReportValveClass %>" <% end -%>>
+            <% if defined?(@error_report_valve_class) %>errorReportValveClass="<%= @error_report_valve_class %>" <% end -%>>
 
-        <!-- SingleSignOn valve, share authentication between web applications
-             Documentation at: /docs/config/valve.html -->
-        <!--
-        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
-        -->
   <% if(@realms) -%>
   <% @realms.each do | realm | -%>
         <Realm className="<%= realm %>" />
@@ -23,9 +18,6 @@
   <% end -%>
 
         <%- if @enable_default_access_log -%>
-        <!-- Access log processes all example.
-             Documentation at: /docs/config/valve.html
-             Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log." suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />

@@ -18,6 +18,11 @@
 # 30 - end engine - end service
 # 99 - end server
 #
+# concat tomcat-users.xml
+# 00 - header
+# 44 - roles
+# 55 - users
+# 99 - end tag
 define tomcat::instance (
                           $tomcatpw                              = 'password',
                           $catalina_base                         = "/opt/${name}",
@@ -48,13 +53,11 @@ define tomcat::instance (
                           $connector_http_disable_upload_timeout = true,
                           $connector_http_uri_encoding           = undef,
                           $jmx_port                              = '8999',
-                          $redirectPort                          = '8443',
+                          $redirect_port                         = '8443',
                           $realms                                = undef,
                           $values                                = undef,
-                          $errorReportValveClass                 = undef,
-                          $maxThreads                            = '150',
-                          $minSpareThreads                       = '4',
-                          $connectionTimeout                     = '20000',
+                          $max_threads                           = '150',
+                          $min_spare_threads                     = '4',
                           $lockoutrealm                          = true,
                           $userdatabase                          = true,
                           $extra_vars                            = undef,
@@ -62,6 +65,7 @@ define tomcat::instance (
                           $rmi_server_hostname                   = undef,
                           $catalina_rotate                       = '15',
                           $catalina_size                         = '100M',
+                          $catalina_logrotate_ensure             = 'present',
                           $heapdump_oom_dir                      = undef,
                           $install_tomcat_manager                = true,
                           $shutdown_command                      = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
@@ -78,11 +82,50 @@ define tomcat::instance (
                           $xml_namespace_aware                   = undef,
                           $jvm_route                             = undef,
                           $version_logger_listener               = true,
+                          $jasper_listener                       = true,
                           $enable_default_access_log             = true,
+                          $custom_webxml                         = false,
+                          $add_error_report_valve_settings       = true,
+                          $error_report_valve_show_report        = false,
+                          $error_report_valve_show_server_info   = false,
+                          $error_report_valve_class              = 'org.apache.catalina.valves.ErrorReportValve',
+                          $user_language                         = undef,
+                          $user_region                           = undef,
+                          $user_country                          = undef,
+                          $user_variant                          = undef,
+                          $file_encoding                         = undef,
+                          $sun_jnu_encoding                      = undef,
+                          $file_encoding_pkg                     = undef,
+                          $umask                                 = undef,
+                          $xmn                                   = undef,
+                          $xmns                                  = undef,
+                          $xmnx                                  = undef,
+                          $use_concurrent_mark_sweep             = true,
+                          $cms_initiating_occupancy_fraction     = undef,
+                          $use_cms_initiating_occupancy_only     = false,
+                          $cms_scavenge_before_remark            = false,
+                          $cms_parallel_remark_enabled           = false,
+                          $print_tenuring_distribution           = false,
+                          $disable_explicit_gc                   = false,
+                          $max_gc_pause_millis                   = undef,
+                          $print_gc                              = false,
+                          $print_gc_details                      = false,
+                          $print_gc_datestamps                   = false,
+                          $print_gc_application_stopped_time     = false,
+                          $print_gc_file                         = undef,
+                          $jvm_error_file                        = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
   }
+
+  # obtenir versio tomcat instalada al tomcathome
+  #
+  # # /opt/tomcat-home/bin/version.sh  | grep "Server version" | rev | cut -f 1 -d/ | rev
+  # 8.5.11
+  # /opt/tomcat-home/bin/version.sh  | grep "Server version" | awk -F/ '{ print $NF }'
+  # 8.5.11
+
 
   if($tomcatpw=='password')
   {
@@ -102,17 +145,6 @@ define tomcat::instance (
   if($values)
   {
     validate_array($values)
-  }
-
-  validate_re($pwdigest, [ '^sha$', '^plaintext$'], 'Not a supported digest: sha/plaintext')
-
-  if ($pwdigest=='sha')
-  {
-    $digestedtomcatpw=sha1($tomcatpw)
-  }
-  else
-  {
-    $digestedtomcatpw=$tomcatpw
   }
 
   if(defined(Class['java']))
@@ -325,14 +357,65 @@ define tomcat::instance (
       }
     }
 
-    file { "${catalina_base}/conf/tomcat-users.xml":
+    concat { "${catalina_base}/conf/tomcat-users.xml":
       ensure  => 'present',
       owner   => $tomcat_user,
       group   => $tomcat_user,
       mode    => '0644',
       require => File["${catalina_base}/conf"],
       notify  => Tomcat::Instance::Service[$instancename],
+      before  => File["/etc/init.d/${instancename}"],
+    }
+
+    concat::fragment{ "${catalina_base}/conf/tomcat-users.xml head":
+      target  => "${catalina_base}/conf/tomcat-users.xml",
+      order   => '00',
       content => template("${module_name}/tomcatusers.erb"),
+    }
+
+    # tomcat user
+    tomcat::tomcatuser { "${instancename} tomcat user":
+      tomcatuser    => 'tomcat',
+      password      => $tomcatpw,
+      catalina_base => $catalina_base,
+      servicename   => $instancename,
+      pwdigest      => $pwdigest,
+      roles         => [ 'tomcat', 'manager', 'admin', 'manager-gui' ],
+    }
+
+    # <role rolename="tomcat"/>
+    # <role rolename="manager"/>
+    # <role rolename="admin"/>
+    # <role rolename="manager-gui"/>
+
+    tomcat::tomcatrole { "${instancename} tomcat role tomcat":
+      rolename      => 'tomcat',
+      catalina_base => $catalina_base,
+      servicename   => $instancename,
+    }
+
+    tomcat::tomcatrole { "${instancename} tomcat role manager":
+      rolename      => 'manager',
+      catalina_base => $catalina_base,
+      servicename   => $instancename,
+    }
+
+    tomcat::tomcatrole { "${instancename} tomcat role admin":
+      rolename      => 'admin',
+      catalina_base => $catalina_base,
+      servicename   => $instancename,
+    }
+
+    tomcat::tomcatrole { "${instancename} tomcat role manager-gui":
+      rolename      => 'manager-gui',
+      catalina_base => $catalina_base,
+      servicename   => $instancename,
+    }
+
+    concat::fragment{ "${catalina_base}/conf/tomcat-users.xml end":
+      target  => "${catalina_base}/conf/tomcat-users.xml",
+      order   => '99',
+      content => "</tomcat-users>\n",
     }
   }
   else
@@ -351,6 +434,7 @@ define tomcat::instance (
     mode    => '0755',
     require => File["${catalina_base}/bin"],
     content => template("${module_name}/multi/startup.erb"),
+    notify  => Tomcat::Instance::Service[$instancename],
   }
 
   file { "${catalina_base}/bin/configtest.sh":
@@ -369,6 +453,7 @@ define tomcat::instance (
     mode    => '0755',
     require => File["${catalina_base}/bin"],
     content => template("${module_name}/multi/shutdown.erb"),
+    notify  => Tomcat::Instance::Service[$instancename],
   }
 
   concat { "${catalina_base}/bin/setenv.sh":
@@ -414,6 +499,17 @@ define tomcat::instance (
     content => template("${module_name}/multi/setenv_jmx.erb"),
   }
 
+  concat::fragment{ "${catalina_base}/bin/setenv.sh GC":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '10',
+    content => template("${module_name}/multi/setenv_gc.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/bin/setenv.sh locale":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '11',
+    content => template("${module_name}/multi/setenv_locale.erb"),
+  }
 
   if($server_info!=undef) or ($server_number!=undef) or ($server_built!=undef)
   {
@@ -435,7 +531,6 @@ define tomcat::instance (
     group   => 'root',
     mode    => '0755',
     require => [ File[ [
-                        "${catalina_base}/conf/tomcat-users.xml",
                         "${catalina_base}/lib",
                         "${catalina_base}/logs",
                         "${catalina_base}/temp",
@@ -466,6 +561,7 @@ define tomcat::instance (
     if(defined(Class['::logrotate']))
     {
       logrotate::logs { "${instancename}.catalina.out":
+        ensure       => $catalina_logrotate_ensure,
         log          => "${catalina_base}/logs/catalina.out",
         compress     => true,
         copytruncate => true,
@@ -497,5 +593,37 @@ define tomcat::instance (
       before  => Tomcat::Instance::Service[$instancename],
     }
   }
+
+  if(!$custom_webxml)
+  {
+    exec { "cp web.xml from tomcat-home ${instancename}":
+      command => "cp -pr ${tomcat::catalina_home}/conf/web.xml ${catalina_base}/conf",
+      creates => "${catalina_base}/conf/web.xml",
+      require => [File["${catalina_base}/conf"],
+                  Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
+                  Class['tomcat'] ],
+      before  => Tomcat::Instance::Service[$instancename],
+    }
+  }
+
+  # $error_report_valve_show_report        = undef,
+  # $error_report_valve_show_server_info   = undef,
+
+  if($add_error_report_valve_settings)
+  {
+
+    tomcat::valve { $instancename:
+      classname     => $error_report_valve_class,
+      servicename   => $instancename,
+      catalina_base => $catalina_base,
+      options       => {
+                          'showReport'     => $error_report_valve_show_report,
+                          'showServerInfo' => $error_report_valve_show_server_info,
+                        },
+    }
+
+  }
+
+
 
 }

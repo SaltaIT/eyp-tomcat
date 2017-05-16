@@ -383,6 +383,15 @@ tomcatdriverpostgres:
   tomcat_retail50: {}
 ```
 
+#### add a new tomcatuser
+
+```puppet
+tomcat::tomcatuser { 'tomcat-8080':
+  tomcatuser => 'test',
+  tomcatpw => 'lol',
+}
+```
+
 ### init script usage
 
 #### options
@@ -522,6 +531,16 @@ Error: bash -c "./configure --with-apr=/usr/bin/apr-1-config --with-java-home=$(
 Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns: change from notrun to 0 failed: bash -c "./configure --with-apr=/usr/bin/apr-1-config --with-java-home=$(dirname $(dirname $(dirname $(find / -xdev -iname jni_md.h | head -n1))))" returned 1 instead of one of [0]
 ```
 
+tomcat agent
+
+```puppet
+tomcat::agent { 'tomcat-8080':
+  agent_name => 'demo',
+  jar_name => 'demo',
+  tar_source => 'puppet:///solr/apache-tomcat-7.0.62.tar.gz',
+}
+```
+
 ## Reference
 
 ### Global variables
@@ -546,6 +565,13 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
 ### defines
 
 #### tomcat::instance
+
+references:
+* [http://www.fasterj.com/articles/oraclecollectors1.shtml](Oracle JVM Garbage Collectors)
+* [https://blog.codecentric.de/en/2013/10/useful-jvm-flags-part-7-cms-collector/](Useful JVM Flags – Part 7 (CMS Collector))
+* [http://blog.sokolenko.me/2014/11/javavm-options-production.html](JVM options for production)
+
+instance options:
 
 * service options:
   * **ensure**                 = 'running',
@@ -593,18 +619,22 @@ Error: /Stage[main]/Tomcat/Exec[configure native library /usr/local/src]/returns
   * **webapps_owner**: webapps folder owner
   * **webapps_group**: webapps folder group
   * **webapps_mode**: webapps folder mode
+  * **custom_webxml**: copies web.xml from catalina_home to catalina_base. If you need to use a **custom web.xml** you are going to need to set it to **true**. (default: false)
 
 #### tomcat::agent
 
 * **jar_name**: jar to deploy (required)
 * **agent_name**: agent name, agent will be deployed on **catalina_base**/**agent_name** (required)
-* **source**: file source, must be a puppet resource (incompatible with **file_ln**)
-* **file_ln**: jar already in place, just add a softlink to it (incompatible with **source**)
+* **install_type**: installation type: source/tar/link (default: tar)
+* **source**: file source, must be a puppet resource (for installation type **source**)
+* **file_ln**: jar already in place, just add a softlink to it (for installation type **link**)
+* **tar_source**: tar source, must be a puppet resource (for installation type **tar**)
 * **catalina_base**: (default: /opt/${name})
 * **servicename**: (default: $name)
 * **purge_old**: purge old agent versions (default: false)
 * **ensure**: (default: present)
-* **comment**: commet to add in the setenv file to identify this agent (default: undef)
+* **description**: commet to add in the setenv file to identify this agent (default: undef)
+* **srcdir**: where to keep temporal files for tar based installation type (default: /usr/local/src)
 
 #### tomcat::driver::postgres
 
@@ -682,6 +712,7 @@ Install postgres driver for a given tomcat instance:
 * **properties_file**,
 * **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
 * **servicename**: tomcat's servicename (default: resource's name)
+* **dir**: properties directory (default: conf)
 
 #### tomcat::resource
 
@@ -712,6 +743,15 @@ Install postgres driver for a given tomcat instance:
 * **catalina_base**: catalina_base for the tomcat instance (default: /opt/${resource's name})
 * **servicename**: tomcat's servicename (default: resource's name)
 
+#### tomcat:tomcatuser
+
+* **tomcatuser**: username (mandatory)
+* **password**: password (mandatory)
+* **catalina_base**: catalina base (default: /opt/<resource's name>)
+* **servicename**: instance name (default: resource's name)
+* **pwdigest**: password format, must match instance configuration (default: sha)
+* **roles**: list of roles (default: [ 'tomcat', 'manager', 'admin', 'manager-gui' ])
+
 ## Limitations
 
 Tested on:
@@ -719,6 +759,7 @@ Tested on:
 * CentOS 6
 * CentOS 7
 * Ubuntu 14.04
+* Ubuntu 16.04
 
 But should work anywhere
 
@@ -729,12 +770,10 @@ have tests to check both presence and absence of any feature
 
 ### TODO
 
-* rename variables with uppercase letters
-* remove disable_variable_is_lowercase from Rakefile (once variables with uppercase letters are removed)
-* acceptance testing for tomcat::agent
+* acceptance testing for **tomcat::agent**
 * acceptance testing manage_service=false
-* review documentation for version 0.4
-* manually managed include files for server.xml
+* review documentation for version 0.4 and 0.5
+* include files for server.xml
 
 ### Contributing
 

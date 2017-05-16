@@ -1,5 +1,131 @@
 # CHANGELOG
 
+## 0.5.17
+
+* added -Xmn using xmn tomcat instance variable
+
+## 0.5.16
+
+* added -Xmns and -Xmnx variables
+* **INCOMPATIBLE CHANGE** set **+UseConcMarkSweepGC** by default (use_concurrent_mark_sweep: true)
+* added GC variables:
+  * cms_initiating_occupancy_fraction
+  * use_cms_initiating_occupancy_only
+  * cms_scavenge_before_remark
+  * cms_parallel_remark_enabled
+  * print_tenuring_distribution
+  * disable_explicit_gc
+  * max_gc_pause_millis
+  * print_gc
+  * print_gc_details
+  * print_gc_datestamps
+  * print_gc_application_stopped_time
+  * print_gc_file
+* added tomcat instance variable **jvm_error_file**
+
+## 0.5.15
+
+* added umask variable for **tomcat::instance**
+
+## 0.5.14
+
+* added puppet managed banner to **setenv.sh**, **startup.sh**, **shutdown.sh** and **init script**
+* added locale and encoding variables to **tomcat::instance**:
+  * user_language
+  * user_region
+  * user_country
+  * user_variant
+  * file_encoding
+  * sun_jnu_encoding
+  * file_encoding_pkg
+
+## 0.5.13
+
+* **java::agent** notify untar on tar changes
+
+## 0.5.12
+
+* bugfix: **CATALINA_OPTS** loaded twice (catalina.sh & startup.sh)
+
+## 0.5.11
+
+* chown to tomcot for **tomcat::agent**
+
+## 0.5.10
+
+*  **tomcat::properties**: allow custom dir
+
+## 0.5.9
+
+* bugfix mkdir srcdir dependencies on **tomcat::agent**
+
+## 0.5.8
+
+* bugfix: tar name in **tomcat::agent**
+
+## 0.5.7
+
+* added **tomcat::agent::tarball_path** to allow different agent tarballs for multiple instances
+
+## 0.5.5
+
+* bugfix **tomcat::agent**: allow installation agents on multiple instances using the same source tar
+
+## 0.5.4
+
+* **tomcat::agent** in tarball mode: added **--no-same-owner** and **--strip 1**
+
+## 0.5.3
+
+* bugfix tomcat-users.xml not present when userdatabase=false
+
+## 0.5.2
+
+* added variables to deploywar for file ownership and mode:
+  * war_owner
+  * war_group
+  * war_mode
+
+## 0.5.1
+
+* added **tomcat::tomcatrole** as a define (**tomcat::instance** has been rewritten to use it)
+* renamed uppercase variables from **tomcat::intance**:
+  * **redirectPort** to **redirect_port**
+  * **maxThreads** to **max_threads**
+  * **minSpareThreads** to **min_spare_threads**
+* deleted obsolete variable **connectionTimeout** from **tomcat::instance**
+
+## 0.5.0
+
+* **INCOMPATIBLE CHANGE**: renamed **tomcat::instance** variable **errorReportValveClass** to **error_report_valve_class**
+* added variable to customize **ErrorReportValve**:
+  * add_error_report_valve_settings (default: true)
+  * error_report_valve_show_report (default: false)
+  * error_report_valve_show_server_info (default: false)
+* added **org.apache.catalina.valves.ErrorReportValve** management (showReport and showServerInfo) to be able to disable stack traces by default
+* added variable to enable/disable JasperListener
+
+## 0.4.53
+
+* bugfix tomcat-users.xml dependency
+
+## 0.4.52
+
+* **INCOMPATIBLE CHANGE**: added variable **custom_webxml** to **tomcat::instance** (default: false) it copies web.xml from catalina_home to catalina_base (if you need to use a **custom web.xml** you are going to need to set it to **true**)
+
+## 0.4.51
+
+* added **tomcat::tomcatuser** (tomcat-user.xml user management)
+* **tomcat::instance** rewritten to use **tomcat::tomcatuser**
+
+## 0.4.50
+
+* added tar as a installation method for tomcat::agent (changed behaviour)
+
+## 0.4.49
+
+* added **catalina_logrotate_ensure** to enable/disable (present/absent) logrotate configuration
+
 ## 0.4.48
 
 * added ensure for **tomcat::jaas**, **tomcat::krb5**, **tomcat::jndi** and **tomcat::login**

@@ -5,7 +5,7 @@ include BeakerSpecHelper
 
 hosts.each do |host|
 
-  if host['platform'] =~ /^ubuntu-(15.04|15.10)-/
+  if host['platform'] =~ /^ubuntu-(15.04|16.04)-/
     on host, "wget -O /tmp/puppet.deb http://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb"
     on host, "dpkg -i --force-all /tmp/puppet.deb"
     on host, "apt-get update"

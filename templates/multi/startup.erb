@@ -1,7 +1,9 @@
 #!/bin/bash
 
-source <%= @catalina_base %>/bin/setenv.sh
+#
+# puppet managed file
+#
 
-cd $CATALINA_BASE
+cd <%= @catalina_base %>
 
-exec $CATALINA_HOME/bin/catalina.sh start
+exec <%= scope.lookupvar('tomcat::catalina_home') %>/bin/catalina.sh start

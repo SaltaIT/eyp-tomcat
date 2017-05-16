@@ -3,6 +3,7 @@ define tomcat::properties (
                             $properties_file,
                             $catalina_base = "/opt/${name}",
                             $servicename   = $name,
+                            $dir           = 'conf',
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -19,7 +20,7 @@ define tomcat::properties (
     $serviceinstance=undef
   }
 
-  file { "${catalina_base}/conf/${properties_file}.properties":
+  file { "${catalina_base}/${dir}/${properties_file}.properties":
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',
