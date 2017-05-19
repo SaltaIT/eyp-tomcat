@@ -114,6 +114,7 @@ define tomcat::instance (
                           $print_gc_application_stopped_time     = false,
                           $print_gc_file                         = undef,
                           $jvm_error_file                        = undef,
+                          $stop_options                          = 'stop',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',

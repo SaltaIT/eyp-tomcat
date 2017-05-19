@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.18
+
+* added $stop_options 
+
 ## 0.5.17
 
 * added -Xmn using xmn tomcat instance variable
