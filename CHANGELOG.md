@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.18
+
+* added **catalina_stop_options** to **tomcat::instance**
+
 ## 0.5.17
 
 * added -Xmn using xmn tomcat instance variable
