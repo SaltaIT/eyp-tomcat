@@ -2,7 +2,7 @@
 
 ## 0.5.18
 
-* added $stop_options 
+* added **catalina_stop_options** to **tomcat::instance**
 
 ## 0.5.17
 
