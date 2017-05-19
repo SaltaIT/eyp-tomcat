@@ -620,6 +620,7 @@ instance options:
   * **webapps_group**: webapps folder group
   * **webapps_mode**: webapps folder mode
   * **custom_webxml**: copies web.xml from catalina_home to catalina_base. If you need to use a **custom web.xml** you are going to need to set it to **true**. (default: false)
+  * **catalina_stop_options**: Options to stop tomcat (default: stop) - It must be a string
 
 #### tomcat::agent
 

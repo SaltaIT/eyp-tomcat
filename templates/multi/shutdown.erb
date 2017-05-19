@@ -4,4 +4,4 @@
 # puppet managed file
 #
 
-exec <%= scope.lookupvar('tomcat::catalina_home') %>/bin/catalina.sh stop
+exec <%= scope.lookupvar('tomcat::catalina_home') %>/bin/catalina.sh <%= @catalina_stop_options %>
