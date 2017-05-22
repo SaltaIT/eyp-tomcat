@@ -146,7 +146,7 @@ stop() {
       echo "Process is still running despite KILL"
     else
       # success, delete PID file
-      rm $CATALINA_PID
+      rm $CATALINA_PID 2> /dev/null
     fi
   else
     echo "<%= @instancename %> is not running"
