@@ -165,7 +165,7 @@ status() {
       exit 0
     else
       echo "<%= @instancename %> is not running."
-      rm -f $CATALINA_PID
+      rm -f $CATALINA_PID 2> /dev/null
       exit 1
     fi
 
