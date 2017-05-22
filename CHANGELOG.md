@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.19
+
+* Redirected to /dev/null possible errors when deleting pid file from init script
+
 ## 0.5.18
 
 * added **catalina_stop_options** to **tomcat::instance**
