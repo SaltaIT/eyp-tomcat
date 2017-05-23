@@ -116,6 +116,7 @@ define tomcat::instance (
                           $print_gc_file                         = undef,
                           $jvm_error_file                        = undef,
                           $catalina_stop_options                 = 'stop',
+                          $config_files_mode                     = '0644',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -252,7 +253,7 @@ define tomcat::instance (
     ensure  => 'present',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0644',
+    mode    => $config_files_mode,
     require => File["${catalina_base}/conf"],
     notify  => Tomcat::Instance::Service[$instancename],
   }
@@ -363,7 +364,7 @@ define tomcat::instance (
       ensure  => 'present',
       owner   => $tomcat_user,
       group   => $tomcat_user,
-      mode    => '0644',
+      mode    => $config_files_mode,
       require => File["${catalina_base}/conf"],
       notify  => Tomcat::Instance::Service[$instancename],
       before  => File["/etc/init.d/${instancename}"],
@@ -462,7 +463,7 @@ define tomcat::instance (
     ensure  => 'present',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0644',
+    mode    => $config_files_mode,
     require => File["${catalina_base}/bin"],
     notify  => Tomcat::Instance::Service[$instancename],
   }
@@ -519,7 +520,7 @@ define tomcat::instance (
       ensure  => 'present',
       owner   => $tomcat_user,
       group   => $tomcat_user,
-      mode    => '0644',
+      mode    => $config_files_mode,
       require => File[$catalina_base],
       notify  => Tomcat::Instance::Service[$instancename],
       content => template("${module_name}/serverinfo.erb"),

@@ -3,6 +3,7 @@
 ## 0.5.20
 
 * added **connector_http_enabled** to enable/disable HTTP connector in **tomcat::instance**
+* added **config_files_mode** to **tomcat::instance** to be able to set default mode for config files
 
 ## 0.5.19
 
