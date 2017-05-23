@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.20
+
+* added **connector_http_enabled** to enable/disable HTTP connector in **tomcat::instance**
+
 ## 0.5.19
 
 * Redirected to /dev/null possible errors when deleting pid file from init script

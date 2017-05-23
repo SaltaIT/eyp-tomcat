@@ -4,7 +4,8 @@
     <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
             maxThreads="<%= @max_threads %>" minSpareThreads="<%= @min_spare_threads %>"/>
 
-  <% if defined?(@connector_port) %>
+  <%- if @connector_http_enabled -%>
+  <%- if defined?(@connector_port) -%>
     <Connector port="<%= @connector_port %>"
                protocol="HTTP/1.1"
                executor="tomcatThreadPool"
@@ -35,7 +36,8 @@
                URIEncoding="<%= @connector_http_uri_encoding %>"
                <%- end -%>
                redirectPort="<%= @redirect_port %>" />
-  <% end %>
+  <%- end -%>
+  <%- end -%>
 
   <% if defined?(@ajp_port) -%>
   <% if ! @ajp_port.to_s.empty? -%>

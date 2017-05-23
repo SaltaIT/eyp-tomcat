@@ -42,6 +42,7 @@ define tomcat::instance (
                           $ajp_port                              = undef,
                           $connector_ajp_packet_size             = undef,
                           $connector_port                        = '8080',
+                          $connector_http_enabled                = true,
                           $connector_http_server                 = undef,
                           $connector_http_max_header_size        = undef,
                           $connector_http_max_threads            = undef,
