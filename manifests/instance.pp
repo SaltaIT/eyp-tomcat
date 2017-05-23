@@ -121,6 +121,7 @@ define tomcat::instance (
                           $log_directory                         = 'logs',
                           $log_prefix                            = 'localhost_access_log.',
                           $log_suffix                            = '.txt',
+                          $log_resolve_hosts                     = false,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',

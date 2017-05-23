@@ -12,6 +12,7 @@
   * log_directory
   * log_prefix
   * log_suffix
+  * log_resolve_hosts
 
 ## 0.5.19
 
