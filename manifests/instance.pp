@@ -607,6 +607,14 @@ define tomcat::instance (
                   Class['tomcat'] ],
       before  => Tomcat::Instance::Service[$instancename],
     }
+
+    file { "${tomcat::catalina_home}/conf/web.xml":
+      ensure => 'present',
+      owner   => $tomcat_user,
+      group   => $tomcat_user,
+      mode    => $config_files_mode,
+      require => Exec["cp web.xml from tomcat-home ${instancename}"],
+    }
   }
 
   # $error_report_valve_show_report        = undef,
