@@ -117,6 +117,10 @@ define tomcat::instance (
                           $jvm_error_file                        = undef,
                           $catalina_stop_options                 = 'stop',
                           $config_files_mode                     = '0644',
+                          $log_pattern                           = '%h %l %u %t &quot;%r&quot; %s %b',
+                          $log_directory                         = 'logs',
+                          $log_prefix                            = 'localhost_access_log.',
+                          $log_suffix                            = '.txt',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',

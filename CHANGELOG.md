@@ -7,6 +7,11 @@
 * added **file_mode** to **tomcat::webxml**
 * added default **web.xml** file mode under puppet management
 * changed default shutdown command
+* added access log related variables:
+  * log_pattern
+  * log_directory
+  * log_prefix
+  * log_suffix
 
 ## 0.5.19
 
