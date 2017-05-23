@@ -69,7 +69,7 @@ define tomcat::instance (
                           $catalina_logrotate_ensure             = 'present',
                           $heapdump_oom_dir                      = undef,
                           $install_tomcat_manager                = true,
-                          $shutdown_command                      = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
+                          $shutdown_command                      = hiera('eyptomcat::shutdowncommand', 'Ap9g9mS1usPl9u'),
                           $java_library_path                     = undef,
                           $java_home                             = undef,
                           $webapps_owner                         = $tomcat::params::default_tomcat_user,

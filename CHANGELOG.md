@@ -6,6 +6,7 @@
 * added **config_files_mode** to **tomcat::instance** to be able to set default mode for config files
 * added **file_mode** to **tomcat::webxml**
 * added default **web.xml** file mode under puppet management
+* changed default shutdown command
 
 ## 0.5.19
 
