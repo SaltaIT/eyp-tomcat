@@ -1,0 +1,11 @@
+
+#
+# debug options
+#
+
+<% if @debug -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Xdebug"
+<% end -%>
+<% if defined?(@runjdwp_dt_socket_address) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Xrunjdwp:transport=dt_socket,address=<%= @runjdwp_dt_socket_address %>,server=<%= scope.function_bool2yn([@runjdwp_dt_socket_server]) %>,suspend=<%= scope.function_bool2yn([@runjdwp_dt_socket_suspend]) %>"
+<% end -%>

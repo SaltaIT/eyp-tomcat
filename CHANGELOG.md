@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.5.20
+## 0.6.1
 
 * added **connector_http_enabled** to enable/disable HTTP connector in **tomcat::instance**
 * added **config_files_mode** to **tomcat::instance** to be able to set default mode for config files
@@ -13,6 +13,14 @@
   * log_prefix
   * log_suffix
   * log_resolve_hosts
+* **INCOMPATIBLE CHANGE**: set **java.awt.headless** variable to true by default - it should be harmless
+* added debug options:
+  * debug
+  * runjdwp_dt_socket_address
+  * runjdwp_dt_socket_server
+  * runjdwp_dt_socket_suspend
+* added **UseParallelGC** option
+* added **-server** option, by default is not set as each JVM, platform and architecture combination behaves differently
 
 ## 0.5.19
 

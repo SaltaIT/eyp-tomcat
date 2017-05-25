@@ -102,6 +102,7 @@ define tomcat::instance (
                           $xmns                                  = undef,
                           $xmnx                                  = undef,
                           $use_concurrent_mark_sweep             = true,
+                          $use_parallel_gc                       = false,
                           $cms_initiating_occupancy_fraction     = undef,
                           $use_cms_initiating_occupancy_only     = false,
                           $cms_scavenge_before_remark            = false,
@@ -122,6 +123,13 @@ define tomcat::instance (
                           $log_prefix                            = 'localhost_access_log.',
                           $log_suffix                            = '.txt',
                           $log_resolve_hosts                     = false,
+                          $debug                                 = false,
+                          $runjdwp_dt_socket_address             = undef,
+                          $runjdwp_dt_socket_server              = true,
+                          $runjdwp_dt_socket_suspend             = false,
+                          $java_awt_headless                     = true,
+                          $java_security_egd                     = undef,
+                          $server                                = false,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
