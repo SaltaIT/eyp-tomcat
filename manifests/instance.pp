@@ -527,6 +527,12 @@ define tomcat::instance (
     content => template("${module_name}/multi/setenv_locale.erb"),
   }
 
+  concat::fragment{ "${catalina_base}/bin/setenv.sh debug":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '12',
+    content => template("${module_name}/multi/setenv_debug.erb"),
+  }
+
   if($server_info!=undef) or ($server_number!=undef) or ($server_built!=undef)
   {
     file { "${catalina_base}/lib/org/apache/catalina/util/ServerInfo.properties":
