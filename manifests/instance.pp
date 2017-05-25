@@ -628,7 +628,7 @@ define tomcat::instance (
     }
 
     file { "${catalina_base}/conf/web.xml":
-      ensure => 'present',
+      ensure  => 'present',
       owner   => $tomcat_user,
       group   => $tomcat_user,
       mode    => $config_files_mode,
