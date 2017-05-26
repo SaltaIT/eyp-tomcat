@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.2
+
+* bugfix **tomcat::agent**: tomcat service may not be not managed 
+
 ## 0.6.1
 
 * added **connector_http_enabled** to enable/disable HTTP connector in **tomcat::instance**

@@ -74,7 +74,15 @@ define tomcat::agent (
 
   if($servicename!=undef)
   {
-    $serviceinstance=Service[$servicename]
+    if($servicename!='')
+    {
+      $serviceinstance=Service[$servicename]
+    }
+    else
+    {
+      $serviceinstance=undef
+    }
+
   }
   else
   {
