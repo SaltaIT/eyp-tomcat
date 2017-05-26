@@ -37,7 +37,6 @@ define tomcat::agent (
     {
       $serviceinstance=undef
     }
-
   }
   else
   {
