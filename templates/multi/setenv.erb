@@ -7,6 +7,10 @@ export JAVA_HOME="<%= @java_home %>"
 export CATALINA_PID=/var/run/<%= @instancename %>.pid
 export CATALINA_HOME=<%= scope.lookupvar('tomcat::catalina_home') %>
 export CATALINA_BASE=<%= @catalina_base %>
+<% if @server -%>
+export CATALINA_OPTS="$CATALINA_OPTS -server"
+<% end -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Djava.awt.headless=<%= @java_awt_headless %>"
 <% if defined?(@jvm_error_file) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:ErrorFile=<%= @jvm_error_file %>"
 <% end -%>
@@ -46,4 +50,7 @@ export CATALINA_OPTS="$CATALINA_OPTS -Dsun.jnu.encoding=<%= @sun_jnu_encoding %>
 <% end -%>
 <% if defined?(@file_encoding_pkg) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding.pkg=<%= @file_encoding_pkg %>"
+<% end -%>
+<% if defined?(@java_security_egd) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Djava.security.egd=file:<%= @java_security_egd %>"
 <% end -%>

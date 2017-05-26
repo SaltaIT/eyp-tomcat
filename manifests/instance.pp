@@ -42,6 +42,7 @@ define tomcat::instance (
                           $ajp_port                              = undef,
                           $connector_ajp_packet_size             = undef,
                           $connector_port                        = '8080',
+                          $connector_http_enabled                = true,
                           $connector_http_server                 = undef,
                           $connector_http_max_header_size        = undef,
                           $connector_http_max_threads            = undef,
@@ -68,7 +69,7 @@ define tomcat::instance (
                           $catalina_logrotate_ensure             = 'present',
                           $heapdump_oom_dir                      = undef,
                           $install_tomcat_manager                = true,
-                          $shutdown_command                      = hiera('eyptomcat::shutdowncommand', 'SHUTDOWN'),
+                          $shutdown_command                      = hiera('eyptomcat::shutdowncommand', 'Ap9g9mS1usPl9u'),
                           $java_library_path                     = undef,
                           $java_home                             = undef,
                           $webapps_owner                         = $tomcat::params::default_tomcat_user,
@@ -101,6 +102,7 @@ define tomcat::instance (
                           $xmns                                  = undef,
                           $xmnx                                  = undef,
                           $use_concurrent_mark_sweep             = true,
+                          $use_parallel_gc                       = false,
                           $cms_initiating_occupancy_fraction     = undef,
                           $use_cms_initiating_occupancy_only     = false,
                           $cms_scavenge_before_remark            = false,
@@ -115,6 +117,19 @@ define tomcat::instance (
                           $print_gc_file                         = undef,
                           $jvm_error_file                        = undef,
                           $catalina_stop_options                 = 'stop',
+                          $config_files_mode                     = '0644',
+                          $log_pattern                           = '%h %l %u %t &quot;%r&quot; %s %b',
+                          $log_directory                         = 'logs',
+                          $log_prefix                            = 'localhost_access_log.',
+                          $log_suffix                            = '.txt',
+                          $log_resolve_hosts                     = false,
+                          $debug                                 = false,
+                          $runjdwp_dt_socket_address             = undef,
+                          $runjdwp_dt_socket_server              = true,
+                          $runjdwp_dt_socket_suspend             = false,
+                          $java_awt_headless                     = true,
+                          $java_security_egd                     = undef,
+                          $server                                = false,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -251,7 +266,7 @@ define tomcat::instance (
     ensure  => 'present',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0644',
+    mode    => $config_files_mode,
     require => File["${catalina_base}/conf"],
     notify  => Tomcat::Instance::Service[$instancename],
   }
@@ -362,7 +377,7 @@ define tomcat::instance (
       ensure  => 'present',
       owner   => $tomcat_user,
       group   => $tomcat_user,
-      mode    => '0644',
+      mode    => $config_files_mode,
       require => File["${catalina_base}/conf"],
       notify  => Tomcat::Instance::Service[$instancename],
       before  => File["/etc/init.d/${instancename}"],
@@ -461,7 +476,7 @@ define tomcat::instance (
     ensure  => 'present',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0644',
+    mode    => $config_files_mode,
     require => File["${catalina_base}/bin"],
     notify  => Tomcat::Instance::Service[$instancename],
   }
@@ -512,13 +527,19 @@ define tomcat::instance (
     content => template("${module_name}/multi/setenv_locale.erb"),
   }
 
+  concat::fragment{ "${catalina_base}/bin/setenv.sh debug":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '12',
+    content => template("${module_name}/multi/setenv_debug.erb"),
+  }
+
   if($server_info!=undef) or ($server_number!=undef) or ($server_built!=undef)
   {
     file { "${catalina_base}/lib/org/apache/catalina/util/ServerInfo.properties":
       ensure  => 'present',
       owner   => $tomcat_user,
       group   => $tomcat_user,
-      mode    => '0644',
+      mode    => $config_files_mode,
       require => File[$catalina_base],
       notify  => Tomcat::Instance::Service[$instancename],
       content => template("${module_name}/serverinfo.erb"),
@@ -603,6 +624,15 @@ define tomcat::instance (
       require => [File["${catalina_base}/conf"],
                   Exec["untar tomcat tomcat ${tomcat::catalina_home}"],
                   Class['tomcat'] ],
+      before  => Tomcat::Instance::Service[$instancename],
+    }
+
+    file { "${catalina_base}/conf/web.xml":
+      ensure  => 'present',
+      owner   => $tomcat_user,
+      group   => $tomcat_user,
+      mode    => $config_files_mode,
+      require => Exec["cp web.xml from tomcat-home ${instancename}"],
       before  => Tomcat::Instance::Service[$instancename],
     }
   }

@@ -18,7 +18,7 @@
   <% end -%>
 
         <%- if @enable_default_access_log -%>
-        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="localhost_access_log." suffix=".txt"
-               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="<%= @log_directory %>"
+               prefix="<%= @log_prefix %>" suffix="<%= @log_suffix %>"
+               pattern="<%= @log_pattern %>" resolveHosts="<%= @log_resolve_hosts %>" />
         <%- end -%>
