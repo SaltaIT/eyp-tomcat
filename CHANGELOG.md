@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.5
+
+* bugfix **start_stop_threads** and **connector_ajp_max_threads*
+
 ## 0.6.4
 
 * added **custom_jar** to **tomcat::agent**
