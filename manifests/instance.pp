@@ -41,6 +41,7 @@ define tomcat::instance (
                           $shutdown_address                      = '127.0.0.1',
                           $ajp_port                              = undef,
                           $connector_ajp_packet_size             = undef,
+                          $connector_ajp_max_threads             = undef,
                           $connector_port                        = '8080',
                           $connector_http_enabled                = true,
                           $connector_http_server                 = undef,
@@ -130,9 +131,8 @@ define tomcat::instance (
                           $java_awt_headless                     = true,
                           $java_security_egd                     = undef,
                           $server                                = false,
-                          $startStopThreads                      = undef,
-                          $connector_ajp_max_threads            = undef,
-
+                          $start_stop_threads                    = undef,
+                          $notify_initscript_actions_to          = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',

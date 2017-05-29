@@ -175,6 +175,10 @@ status() {
   fi
 }
 
+<%- if defined?(@notify_initscript_actions_to) -%>
+echo -e "tomcat actions notitications\n<%= @instancename %> - action $1" | mail -s "<%= @instancename %> $1 on $(hostname -f)" <%= @notify_initscript_actions_to %>
+<%- end -%>
+
 case $1 in
   start)
     start
