@@ -12,6 +12,7 @@ define tomcat::agent (
                         $description   = undef,
                         $srcdir        = '/usr/local/src',
                         $tarball_path  = undef,
+                        $custom_jar    = undef,
                       ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -60,14 +61,25 @@ define tomcat::agent (
     require => File[$catalina_base],
   }
 
-  concat::fragment{ "${catalina_base}/bin/setenv.sh javaagent ${agent_name} ${jar_name}":
-    target  => "${catalina_base}/bin/setenv.sh",
-    order   => '10',
-    content => template("${module_name}/multi/setenv_javaagent.erb"),
+  if($install_type!='custom')
+  {
+    concat::fragment{ "${catalina_base}/bin/setenv.sh javaagent ${agent_name} ${jar_name}":
+      target  => "${catalina_base}/bin/setenv.sh",
+      order   => '10',
+      content => template("${module_name}/multi/setenv_javaagent.erb"),
+    }
   }
 
   case $install_type
   {
+    'custom':
+    {
+      concat::fragment{ "${catalina_base}/bin/setenv.sh javaagent ${custom_jar}":
+        target  => "${catalina_base}/bin/setenv.sh",
+        order   => '10',
+        content => template("${module_name}/multi/setenv_javaagent_custom.erb"),
+      }
+    }
     'tar':
     {
       if($source!=undef or $file_ln!=undef)
@@ -163,7 +175,6 @@ define tomcat::agent (
           notify  => $serviceinstance,
           require => File["${catalina_base}/${agent_name}"],
         }
-
       }
     }
     default:

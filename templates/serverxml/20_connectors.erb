@@ -48,7 +48,7 @@
                packetSize="<%= @connector_ajp_packet_size %>"
                <%- end -%>
                <%- if defined?(@connector_ajp_max_threads) -%>
-               connector_ajp_max_threads="<%= @connector_ajp_max_threads %>"
+               maxThreads="<%= @connector_ajp_max_threads %>"
                <%- end -%>
                redirectPort="<%= @redirectPort %>" />
       <% end -%>
