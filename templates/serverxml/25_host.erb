@@ -3,8 +3,8 @@
             unpackWARs="true" autoDeploy="true"
             <% if defined?(@xml_validation) %>xmlValidation="<%= @xml_validation %>"<% end -%>
             <% if defined?(@xml_namespace_aware) %>xmlNamespaceAware="<%= @xml_namespace_aware %>"<% end -%>
-            <% if defined?(@error_report_valve_class) %>errorReportValveClass="<%= @error_report_valve_class %>"<% end -%>>
-            <% if defined?(@start_stop_threads) %>startStopThreads="<%= @start_stop_threads %>" <% end -%>>
+            <% if defined?(@error_report_valve_class) %>errorReportValveClass="<%= @error_report_valve_class %>"<% end -%>
+            <% if defined?(@startStopThreads) %>startStopThreads="<%= @startStopThreads %>" <% end -%>>
 
   <% if(@realms) -%>
   <% @realms.each do | realm | -%>
