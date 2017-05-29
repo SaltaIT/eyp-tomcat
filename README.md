@@ -775,6 +775,7 @@ have tests to check both presence and absence of any feature
 * acceptance testing manage_service=false
 * review documentation for version 0.4 and 0.5
 * include files for server.xml
+* delete duplicated code for default vhost
 
 ### Contributing
 

@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 0.6.3
+
+* improved **tomcat::agent** code
+* added **connector_ajp_max_threads** to **tomcat::instance** to define maxThreads for AJP
+* added **startStopThreads** to **tomcat::instance**
+
+## 0.6.2
+
+* bugfix **tomcat::agent**: tomcat service may not be not managed
+
 ## 0.6.1
 
 * added **connector_http_enabled** to enable/disable HTTP connector in **tomcat::instance**

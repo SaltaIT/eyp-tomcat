@@ -130,6 +130,9 @@ define tomcat::instance (
                           $java_awt_headless                     = true,
                           $java_security_egd                     = undef,
                           $server                                = false,
+                          $startStopThreads                      = undef,
+                          $connector_ajp_max_threads            = undef,
+
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
