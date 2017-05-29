@@ -2,7 +2,7 @@
 
 ## 0.6.6
 
-* bugfix **start_stop_threads** and **connector_ajp_max_threads*
+* bugfix **start_stop_threads** and **connector_ajp_max_threads**
 
 ## 0.6.4
 
