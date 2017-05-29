@@ -3,6 +3,8 @@
 ## 0.6.3
 
 * improved **tomcat::agent** code
+* added **connector_ajp_max_threads** to **tomcat::instance** to define maxThreads for AJP
+* added **startStopThreads** to **tomcat::instance**
 
 ## 0.6.2
 
