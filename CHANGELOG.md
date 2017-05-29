@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.6.5
+## 0.6.6
 
 * bugfix **start_stop_threads** and **connector_ajp_max_threads*
 
