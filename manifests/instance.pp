@@ -42,6 +42,7 @@ define tomcat::instance (
                           $ajp_port                              = undef,
                           $connector_ajp_packet_size             = undef,
                           $connector_ajp_max_threads             = undef,
+                          $connector_ajp_connection_timeout      = undef,
                           $connector_port                        = '8080',
                           $connector_http_enabled                = true,
                           $connector_http_server                 = undef,
@@ -131,8 +132,6 @@ define tomcat::instance (
                           $java_awt_headless                     = true,
                           $java_security_egd                     = undef,
                           $server                                = false,
-                          $connector_ajp_max_threads             = undef,
-                          $connector_ajp_connection_timeout      = undef,
                           $start_stop_threads                    = undef,
                           $notify_initscript_actions_to          = undef,
                         ) {
