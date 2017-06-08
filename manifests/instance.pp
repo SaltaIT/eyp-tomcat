@@ -132,6 +132,7 @@ define tomcat::instance (
                           $server                                = false,
                           $startStopThreads                      = undef,
                           $connector_ajp_max_threads            = undef,
+                          $connector_ajp_packet_size            = undef,
 
                         ) {
   Exec {
