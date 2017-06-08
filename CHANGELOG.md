@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.6.7
+## 0.6.8
 
 * Added **connector_ajp_connection_timeout** to **tomcat::instance**
 
