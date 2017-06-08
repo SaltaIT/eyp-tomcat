@@ -131,6 +131,8 @@ define tomcat::instance (
                           $java_awt_headless                     = true,
                           $java_security_egd                     = undef,
                           $server                                = false,
+                          $connector_ajp_max_threads             = undef,
+                          $connector_ajp_connection_timeout      = undef,
                           $start_stop_threads                    = undef,
                           $notify_initscript_actions_to          = undef,
                         ) {

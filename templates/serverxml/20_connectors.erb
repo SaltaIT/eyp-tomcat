@@ -50,6 +50,9 @@
                <%- if defined?(@connector_ajp_max_threads) -%>
                maxThreads="<%= @connector_ajp_max_threads %>"
                <%- end -%>
+               <%- if defined?(@connector_ajp_connection_timeout) -%>
+               connectionTimeout="<%= @connector_ajp_connection_timeout %>"
+               <%- end -%>
                redirectPort="<%= @redirectPort %>" />
       <% end -%>
   <% end -%>
