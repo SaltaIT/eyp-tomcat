@@ -1,0 +1,4 @@
+<% if defined?(@description) -%>
+# <%= @description %>
+<% end -%>
+export JAVA_OPTS="$JAVA_OPTS -javaagent:<%= @custom_jar %>"
