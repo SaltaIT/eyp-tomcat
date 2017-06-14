@@ -1,9 +1,23 @@
 # CHANGELOG
 
+## 0.6.5
+
+* bugfix **start_stop_threads** and **connector_ajp_max_threads*
+
+## 0.6.4
+
+* added **custom_jar** to **tomcat::agent**
+* added **connector_ajp_max_threads** to **tomcat::instance** to define maxThreads for AJP
+* added **start_stop_threads** to **tomcat::instance**
+* added email notification in init script
+
+## 0.6.3
+
+* minor changes
+
 ## 0.6.2
 
-* added **connector_ajp_max_threads** to **tomcat::instance** to define maxThreads for AJP
-* added **startStopThreads** to **tomcat::instance**
+* bugfix **tomcat::agent**: tomcat service may not be not managed
 
 ## 0.6.1
 
