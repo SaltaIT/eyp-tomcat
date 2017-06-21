@@ -41,3 +41,24 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:+CMSParallelRemarkEnabled"
 <% if @print_tenuring_distribution -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintTenuringDistribution"
 <% end -%>
+<% if @use_par_new_gc -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+UseParNewGC"
+<% end -%>
+<% if defined?(@par_gc_cards_per_stride_chunk) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:ParGCCardsPerStrideChunk=<%= @par_gc_cards_per_stride_chunk %>"
+<% end -%>
+<% if @bind_gc_task_threads_to_cpus -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+BindGCTaskThreadsToCPUs"
+<% end -%>
+<% if @use_gc_task_affinity -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+UseGCTaskAffinity"
+<% end -%>
+<% if @scavenge_before_full_gc -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+ScavengeBeforeFullGC"
+<% end -%>
+<% if @print_gc_cause -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGCCause"
+<% end -%>
+<% if defined?(@parallel_gc_threads) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:ParallelGCThreads=<%= @parallel_gc_threads %>"
+<% end -%>

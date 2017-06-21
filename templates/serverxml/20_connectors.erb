@@ -50,6 +50,12 @@
                <%- if defined?(@connector_ajp_max_threads) -%>
                maxThreads="<%= @connector_ajp_max_threads %>"
                <%- end -%>
+               <%- if defined?(@connector_ajp_accept_count) -%>
+               acceptCount="<%= @connector_ajp_accept_count %>"
+               <%- end -%>
+               <%- if defined?(@connector_ajp_acceptor_threadcount) -%>
+               acceptorThreadCount="<%= @connector_ajp_acceptor_threadcount %>"
+               <%- end -%>
                redirectPort="<%= @redirectPort %>" />
       <% end -%>
   <% end -%>

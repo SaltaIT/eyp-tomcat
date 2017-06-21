@@ -621,6 +621,25 @@ instance options:
   * **webapps_mode**: webapps folder mode
   * **custom_webxml**: copies web.xml from catalina_home to catalina_base. If you need to use a **custom web.xml** you are going to need to set it to **true**. (default: false)
   * **catalina_stop_options**: Options to stop tomcat (default: stop) - It must be a string
+  * **use_par_new_gc**: Uses a parallel version of the young generation copying collector alongside the default collector. This minimizes pauses by using all available CPUs in parallel. The collector is compatible with both the default collector and the Concurrent Mark and Sweep (CMS) collector.
+  * **max_tenuring_threshold**: reduce the amount of time spent in data copying in the young generation collection while avoiding promoting too many objects, by noting tenuring ages in the GC logs (default: undef)
+  * **survivor_ratio**: Ratio of eden/survivor space size (default: undef)
+  * **unlock_diagnostic_vm_options**   = false,
+  * **par_gc_cards_per_stride_chunk**:  controls the granularity of tasks given to GC worker threads and helps get the best performance (default: undef)
+  * **bind_gc_task_threads_to_cpus** : binds GC threads to individual CPU cores (default: false)
+  * **use_gc_task_affinity**: allocates tasks to GC worker threads using an affinity parameter if implemented (default: false)
+  * **always_pre_touch**: It pretouchs and set zero all the pages you have allocated during the initialization of your application (default: false)
+  * **scavenge_before_full_gc**: Do young generation GC prior to a full GC (default: false)
+  * **agressive_opts**: Turn on point performance compiler optimizations that are expected to be default in upcoming releases (default: false)
+  * **use_biased_locking**: 	Enable biased locking   (default: false)
+  * **print_gc_cause**                        = false,
+  * **target_survivor_ratio**: 	Desired percentage of survivor space used after scavenge  (default: undef)
+  * **parallel_gc_threads**: Sets the number of garbage collection threads in the young and old parallel garbage collectors  (default: undef)
+  * **jvm_prefer_ip4_stack**                  = false,
+  * **http_max_connections**                  = undef,
+  * **rmi_port**                              = undef,
+  * **connector_ajp_accept_count**            = undef,
+  * **connector_ajp_acceptor_threadcount**    = undef,
 
 #### tomcat::agent
 

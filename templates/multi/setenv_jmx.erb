@@ -7,5 +7,11 @@
 export CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=<%= @jmx_port %> -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
 <% if defined?(@rmi_server_hostname) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Djava.rmi.server.hostname=<%= @rmi_server_hostname %>"
+<% if defined?(@rmi_port) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote.rmi.port=<%= @rmi_port %>"
+<% if @jvm_prefer_ip4_stack  -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Djava.net.preferIPv4Stack=true"
+<% end -%>
+<% end -%>
 <% end -%>
 <% end -%>
