@@ -8,6 +8,9 @@
   <Connector  port="<%= @connector_https_port %>"
               protocol="HTTP/1.1"
               SSLEnabled="true"
+              <%- if defined?(@connector_https_server) -%>
+              server="<%= @connector_https_server %>"
+              <%- end -%>
               <%- if defined?(@connector_https_max_threads) -%>
               maxThreads="<%= @connector_https_max_threads %>"
               <%- end -%>
@@ -16,6 +19,12 @@
               <%- end -%>
               <%- if defined?(@connector_https_max_spare_threads) -%>
               maxSpareThreads="<%= @connector_https_max_spare_threads %>"
+              <%- end -%>
+              <%- if defined?(@connector_https_accept_count) -%>
+              acceptCount="<%= @connector_https_accept_count %>"
+              <%- end -%>
+              <%- if defined?(@connector_https_connection_timeout) -%>
+              connectionTimeout="<%= @connector_https_connection_timeout %>"
               <%- end -%>
               scheme="https"
               secure="true"
