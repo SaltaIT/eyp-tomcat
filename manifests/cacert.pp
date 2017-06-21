@@ -45,8 +45,8 @@ define tomcat::cacert (
   else
   {
     file { "${catalina_base}/conf/thuststore_${certname}_${version}.cert":
-      ensure => 'link',
-      target => $ca_file,
+      ensure  => 'link',
+      target  => $ca_file,
       require => File["${catalina_base}/conf"],
       notify  => $serviceinstance,
     }
