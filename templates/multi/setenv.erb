@@ -54,3 +54,28 @@ export CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding.pkg=<%= @file_encoding_pkg 
 <% if defined?(@java_security_egd) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -Djava.security.egd=file:<%= @java_security_egd %>"
 <% end -%>
+<% if defined?(@http_max_connections) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Dhttp.maxConnections=<%= @http_max_connections %>"
+<% end -%>
+## OTHERS
+<% if defined?(@max_tenuring_threshold) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxTenuringThreshold=<%= @max_tenuring_threshold %>"
+<% end -%>
+<% if defined?(@survivor_ratio) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:SurvivorRatio=<%= @survivor_ratio %>"
+<% end -%>
+<% if @unlock_diagnostic_vm_options -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+UnlockDiagnosticVMOptions"
+<% end -%>
+<% if @always_pre_touch -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+AlwaysPreTouch"
+<% end -%>
+<% if @agressive_opts -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+AggressiveOpts"
+<% end -%>
+<% if @use_biased_locking -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+UseBiasedLocking"
+<% end -%>
+<% if defined?(@target_survivor_ratio) -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:TargetSurvivorRatio=<%= @target_survivor_ratio %>"
+<% end -%>
