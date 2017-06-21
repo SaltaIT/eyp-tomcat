@@ -54,6 +54,7 @@ define tomcat::instance (
                           $connector_https_keystore_pass         = '',
                           $connector_https_thruststore           = undef,
                           $connector_https_thruststore_pass      = '',
+                          $connector_https_sslprotocol           = 'TLS',
                           $connector_http_enabled                = true,
                           $connector_http_server                 = undef,
                           $connector_http_max_header_size        = undef,

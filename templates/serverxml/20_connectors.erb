@@ -30,7 +30,7 @@
               <%- if defined?(@connector_https_client_auth) -%>
               clientAuth="<%= @connector_https_client_auth %>"
               <%- end -%>
-              sslProtocol="TLS" />
+              sslProtocol="<%= @connector_https_sslprotocol %>" />
   <%- end -%>
 
 
