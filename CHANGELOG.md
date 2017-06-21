@@ -1,14 +1,23 @@
 # CHANGELOG
 
-## 0.6.6
+## 0.6.11
 
 * added **use_par_new_gc**, **max_tenuring_threshold**, **survivor_ratio**, **unlock_diagnostic_vm_options**, **par_gc_cards_per_stride_chunk**, **bind_gc_task_threads_to_cpus**, **use_gc_task_affinity**, **always_pre_touch**, **scavenge_before_full_gc**, **agressive_opts**, **use_biased_locking**, **print_gc_cause**, **target_survivor_ratio**, **parallel_gc_threads**, **http_max_connections**, **jvm_prefer_ip4_stack**, **rmi_port**, **connector_ajp_accept_count**, **connector_ajp_acceptor_threadcount**
 
-## 0.6.5
+## 0.6.10
 
-* bugfix **start_stop_threads** and **connector_ajp_max_threads*
+* added HTTPS connector and thuststore/keystore management
+
+## 0.6.9
+
+* added **connector_ajp_connection_timeout** to **tomcat::instance**
+
+## 0.6.6
+
+* bugfix **start_stop_threads** and **connector_ajp_max_threads**
 
 ## 0.6.4
+
 
 * added **custom_jar** to **tomcat::agent**
 * added **connector_ajp_max_threads** to **tomcat::instance** to define maxThreads for AJP
