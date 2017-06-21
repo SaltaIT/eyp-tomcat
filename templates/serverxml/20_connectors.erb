@@ -4,6 +4,36 @@
     <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
             maxThreads="<%= @max_threads %>" minSpareThreads="<%= @min_spare_threads %>"/>
 
+  <%- if @connector_https_enabled -%>
+  <Connector  port="<%= @connector_https_port %>"
+              protocol="HTTP/1.1"
+              SSLEnabled="true"
+              <%- if defined?(@connector_https_max_threads) -%>
+              maxThreads="<%= @connector_https_max_threads %>"
+              <%- end -%>
+              <%- if defined?(@connector_https_min_spare_threads) -%>
+              minSpareThreads="<%= @connector_https_min_spare_threads %>"
+              <%- end -%>
+              <%- if defined?(@connector_https_max_spare_threads) -%>
+              maxSpareThreads="<%= @connector_https_max_spare_threads %>"
+              <%- end -%>
+              scheme="https"
+              secure="true"
+              <%- if defined?(@connector_https_thruststore) -%>
+              truststoreFile="<%= @connector_https_thruststore %>"
+              truststorePass="<%= @connector_https_thruststore_pass %>"
+              <%- end -%>
+              <%- if defined?(@connector_https_keystore) -%>
+              keystoreFile="<%= @connector_https_keystore %>"
+              keystorePass="<%= @connector_https_keystore_pass %>"
+              <%- end -%>
+              <%- if defined?(@connector_https_client_auth) -%>
+              clientAuth="<%= @connector_https_client_auth %>"
+              <%- end -%>
+              sslProtocol="TLS" />
+  <%- end -%>
+
+
   <%- if @connector_http_enabled -%>
   <%- if defined?(@connector_port) -%>
     <Connector port="<%= @connector_port %>"

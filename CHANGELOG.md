@@ -1,8 +1,12 @@
 # CHANGELOG
 
+## 0.6.10
+
+* added HTTPS connector and thuststore/keystore management
+
 ## 0.6.9
 
-* Added **connector_ajp_connection_timeout** to **tomcat::instance**
+* added **connector_ajp_connection_timeout** to **tomcat::instance**
 
 ## 0.6.6
 
