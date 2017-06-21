@@ -1,10 +1,19 @@
 # CHANGELOG
 
-## 0.6.5
+## 0.6.10
 
-* bugfix **start_stop_threads** and **connector_ajp_max_threads*
+* added HTTPS connector and thuststore/keystore management
+
+## 0.6.9
+
+* added **connector_ajp_connection_timeout** to **tomcat::instance**
+
+## 0.6.6
+
+* bugfix **start_stop_threads** and **connector_ajp_max_threads**
 
 ## 0.6.4
+
 
 * added **custom_jar** to **tomcat::agent**
 * added **connector_ajp_max_threads** to **tomcat::instance** to define maxThreads for AJP

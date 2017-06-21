@@ -4,8 +4,51 @@
     <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
             maxThreads="<%= @max_threads %>" minSpareThreads="<%= @min_spare_threads %>"/>
 
+  <%- if @connector_https_enabled -%>
+    <!-- HTTPS Connector -->
+    <Connector  port="<%= @connector_https_port %>"
+                protocol="HTTP/1.1"
+                SSLEnabled="true"
+                <%- if defined?(@connector_https_server) -%>
+                server="<%= @connector_https_server %>"
+                <%- end -%>
+                <%- if defined?(@connector_https_max_header_size) -%>
+                maxHttpHeaderSize="<%= @connector_https_max_header_size %>"
+                <%- end -%>
+                <%- if defined?(@connector_https_max_threads) -%>
+                maxThreads="<%= @connector_https_max_threads %>"
+                <%- end -%>
+                <%- if defined?(@connector_https_min_spare_threads) -%>
+                minSpareThreads="<%= @connector_https_min_spare_threads %>"
+                <%- end -%>
+                <%- if defined?(@connector_https_max_spare_threads) -%>
+                maxSpareThreads="<%= @connector_https_max_spare_threads %>"
+                <%- end -%>
+                <%- if defined?(@connector_https_accept_count) -%>
+                acceptCount="<%= @connector_https_accept_count %>"
+                <%- end -%>
+                <%- if defined?(@connector_https_connection_timeout) -%>
+                connectionTimeout="<%= @connector_https_connection_timeout %>"
+                <%- end -%>
+                scheme="https"
+                secure="true"
+                <%- if defined?(@connector_https_thruststore) -%>
+                truststoreFile="<%= @connector_https_thruststore %>"
+                truststorePass="<%= @connector_https_thruststore_pass %>"
+                <%- end -%>
+                <%- if defined?(@connector_https_keystore) -%>
+                keystoreFile="<%= @connector_https_keystore %>"
+                keystorePass="<%= @connector_https_keystore_pass %>"
+                <%- end -%>
+                <%- if defined?(@connector_https_client_auth) -%>
+                clientAuth="<%= @connector_https_client_auth %>"
+                <%- end -%>
+                sslProtocol="<%= @connector_https_sslprotocol %>" />
+  <%- end -%>
+
   <%- if @connector_http_enabled -%>
   <%- if defined?(@connector_port) -%>
+    <!-- HTTP Connector -->
     <Connector port="<%= @connector_port %>"
                protocol="HTTP/1.1"
                executor="tomcatThreadPool"
@@ -41,7 +84,7 @@
 
   <% if defined?(@ajp_port) -%>
   <% if ! @ajp_port.to_s.empty? -%>
-    <!-- Define an AJP 1.3 Connector on port 8009 -->
+    <!-- AJP Connector -->
     <Connector port="<%= @ajp_port %>"
                protocol="AJP/1.3"
                <%- if defined?(@connector_ajp_packet_size) -%>
@@ -49,6 +92,9 @@
                <%- end -%>
                <%- if defined?(@connector_ajp_max_threads) -%>
                maxThreads="<%= @connector_ajp_max_threads %>"
+               <%- end -%>
+               <%- if defined?(@connector_ajp_connection_timeout) -%>
+               connectionTimeout="<%= @connector_ajp_connection_timeout %>"
                <%- end -%>
                redirectPort="<%= @redirectPort %>" />
       <% end -%>

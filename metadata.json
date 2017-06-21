@@ -1,6 +1,6 @@
 {
   "name": "eyp-tomcat",
-  "version": "0.6.5",
+  "version": "0.6.10",
   "author": "eyp",
   "summary": "multi instance tomcat",
   "license": "Apache-2.0",
@@ -8,8 +8,8 @@
   "project_page": null,
   "issues_url": "https://github.com/NTTCom-MS/eyp-tomcat/issues",
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0"},
-    {"name":"puppetlabs/concat","version_requirement":">= 1.2.3"},
+    {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0 < 9.9.9"},
+    {"name":"puppetlabs/concat","version_requirement":">= 1.2.3 < 9.9.9"},
     {"version_requirement":">= 0.1.11 < 0.2.0","name":"eyp/systemd"}
   ],
   "operatingsystem_support": [
