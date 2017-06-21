@@ -47,6 +47,7 @@ define tomcat::instance (
                           $connector_https_enabled               = false,
                           $connector_https_port                  = '8443',
                           $connector_https_server                = undef,
+                          $connector_https_max_header_size       = undef,
                           $connector_https_client_auth           = undef,
                           $connector_https_max_threads           = undef,
                           $connector_https_min_spare_threads     = undef,

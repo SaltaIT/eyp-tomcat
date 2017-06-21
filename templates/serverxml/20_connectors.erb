@@ -12,6 +12,9 @@
                 <%- if defined?(@connector_https_server) -%>
                 server="<%= @connector_https_server %>"
                 <%- end -%>
+                <%- if defined?(@connector_https_max_header_size) -%>
+                maxHttpHeaderSize="<%= @connector_https_max_header_size %>"
+                <%- end -%>
                 <%- if defined?(@connector_https_max_threads) -%>
                 maxThreads="<%= @connector_https_max_threads %>"
                 <%- end -%>
