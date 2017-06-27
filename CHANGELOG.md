@@ -2,7 +2,26 @@
 
 ## 0.6.11
 
-* added **use_par_new_gc**, **max_tenuring_threshold**, **survivor_ratio**, **unlock_diagnostic_vm_options**, **par_gc_cards_per_stride_chunk**, **bind_gc_task_threads_to_cpus**, **use_gc_task_affinity**, **always_pre_touch**, **scavenge_before_full_gc**, **agressive_opts**, **use_biased_locking**, **print_gc_cause**, **target_survivor_ratio**, **parallel_gc_threads**, **http_max_connections**, **jvm_prefer_ip4_stack**, **rmi_port**, **connector_ajp_accept_count**, **connector_ajp_acceptor_threadcount**
+* added JVM options:
+  * **use_par_new_gc**
+  * **max_tenuring_threshold**
+  * **survivor_ratio**
+  * **unlock_diagnostic_vm_options**
+  * **par_gc_cards_per_stride_chunk**
+  * **bind_gc_task_threads_to_cpus**
+  * **use_gc_task_affinity**
+  * **always_pre_touch**
+  * **scavenge_before_full_gc**
+  * **agressive_opts**
+  * **use_biased_locking**
+  * **print_gc_cause**
+  * **target_survivor_ratio**
+  * **parallel_gc_threads**
+  * **http_max_connections**
+  * **jvm_prefer_ip4_stack**
+  * **rmi_port**
+  * **connector_ajp_accept_count**
+  * **connector_ajp_acceptor_threadcount**
 
 ## 0.6.10
 
