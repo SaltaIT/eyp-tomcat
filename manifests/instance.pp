@@ -151,6 +151,27 @@ define tomcat::instance (
                           $server                                = false,
                           $start_stop_threads                    = undef,
                           $notify_initscript_actions_to          = undef,
+                          $use_par_new_gc                        = false,
+                          $max_tenuring_threshold                = undef,
+                          $survivor_ratio                        = undef,
+                          $unlock_diagnostic_vm_options          = false,
+                          $par_gc_cards_per_stride_chunk         = undef,
+                          $bind_gc_task_threads_to_cpus          = false,
+                          $use_gc_task_affinity                  = false,
+                          $always_pre_touch                      = false,
+                          $scavenge_before_full_gc               = false,
+                          $agressive_opts                        = false,
+                          $use_biased_locking                    = false,
+                          $print_gc_cause                        = false,
+                          $target_survivor_ratio                 = undef,
+                          $parallel_gc_threads                   = undef,
+                          $jvm_prefer_ip4_stack                  = false,
+                          $http_max_connections                  = undef,
+                          $rmi_port                              = undef,
+                          $connector_ajp_accept_count            = undef,
+                          $connector_ajp_acceptor_threadcount    = undef,
+
+
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
