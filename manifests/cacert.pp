@@ -32,7 +32,7 @@ define tomcat::cacert (
 
   if($ca_source!=undef)
   {
-    file { "${catalina_base}/conf/thuststore_${certname}_${version}.cert":
+    file { "${catalina_base}/conf/thuststore_${certname}_${version}.ks":
       ensure  => 'present',
       owner   => 'root',
       group   => 'root',
@@ -44,7 +44,7 @@ define tomcat::cacert (
   }
   else
   {
-    file { "${catalina_base}/conf/thuststore_${certname}_${version}.cert":
+    file { "${catalina_base}/conf/thuststore_${certname}_${version}.ks":
       ensure  => 'link',
       target  => $ca_file,
       require => File["${catalina_base}/conf"],

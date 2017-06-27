@@ -33,11 +33,11 @@
                 scheme="https"
                 secure="true"
                 <%- if defined?(@connector_https_thruststore) -%>
-                truststoreFile="<%= @connector_https_thruststore %>"
+                truststoreFile="<%= @catalina_base %>/conf/thuststore_<%= @connector_https_thruststore %>_<%= @connector_https_thruststore_version %>.ks"
                 truststorePass="<%= @connector_https_thruststore_pass %>"
                 <%- end -%>
                 <%- if defined?(@connector_https_keystore) -%>
-                keystoreFile="<%= @connector_https_keystore %>"
+                keystoreFile="<%= @catalina_base %>/conf/keystore_<%= @connector_https_keystore %>_<%= @connector_https_keystore_version %>.ks"
                 keystorePass="<%= @connector_https_keystore_pass %>"
                 <%- end -%>
                 <%- if defined?(@connector_https_client_auth) -%>

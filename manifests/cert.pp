@@ -33,7 +33,7 @@ define tomcat::cert (
 
   if($cert_source!=undef)
   {
-    file { "${catalina_base}/conf/keystore_${certname}_${version}.cert":
+    file { "${catalina_base}/conf/keystore_${certname}_${version}.ks":
       ensure  => 'present',
       owner   => 'root',
       group   => 'root',
@@ -45,7 +45,7 @@ define tomcat::cert (
   }
   else
   {
-    file { "${catalina_base}/conf/keystore_${certname}_${version}.cert":
+    file { "${catalina_base}/conf/keystore_${certname}_${version}.ks":
       ensure  => 'link',
       target  => $cert_file,
       require => File["${catalina_base}/conf"],
