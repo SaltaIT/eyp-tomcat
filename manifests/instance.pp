@@ -23,6 +23,9 @@
 # 44 - roles
 # 55 - users
 # 99 - end tag
+#
+# nota: ssl client certificates: https://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/
+#
 define tomcat::instance (
                           $tomcatpw                              = 'password',
                           $catalina_base                         = "/opt/${name}",
