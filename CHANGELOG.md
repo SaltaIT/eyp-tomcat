@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.12
+
+* added **maxPostSize** to AJP, HTTP and HTTPS connectors
+
 ## 0.6.11
 
 * added JVM options:
