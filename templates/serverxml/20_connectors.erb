@@ -30,6 +30,9 @@
                 <%- if defined?(@connector_https_connection_timeout) -%>
                 connectionTimeout="<%= @connector_https_connection_timeout %>"
                 <%- end -%>
+                <%- if defined?(@connector_https_max_post_size) -%>
+                maxPostSize="<%= @connector_https_max_post_size %>"
+                <%- end -%>
                 scheme="https"
                 secure="true"
                 <%- if defined?(@connector_https_thruststore) -%>
@@ -78,6 +81,9 @@
                <%- if defined?(@connector_http_uri_encoding) -%>
                URIEncoding="<%= @connector_http_uri_encoding %>"
                <%- end -%>
+               <%- if defined?(@connector_http_max_post_size) -%>
+               maxPostSize="<%= @connector_http_max_post_size %>"
+               <%- end -%>
                redirectPort="<%= @redirect_port %>" />
   <%- end -%>
   <%- end -%>
@@ -101,6 +107,9 @@
                <%- end -%>
                <%- if defined?(@connector_ajp_connection_timeout) -%>
                connectionTimeout="<%= @connector_ajp_connection_timeout %>"
+               <%- end -%>
+               <%- if defined?(@connector_ajp_max_post_size) -%>
+               maxPostSize="<%= @connector_ajp_max_post_size %>"
                <%- end -%>
                redirectPort="<%= @redirectPort %>" />
       <% end -%>

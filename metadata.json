@@ -1,11 +1,11 @@
 {
   "name": "eyp-tomcat",
-  "version": "0.6.11",
+  "version": "0.6.12",
   "author": "eyp",
   "summary": "multi instance tomcat",
   "license": "Apache-2.0",
   "source": "https://github.com/NTTCom-MS/eyp-tomcat",
-  "project_page": null,
+  "project_page": "https://github.com/NTTCom-MS/eyp-tomcat",
   "issues_url": "https://github.com/NTTCom-MS/eyp-tomcat/issues",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0 < 9.9.9"},
@@ -42,6 +42,12 @@
       "operatingsystemrelease": [
         "8"
       ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.8.0"
     }
   ]
 }
