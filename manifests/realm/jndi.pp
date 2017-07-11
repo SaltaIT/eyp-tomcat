@@ -52,6 +52,7 @@
 # ** There is no way built in to tomcat to obfuscate the password on a JNDI resource **
 #
 # ======================================================================================
+# puppet2sitepp @tomcatrealmjndi
 define tomcat::realm::jndi(
                             #required options
                             $connection_url,

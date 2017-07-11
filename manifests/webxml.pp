@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatwebxml
 define tomcat::webxml (
                             $source,
                             $catalina_base     = "/opt/${name}",

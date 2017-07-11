@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatcontext
 define tomcat::context(
                         $path,
                         $servicename           = $name,

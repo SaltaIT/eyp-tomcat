@@ -13,7 +13,7 @@
 # ;        permitted_enctypes = aes256-cts-hmac-sha1-96 rc4-hmac des-cbc-crc des-cbc-md5
 #
 # ; for MIT/Heimdal kdc no need to restrict encryption type
-
+# puppet2sitepp @tomcatkerberos
 define tomcat::krb5 (
                             $realm,
                             $kdc,

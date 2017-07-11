@@ -1,6 +1,7 @@
 #
 # temporalment sense opcions, planxo config tal cual
 #
+# puppet2sitepp @tomcatlogin
 define tomcat::login(
                       $servicename   = $name,
                       $catalina_base = "/opt/${name}",

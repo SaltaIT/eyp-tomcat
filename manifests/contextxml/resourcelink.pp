@@ -2,6 +2,9 @@
 # name="jdbc/ARL"
 # global="jdbc/ARL"
 # type="oracle.jdbc.pool.OracleDataSource" />
+#
+# puppet2sitepp @tomcatcontextxmlreslinks
+#
 define tomcat::contextxml::resourcelink(
                                         $resname,
                                         $global,

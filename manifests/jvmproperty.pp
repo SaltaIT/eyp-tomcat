@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatjvmproperties
 define tomcat::jvmproperty(
                             $property,
                             $value,

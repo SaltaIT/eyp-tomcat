@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatcerts
 define tomcat::cert (
                       $cert_source   = undef,
                       $cert_file     = undef,

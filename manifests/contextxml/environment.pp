@@ -2,6 +2,9 @@
 # value="APPL-D-LIFE-PRD-"
 # type="java.lang.String"
 # override="false" />
+#
+# puppet2sitepp @tomcatcontextxmlenvs
+#
 define tomcat::contextxml::environment(
                                         $envname,
                                         $value,

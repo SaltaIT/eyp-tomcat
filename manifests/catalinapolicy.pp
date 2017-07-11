@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatcatalinapolicies
 define tomcat::catalinapolicy (
                                 $source,
                                 $catalina_base = "/opt/${name}",

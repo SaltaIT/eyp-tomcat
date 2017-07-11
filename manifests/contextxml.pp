@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatcontextxml
 define tomcat::contextxml (
                             $session_cookie_path   = undef,
                             $session_cookie_name   = undef,

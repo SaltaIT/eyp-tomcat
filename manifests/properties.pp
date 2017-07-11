@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatproperties
 define tomcat::properties (
                             $source,
                             $properties_file,

@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatagents
 define tomcat::agent (
                         $jar_name,
                         $agent_name,

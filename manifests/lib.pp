@@ -1,12 +1,13 @@
-define tomcat::lib (
-                            $jar_name,
-                            $source        = undef,
-                            $file_ln       = undef,
-                            $catalina_base = "/opt/${name}",
-                            $servicename   = $name,
-                            $purge_old     = true,
-                            $ensure        = 'present',
-                          ) {
+# puppet2sitepp @tomcatlibs
+define tomcat::lib(
+                    $jar_name,
+                    $source        = undef,
+                    $file_ln       = undef,
+                    $catalina_base = "/opt/${name}",
+                    $servicename   = $name,
+                    $purge_old     = true,
+                    $ensure        = 'present',
+                  ) {
 
   if ! defined(Class['tomcat'])
   {
