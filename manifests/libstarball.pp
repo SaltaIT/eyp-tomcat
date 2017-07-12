@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatlibstarballs
 define tomcat::libstarball(
                             $source,
                             $catalina_base   = "/opt/${name}",

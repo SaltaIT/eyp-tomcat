@@ -10,6 +10,8 @@
 #   ,88
 # 888P"
 #
+# puppet2sitepp @jaasproperties
+#
 define tomcat::jaas (
                             #LDAP zookeeper
                             $app                 = undef,

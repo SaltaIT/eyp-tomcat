@@ -1,3 +1,4 @@
+# puppet2sitepp @jndiproperties
 define tomcat::jndi (
                             $ldapservers,
                             $ldapbase,

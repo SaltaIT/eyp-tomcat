@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatusers
 define tomcat::tomcatuser (
                             $tomcatuser,
                             $password,

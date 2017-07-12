@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatauthenticators
 define tomcat::authenticators (
                                 $basic         = 'org.apache.catalina.authenticator.BasicAuthenticator',
                                 $form          = 'org.apache.catalina.authenticator.FormAuthenticator',

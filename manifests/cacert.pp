@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatcacerts
 define tomcat::cacert (
                         $ca_source     = undef,
                         $ca_file       = undef,

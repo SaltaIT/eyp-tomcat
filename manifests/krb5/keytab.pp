@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatkerberoskeytabs
 define tomcat::krb5::keytab (
                               $source        = undef,
                               $catalina_base = "/opt/${name}",

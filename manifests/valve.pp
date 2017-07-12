@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatvalves
 define tomcat::valve(
                         $classname,
                         $options       = undef,

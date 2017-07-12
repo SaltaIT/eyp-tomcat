@@ -1,3 +1,4 @@
+# puppet2sitepp @tomcatincludedresources
 define tomcat::include::resource(
                                   $resourcename,
                                   $servicename   = $name,

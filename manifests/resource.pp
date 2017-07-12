@@ -19,6 +19,8 @@
 #  Old form: jdbc:oracle:thin:<host>:<port>:<SID>
 #  New form: jdbc:oracle:thin:@<host>:<port>/<SERVICE_NAME>
 #
+# puppet2sitepp @tomcatresources
+#
 define tomcat::resource (
                           $resource_type,
                           $resource_name,
