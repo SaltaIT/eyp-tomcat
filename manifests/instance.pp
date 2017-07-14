@@ -183,10 +183,6 @@ define tomcat::instance (
                           $flight_recorder                       = false,
                           $debug_non_safepoints                  = false,
                           $print_string_table_statistics         = false,
-
-
-
-
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
