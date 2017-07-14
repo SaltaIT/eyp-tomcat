@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.6.14
+## 0.6.13
 
 * added **unlock_commercial_features**, **flight_recorder**, **debug_non_safepoints**, **print_string_table_statistics**
 * added variables to managed **tomcat::webxml**'s file mode
