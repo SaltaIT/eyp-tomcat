@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.13
+
+* added variables to managed **tomcat::webxml**'s file mode
+
 ## 0.6.12
 
 * added **maxPostSize** to AJP, HTTP and HTTPS connectors
