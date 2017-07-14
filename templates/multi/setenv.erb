@@ -79,3 +79,15 @@ export CATALINA_OPTS="$CATALINA_OPTS -XX:+UseBiasedLocking"
 <% if defined?(@target_survivor_ratio) -%>
 export CATALINA_OPTS="$CATALINA_OPTS -XX:TargetSurvivorRatio=<%= @target_survivor_ratio %>"
 <% end -%>
+<% if @unlock_commercial_features -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+UnlockCommercialFeatures"
+<% end -%>
+<% if @flight_recorder -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+FlightRecorder"
+<% end -%>
+<% if @debug_non_safepoints -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+DebugNonSafepoints"
+<% end -%>
+<% if @print_string_table_statistics -%>
+export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintStringTableStatistics"
+<% end -%>

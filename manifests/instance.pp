@@ -178,6 +178,10 @@ define tomcat::instance (
                           $rmi_port                              = undef,
                           $connector_ajp_accept_count            = undef,
                           $connector_ajp_acceptor_threadcount    = undef,
+                          $unlock_commercial_features            = false,
+                          $flight_recorder                       = false,
+                          $debug_non_safepoints                  = false,
+                          $print_string_table_statistics         = false,
 
 
                         ) {
