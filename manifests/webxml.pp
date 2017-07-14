@@ -1,9 +1,11 @@
 # puppet2sitepp @tomcatwebxml
 define tomcat::webxml (
                             $source,
-                            $catalina_base     = "/opt/${name}",
-                            $servicename       = $name,
-                            $file_mode         = '0644',
+                            $catalina_base = "/opt/${name}",
+                            $servicename   = $name,
+                            $file_owner    = 'tomcat',
+                            $file_group    = 'tomcat',
+                            $file_mode     = '0644',
                           ) {
 
   if ! defined(Class['tomcat'])
@@ -22,9 +24,9 @@ define tomcat::webxml (
 
   file { "${catalina_base}/conf/web.xml":
     ensure  => 'present',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+    owner   => $file_owner,
+    group   => $file_group,
+    mode    => $file_mode,
     require => File["${catalina_base}/conf"],
     notify  => $serviceinstance,
     source  => $source,
