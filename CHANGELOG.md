@@ -3,7 +3,7 @@
 ## 0.6.14
 
 * added **unlock_commercial_features**, **flight_recorder**, **debug_non_safepoints**, **print_string_table_statistics**
-
+* added **catalina_disable_http_keepalive** 
 
 ## 0.6.13
 

@@ -175,6 +175,7 @@ define tomcat::instance (
                           $parallel_gc_threads                   = undef,
                           $jvm_prefer_ip4_stack                  = false,
                           $http_max_connections                  = undef,
+                          $catalina_disable_http_keepalive       = false,                 
                           $rmi_port                              = undef,
                           $connector_ajp_accept_count            = undef,
                           $connector_ajp_acceptor_threadcount    = undef,
@@ -182,6 +183,8 @@ define tomcat::instance (
                           $flight_recorder                       = false,
                           $debug_non_safepoints                  = false,
                           $print_string_table_statistics         = false,
+
+
 
 
                         ) {
