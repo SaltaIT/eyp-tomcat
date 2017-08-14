@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.15
+
+* bugfix wrong var name **redirectPort** renamed to **connector_ajp_redirect_port**
+
 ## 0.6.14
 
 * added **tomcat::java_property**
