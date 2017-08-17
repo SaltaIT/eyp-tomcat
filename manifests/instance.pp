@@ -49,6 +49,7 @@ define tomcat::instance (
                           $connector_ajp_max_threads             = undef,
                           $connector_ajp_connection_timeout      = undef,
                           $connector_ajp_max_post_size           = undef,
+                          $connector_ajp_redirect_port           = undef,
                           $connector_https_enabled               = false,
                           $connector_https_port                  = '8443',
                           $connector_https_server                = undef,
