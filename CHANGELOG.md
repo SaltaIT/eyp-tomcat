@@ -2,7 +2,7 @@
 
 ## 0.6.15
 
-* bugfix wrong var name **redirectPort** renamed to **connector_ajp_redirect_port**
+* added variable **connector_ajp_redirect_port**
 
 ## 0.6.14
 
