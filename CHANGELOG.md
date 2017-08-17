@@ -1,9 +1,18 @@
 # CHANGELOG
 
+## 0.6.15
+
+* added variable **connector_ajp_redirect_port**
+
+## 0.6.14
+
+* added **tomcat::java_property**
+
 ## 0.6.13
 
 * added **unlock_commercial_features**, **flight_recorder**, **debug_non_safepoints**, **print_string_table_statistics**
 * added variables to managed **tomcat::webxml**'s file mode
+* added **catalina_disable_http_keepalive**
 
 ## 0.6.12
 

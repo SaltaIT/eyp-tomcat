@@ -49,6 +49,7 @@ define tomcat::instance (
                           $connector_ajp_max_threads             = undef,
                           $connector_ajp_connection_timeout      = undef,
                           $connector_ajp_max_post_size           = undef,
+                          $connector_ajp_redirect_port           = undef,
                           $connector_https_enabled               = false,
                           $connector_https_port                  = '8443',
                           $connector_https_server                = undef,
@@ -175,6 +176,7 @@ define tomcat::instance (
                           $parallel_gc_threads                   = undef,
                           $jvm_prefer_ip4_stack                  = false,
                           $http_max_connections                  = undef,
+                          $catalina_disable_http_keepalive       = false,
                           $rmi_port                              = undef,
                           $connector_ajp_accept_count            = undef,
                           $connector_ajp_acceptor_threadcount    = undef,
@@ -182,8 +184,6 @@ define tomcat::instance (
                           $flight_recorder                       = false,
                           $debug_non_safepoints                  = false,
                           $print_string_table_statistics         = false,
-
-
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
