@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.17
+
+* added variable to be able to set conf's dir mode: **conf_dir_mode** to **tomcat::intance**
+
 ## 0.6.15
 
 * added variable **connector_ajp_redirect_port**

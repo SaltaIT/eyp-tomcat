@@ -26,6 +26,8 @@
 #
 # nota: ssl client certificates: https://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/
 #
+# @param conf_dir_mode instance's config directory mode (default: 0755)
+#
 # puppet2sitepp @tomcatinstances
 #
 define tomcat::instance (
@@ -184,6 +186,7 @@ define tomcat::instance (
                           $flight_recorder                       = false,
                           $debug_non_safepoints                  = false,
                           $print_string_table_statistics         = false,
+                          $conf_dir_mode                         = '0755',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -264,7 +267,7 @@ define tomcat::instance (
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0755',
+    mode    => $conf_dir_mode,
     require => File[$catalina_base],
   }
 
