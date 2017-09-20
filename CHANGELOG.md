@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.18
+
+* added **tomcat::instance** variable to control **allowUnsafeLegacyRenegotiation**
+
 ## 0.6.17
 
 * added variable to be able to set conf's dir mode: **conf_dir_mode** to **tomcat::intance**

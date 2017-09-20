@@ -27,6 +27,7 @@
 # nota: ssl client certificates: https://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/
 #
 # @param conf_dir_mode instance's config directory mode (default: 0755)
+# @param connector_https_unsafe_legacy_reneg allow unsed legacy renegotation for TLS connections - HTTPS connector (default: false)
 #
 # puppet2sitepp @tomcatinstances
 #
@@ -70,6 +71,7 @@ define tomcat::instance (
                           $connector_https_accept_count          = undef,
                           $connector_https_connection_timeout    = undef,
                           $connector_https_max_post_size         = undef,
+                          $connector_https_unsafe_legacy_reneg   = false,
                           $connector_http_enabled                = true,
                           $connector_http_server                 = undef,
                           $connector_port                        = '8080',
@@ -82,7 +84,7 @@ define tomcat::instance (
                           $connector_http_connection_timeout     = '20000',
                           $connector_http_disable_upload_timeout = true,
                           $connector_http_uri_encoding           = undef,
-                          $connector_http_max_post_size         = undef,
+                          $connector_http_max_post_size          = undef,
                           $jmx_port                              = '8999',
                           $redirect_port                         = '8443',
                           $realms                                = undef,
