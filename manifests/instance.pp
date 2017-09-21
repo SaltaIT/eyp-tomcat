@@ -26,6 +26,7 @@
 #
 # nota: ssl client certificates: https://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/
 #
+# @param tomcatpw instance's password
 # @param conf_dir_mode instance's config directory mode (default: 0755)
 # @param connector_https_unsafe_legacy_reneg allow unsed legacy renegotation for TLS connections - HTTPS connector (default: false)
 #
