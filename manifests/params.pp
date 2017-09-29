@@ -1,7 +1,7 @@
 class tomcat::params() {
 
   $default_tomcat_user='tomcat'
-  $default_webapps_mode='0775'
+  # $default_webapps_mode=
 
 
   case $::osfamily

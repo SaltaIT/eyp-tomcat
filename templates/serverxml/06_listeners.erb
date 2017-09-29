@@ -9,3 +9,6 @@
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+  <%- if @security_listener -%>
+  <Listener className="org.apache.catalina.security.SecurityListener" />
+  <%- end -%>

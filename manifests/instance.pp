@@ -27,8 +27,13 @@
 # nota: ssl client certificates: https://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/
 #
 # @param tomcatpw instance's password
-# @param conf_dir_mode instance's config directory mode (default: 0755)
 # @param connector_https_unsafe_legacy_reneg allow unsed legacy renegotation for TLS connections - HTTPS connector (default: false)
+# @param conf_dir_mode instance's config directory mode (default: 0755)
+# @param logs_dir_mode log dir mode: (default: 0755)
+# @param temp_dir_mode temp dir mode: (default: 0755)
+# @param bin_dir_mode bin dir mode: (default: 0755)
+# @param webapps_mode webapps dir mode (default: 0775)
+# @param security_listener load org.apache.catalina.security.SecurityListener (default: false)
 #
 # puppet2sitepp @tomcatinstances
 #
@@ -107,7 +112,7 @@ define tomcat::instance (
                           $java_home                             = undef,
                           $webapps_owner                         = $tomcat::params::default_tomcat_user,
                           $webapps_group                         = $tomcat::params::default_tomcat_user,
-                          $webapps_mode                          = $tomcat::params::default_webapps_mode,
+                          $webapps_mode                          = '0775',
                           $ensure                                = 'running',
                           $manage_service                        = true,
                           $manage_docker_service                 = true,
@@ -117,6 +122,7 @@ define tomcat::instance (
                           $jvm_route                             = undef,
                           $version_logger_listener               = true,
                           $jasper_listener                       = true,
+                          $security_listener                     = false,
                           $enable_default_access_log             = true,
                           $custom_webxml                         = false,
                           $add_error_report_valve_settings       = true,
@@ -190,6 +196,9 @@ define tomcat::instance (
                           $debug_non_safepoints                  = false,
                           $print_string_table_statistics         = false,
                           $conf_dir_mode                         = '0755',
+                          $logs_dir_mode                         = '0755',
+                          $temp_dir_mode                         = '0755',
+                          $bin_dir_mode                          = '0755',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -278,7 +287,7 @@ define tomcat::instance (
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0755',
+    mode    => $bin_dir_mode,
     require => File[$catalina_base],
   }
 
@@ -286,7 +295,7 @@ define tomcat::instance (
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0755',
+    mode    => $temp_dir_mode,
     require => File[$catalina_base],
   }
 
@@ -302,7 +311,7 @@ define tomcat::instance (
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0755',
+    mode    => $logs_dir_mode,
     require => File[$catalina_base],
   }
 

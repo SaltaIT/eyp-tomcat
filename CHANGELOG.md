@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.6.19
+
+* added option in **tomcat::instance** to be able to enable **SecurityListener**
+* configurable directory mode for:
+  * logs
+  * temp
+  * bin
+
 ## 0.6.18
 
 * added **tomcat::instance** variable to control **allowUnsafeLegacyRenegotiation**
