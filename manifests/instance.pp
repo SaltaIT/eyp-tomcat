@@ -199,6 +199,9 @@ define tomcat::instance (
                           $logs_dir_mode                         = '0755',
                           $temp_dir_mode                         = '0755',
                           $bin_dir_mode                          = '0755',
+                          $audit_log_config_changes              = false,
+                          $audit_log_webapps_changes             = false,
+                          $audit_log_webapps_changes_tag         = 'webappsChange',
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -211,6 +214,25 @@ define tomcat::instance (
   # /opt/tomcat-home/bin/version.sh  | grep "Server version" | awk -F/ '{ print $NF }'
   # 8.5.11
 
+  if($audit_log_config_changes)
+  {
+    # Auditd watch Tomcat configuration - -w /opt/tomcat/conf/ -p rwa -k tomcatConfigAccess
+    audit::fsrule { 'auditd watch Tomcat configuration':
+      path => "${catalina_base}/conf",
+      permissions => 'rwa',
+      keyname => 'tomcatConfigAccess',
+    }
+  }
+
+  if($audit_log_webapps_changes)
+  {
+    # Auditd watch webapps dir - -w /opt/tomcat/webapps/ -p wa -k webappsChange
+    audit::fsrule { 'auditd watch webapps dir':
+      path => "${catalina_base}/webapps",
+      permissions => 'rwa',
+      keyname => $audit_log_webapps_changes_tag,
+    }
+  }
 
   if($tomcatpw=='password')
   {

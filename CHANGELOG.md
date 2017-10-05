@@ -7,6 +7,7 @@
   * logs
   * temp
   * bin
+* add default auditd rules for config files
 
 ## 0.6.18
 
