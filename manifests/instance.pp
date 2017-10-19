@@ -345,7 +345,7 @@ define tomcat::instance (
     owner   => $webapps_owner,
     group   => $webapps_group,
     mode    => $webapps_mode,
-    recurse => $webapps_recurse,
+    recurse => $webapps_mode_recursive,
     require => File[$catalina_base],
   }
 
