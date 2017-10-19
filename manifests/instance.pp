@@ -34,6 +34,7 @@
 # @param temp_dir_mode temp dir mode: (default: 0755)
 # @param bin_dir_mode bin dir mode: (default: 0755)
 # @param webapps_mode webapps dir mode (default: 0775)
+# @param webapps_mode_recursive whether webapps dir mode is recursive or not (default: false)
 # @param security_listener load org.apache.catalina.security.SecurityListener (default: false)
 #
 # puppet2sitepp @tomcatinstances
@@ -114,6 +115,7 @@ define tomcat::instance (
                           $webapps_owner                         = $tomcat::params::default_tomcat_user,
                           $webapps_group                         = $tomcat::params::default_tomcat_user,
                           $webapps_mode                          = '0775',
+                          $webapps_mode_recursive                = false,
                           $ensure                                = 'running',
                           $manage_service                        = true,
                           $manage_docker_service                 = true,
@@ -343,6 +345,7 @@ define tomcat::instance (
     owner   => $webapps_owner,
     group   => $webapps_group,
     mode    => $webapps_mode,
+    recurse => $webapps_recurse,
     require => File[$catalina_base],
   }
 

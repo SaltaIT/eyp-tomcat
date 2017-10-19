@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.20
+
+* added **webapps_mode_recursive** to **tomcat::instance** to be able to recursively change mode for webapps directory
+
 ## 0.6.19
 
 * added option in **tomcat::instance** to be able to enable **SecurityListener**
