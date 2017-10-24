@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.21
+
+* added **client_https_protocols** option to **tomcat::instance**
+
 ## 0.6.20
 
 * added **webapps_mode_recursive** to **tomcat::instance** to be able to recursively change mode for webapps directory

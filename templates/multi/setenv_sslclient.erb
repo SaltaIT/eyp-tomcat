@@ -1,0 +1,8 @@
+
+#
+# SSL client
+#
+
+<% if @client_https_protocols -%>
+export CATALINA_OPTS="$CATALINA_OPTS -Dhttps.protocols=<%= @client_https_protocols %>"
+<% end -%>

@@ -205,6 +205,7 @@ define tomcat::instance (
                           $audit_log_config_changes              = false,
                           $audit_log_webapps_changes             = false,
                           $audit_log_webapps_changes_tag         = 'webappsChange',
+                          $client_https_protocols                = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -626,6 +627,12 @@ define tomcat::instance (
     target  => "${catalina_base}/bin/setenv.sh",
     order   => '12',
     content => template("${module_name}/multi/setenv_debug.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/bin/setenv.sh ssl client":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '13',
+    content => template("${module_name}/multi/setenv_sslclient.erb"),
   }
 
   if($server_info!=undef) or ($server_number!=undef) or ($server_built!=undef)
