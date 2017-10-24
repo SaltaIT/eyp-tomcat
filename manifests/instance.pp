@@ -26,8 +26,16 @@
 #
 # nota: ssl client certificates: https://virgo47.wordpress.com/2010/08/23/tomcat-web-application-with-ssl-client-certificates/
 #
-# @param conf_dir_mode instance's config directory mode (default: 0755)
+# @param tomcatpw instance's password
+# @param catalina_base where to deploy this tomcat instance (default: /opt/<intance's name>)
 # @param connector_https_unsafe_legacy_reneg allow unsed legacy renegotation for TLS connections - HTTPS connector (default: false)
+# @param conf_dir_mode instance's config directory mode (default: 0755)
+# @param logs_dir_mode log dir mode: (default: 0755)
+# @param temp_dir_mode temp dir mode: (default: 0755)
+# @param bin_dir_mode bin dir mode: (default: 0755)
+# @param webapps_mode webapps dir mode (default: 0775)
+# @param webapps_mode_recursive whether webapps dir mode is recursive or not (default: false)
+# @param security_listener load org.apache.catalina.security.SecurityListener (default: false)
 #
 # puppet2sitepp @tomcatinstances
 #
@@ -106,7 +114,8 @@ define tomcat::instance (
                           $java_home                             = undef,
                           $webapps_owner                         = $tomcat::params::default_tomcat_user,
                           $webapps_group                         = $tomcat::params::default_tomcat_user,
-                          $webapps_mode                          = $tomcat::params::default_webapps_mode,
+                          $webapps_mode                          = '0775',
+                          $webapps_mode_recursive                = false,
                           $ensure                                = 'running',
                           $manage_service                        = true,
                           $manage_docker_service                 = true,
@@ -116,6 +125,7 @@ define tomcat::instance (
                           $jvm_route                             = undef,
                           $version_logger_listener               = true,
                           $jasper_listener                       = true,
+                          $security_listener                     = false,
                           $enable_default_access_log             = true,
                           $custom_webxml                         = false,
                           $add_error_report_valve_settings       = true,
@@ -189,6 +199,13 @@ define tomcat::instance (
                           $debug_non_safepoints                  = false,
                           $print_string_table_statistics         = false,
                           $conf_dir_mode                         = '0755',
+                          $logs_dir_mode                         = '0755',
+                          $temp_dir_mode                         = '0755',
+                          $bin_dir_mode                          = '0755',
+                          $audit_log_config_changes              = false,
+                          $audit_log_webapps_changes             = false,
+                          $audit_log_webapps_changes_tag         = 'webappsChange',
+                          $client_https_protocols                = undef,
                         ) {
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -201,6 +218,25 @@ define tomcat::instance (
   # /opt/tomcat-home/bin/version.sh  | grep "Server version" | awk -F/ '{ print $NF }'
   # 8.5.11
 
+  if($audit_log_config_changes)
+  {
+    # Auditd watch Tomcat configuration - -w /opt/tomcat/conf/ -p rwa -k tomcatConfigAccess
+    audit::fsrule { 'auditd watch Tomcat configuration':
+      path        => "${catalina_base}/conf",
+      permissions => 'rwa',
+      keyname     => 'tomcatConfigAccess',
+    }
+  }
+
+  if($audit_log_webapps_changes)
+  {
+    # Auditd watch webapps dir - -w /opt/tomcat/webapps/ -p wa -k webappsChange
+    audit::fsrule { 'auditd watch webapps dir':
+      path        => "${catalina_base}/webapps",
+      permissions => 'rwa',
+      keyname     => $audit_log_webapps_changes_tag,
+    }
+  }
 
   if($tomcatpw=='password')
   {
@@ -277,7 +313,7 @@ define tomcat::instance (
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0755',
+    mode    => $bin_dir_mode,
     require => File[$catalina_base],
   }
 
@@ -285,7 +321,7 @@ define tomcat::instance (
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0755',
+    mode    => $temp_dir_mode,
     require => File[$catalina_base],
   }
 
@@ -301,7 +337,7 @@ define tomcat::instance (
     ensure  => 'directory',
     owner   => $tomcat_user,
     group   => $tomcat_user,
-    mode    => '0755',
+    mode    => $logs_dir_mode,
     require => File[$catalina_base],
   }
 
@@ -310,6 +346,7 @@ define tomcat::instance (
     owner   => $webapps_owner,
     group   => $webapps_group,
     mode    => $webapps_mode,
+    recurse => $webapps_mode_recursive,
     require => File[$catalina_base],
   }
 
@@ -590,6 +627,12 @@ define tomcat::instance (
     target  => "${catalina_base}/bin/setenv.sh",
     order   => '12',
     content => template("${module_name}/multi/setenv_debug.erb"),
+  }
+
+  concat::fragment{ "${catalina_base}/bin/setenv.sh ssl client":
+    target  => "${catalina_base}/bin/setenv.sh",
+    order   => '13',
+    content => template("${module_name}/multi/setenv_sslclient.erb"),
   }
 
   if($server_info!=undef) or ($server_number!=undef) or ($server_built!=undef)

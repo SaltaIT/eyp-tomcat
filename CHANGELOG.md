@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 0.6.21
+
+* added **client_https_protocols** option to **tomcat::instance**
+
+## 0.6.20
+
+* added **webapps_mode_recursive** to **tomcat::instance** to be able to recursively change mode for webapps directory
+
+## 0.6.19
+
+* added option in **tomcat::instance** to be able to enable **SecurityListener**
+* configurable directory mode for:
+  * logs
+  * temp
+  * bin
+* add default auditd rules for config files
+
 ## 0.6.18
 
 * added **tomcat::instance** variable to control **allowUnsafeLegacyRenegotiation**
