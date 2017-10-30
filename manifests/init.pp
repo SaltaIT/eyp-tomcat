@@ -1,7 +1,3 @@
-# === Copyright
-#
-# Copyright 2015 Your name here, unless otherwise noted.
-#
 class tomcat(
               $tomcat_src         = undef,
               $tomcat_url         = undef,
