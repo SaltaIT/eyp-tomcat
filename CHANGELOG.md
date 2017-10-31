@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.22
+
+* bugfix audit rules
+
 ## 0.6.21
 
 * added **client_https_protocols** option to **tomcat::instance**
