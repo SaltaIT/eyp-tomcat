@@ -221,7 +221,7 @@ define tomcat::instance (
   if($audit_log_config_changes)
   {
     # Auditd watch Tomcat configuration - -w /opt/tomcat/conf/ -p rwa -k tomcatConfigAccess
-    audit::fsrule { 'auditd watch Tomcat configuration':
+    audit::fsrule { "auditd watch Tomcat configuration ${catalina_base}":
       path        => "${catalina_base}/conf",
       permissions => 'rwa',
       keyname     => 'tomcatConfigAccess',
@@ -231,7 +231,7 @@ define tomcat::instance (
   if($audit_log_webapps_changes)
   {
     # Auditd watch webapps dir - -w /opt/tomcat/webapps/ -p wa -k webappsChange
-    audit::fsrule { 'auditd watch webapps dir':
+    audit::fsrule { "auditd watch webapps dir ${catalina_base}":
       path        => "${catalina_base}/webapps",
       permissions => 'rwa',
       keyname     => $audit_log_webapps_changes_tag,
