@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.23
+
+* added URIEncoding to AJP connector
+
 ## 0.6.22
 
 * bugfix audit rules
