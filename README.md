@@ -571,6 +571,8 @@ references:
 * [https://blog.codecentric.de/en/2013/10/useful-jvm-flags-part-7-cms-collector/](Useful JVM Flags – Part 7 (CMS Collector))
 * [http://blog.sokolenko.me/2014/11/javavm-options-production.html](JVM options for production)
 
+NOTE: *please be aware some options might not be available for your specific tomcat version*
+
 instance options:
 
 * service options:
