@@ -27,6 +27,9 @@
                 <%- if defined?(@connector_https_accept_count) -%>
                 acceptCount="<%= @connector_https_accept_count %>"
                 <%- end -%>
+                <%- if defined?(@connector_https_send_reason_phrase) -%>
+                sendReasonPhrase="<%= @connector_https_send_reason_phrase %>"
+                <%- end -%>
                 <%- if defined?(@connector_https_connection_timeout) -%>
                 connectionTimeout="<%= @connector_https_connection_timeout %>"
                 <%- end -%>
@@ -75,6 +78,9 @@
                <%- end -%>
                <%- if defined?(@connector_http_accept_count) -%>
                acceptCount="<%= @connector_http_accept_count %>"
+               <%- end -%>
+               <%- if defined?(@connector_http_send_reason_phrase) -%>
+               sendReasonPhrase="<%= @connector_http_send_reason_phrase %>"
                <%- end -%>
                <%- if defined?(@connector_http_connection_timeout) -%>
                connectionTimeout="<%= @connector_http_connection_timeout %>"

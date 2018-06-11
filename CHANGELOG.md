@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.24
+
+* added sendReasonPhrase option to HTTP/HTTPS connectors (tomcat >=8.5 < 9.0)
+
 ## 0.6.23
 
 * added URIEncoding to AJP connector
