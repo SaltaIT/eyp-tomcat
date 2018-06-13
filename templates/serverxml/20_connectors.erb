@@ -112,6 +112,9 @@
                <%- if defined?(@connector_ajp_uri_encoding) -%>
                URIEncoding="<%= @connector_ajp_uri_encoding %>"
                <%- end -%>
+               <%- if defined?(@connector_ajp_send_reason_phrase) -%>
+               sendReasonPhrase="<%= @connector_ajp_send_reason_phrase %>"
+               <%- end -%>
                <%- if defined?(@connector_ajp_acceptor_threadcount) -%>
                acceptorThreadCount="<%= @connector_ajp_acceptor_threadcount %>"
                <%- end -%>
