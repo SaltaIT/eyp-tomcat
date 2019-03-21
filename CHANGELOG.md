@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.25
+
+* updated max **eyp-auditd** version
+
 ## 0.6.24
 
 * added sendReasonPhrase option to HTTP/HTTPS connectors (tomcat >=8.5 < 9.0)
