@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.26
+
+* Updated metadata for **eyp-systemd 0.2.0**
+
 ## 0.6.25
 
 * updated max **eyp-auditd** version
