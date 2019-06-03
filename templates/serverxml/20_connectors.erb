@@ -9,6 +9,9 @@
     <Connector  port="<%= @connector_https_port %>"
                 protocol="HTTP/1.1"
                 SSLEnabled="true"
+                <%- if defined?(@connector_https_address) -%>
+                address="<%= @connector_https_address %>"
+                <%- end -%>
                 <%- if defined?(@connector_https_server) -%>
                 server="<%= @connector_https_server %>"
                 <%- end -%>
@@ -61,6 +64,9 @@
                executor="tomcatThreadPool"
                enableLookups="<%= @connector_http_enable_lookups %>"
                disableUploadTimeout="<%= @connector_http_disable_upload_timeout %>"
+               <%- if defined?(@connector_http_address) -%>
+               address="<%= @connector_http_address %>"
+               <%- end -%>
                <%- if defined?(@connector_http_server) -%>
                server="<%= @connector_http_server %>"
                <%- end -%>

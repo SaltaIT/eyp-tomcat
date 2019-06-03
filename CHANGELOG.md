@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.27
+
+* Added parameter of ip address in server.xml
+
 ## 0.6.26
 
 * Updated metadata for **eyp-systemd 0.2.0**
