@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.6.26
+## 0.6.27
 
 * Added parameter of ip address in server.xml
 
