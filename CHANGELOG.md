@@ -2,7 +2,7 @@
 
 ## 0.6.27
 
-* Added parameter of ip address in server.xml
+* Added address option for HTTP and HTTPS connectors
 
 ## 0.6.26
 
