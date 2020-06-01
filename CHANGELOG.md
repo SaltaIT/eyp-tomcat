@@ -2,7 +2,8 @@
 
 ## 0.6.29
 
-* impoved **OS support**
+* improved **OS support**
+* improves **eyp-systemd** compatibility
 
 ## 0.6.28
 
