@@ -16,7 +16,7 @@ class tomcat::params() {
         {
           $systemd=false
         }
-        /^7.*$/:
+        /^[7-8].*$/:
         {
           $systemd=true
         }
@@ -25,6 +25,7 @@ class tomcat::params() {
     }
     'Debian':
     {
+      $develpkg=[ 'libapr1-dev', 'libapr1' ]
       case $::operatingsystem
       {
         'Ubuntu':
@@ -34,12 +35,14 @@ class tomcat::params() {
             /^14.*$/:
             {
               $systemd=false
-              $develpkg=[ 'libapr1-dev', 'libapr1' ]
             }
-            /^16.*$/:
+            /^1[68].*$/:
             {
               $systemd=true
-              $develpkg=[ 'libapr1-dev', 'libapr1' ]
+            }
+            /^20.*$/:
+            {
+              $systemd=true
             }
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
@@ -48,10 +51,13 @@ class tomcat::params() {
         {
           case $::operatingsystemrelease
           {
-            /^8.*$/:
+            /^[89].*$/:
             {
               $systemd=true
-              $develpkg=[ 'libapr1-dev', 'libapr1' ]
+            }
+            /^10.*$/:
+            {
+              $systemd=true
             }
             default: { fail("Unsupported Debian version! - ${::operatingsystemrelease}")  }
           }

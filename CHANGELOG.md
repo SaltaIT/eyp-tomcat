@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.29
+
+* impoved **OS support**
+
 ## 0.6.28
 
 * changed default connection timeout for AJP and HTTPS connectors to 30s
