@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.30
+
+* changed PID ownership
+
 ## 0.6.29
 
 * improved **OS support**

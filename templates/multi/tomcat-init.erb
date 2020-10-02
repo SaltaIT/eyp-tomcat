@@ -108,7 +108,8 @@ start(){
 
   echo "Starting <%= @instancename %>"
   touch $CATALINA_PID
-  chown $TOMCAT_USER $CATALINA_PID
+  chown root:$TOMCAT_USER $CATALINA_PID
+  chmod 0664 $CATALINA_PID
   $EXECSTART $CATALINA_BASE/bin/startup.sh
   exit 0
 }
