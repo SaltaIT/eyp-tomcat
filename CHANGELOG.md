@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.31
+
+* added logname to the restart notification email
+
 ## 0.6.30
 
 * changed PID ownership
