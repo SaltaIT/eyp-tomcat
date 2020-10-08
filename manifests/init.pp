@@ -79,6 +79,13 @@ class tomcat(
     }
   }
 
+  file { '/usr/local/bin/tomcatctl':
+    ensure  => 'present',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    content => file("${module_name}/tomcatctl.sh"),
+  }
 
   file { $catalina_home:
     ensure => 'directory',

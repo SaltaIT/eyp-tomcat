@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.31
+
+* added tomcatctl script
+
 ## 0.6.30
 
 * changed PID ownership
