@@ -1,6 +1,6 @@
 {
   "name": "eyp-tomcat",
-  "version": "0.6.32",
+  "version": "6.0.32",
   "author": "Jordi Prats",
   "summary": "multi instance tomcat",
   "license": "Apache-2.0",
@@ -52,7 +52,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.8.0"
+      "version_requirement": ">= 4.0.0"
     }
   ]
 }
